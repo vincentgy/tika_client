@@ -1,4 +1,4 @@
-package com.tikaclient;
+package com.tika;
 
 import android.app.Application;
 
