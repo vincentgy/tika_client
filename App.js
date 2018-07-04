@@ -1,23 +1,19 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import { Provider } from 'react-redux'
+import Rluy from './src/rluy.native'
+import user from './src/controller/user'
+
+Rluy.addController(user)
+
+const store = Rluy.run()
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Hello</Text>
-        <Text>Vincent, Colin, Alex</Text>
-        <Text>This is an great project! Keep it going on</Text>
-      </View>
-    );
+      <Provider store={store}>
+        <View style={{ backgroundColor: '#2D59D9', height: '100%' }} />
+      </Provider>
+    )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
