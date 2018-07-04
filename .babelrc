@@ -5,8 +5,7 @@
   "env": {
     "development": {
       "plugins": [
-        "transform-react-jsx-source",
-        "./my-plugin"
+        "transform-react-jsx-source"
       ]
     }
   }

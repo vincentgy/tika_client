@@ -7,7 +7,6 @@ import user from './src/controller/user'
 Rluy.addController(user)
 
 const store = Rluy.run()
-
 export default class App extends React.Component {
   render() {
     return (
