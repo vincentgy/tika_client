@@ -1,0 +1,12 @@
+.babelrc
+.git
+node_modules
+ios
+android
+.Ds_Store
+.gitignore
+.prettierignore
+.watchmanconfig
+yarn.lock
+package-lock.json
+package.json

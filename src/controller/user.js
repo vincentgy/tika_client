@@ -2,11 +2,11 @@ export default {
   name: 'user',
   state: {},
   reducers: {
-    mapSome: (state, { payload }) => {
-      return state
-    }
+    mapSome: state => {
+      return state;
+    },
   },
   effects: {
-    *fetchUser({ put }, { payload }) {}
-  }
-}
+    *fetchUser() {},
+  },
+};
