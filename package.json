@@ -13,7 +13,7 @@
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "test": "jest",
+    "test:jest": "jest",
     "reset": "npm run start -- --reset-cache",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
