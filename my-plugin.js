@@ -1,9 +1,7 @@
 var transformer = require('metro/src/transformer');
 const fs = require('fs');
 
-function transform(src, filename, options) {
-  options = options || {};
-
+function transform(src) {
   let srcs = src;
   if (/App.js/.test(src.filename)) {
     console.log('读取');

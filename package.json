@@ -16,8 +16,8 @@
     "ios": "react-native run-ios",
     "test:jest": "jest",
     "reset": "npm run start -- --reset-cache",
-    "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix",
+    "lint": "eslint ./",
+    "lint:fix": "eslint --fix ./ ",
     "format": "prettier --config ./.prettierrc --write './**'",
     "gitadd": "git add ."
   },

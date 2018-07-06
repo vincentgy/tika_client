@@ -2,6 +2,10 @@ import React from 'react';
 import {View} from 'react-native';
 
 export class Form extends React.Component {
+  static defaultProps = {
+    style: {},
+  };
+
   onChange = ({key, value}) => {
     this.setState({
       [key]: value,
@@ -15,6 +19,10 @@ export class Form extends React.Component {
   render() {
     const {children} = this.props;
 
-    return <View>{children(this.onChange, this.onSumit)}</View>;
+    return (
+      <View style={{...this.props.style}}>
+        {children(this.onChange, this.onSumit)}
+      </View>
+    );
   }
 }
