@@ -1218,6 +1218,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tika.react.native;
 				PRODUCT_NAME = tika;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1236,6 +1237,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tika.react.native;
 				PRODUCT_NAME = tika;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

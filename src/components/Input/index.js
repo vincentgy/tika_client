@@ -1,7 +1,18 @@
 import React from 'react';
 import {View, TextInput} from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import styled from 'styled-components';
+
 import {WIDTH} from '../../utils/plaform';
+
+const InputWrapperStyled = styled.View`
+  margin-left: 15px;
+  background-color: white;
+  width: ${WIDTH};
+  border-bottom-width: 1px;
+  border-color: rgba(120, 120, 120, 0.2);
+  border-style: solid;
+`;
 
 class Input extends React.Component {
   state = {
@@ -32,15 +43,7 @@ class Input extends React.Component {
   render() {
     return (
       <View style={{backgroundColor: 'white'}}>
-        <View
-          style={{
-            marginLeft: 15,
-            backgroundColor: 'white',
-            width: WIDTH,
-            borderBottomWidth: 1,
-            borderBottomColor: 'rgba(120,120,120,0.2)',
-            borderStyle: 'solid',
-          }}>
+        <InputWrapperStyled>
           <Animatable.Text
             ref={this.handleTextRef}
             style={{
@@ -75,7 +78,7 @@ class Input extends React.Component {
                 );
             }}
           />
-        </View>
+        </InputWrapperStyled>
       </View>
     );
   }
