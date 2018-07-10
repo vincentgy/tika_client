@@ -13,7 +13,6 @@ import KeyboardDetector from './src/utils/keyboard';
 Rluy.addController(user);
 const store = Rluy.run();
 
-let didMove = false;
 export default class App extends React.Component {
   getViewContainerRef = node => (this.View = node);
 
@@ -22,18 +21,18 @@ export default class App extends React.Component {
       fetch('http://18.222.175.208/', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify({
-          a: 'ur',
-          e: '215566435@qq.com',
-          p: 'metal_gear2',
+          param: {
+            a: 'ur',
+            e: '215566435@qq.com',
+            p: 'metal_gear2',
+          },
         }),
       }).then(res => {
         console.log(res);
-        res.json().then(json => {
-          console.log(json);
-        });
+        res.json().then(json => console.log(json));
       });
     }, 5000);
   }
