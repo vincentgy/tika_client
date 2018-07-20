@@ -47,6 +47,7 @@ export default class App extends React.Component {
                 backgroundColor: '#2D59D9',
                 height: '100%',
               }}>
+              
               <Animatable.View ref={getViewContainerRef}>
                 <View style={{height: '50%'}} />
                 <View style={{height: '50%', backgroundColor: 'white'}}>
