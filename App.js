@@ -6,35 +6,25 @@ import * as Animatable from 'react-native-animatable';
 
 import Rluy from './src/utils/rluy.native';
 import user from './src/controller/user';
-import {Form} from './src/components/Form';
+import Form from './src/components/Form';
 import Input from './src/components/Input';
 import KeyboardDetector from './src/utils/keyboard';
+import {NativeModules} from 'react-native';
 
 Rluy.addController(user);
 const store = Rluy.run();
+const alert = Alert.alert;
 
 export default class App extends React.Component {
   getViewContainerRef = node => (this.View = node);
 
   componentDidMount() {
-    setInterval(() => {
-      fetch('http://18.222.175.208/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify({
-          param: {
-            a: 'ur',
-            e: '215566435@qq.com',
-            p: 'metal_gear2',
-          },
-        }),
-      }).then(res => {
-        console.log(res);
-        res.json().then(json => console.log(json));
-      });
-    }, 5000);
+    if (NativeModules.hotupdate) {
+      NativeModules.hotupdate
+        .download('www.baidu.com', 'bundle.zip')
+        .then(e => alert('下载成功：' + e.result + '，下次重启时生效！'))
+        .catch(error => console.log(error));
+    }
   }
 
   render() {
@@ -47,7 +37,6 @@ export default class App extends React.Component {
                 backgroundColor: '#2D59D9',
                 height: '100%',
               }}>
-              
               <Animatable.View ref={getViewContainerRef}>
                 <View style={{height: '50%'}} />
                 <View style={{height: '50%', backgroundColor: 'white'}}>
@@ -83,7 +72,6 @@ export default class App extends React.Component {
                   </Form>
                 </View>
               </Animatable.View>
-              )}
             </ScrollView>
           )}
         </KeyboardDetector>

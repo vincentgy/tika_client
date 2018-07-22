@@ -10,3 +10,7 @@ android
 yarn.lock
 package-lock.json
 package.json
+*.png
+*.sh
+.eslintignore
+

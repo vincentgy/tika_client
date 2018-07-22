@@ -19,7 +19,10 @@
     "lint": "eslint ./",
     "lint:fix": "eslint --fix ./ ",
     "format": "prettier --config ./.prettierrc --write './**'",
-    "gitadd": "git add ."
+    "gitadd": "git add .",
+    "release-android": "./scripts/android.build.sh && ./scripts/android.install.sh",
+    "debug-android": "./scripts/android.debug.sh && ./scripts/android.debug.install.sh",
+    "build-android": "react-native bundle --entry-file index.js --platform android --dev false --bundle-output ./android/app/src/main/assets/index.android.bundle --assets-dest ./android/app/src/main/res/"
   },
   "jest": {
     "preset": "react-native"

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 
-export class Form extends React.Component {
+export default class Form extends React.Component {
   static defaultProps = {
     style: {},
   };
