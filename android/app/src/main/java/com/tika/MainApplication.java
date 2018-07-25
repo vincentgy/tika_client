@@ -28,6 +28,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected String getJSMainModuleName() {
       return "index";
     }
+
+    @Override
+    protected String getJSBundleFile() {
+      return getFilesDir().getAbsolutePath() + "/index.android.bundle";
+      // return super.getJSBundleFile();
+    }
+
   };
 
   @Override

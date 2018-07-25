@@ -11,6 +11,7 @@
     "react-test-renderer": "16.3.1"
   },
   "scripts": {
+    "start:a":"adb reverse tcp:8081 tcp:8081 && npm run start",
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",

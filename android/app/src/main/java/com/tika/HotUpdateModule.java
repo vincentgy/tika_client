@@ -13,6 +13,7 @@ import com.facebook.react.bridge.Arguments;
 
 import java.util.Map;
 import java.util.HashMap;
+import android.content.Context;
 
 public class HotUpdateModule extends ReactContextBaseJavaModule {
     public HotUpdateModule(ReactApplicationContext reactContext) {
@@ -33,6 +34,7 @@ public class HotUpdateModule extends ReactContextBaseJavaModule {
                 try {
                     String result = SimpleDownloadUtil.download(url, savePath);
                     WritableMap map = Arguments.createMap();
+
                     map.putString("result", result);
                     promise.resolve(map);
                 } catch (Exception e) {
