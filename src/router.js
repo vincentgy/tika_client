@@ -1,20 +1,24 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import {createBottomTabNavigator} from 'react-navigation';
-import {YellowBox} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {
+  createBottomTabNavigator,
+  createStackNavigator,
+  createSwitchNavigator,
+} from 'react-navigation';
 import {Page} from './components/PageHOC';
-
-YellowBox.ignoreWarnings([
-  'Warning: isMounted(...) is deprecated',
-  'Module RCTImageLoader',
-]);
+import {Ionicons} from './components/Icons';
+import {Button} from '../node_modules/react-native-elements';
 
 @Page({
   tabBarLabel: 'Notifications',
-  tabBarIcon: () => <Icon name="rocket" size={30} color="#900" />,
+  tabBarIcon: ({focused}) => (
+    <Ionicons
+      name={focused ? 'ios-people' : 'ios-people-outline'}
+      size={24}
+      color="#900"
+    />
+  ),
   tabBarOnPress: ({defaultHandler}) => {
-    //   Alert.alert('切换中');
     defaultHandler();
   },
 })
@@ -22,7 +26,13 @@ class Notifications extends React.Component {
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Home!</Text>
+        <Text>Notification!</Text>
+        <Button
+          title="shit"
+          onPress={() => {
+            this.props.navigation.navigate('Shit');
+          }}
+        />
       </View>
     );
   }
@@ -33,7 +43,7 @@ class PostJob extends React.Component {
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Settings!</Text>
+        <Text>Post a Job</Text>
       </View>
     );
   }
@@ -43,7 +53,7 @@ class FindJob extends React.Component {
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Settings!</Text>
+        <Text>Find a Job</Text>
       </View>
     );
   }
@@ -54,18 +64,17 @@ class Account extends React.Component {
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Settings!</Text>
+        <Text>My Account</Text>
       </View>
     );
   }
 }
 
-export default createBottomTabNavigator(
+const TabRoot = createBottomTabNavigator(
   {
     Notifications,
     PostJob,
     FindJob,
-    Account,
   },
   {
     tabBarOptions: {
@@ -75,3 +84,12 @@ export default createBottomTabNavigator(
     },
   }
 );
+const HomeStack = createStackNavigator({
+  Tabs: TabRoot,
+  Shit: Account,
+  /* any other route you want to render above the tab bar */
+});
+
+export default createSwitchNavigator({
+  HomeStack,
+});

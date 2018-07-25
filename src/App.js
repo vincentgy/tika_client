@@ -1,10 +1,15 @@
 import React from 'react';
-import {Provider, Alert} from 'react-redux';
+import {Provider} from 'react-redux';
 
 import Rluy from './utils/rluy.native';
 import user from './controller/user';
 
-import {NativeModules} from 'react-native';
+import {NativeModules, YellowBox, Alert} from 'react-native';
+YellowBox.ignoreWarnings([
+  'Warning: isMounted(...) is deprecated',
+  'Module RCTImageLoader',
+]);
+
 import TabRoot from './router';
 
 Rluy.addController(user);
