@@ -11,7 +11,7 @@
     "react-test-renderer": "16.3.1"
   },
   "scripts": {
-    "start:a":"adb reverse tcp:8081 tcp:8081 && npm run start",
+    "start:a": "adb reverse tcp:8081 tcp:8081 && npm run start",
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
@@ -22,7 +22,7 @@
     "format": "prettier --config ./.prettierrc --write './**'",
     "gitadd": "git add .",
     "release-android": "./scripts/android.build.sh && ./scripts/android.install.sh",
-    "debug-android": "./scripts/android.debug.sh && ./scripts/android.debug.install.sh",
+    "debug-android": "adb reverse tcp:8081 tcp:8081 &&./scripts/android.debug.sh && ./scripts/android.debug.install.sh",
     "build-android": "react-native bundle --entry-file index.js --platform android --dev false --bundle-output ./android/app/src/main/assets/index.android.bundle --assets-dest ./android/app/src/main/res/"
   },
   "jest": {
@@ -40,7 +40,7 @@
     "react-native-elements": "^0.19.1",
     "react-native-swipe-cards": "^0.1.1",
     "react-native-vector-icons": "^4.6.0",
-    "react-navigation": "^2.6.2",
+    "react-navigation": "^2.9.1",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0",

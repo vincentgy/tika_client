@@ -31,8 +31,8 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected String getJSBundleFile() {
-      return getFilesDir().getAbsolutePath() + "/index.android.bundle";
-      // return super.getJSBundleFile();
+      // return getFilesDir().getAbsolutePath() + "/index.android.bundle";
+      return super.getJSBundleFile();
     }
 
   };
