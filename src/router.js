@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, StatusBar} from 'react-native';
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -7,7 +7,8 @@ import {
 } from 'react-navigation';
 import {Page} from './components/PageHOC';
 import {Ionicons} from './components/Icons';
-import {Button} from '../node_modules/react-native-elements';
+import Header from './components/Header';
+import Tab from './components/Tabs';
 
 @Page({
   tabBarLabel: 'Notifications',
@@ -25,15 +26,26 @@ import {Button} from '../node_modules/react-native-elements';
 class Notifications extends React.Component {
   render() {
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Notification!</Text>
-        <Button
-          title="shit"
-          onPress={() => {
-            this.props.navigation.navigate('Shit');
-          }}
+      <React.Fragment>
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
+        <Header
+          rightButton={[
+            <Ionicons key={0} name="ios-people" size={24} color="#900" />,
+            <Ionicons key={0} name="ios-people" size={24} color="#900" />,
+          ]}
         />
-      </View>
+        <Tab>
+          <View style={{width: '100%'}}>
+            <Text>1</Text>
+          </View>
+          <View style={{width: '100%'}}>
+            <Text>1</Text>
+          </View>
+          <View style={{width: '100%'}}>
+            <Text>1</Text>
+          </View>
+        </Tab>
+      </React.Fragment>
     );
   }
 }
@@ -85,7 +97,12 @@ const TabRoot = createBottomTabNavigator(
   }
 );
 const HomeStack = createStackNavigator({
-  Tabs: TabRoot,
+  Tabs: {
+    screen: TabRoot,
+    navigationOptions: {
+      header: null,
+    },
+  },
   Shit: Account,
   /* any other route you want to render above the tab bar */
 });
