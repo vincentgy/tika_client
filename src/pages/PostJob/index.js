@@ -11,12 +11,7 @@ const Item = List.Item;
 export default class PostJob extends React.Component {
   render() {
     return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+      <View>
         <ScrollView
           style={{
             height: '100%',
