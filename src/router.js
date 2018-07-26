@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, StatusBar} from 'react-native';
+import {Text, View, ScrollView, StatusBar} from 'react-native';
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -9,6 +9,7 @@ import {Page} from './components/PageHOC';
 import {Ionicons} from './components/Icons';
 import Header from './components/Header';
 import Tab from './components/Tabs';
+import PostJob from './pages/PostJob';
 
 @Page({
   tabBarLabel: 'Notifications',
@@ -26,7 +27,7 @@ import Tab from './components/Tabs';
 class Notifications extends React.Component {
   render() {
     return (
-      <React.Fragment>
+      <View style={{backgroundColor: 'white', height: '100%'}}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Header
           rightButton={[
@@ -34,22 +35,14 @@ class Notifications extends React.Component {
             <Ionicons key={0} name="ios-people" size={24} color="#900" />,
           ]}
         />
-        <Tab />
-      </React.Fragment>
-    );
-  }
-}
-
-@Page({tabBarLabel: 'Post a Job'})
-class PostJob extends React.Component {
-  render() {
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Post a Job</Text>
+        <ScrollView style={{backgroundColor: 'grey'}}>
+          <Tab />
+        </ScrollView>
       </View>
     );
   }
 }
+
 @Page({tabBarLabel: 'Find a Job'})
 class FindJob extends React.Component {
   render() {
@@ -79,6 +72,7 @@ const TabRoot = createBottomTabNavigator(
     FindJob,
   },
   {
+    initialRouteName: 'PostJob',
     tabBarOptions: {
       style: {
         backgroundColor: 'white',

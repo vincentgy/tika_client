@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Text} from 'react-native';
+import {Text, Platform} from 'react-native';
 // import PropTypes from 'prop-types';
 import {Entypo} from '../Icons';
 
 const HeaderContainer = styled.View`
+  margin-top: ${Platform.OS === 'ios' ? 20 : 0};
   height: 48px;
   background-color: white;
   flex-direction: row;
