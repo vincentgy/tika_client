@@ -34,17 +34,7 @@ class Notifications extends React.Component {
             <Ionicons key={0} name="ios-people" size={24} color="#900" />,
           ]}
         />
-        <Tab>
-          <View style={{width: '100%'}}>
-            <Text>1</Text>
-          </View>
-          <View style={{width: '100%'}}>
-            <Text>1</Text>
-          </View>
-          <View style={{width: '100%'}}>
-            <Text>1</Text>
-          </View>
-        </Tab>
+        <Tab />
       </React.Fragment>
     );
   }
