@@ -22,3 +22,4 @@ android/app/build
 .settings*
 my-release-key.keystore
 index.android.bundle*
+android/.idea
