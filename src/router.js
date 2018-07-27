@@ -12,6 +12,7 @@ import Tab from './components/Tabs';
 import PostJob from './pages/PostJob';
 import Edit from './pages/PostJob/edit';
 import Picker from './pages/PostJob/picker';
+import Account from './pages/Account';
 
 @Page({
   tabBarLabel: 'Notifications',
@@ -56,17 +57,6 @@ class FindJob extends React.Component {
   }
 }
 
-@Page({tabBarLabel: 'My Account'})
-class Account extends React.Component {
-  render() {
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>My Account</Text>
-      </View>
-    );
-  }
-}
-
 const TabRoot = createBottomTabNavigator(
   {
     Notifications,
@@ -75,7 +65,7 @@ const TabRoot = createBottomTabNavigator(
     Account,
   },
   {
-    initialRouteName: 'PostJob',
+    initialRouteName: 'Account',
     tabBarOptions: {
       style: {
         backgroundColor: 'white',
