@@ -36,7 +36,12 @@ class PostJob extends React.Component {
             desc={this.props.title}
             onPress={() => action('title')}
           />
-          <Item key="3" title="Categories" desc={this.props.categories} />
+          <Item
+            key="3"
+            title="Categories"
+            onPress={() => this.props.navigation.navigate('Picker')}
+            desc={this.props.categories}
+          />
         </List>
         <List>
           <Item

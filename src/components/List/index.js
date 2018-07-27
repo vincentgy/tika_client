@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import {View, TouchableNativeFeedback} from 'react-native';
+import {
+  View,
+  TouchableNativeFeedback,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
 import {Entypo} from '../Icons';
 
 const List = ({children}) => {
@@ -43,8 +48,11 @@ const TextMargined = T.extend`
 `;
 
 const Item = ({title, desc, style, onPress}) => {
+  const PlaformView =
+    Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
+
   return (
-    <TouchableNativeFeedback onPress={onPress}>
+    <PlaformView onPress={onPress}>
       <Padding16 style={style}>
         <ItemContainer>
           <T>{title}</T>
@@ -59,7 +67,7 @@ const Item = ({title, desc, style, onPress}) => {
           </ItemContainer>
         </ItemContainer>
       </Padding16>
-    </TouchableNativeFeedback>
+    </PlaformView>
   );
 };
 

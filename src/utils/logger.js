@@ -1,9 +1,16 @@
 import React from 'react';
-import {ScrollView, Text} from 'react-native';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {WIDTH} from './plaform';
-import {Button} from 'react-native-elements';
 
 export let Debugger = null;
+
+const Button = ({children, ...others}) => {
+  return (
+    <TouchableOpacity {...others} style={{width: WIDTH / 4}}>
+      <Text style={{textAlign: 'center'}}>{children}</Text>
+    </TouchableOpacity>
+  );
+};
 
 export class Logger extends React.Component {
   state = {
@@ -19,7 +26,7 @@ export class Logger extends React.Component {
   log(obj) {
     let _obj = obj;
     if (_obj instanceof Object || _obj instanceof Array) {
-      _obj = JSON.stringify(obj, undefined, 2).replace(/\\/g, '');
+      _obj = JSON.stringify(_obj, null, 2);
     }
     this.setState({
       loggerQueue: [...this.state.loggerQueue, _obj],
@@ -28,40 +35,50 @@ export class Logger extends React.Component {
 
   render() {
     return (
-      <ScrollView
+      <View
         style={{
-          borderWidth: 1,
           position: 'absolute',
-          backgroundColor: 'white',
-          height: this.state.open ? 200 : 20,
-          width: WIDTH / 2,
+          marginTop: 20,
+          marginLeft: 20,
         }}>
-        <Button
-          onPress={() => {
-            this.setState({
-              open: !this.state.open,
-            });
+        <ScrollView
+          ref={this.getRef}
+          onContentSizeChange={() => {
+            this.scroller.scrollToEnd({animated: true});
           }}
-          buttonStyle={{height: 20, width: 100}}
-          title="关闭"
-        />
-        {/* <Button
-          onPress={() => {
-            this.setState({
-              loggerQueue: [],
-            });
-          }}
-          buttonStyle={{height: 20, width: 100}}
-          title="清理"
-        /> */}
-        {this.state.loggerQueue.map((obj, index) => {
-          return (
-            <Text style={{fontSize: 10}} key={index}>
-              {index}:{obj}
-            </Text>
-          );
-        })}
-      </ScrollView>
+          style={{
+            borderWidth: 1,
+            backgroundColor: 'white',
+            height: this.state.open ? 200 : 0,
+            width: WIDTH / 2,
+          }}>
+          {this.state.loggerQueue.map((obj, index) => {
+            return (
+              <Text style={{fontSize: 10}} key={index}>
+                {index}:{obj}
+              </Text>
+            );
+          })}
+        </ScrollView>
+        <View style={{flexDirection: 'row'}}>
+          <Button
+            onPress={() => {
+              this.setState({
+                open: !this.state.open,
+              });
+            }}>
+            {this.state.open ? '关' : '开'}
+          </Button>
+          <Button
+            onPress={() => {
+              this.setState({
+                loggerQueue: [],
+              });
+            }}>
+            清理
+          </Button>
+        </View>
+      </View>
     );
   }
 }

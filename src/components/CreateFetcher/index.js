@@ -25,20 +25,11 @@ const CreateFetcher = (
             },
           });
 
-          const res = await Promise.race(
-            fetchPromise,
-            new Promise((resolve, reject) => {
-              setTimeout(() => {
-                reject('timeOut');
-                Debugger.log('请求超时');
-              }, 5000);
-            })
-          );
-
+          const res = await fetchPromise;
           const json = await res.json();
-          Debugger.log(JSON.parse(json));
+          Debugger.log(json.data);
           this.setState({
-            fetchData: JSON.parse(json),
+            fetchData: json.data,
             loading: false,
           });
         } catch (e) {
