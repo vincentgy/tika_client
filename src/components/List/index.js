@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {View} from 'react-native';
+import {View, TouchableNativeFeedback} from 'react-native';
 import {Entypo} from '../Icons';
 
 const List = ({children}) => {
@@ -42,17 +42,24 @@ const TextMargined = T.extend`
   margin-right: 8px;
 `;
 
-const Item = ({title, desc, style}) => {
+const Item = ({title, desc, style, onPress}) => {
   return (
-    <Padding16 style={style}>
-      <ItemContainer>
-        <T>{title}</T>
+    <TouchableNativeFeedback onPress={onPress}>
+      <Padding16 style={style}>
         <ItemContainer>
-          <TextMargined style={{color: '#2D59D9'}}>{desc}</TextMargined>
-          <Entypo size={12} key={0} name="chevron-thin-right" color="#2D59D9" />
+          <T>{title}</T>
+          <ItemContainer>
+            <TextMargined style={{color: '#2D59D9'}}>{desc}</TextMargined>
+            <Entypo
+              size={12}
+              key={0}
+              name="chevron-thin-right"
+              color="#2D59D9"
+            />
+          </ItemContainer>
         </ItemContainer>
-      </ItemContainer>
-    </Padding16>
+      </Padding16>
+    </TouchableNativeFeedback>
   );
 };
 

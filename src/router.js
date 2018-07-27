@@ -10,6 +10,8 @@ import {Ionicons} from './components/Icons';
 import Header from './components/Header';
 import Tab from './components/Tabs';
 import PostJob from './pages/PostJob';
+import Edit from './pages/PostJob/edit';
+import Picker from './pages/PostJob/picker';
 
 @Page({
   tabBarLabel: 'Notifications',
@@ -70,6 +72,7 @@ const TabRoot = createBottomTabNavigator(
     Notifications,
     PostJob,
     FindJob,
+    Account,
   },
   {
     initialRouteName: 'PostJob',
@@ -87,8 +90,8 @@ const HomeStack = createStackNavigator({
       header: null,
     },
   },
-  Shit: Account,
-  /* any other route you want to render above the tab bar */
+  Edit: Edit,
+  Picker: Picker,
 });
 
 export default createSwitchNavigator({

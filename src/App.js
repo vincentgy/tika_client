@@ -5,12 +5,14 @@ import Rluy from './utils/rluy.native';
 import user from './controller/user';
 
 import {NativeModules, YellowBox, Alert} from 'react-native';
+
+import TabRoot from './router';
+import {Logger} from './utils/logger';
+
 YellowBox.ignoreWarnings([
   'Warning: isMounted(...) is deprecated',
   'Module RCTImageLoader',
 ]);
-
-import TabRoot from './router';
 
 Rluy.addController(user);
 const store = Rluy.run();
@@ -41,7 +43,10 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <TabRoot />
+        <React.Fragment>
+          <TabRoot />
+          <Logger />
+        </React.Fragment>
       </Provider>
     );
   }
