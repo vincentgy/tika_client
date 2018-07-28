@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, TextInput, Platform} from 'react-native';
 import {connect} from 'react-redux';
+import Header from '../../components/Header';
 
 @connect(state => ({...state.postJob}))
 export default class Edit extends React.Component {
@@ -17,7 +18,8 @@ export default class Edit extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={{backgroundColor: 'white'}}>
+        <Header />
         <TextInput
           onChangeText={text => {
             this.props.dispatch({

@@ -52,8 +52,8 @@ const Item = ({title, desc, style, onPress}) => {
     Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
 
   return (
-    <PlaformView onPress={onPress}>
-      <Padding16 style={style}>
+    <Padding16 style={style}>
+      <PlaformView onPress={onPress}>
         <ItemContainer>
           <T>{title}</T>
           <ItemContainer>
@@ -66,8 +66,8 @@ const Item = ({title, desc, style, onPress}) => {
             />
           </ItemContainer>
         </ItemContainer>
-      </Padding16>
-    </PlaformView>
+      </PlaformView>
+    </Padding16>
   );
 };
 

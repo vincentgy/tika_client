@@ -11,6 +11,7 @@
     "react-test-renderer": "16.3.1"
   },
   "scripts": {
+    "postinstall": "cp vendor/attachWebsocketServer.js node_modules/react-native/local-cli/server/util/",
     "start:a": "adb reverse tcp:8081 tcp:8081 && npm run start",
     "start": "react-native start",
     "android": "react-native run-android",
@@ -48,8 +49,8 @@
     "styled-components": "^3.3.3"
   },
   "pre-commit": [
+    "lint",
     "format",
-    "gitadd",
-    "lint"
+    "gitadd"
   ]
 }

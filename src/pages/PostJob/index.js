@@ -7,6 +7,7 @@ import {Button} from 'react-native-elements';
 import {withNavigation} from 'react-navigation';
 import {connect} from 'react-redux';
 import PageBase from '../../components/PageBase';
+import ModalPicker from '../../components/ModalPicker';
 
 const Item = List.Item;
 
@@ -44,13 +45,16 @@ class PostJob extends React.Component {
           />
         </List>
         <List>
-          <Item
-            key="1"
-            title="Region"
-            onPress={() => this.props.navigation.navigate('Picker')}
-            desc={this.props.region}
-          />
-          <Item key="2" title="District" desc={this.props.district} />
+          <ModalPicker key="1">
+            {(openCallback, props) => (
+              <Item
+                style={props.style}
+                title="Region"
+                onPress={() => openCallback()}
+                desc={this.props.region}
+              />
+            )}
+          </ModalPicker>
           <Item
             key="3"
             title="Location"

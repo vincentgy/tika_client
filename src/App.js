@@ -4,7 +4,13 @@ import {Provider} from 'react-redux';
 import Rluy from './utils/rluy.native';
 import user from './controller/user';
 
-import {NativeModules, YellowBox, Alert} from 'react-native';
+import {
+  NativeModules,
+  YellowBox,
+  Alert,
+  PanResponder,
+  View,
+} from 'react-native';
 
 import TabRoot from './router';
 import {Logger} from './utils/logger';
@@ -18,7 +24,7 @@ Rluy.addController(user);
 const store = Rluy.run();
 const alert = Alert.alert;
 
-export default class App extends React.Component {
+class App extends React.Component {
   getViewContainerRef = node => (this.View = node);
 
   async checkVersion() {
@@ -51,3 +57,27 @@ export default class App extends React.Component {
     );
   }
 }
+
+// https://github.com/facebook/react-native/issues/10191
+// 3 finger touch can get the things out
+const DevMenuTrigger = ({children}) => {
+  const {DevMenu} = NativeModules;
+  const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: (evt, gestureState) => {
+      if (gestureState.numberActiveTouches === 3) {
+        DevMenu.show();
+      }
+    },
+  });
+  return (
+    <View style={{flex: 1}} {...panResponder.panHandlers}>
+      {children}
+    </View>
+  );
+};
+
+export default () => (
+  <DevMenuTrigger>
+    <App />
+  </DevMenuTrigger>
+);

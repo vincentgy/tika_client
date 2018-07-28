@@ -65,7 +65,7 @@ const TabRoot = createBottomTabNavigator(
     Account,
   },
   {
-    initialRouteName: 'Account',
+    initialRouteName: 'PostJob',
     tabBarOptions: {
       style: {
         backgroundColor: 'white',
@@ -80,7 +80,12 @@ const HomeStack = createStackNavigator({
       header: null,
     },
   },
-  Edit: Edit,
+  Edit: {
+    screen: Edit,
+    navigationOptions: {
+      header: null,
+    },
+  },
   Picker: Picker,
 });
 
