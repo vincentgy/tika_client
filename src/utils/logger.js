@@ -15,7 +15,7 @@ const Button = ({children, ...others}) => {
 export class Logger extends React.Component {
   state = {
     loggerQueue: [],
-    open: true,
+    open: false,
   };
 
   getRef = node => (this.scroller = node);

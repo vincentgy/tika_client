@@ -40,12 +40,18 @@ class PostJob extends React.Component {
           <Item
             key="3"
             title="Categories"
-            onPress={() => this.props.navigation.navigate('Picker')}
+            onPress={() => {
+              this.props.dispatch({
+                type: 'ChangeCurrentField',
+                payload: 'categories',
+              });
+              this.props.navigation.navigate('Picker');
+            }}
             desc={this.props.categories}
           />
         </List>
         <List>
-          <ModalPicker key="1">
+          <ModalPicker title="Region" key="1">
             {(openCallback, props) => (
               <Item
                 style={props.style}
@@ -64,7 +70,17 @@ class PostJob extends React.Component {
         </List>
         <List>
           <Item key="1" title="Pay Type" desc={this.props.payType} />
-          <Item key="2" title="Pay Range" desc={this.props.payRange} />
+          <ModalPicker title="Pay Range" key="2">
+            {(openCallback, props) => (
+              <Item
+                onPress={() => openCallback()}
+                key="2"
+                style={props.style}
+                title="Pay Range"
+                desc={this.props.payRange}
+              />
+            )}
+          </ModalPicker>
         </List>
         <View style={{marginTop: 8, marginBottom: 8}}>
           <Button title="Post a job" backgroundColor="#2D59D9" />

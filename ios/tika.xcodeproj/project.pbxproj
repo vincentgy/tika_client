@@ -35,6 +35,7 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* tikaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* tikaTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
+		450CA9A6210CC7930056AB17 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 450CA9A2210CC6EA0056AB17 /* libRNSpinkit.a */; };
 		456634B42108BE550041FB55 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 456634B32108BE3D0041FB55 /* libRNVectorIcons.a */; };
 		456634C12108BF780041FB55 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 456634B62108BF780041FB55 /* Octicons.ttf */; };
 		456634C22108BF780041FB55 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 456634B72108BF780041FB55 /* Feather.ttf */; };
@@ -291,6 +292,20 @@
 			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
 			remoteInfo = "jschelpers-tvOS";
 		};
+		450CA9A1210CC6EA0056AB17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 450CA977210CC6EA0056AB17 /* RNSpinkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D42CB3511B2538DE00FD0AE2;
+			remoteInfo = RNSpinkit;
+		};
+		450CA9A3210CC6EA0056AB17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 450CA977210CC6EA0056AB17 /* RNSpinkit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 641194871EC9FD4A00D4FC03;
+			remoteInfo = "RNSpinkit-tvOS";
+		};
 		456634B22108BE3D0041FB55 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 456634892108BE3C0041FB55 /* RNVectorIcons.xcodeproj */;
@@ -358,6 +373,7 @@
 		2D02E47B1E0B4A5D006451C7 /* tika-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tika-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* tika-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "tika-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		450CA977210CC6EA0056AB17 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		456634892108BE3C0041FB55 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		456634B62108BF780041FB55 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		456634B72108BF780041FB55 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
@@ -389,6 +405,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				450CA9A6210CC7930056AB17 /* libRNSpinkit.a in Frameworks */,
 				456634B42108BE550041FB55 /* libRNVectorIcons.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
@@ -556,6 +573,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		450CA978210CC6EA0056AB17 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				450CA9A2210CC6EA0056AB17 /* libRNSpinkit.a */,
+				450CA9A4210CC6EA0056AB17 /* libRNSpinkit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4566348A2108BE3C0041FB55 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -604,6 +630,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				450CA977210CC6EA0056AB17 /* RNSpinkit.xcodeproj */,
 				456634B52108BF780041FB55 /* Fonts */,
 				456634892108BE3C0041FB55 /* RNVectorIcons.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -826,6 +853,10 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = 450CA978210CC6EA0056AB17 /* Products */;
+					ProjectRef = 450CA977210CC6EA0056AB17 /* RNSpinkit.xcodeproj */;
 				},
 				{
 					ProductGroup = 4566348A2108BE3C0041FB55 /* Products */;
@@ -1065,6 +1096,20 @@
 			fileType = archive.ar;
 			path = libjschelpers.a;
 			remoteRef = 3DAD3EAE1DF850E9000B6D8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		450CA9A2210CC6EA0056AB17 /* libRNSpinkit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSpinkit.a;
+			remoteRef = 450CA9A1210CC6EA0056AB17 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		450CA9A4210CC6EA0056AB17 /* libRNSpinkit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSpinkit.a;
+			remoteRef = 450CA9A3210CC6EA0056AB17 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		456634B32108BE3D0041FB55 /* libRNVectorIcons.a */ = {

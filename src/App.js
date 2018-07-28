@@ -18,6 +18,7 @@ import {Logger} from './utils/logger';
 YellowBox.ignoreWarnings([
   'Warning: isMounted(...) is deprecated',
   'Module RCTImageLoader',
+  'Class RCTCxxModule',
 ]);
 
 Rluy.addController(user);

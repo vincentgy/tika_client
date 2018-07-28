@@ -6,10 +6,11 @@ export default class ModalPicker extends React.Component {
   static defaultProps = {
     row: 2,
     data: {0: [], 1: []},
+    title: '标题',
   };
 
   state = {
-    modalVisible: true,
+    modalVisible: false,
   };
 
   setModalVisible = modalVisible => {
@@ -48,15 +49,24 @@ export default class ModalPicker extends React.Component {
                   style={{padding: 16}}>
                   <Text
                     style={{fontWeight: '900', color: '#a0b0b0', fontSize: 16}}>
-                    取消
+                    Cancel
                   </Text>
                 </TouchableOpacity>
+                <Text
+                  style={{
+                    padding: 16,
+                    fontWeight: '900',
+                    color: '#a0b0b0',
+                    fontSize: 16,
+                  }}>
+                  {this.props.title}
+                </Text>
                 <TouchableOpacity
                   onPress={() => this.setModalVisible(false)}
                   style={{padding: 16}}>
                   <Text
                     style={{fontWeight: '900', color: '#0077FF', fontSize: 16}}>
-                    确定
+                    Comfirm
                   </Text>
                 </TouchableOpacity>
               </View>
