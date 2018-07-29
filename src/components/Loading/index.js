@@ -1,13 +1,13 @@
 import React from 'react';
 import Spinner from 'react-native-spinkit';
 import {View} from 'react-native';
-import {HEIGHT, WIDTH} from '../../utils/plaform';
+import {WIDTH} from '../../utils/plaform';
 
+//https://github.com/maxs15/react-native-spinkit
 //https://github.com/ybq/Android-SpinKit
 export const Loading = () => (
   <View
     style={{
-      height: HEIGHT,
       width: WIDTH,
       flexDirection: 'row',
       alignItems: 'center',

@@ -2,7 +2,7 @@ import React from 'react';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {WIDTH} from './plaform';
 
-export let Debugger = null;
+export let Debugger = {log: () => void 666};
 
 const Button = ({children, ...others}) => {
   return (
@@ -24,12 +24,14 @@ export class Logger extends React.Component {
     Debugger = this;
   }
   log(obj) {
-    let _obj = obj;
-    if (_obj instanceof Object || _obj instanceof Array) {
-      _obj = JSON.stringify(_obj, null, 2);
-    }
-    this.setState({
-      loggerQueue: [...this.state.loggerQueue, _obj],
+    setTimeout(() => {
+      let _obj = obj;
+      if (_obj instanceof Object || _obj instanceof Array) {
+        _obj = JSON.stringify(_obj, null, 2);
+      }
+      this.setState({
+        loggerQueue: [...this.state.loggerQueue, _obj],
+      });
     });
   }
 

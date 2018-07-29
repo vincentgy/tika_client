@@ -1,16 +1,22 @@
+// const payType = [
+//   {id: '1', name: 'one-off'},
+//   {id: '2', name: 'annual'},
+//   {id: '3', name: 'hourly'},
+// ];
+
 export default {
   name: 'postJob',
   state: {
-    title: 'title',
-    company: 'company',
-    type: '',
-    payType: '',
-    payRange: '',
-    region: '',
+    title: 'edit',
+    company: 'edit',
+    type: 'choose',
+    payType: 'choose',
+    payRange: 'choose',
+    region: 'choose',
     district: '',
-    location: '',
-    number: '',
-    categories: '',
+    location: 'edit',
+    number: 'edit',
+    categories: 'choose',
     currentField: '',
   },
   reducers: {

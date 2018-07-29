@@ -1,17 +1,25 @@
 import React from 'react';
 
 import {View, ScrollView, Platform} from 'react-native';
-import {WIDTH} from '../../utils/plaform';
+import {WIDTH, HEIGHT} from '../../utils/plaform';
 
 class PageBase extends React.Component {
   render() {
     const {hasStatusBar} = this.props;
 
+    const Height =
+      Platform.OS === 'ios'
+        ? {
+            height:
+              HEIGHT - (Platform.OS === 'ios' ? (hasStatusBar ? 66 : 0) : 0),
+          }
+        : {};
+
     return (
       <View>
         <ScrollView
           style={{
-            height: '100%',
+            ...Height,
             width: WIDTH,
             marginTop: Platform.OS === 'ios' ? (hasStatusBar ? 20 : 0) : 0,
           }}>

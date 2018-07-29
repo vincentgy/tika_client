@@ -7,6 +7,8 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+// https://github.com/maxs15/react-native-spinkit/wiki/Manual-linking---Android
+import com.react.rnspinkit.RNSpinkitPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +23,7 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(new MainReactPackage(), new CustomHotUpdateModulePackage());
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new CustomHotUpdateModulePackage(),new RNSpinkitPackage());
     }
 
     @Override

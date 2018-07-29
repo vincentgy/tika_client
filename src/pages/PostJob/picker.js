@@ -1,47 +1,50 @@
 import React from 'react';
 
 import List from '../../components/List';
-import CreateFetcher from '../../components/CreateFetcher';
+import {Fetcher} from '../../components/CreateFetcher';
 import PageBase from '../../components/PageBase';
-import {Loading} from '../../components/Loading';
 import {connect} from 'react-redux';
+// import {Debugger} from '../../utils/logger';
 
-@connect()
-class Picker extends React.Component {
+@connect(state => ({currentField: state.postJob.currentField}))
+export default class Picker extends React.PureComponent {
+  state = {
+    type: 'jt',
+    payType: 'jpt',
+    categories: 'jc',
+  };
+
   render() {
-    if (this.props.loading) return <Loading />;
+    // Debugger.log(this.props.currentField);
+    const {currentField} = this.props;
+
+    const body = {a: this.state[currentField]};
 
     return (
       <PageBase>
-        <List>
-          {this.props.data.map(d => {
-            return (
-              <List.Item
-                desc="choose"
-                onPress={() => {
-                  this.props.dispatch({
-                    type: 'EditPostJob',
-                    payload: d.name,
-                  });
-                  this.props.navigation.goBack(null);
-                }}
-                key={d.id}
-                title={d.name}
-              />
-            );
-          })}
-        </List>
+        <Fetcher body={body}>
+          {({fetchData}) => (
+            <List>
+              {fetchData.data.map(d => {
+                return (
+                  <List.Item
+                    desc="choose"
+                    onPress={() => {
+                      this.props.dispatch({
+                        type: 'EditPostJob',
+                        payload: d.name,
+                      });
+                      this.props.navigation.goBack(null);
+                    }}
+                    key={d.id}
+                    title={d.name}
+                  />
+                );
+              })}
+            </List>
+          )}
+        </Fetcher>
       </PageBase>
     );
   }
 }
-
-const mapState = state => {
-  return {
-    data: state.fetchData,
-    error: state.error,
-    loading: state.loading,
-  };
-};
-
-export default CreateFetcher(undefined, {a: 'jpt'}, mapState)(Picker);

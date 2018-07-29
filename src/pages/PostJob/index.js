@@ -8,6 +8,7 @@ import {withNavigation} from 'react-navigation';
 import {connect} from 'react-redux';
 import PageBase from '../../components/PageBase';
 import ModalPicker from '../../components/ModalPicker';
+import {payRange} from './config';
 
 const Item = List.Item;
 
@@ -20,7 +21,7 @@ class PostJob extends React.Component {
       this.props.navigation.navigate('Edit');
     };
     return (
-      <PageBase>
+      <PageBase hasStatusBar>
         <List>
           <Item
             key="1"
@@ -28,9 +29,26 @@ class PostJob extends React.Component {
             desc={this.props.company}
             onPress={() => action('company')}
           />
+          <Item
+            key="2"
+            title="Number"
+            desc={this.props.number}
+            onPress={() => action('number')}
+          />
         </List>
         <List>
-          <Item key="1" title="Job Type" desc={this.props.type} />
+          <Item
+            key="1"
+            title="Job Type"
+            onPress={() => {
+              this.props.dispatch({
+                type: 'ChangeCurrentField',
+                payload: 'type',
+              });
+              this.props.navigation.navigate('Picker');
+            }}
+            desc={this.props.type}
+          />
           <Item
             key="2"
             title="Job Title"
@@ -69,8 +87,25 @@ class PostJob extends React.Component {
           />
         </List>
         <List>
-          <Item key="1" title="Pay Type" desc={this.props.payType} />
-          <ModalPicker title="Pay Range" key="2">
+          <Item
+            key="1"
+            title="Pay Type"
+            onPress={() => {
+              this.props.dispatch({
+                type: 'ChangeCurrentField',
+                payload: 'payType',
+              });
+              this.props.navigation.navigate('Picker');
+            }}
+            desc={this.props.payType}
+          />
+          <ModalPicker
+            data={{
+              0: payRange,
+              1: payRange,
+            }}
+            title="Pay Range"
+            key="2">
             {(openCallback, props) => (
               <Item
                 onPress={() => openCallback()}

@@ -62,6 +62,8 @@ class Input extends React.Component {
               height: 51,
               fontSize: 15,
             }}
+            autoFocus={this.props.autoFocus}
+            onEndEditing={this.props.onEndEditing}
             onChangeText={this.handleChangeText}
             returnKeyType="done"
             onBlur={() => {

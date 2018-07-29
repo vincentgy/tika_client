@@ -1,7 +1,9 @@
 import React from 'react';
-import {View, TextInput, Platform} from 'react-native';
+import {View, Platform} from 'react-native';
 import {connect} from 'react-redux';
 import Header from '../../components/Header';
+import Input from '../../components/Input';
+import {HEIGHT} from '../../utils/plaform';
 
 @connect(state => ({...state.postJob}))
 export default class Edit extends React.Component {
@@ -18,9 +20,9 @@ export default class Edit extends React.Component {
 
   render() {
     return (
-      <View style={{backgroundColor: 'white'}}>
+      <View style={{backgroundColor: 'white', height: HEIGHT}}>
         <Header />
-        <TextInput
+        <Input
           onChangeText={text => {
             this.props.dispatch({
               type: 'EditPostJob',
@@ -31,7 +33,7 @@ export default class Edit extends React.Component {
           onEndEditing={() => this.props.navigation.goBack(null)}
           returnKeyType="done"
           autoFocus
-          placeholder="Edit company name"
+          placeholder={`edit ${this.props.currentField}`}
         />
       </View>
     );

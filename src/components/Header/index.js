@@ -45,7 +45,7 @@ class Header extends React.Component {
           })}
         </FlexContainer>
         <Title>
-          <Text>我是标题</Text>
+          <Text>{this.props.title}</Text>
         </Title>
         <FlexContainer>
           {rightButton.map((rb, index) => {

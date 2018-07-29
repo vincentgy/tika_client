@@ -1,6 +1,32 @@
 import React from 'react';
 import {Modal, View, Text, TouchableOpacity, Picker} from 'react-native';
 import {WIDTH} from '../../utils/plaform';
+import styled from 'styled-components';
+import produce from 'immer';
+
+const Placeholder = styled.View`
+  height: 55%;
+`;
+
+const ModalInside = styled.View`
+  height: 45%;
+  background-color: white;
+`;
+
+const ButtonGroup = styled.View`
+  border-top-width: 1px;
+  border-top-color: rgba(120, 120, 120, 0.1);
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(120, 120, 120, 0.1);
+`;
+
+const StyledText = styled.Text`
+  font-weight: 900;
+  color: #0077ff;
+  font-size: 16px;
+`;
 
 export default class ModalPicker extends React.Component {
   static defaultProps = {
@@ -9,9 +35,18 @@ export default class ModalPicker extends React.Component {
     title: '标题',
   };
 
-  state = {
-    modalVisible: false,
-  };
+  constructor(props) {
+    super(props);
+
+    const value = [];
+    Object.keys(props.data).forEach(() => {
+      value.push('');
+    });
+    this.state = {
+      value: [...value],
+      modalVisible: false,
+    };
+  }
 
   setModalVisible = modalVisible => {
     this.setState({
@@ -35,22 +70,13 @@ export default class ModalPicker extends React.Component {
           visible={this.state.modalVisible}
           onRequestClose={() => this.setModalVisible(false)}>
           <View>
-            <View style={{height: '55%', backgroundColor: 'rgba(0,0,0,0.6)'}} />
-            <View style={{height: '45%', backgroundColor: 'white'}}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  borderBottomWidth: 1,
-                  borderBottomColor: 'rgba(120,120,120,0.1)',
-                }}>
+            <Placeholder />
+            <ModalInside>
+              <ButtonGroup>
                 <TouchableOpacity
                   onPress={() => this.setModalVisible(false)}
                   style={{padding: 16}}>
-                  <Text
-                    style={{fontWeight: '900', color: '#a0b0b0', fontSize: 16}}>
-                    Cancel
-                  </Text>
+                  <StyledText>Cancel</StyledText>
                 </TouchableOpacity>
                 <Text
                   style={{
@@ -64,47 +90,35 @@ export default class ModalPicker extends React.Component {
                 <TouchableOpacity
                   onPress={() => this.setModalVisible(false)}
                   style={{padding: 16}}>
-                  <Text
-                    style={{fontWeight: '900', color: '#0077FF', fontSize: 16}}>
-                    Comfirm
-                  </Text>
+                  <StyledText>Comfirm</StyledText>
                 </TouchableOpacity>
-              </View>
+              </ButtonGroup>
               <View style={{flexDirection: 'row'}}>
-                <Picker
-                  // selectedValue={this.state.language}
-                  style={{
-                    width: WIDTH / 2,
-                  }}>
-                  <Picker.Item label="Java" value="java" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                </Picker>
-                <Picker
-                  // selectedValue={this.state.language}
-                  style={{
-                    width: WIDTH / 2,
-                  }}>
-                  <Picker.Item label="Java" value="java" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                  <Picker.Item label="JavaScript" value="js" />
-                </Picker>
+                {Object.keys(this.props.data).map((key, idx) => (
+                  <Picker
+                    selectedValue={this.state.value[idx]}
+                    onValueChange={value => {
+                      this.setState({
+                        value: produce(this.state.value, draft => {
+                          draft[idx] = value;
+                        }),
+                      });
+                    }}
+                    key={key}
+                    style={{
+                      width: WIDTH / 2,
+                    }}>
+                    {this.props.data[key].map((item, index) => (
+                      <Picker.Item
+                        key={index}
+                        label={item.label}
+                        value={item.value}
+                      />
+                    ))}
+                  </Picker>
+                ))}
               </View>
-            </View>
+            </ModalInside>
           </View>
         </Modal>
       </React.Fragment>
