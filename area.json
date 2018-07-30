@@ -1,0 +1,128 @@
+{
+  "regions": {
+    "1": "Auckland",
+    "2": "Bay Of Plenty",
+    "3": "Canterbury",
+    "4": "Gisborne",
+    "5": "Hawke's Bay ",
+    "6": "Manawatu / Wanganui",
+    "7": "Marlborough",
+    "8": "Nelson / Tasman",
+    "9": "Northland",
+    "10": "Otago",
+    "11": "Southland",
+    "12": "Taranaki",
+    "13": "Waikato",
+    "14": "Wellington",
+    "15": "West Coast"
+  },
+  "1": {
+    "1": "Auckland City",
+    "2": "Franklin",
+    "3": "Hauraki Gulf Islands",
+    "4": "Manukau City",
+    "5": "North Shore City",
+    "6": "Papakura",
+    "7": "Rodney",
+    "8": "Waiheke Island",
+    "9": "Waitakere City"
+  },
+  "2": {
+    "10": "Kawerau",
+    "11": "Opotiki",
+    "12": "Rotorua",
+    "13": "Tauranga",
+    "14": "Western Bay Of Plenty",
+    "15": "Whakatane"
+  },
+  "3": {
+    "16": "Ashburton",
+    "17": "Banks Peninsula",
+    "18": "Christchurch City",
+    "19": "Hurunui",
+    "20": "Mackenzie",
+    "21": "Selwyn",
+    "22": "Timaru",
+    "23": "Waimakariri",
+    "24": "Waimate"
+  },
+  "4": {
+    "25": "Gisborne"
+  },
+  "5": {
+    "26": "Central Hawke's Bay",
+    "27": "Hastings",
+    "28": "Napier",
+    "29": "Wairoa"
+  },
+  "6": {
+    "30": "Horowhenua",
+    "31": "Manawatu",
+    "32": "Palmerston North",
+    "33": "Rangitikei",
+    "34": "Ruapehu",
+    "35": "Tararua",
+    "36": "Wanganui"
+  },
+  "7": {
+    "37": "Blenheim",
+    "38": "Kaikoura",
+    "39": "Marlborough"
+  },
+  "8": {
+    "40": "Nelson",
+    "41": "Tasman"
+  },
+  "9": {
+    "42": "Far North",
+    "43": "Kaipara",
+    "44": "Whangarei"
+  },
+  "10": {
+    "45": "Central Otago",
+    "46": "Clutha",
+    "47": "Dunedin",
+    "48": "Queenstown-Lakes",
+    "49": "South Otago",
+    "50": "Waitaki",
+    "51": "Wanaka"
+  },
+  "11": {
+    "52": "Catlins",
+    "53": "Gore",
+    "54": "Invercargill",
+    "55": "Southland"
+  },
+  "12": {
+    "56": "New Plymouth",
+    "57": "South Taranaki",
+    "58": "Stratford"
+  },
+  "13": {
+    "59": "Hamilton",
+    "60": "Hauraki",
+    "61": "Matamata-Piako",
+    "62": "Otorohanga",
+    "63": "South Waikato",
+    "64": "Taupo",
+    "65": "Thames-Coromandel",
+    "66": "Waikato",
+    "67": "Waipa",
+    "68": "Waitomo"
+  },
+  "14": {
+    "69": "Carterton",
+    "70": "Kapiti Coast",
+    "71": "Lower Hutt",
+    "72": "Masterton",
+    "73": "Porirua",
+    "74": "South Wairarapa",
+    "75": "Upper Hutt",
+    "76": "Wellington"
+  },
+  "15": {
+    "77": "Buller",
+    "78": "Grey",
+    "79": "Westland"
+  }
+}
