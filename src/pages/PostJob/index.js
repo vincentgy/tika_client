@@ -8,7 +8,9 @@ import {withNavigation} from 'react-navigation';
 import {connect} from 'react-redux';
 import PageBase from '../../components/PageBase';
 import ModalPicker from '../../components/ModalPicker';
-import {payRange} from './config';
+import ModalFetcher from '../../components/ModalFetcher';
+import PayRange from './config';
+import {Debugger} from '../../utils/logger';
 
 const Item = List.Item;
 
@@ -69,16 +71,47 @@ class PostJob extends React.Component {
           />
         </List>
         <List>
-          <ModalPicker title="Region" key="1">
-            {(openCallback, props) => (
-              <Item
-                style={props.style}
+          <ModalFetcher>
+            {(startFetch, res) => (
+              <ModalPicker
+                onComfirm={value => {
+                  Debugger.log(value);
+                  const values = `${value[0]} ${value[1]}`;
+                  this.props.dispatch({type: 'EditPostJob', payload: values});
+                }}
+                onValueChange={(value, type) => {
+                  Debugger.log(type);
+                  const id = PayRange.region.findIndex(i => i.value === value);
+                  // we checking type with 0
+                  // means `0` is when region change
+                  // not `district`
+                  if (type === '0') startFetch({a: 'ld', r: id});
+                }}
+                data={{
+                  0: PayRange.region.map(i => ({...i, type: 'region'})),
+                  1:
+                    (res && res.map(i => ({label: i.name, value: i.name}))) ||
+                    [],
+                }}
                 title="Region"
-                onPress={() => openCallback()}
-                desc={this.props.region}
-              />
+                key="1">
+                {(openCallback, props) => (
+                  <Item
+                    style={props.style}
+                    title="Region"
+                    onPress={() => {
+                      this.props.dispatch({
+                        type: 'ChangeCurrentField',
+                        payload: 'region',
+                      });
+                      openCallback();
+                    }}
+                    desc={this.props.region}
+                  />
+                )}
+              </ModalPicker>
             )}
-          </ModalPicker>
+          </ModalFetcher>
           <Item
             key="3"
             title="Location"
@@ -101,14 +134,24 @@ class PostJob extends React.Component {
           />
           <ModalPicker
             data={{
-              0: payRange,
-              1: payRange,
+              0: PayRange[this.props.payType ? this.props.payType : 'hourly'],
+              1: PayRange[this.props.payType ? this.props.payType : 'hourly'],
+            }}
+            onComfirm={value => {
+              const values = `${value[0]}~${value[1]}`;
+              this.props.dispatch({type: 'EditPostJob', payload: values});
             }}
             title="Pay Range"
             key="2">
             {(openCallback, props) => (
               <Item
-                onPress={() => openCallback()}
+                onPress={() => {
+                  this.props.dispatch({
+                    type: 'ChangeCurrentField',
+                    payload: 'payRange',
+                  });
+                  openCallback();
+                }}
                 key="2"
                 style={props.style}
                 title="Pay Range"
@@ -118,7 +161,30 @@ class PostJob extends React.Component {
           </ModalPicker>
         </List>
         <View style={{marginTop: 8, marginBottom: 8}}>
-          <Button title="Post a job" backgroundColor="#2D59D9" />
+          <ModalFetcher>
+            {startFetch => (
+              <Button
+                title="Post a job"
+                backgroundColor="#2D59D9"
+                onPress={() => {
+                  startFetch({
+                    a: 'pj',
+                    title: this.props.title,
+                    company: this.props.company,
+                    user_id: '3',
+                    type: this.props.type,
+                    minimum_pay: 10000,
+                    maximum_pay: 20000,
+                    region_id: '12312312',
+                    district_id: '123123',
+                    location: '123123',
+                    number: 1,
+                    categories: 1,
+                  });
+                }}
+              />
+            )}
+          </ModalFetcher>
         </View>
       </PageBase>
     );

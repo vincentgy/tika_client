@@ -39,8 +39,9 @@ export default class ModalPicker extends React.Component {
     super(props);
 
     const value = [];
-    Object.keys(props.data).forEach(() => {
-      value.push('');
+
+    Object.keys(props.data).forEach(key => {
+      value.push(props.data[key][0] && props.data[key][0].value);
     });
     this.state = {
       value: [...value],
@@ -88,7 +89,11 @@ export default class ModalPicker extends React.Component {
                   {this.props.title}
                 </Text>
                 <TouchableOpacity
-                  onPress={() => this.setModalVisible(false)}
+                  onPress={() => {
+                    this.props.onComfirm &&
+                      this.props.onComfirm(this.state.value);
+                    this.setModalVisible(false);
+                  }}
                   style={{padding: 16}}>
                   <StyledText>Comfirm</StyledText>
                 </TouchableOpacity>
@@ -98,6 +103,8 @@ export default class ModalPicker extends React.Component {
                   <Picker
                     selectedValue={this.state.value[idx]}
                     onValueChange={value => {
+                      this.props.onValueChange &&
+                        this.props.onValueChange(value, key);
                       this.setState({
                         value: produce(this.state.value, draft => {
                           draft[idx] = value;

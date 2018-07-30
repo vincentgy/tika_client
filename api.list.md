@@ -119,6 +119,7 @@ JSON object,
 
 7.  List districts by region id,
 
+```
 Request,
 'a':'ld'
 ‘r’: region id
@@ -127,11 +128,13 @@ Response,
 JSON object,
 ‘ret’, 0 means successful, otherwise failed.
 ‘data’, JSON encoded array of job categories, with [id, name]
+```
 
 ---
 
 8.Post Job,
 
+```bash
 Request,
 ‘a’:'pj',
 ‘title’ : job title,
@@ -150,3 +153,4 @@ Request,
 Response,
 JSON object,
 ‘ret’, 0 means successful, otherwise failed.
+```

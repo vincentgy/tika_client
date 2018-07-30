@@ -10,7 +10,7 @@ export default {
     title: 'edit',
     company: 'edit',
     type: 'choose',
-    payType: 'choose',
+    payType: 'hourly',
     payRange: 'choose',
     region: 'choose',
     district: '',
