@@ -75,9 +75,9 @@ class PostJob extends React.Component {
             {(startFetch, res) => (
               <ModalPicker
                 onComfirm={value => {
-                  Debugger.log(value);
-                  const values = `${value[0]} ${value[1]}`;
-                  this.props.dispatch({type: 'EditPostJob', payload: values});
+                  const values = res.find(item => item.name === value[1]);
+                  Debugger.log(values);
+                  this.props.dispatch({type: 'EditRegion', payload: values});
                 }}
                 onValueChange={(value, type) => {
                   Debugger.log(type);
@@ -172,12 +172,13 @@ class PostJob extends React.Component {
                     title: this.props.title,
                     company: this.props.company,
                     user_id: '3',
-                    type: this.props.type,
+                    type: 1,
                     minimum_pay: 10000,
                     maximum_pay: 20000,
-                    region_id: '12312312',
-                    district_id: '123123',
-                    location: '123123',
+                    region_id: this.props.region_id,
+                    district_id: this.props.district_id,
+                    location: '325 east coast road',
+                    pay_type: 2,
                     number: 1,
                     categories: 1,
                   });

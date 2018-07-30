@@ -18,6 +18,8 @@ export default {
     number: 'edit',
     categories: 'choose',
     currentField: '',
+    region_id: '',
+    district_id: '',
   },
   reducers: {
     mapSome: (state, {payload}) => {
@@ -25,6 +27,10 @@ export default {
     },
     changeField: (state, {payload}) => {
       return {...state, currentField: payload};
+    },
+    EditRegion: (state, {payload}) => {
+      const {id, region_id, name} = payload;
+      return {...state, district_id: id, region_id: region_id, region: name};
     },
   },
   effects: {
