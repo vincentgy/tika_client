@@ -3,6 +3,7 @@
 //   {id: '2', name: 'annual'},
 //   {id: '3', name: 'hourly'},
 // ];
+import {Regions, Disctrict} from '../pages/PostJob/area';
 
 export default {
   name: 'postJob',
@@ -10,13 +11,14 @@ export default {
     title: 'edit',
     company: 'edit',
     type: 'choose',
-    payType: 'hourly',
+    payType: 'one-off',
     payRange: 'choose',
     region: 'choose',
     district: '',
     location: 'edit',
     number: 'edit',
     categories: 'choose',
+    categories_id: null,
     currentField: '',
     region_id: '',
     district_id: '',
@@ -25,12 +27,20 @@ export default {
     mapSome: (state, {payload}) => {
       return {...state, [state.currentField]: payload};
     },
+    EditCategoris: (state, {payload}) => {
+      const {name, id} = payload;
+      return {...state, categories: name, categories_id: id};
+    },
     changeField: (state, {payload}) => {
       return {...state, currentField: payload};
     },
-    EditRegion: (state, {payload}) => {
-      const {id, region_id, name} = payload;
-      return {...state, district_id: id, region_id: region_id, region: name};
+    EditPlace: (state, {payload}) => {
+      const {region, district} = payload;
+      const region_id = Regions.find(i => i.region === region).id;
+      const district_id = Disctrict[region_id].find(i => i.name === district)
+        .id;
+
+      return {...state, region, district, region_id, district_id};
     },
   },
   effects: {

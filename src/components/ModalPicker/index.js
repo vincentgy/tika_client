@@ -113,7 +113,7 @@ export default class ModalPicker extends React.Component {
                     }}
                     key={key}
                     style={{
-                      width: WIDTH / 2,
+                      width: WIDTH / this.props.row,
                     }}>
                     {this.props.data[key].map((item, index) => (
                       <Picker.Item

@@ -1,4 +1,36 @@
 export default {
+  jobType: [
+    {
+      id: '1',
+      name: 'full-time',
+    },
+    {
+      id: '2',
+      name: 'contract',
+    },
+    {
+      id: '3',
+      name: 'part-time',
+    },
+    {
+      id: '4',
+      name: 'one-off',
+    },
+  ],
+  payType: [
+    {
+      id: '1',
+      name: 'one-off',
+    },
+    {
+      id: '2',
+      name: 'annual',
+    },
+    {
+      id: '3',
+      name: 'hourly',
+    },
+  ],
   hourly: [
     {label: '10', value: 10},
     {label: '15', value: 15},

@@ -13,7 +13,7 @@
   "scripts": {
     "postinstall": "cp vendor/attachWebsocketServer.js node_modules/react-native/local-cli/server/util/",
     "start:a": "adb reverse tcp:8081 tcp:8081 && npm run start",
-    "start": "react-native start",
+    "start": "node ./scripts/abstract.js&&react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "test:jest": "jest",

@@ -31,8 +31,8 @@ export default class Picker extends React.PureComponent {
                     desc="choose"
                     onPress={() => {
                       this.props.dispatch({
-                        type: 'EditPostJob',
-                        payload: d.name,
+                        type: 'EditCategoris',
+                        payload: {name: d.name, id: d.id},
                       });
                       this.props.navigation.goBack(null);
                     }}
