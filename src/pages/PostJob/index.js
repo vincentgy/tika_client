@@ -204,6 +204,7 @@ class PostJob extends React.Component {
               />
             )}
           </ModalPicker>
+          <Item key="3" title="Job Description" desc={this.props.payRange} />
         </List>
         <View style={{marginTop: 8, marginBottom: 8}}>
           <ModalFetcher>

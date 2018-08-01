@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 import TabRoot from './router';
-import {Logger} from './utils/logger';
+// import {Logger} from './utils/logger';
 
 YellowBox.ignoreWarnings([
   'Warning: isMounted(...) is deprecated',
@@ -52,7 +52,7 @@ class App extends React.Component {
       <Provider store={store}>
         <React.Fragment>
           <TabRoot />
-          <Logger />
+          {/* <Logger /> */}
         </React.Fragment>
       </Provider>
     );

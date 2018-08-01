@@ -10,6 +10,7 @@ import {Ionicons} from './components/Icons';
 import Header from './components/Header';
 import Tab from './components/Tabs';
 import PostJob from './pages/PostJob';
+import JobList from './pages/JobList';
 import Edit from './pages/PostJob/edit';
 import Picker from './pages/PostJob/picker';
 import Account from './pages/Account';
@@ -60,12 +61,12 @@ class FindJob extends React.Component {
 const TabRoot = createBottomTabNavigator(
   {
     Notifications,
-    PostJob,
+    JobList,
     FindJob,
     Account,
   },
   {
-    initialRouteName: 'PostJob',
+    initialRouteName: 'JobList',
     tabBarOptions: {
       style: {
         backgroundColor: 'white',
@@ -82,6 +83,12 @@ const HomeStack = createStackNavigator({
   },
   Edit: {
     screen: Edit,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  PostJob: {
+    screen: PostJob,
     navigationOptions: {
       header: null,
     },
