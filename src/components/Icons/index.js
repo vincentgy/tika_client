@@ -1,3 +1,4 @@
+//https://github.com/oblador/react-native-vector-icons
 import {default as _FontAwesome} from 'react-native-vector-icons/FontAwesome';
 import {default as _Entypo} from 'react-native-vector-icons/Entypo';
 import {default as _Feather} from 'react-native-vector-icons/Feather';

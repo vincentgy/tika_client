@@ -1,10 +1,15 @@
+//https://github.com/Flipkart/recyclerlistview/blob/21049cc89ad606ec9fe8ea045dc73732ff29eac9/src/core/RecyclerListView.tsx#L540-L634
+
 /***
  Use this component inside your React Native Application.
  A scrollable list with different item type
  */
 import React from 'react';
-import {View, Text, Dimensions} from 'react-native';
+import {View, Text, Dimensions, Image, TouchableOpacity} from 'react-native';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
+import {Entypo} from '../../components/Icons';
+import Header from '../../components/Header';
+import Filter from '../../components/Filter';
 
 const ViewTypes = {
   FULL: 0,
@@ -42,7 +47,7 @@ export default class JobList extends React.Component {
       },
       (type, dim) => {
         dim.width = width;
-        dim.height = 140;
+        dim.height = 144;
       }
     );
 
@@ -65,44 +70,57 @@ export default class JobList extends React.Component {
   //Given type and data return the view component
   _rowRenderer(type, data) {
     return (
-      <View style={{...styles.container, borderBottomWidth: 1}}>
-        <Text>Name: {data}</Text>
-        <Text>Location: {data}</Text>
-        <Text>Tag: {data}</Text>
-        <Text>HowManyPosition: {data}</Text>
-      </View>
+      <TouchableOpacity activeOpacity={0.7} style={{backgroundColor: 'white'}}>
+        <View
+          style={{
+            paddingVertical: 8,
+            marginHorizontal: 16,
+            backgroundColor: 'white',
+            borderBottomWidth: 1,
+            borderBottomColor: 'rgba(120,120,120,0.1)',
+          }}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Image
+              style={{width: 40, height: 40, zIndex: 1000}}
+              source={require('./alibaba.png')}
+            />
+            <View style={{marginVertical: 8, marginLeft: 16}}>
+              <Text style={{color: 'black', fontSize: 16}}>Name: {data}</Text>
+              <Text style={{color: 'black', fontSize: 12}}>
+                Location: {data}
+              </Text>
+            </View>
+          </View>
+          <Text>Tag: {data}</Text>
+        </View>
+        <View
+          style={{
+            paddingVertical: 8,
+            marginHorizontal: 16,
+            flexDirection: 'row',
+            backgroundColor: 'white',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+          <Text>HowManyPosition: {data}</Text>
+          <Entypo size={12} key={0} name="chevron-thin-right" color="#2D59D9" />
+        </View>
+      </TouchableOpacity>
     );
     //You can return any view here, CellContainer has no special significance
   }
 
   render() {
     return (
-      <RecyclerListView
-        layoutProvider={this._layoutProvider}
-        dataProvider={this.state.dataProvider}
-        rowRenderer={this._rowRenderer}
-      />
+      <React.Fragment>
+        <Header leftButton={[<Text key="1">Job Search</Text>]} />
+        <Filter />
+        <RecyclerListView
+          layoutProvider={this._layoutProvider}
+          dataProvider={this.state.dataProvider}
+          rowRenderer={this._rowRenderer}
+        />
+      </React.Fragment>
     );
   }
 }
-
-const styles = {
-  container: {
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flex: 1,
-    backgroundColor: '#00a1f1',
-  },
-  containerGridLeft: {
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flex: 1,
-    backgroundColor: '#ffbb00',
-  },
-  containerGridRight: {
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    flex: 1,
-    backgroundColor: '#7cbb00',
-  },
-};

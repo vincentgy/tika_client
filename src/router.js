@@ -36,7 +36,6 @@ class Notifications extends React.Component {
         <Header
           rightButton={[
             <Ionicons key={0} name="ios-people" size={24} color="#900" />,
-            <Ionicons key={0} name="ios-people" size={24} color="#900" />,
           ]}
         />
         <ScrollView style={{backgroundColor: 'grey'}}>
