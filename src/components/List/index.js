@@ -52,22 +52,24 @@ const Item = ({title, desc, style, onPress}) => {
     Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
 
   return (
-    <Padding16 style={style}>
+    <View style={style}>
       <PlaformView onPress={onPress}>
-        <ItemContainer>
-          <T>{title}</T>
+        <Padding16>
           <ItemContainer>
-            <TextMargined style={{color: '#2D59D9'}}>{desc}</TextMargined>
-            <Entypo
-              size={12}
-              key={0}
-              name="chevron-thin-right"
-              color="#2D59D9"
-            />
+            <T>{title}</T>
+            <ItemContainer>
+              <TextMargined style={{color: '#2D59D9'}}>{desc}</TextMargined>
+              <Entypo
+                size={12}
+                key={0}
+                name="chevron-thin-right"
+                color="#2D59D9"
+              />
+            </ItemContainer>
           </ItemContainer>
-        </ItemContainer>
+        </Padding16>
       </PlaformView>
-    </Padding16>
+    </View>
   );
 };
 

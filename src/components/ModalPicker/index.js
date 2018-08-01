@@ -1,8 +1,19 @@
 import React from 'react';
-import {Modal, View, Text, TouchableOpacity, Picker} from 'react-native';
+import {
+  Modal,
+  View,
+  Text,
+  TouchableOpacity,
+  Picker,
+  Platform,
+} from 'react-native';
 import {WIDTH} from '../../utils/plaform';
 import styled from 'styled-components';
 import produce from 'immer';
+import PickerAndroid from './android';
+
+const PickerCompat = Platform.OS === 'ios' ? Picker : PickerAndroid;
+const PickerItem = PickerCompat.Item;
 
 const Placeholder = styled.View`
   height: 55%;
@@ -100,7 +111,7 @@ export default class ModalPicker extends React.Component {
               </ButtonGroup>
               <View style={{flexDirection: 'row'}}>
                 {Object.keys(this.props.data).map((key, idx) => (
-                  <Picker
+                  <PickerCompat
                     selectedValue={this.state.value[idx]}
                     onValueChange={value => {
                       this.props.onValueChange &&
@@ -116,13 +127,13 @@ export default class ModalPicker extends React.Component {
                       width: WIDTH / this.props.row,
                     }}>
                     {this.props.data[key].map((item, index) => (
-                      <Picker.Item
+                      <PickerItem
                         key={index}
                         label={item.label}
                         value={item.value}
                       />
                     ))}
-                  </Picker>
+                  </PickerCompat>
                 ))}
               </View>
             </ModalInside>
