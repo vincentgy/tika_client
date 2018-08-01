@@ -139,9 +139,10 @@ Request,
 ‘a’:'pj',
 ‘title’ : job title,
 ‘company’ : company name,
+‘description’ : job description,
 ’user_id’ : user id of creator,
 ‘type’ : job type id,
-‘pay_type’ : pay type,
+‘pay_type’ : pay type id,
 ‘minimum_pay’ : minimum salary,
 ‘maximum_pay’ : maximum salary,
 ‘region_id’ : region id,
@@ -153,4 +154,31 @@ Request,
 Response,
 JSON object,
 ‘ret’, 0 means successful, otherwise failed.
+```
+
+---
+
+9.Search Job,
+
+```bash
+Request,
+‘a’:'sj',
+'query' =>[
+    ‘title’ : job title key word,
+    ‘company’ : company name key word,
+    ‘description’ : job description key word,
+    ‘type’ : job type id,
+    ‘pay_type’ : pay type id,
+    ‘minimum_pay’ : minimum salary,
+    ‘maximum_pay’ : maximum salary,
+    ‘region_id’ : region id,
+    ‘district_id’ : district id,
+    ‘location’ : address key word,
+    ‘category_ids’ : list of categories the job belongs.
+]
+
+Response,
+JSON object,
+‘ret’, 0 means successful, otherwise failed.
+‘data’, JSON encoded array of job list.
 ```
