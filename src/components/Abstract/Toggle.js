@@ -12,6 +12,6 @@ export default class Toggle extends React.PureComponent {
   };
 
   render() {
-    return this.props.children(this.state.control, this.state.toggle);
+    return this.props.children(this.control, this.state.toggle);
   }
 }
