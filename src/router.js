@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, ScrollView, StatusBar} from 'react-native';
+import {Text, View, ScrollView} from 'react-native';
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -32,7 +32,6 @@ class Notifications extends React.Component {
   render() {
     return (
       <View style={{backgroundColor: 'white', height: '100%'}}>
-        <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Header
           rightButton={[
             <Ionicons key={0} name="ios-people" size={24} color="#900" />,

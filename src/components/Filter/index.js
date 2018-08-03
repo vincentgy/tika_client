@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, TouchableOpacity, Text, Modal} from 'react-native';
+import {View, TouchableOpacity, Platform, Text, Modal} from 'react-native';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
+import * as Animatable from 'react-native-animatable';
 import {Entypo} from '../Icons';
 import Toggle from '../Abstract/Toggle';
 import styled from 'styled-components';
@@ -15,7 +16,7 @@ const FilterContainer = styled.View`
 `;
 
 const RealFilter = styled.TouchableOpacity`
-  margin-top: 48px;
+  margin-top: ${() => (Platform.OS === 'ios' ? 68 : 48)}px;
   height: 40px;
   border-bottom-width: 1px;
   border-bottom-color: rgba(120, 120, 120, 0.1);
@@ -34,6 +35,7 @@ const FilterItem = props => (
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
+      height: 24,
     }}>
     <View>
       <Text style={{textAlign: 'center', fontSize: 10}}>1231</Text>
@@ -45,19 +47,28 @@ const FilterItem = props => (
 class Filter extends React.Component {
   static defaultProps = {};
 
+  getFilterView = node => (this.filter = node);
+
   render() {
     return (
       <Toggle>
         {(ctrl, state) => (
           <React.Fragment>
             <FilterContainer>
-              <FilterItem onPress={() => ctrl()} style={{width: WIDTH / 4}} />
+              <FilterItem
+                onPress={() => {
+                  ctrl(() => {
+                    this.filter.transition({height: 0}, {height: 400});
+                  });
+                }}
+                style={{width: WIDTH / 4}}
+              />
               <FilterItem style={{width: WIDTH / 4}} />
               <FilterItem style={{width: WIDTH / 4}} />
               <FilterItem style={{width: WIDTH / 4}} />
             </FilterContainer>
             <Modal
-              animationType="fade"
+              animationType="none"
               transparent={true}
               visible={state}
               onRequestClose={() => ctrl()}>
@@ -67,7 +78,15 @@ class Filter extends React.Component {
                 <FilterItem style={{width: WIDTH / 4}} />
                 <FilterItem style={{width: WIDTH / 4}} />
               </RealFilter>
-              <View
+              <Animatable.View
+                ref={this.getFilterView}
+                style={{
+                  backgroundColor: '#f8f8f8',
+                  width: WIDTH,
+                }}
+              />
+              <TouchableOpacity
+                onPress={ctrl}
                 style={{
                   width: WIDTH,
                   height: HEIGHT,

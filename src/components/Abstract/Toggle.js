@@ -5,10 +5,15 @@ export default class Toggle extends React.PureComponent {
     toggle: false,
   };
 
-  control = () => {
-    this.setState({
-      toggle: !this.state.toggle,
-    });
+  control = fn => {
+    this.setState(
+      {
+        toggle: !this.state.toggle,
+      },
+      () => {
+        if (fn && fn instanceof Function) fn();
+      }
+    );
   };
 
   render() {

@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Text, Platform} from 'react-native';
+import {Text} from 'react-native';
 // import PropTypes from 'prop-types';
 import {Entypo} from '../Icons';
 
+const IOSStatusBar = styled.View`
+  height: 20px;
+  background-color: #2d59d9;
+`;
+
 const HeaderContainer = styled.View`
-  margin-top: ${Platform.OS === 'ios' ? 20 : 0};
   height: 48px;
   background-color: white;
   flex-direction: row;
@@ -38,21 +42,24 @@ class Header extends React.Component {
     const {leftButton, rightButton} = this.props;
 
     return (
-      <HeaderContainer>
-        <FlexContainer>
-          {leftButton.map((rb, index) => {
-            return <GroupLeft key={index}>{rb}</GroupLeft>;
-          })}
-        </FlexContainer>
-        <Title>
-          <Text>{this.props.title}</Text>
-        </Title>
-        <FlexContainer>
-          {rightButton.map((rb, index) => {
-            return <GroupRight key={index}>{rb}</GroupRight>;
-          })}
-        </FlexContainer>
-      </HeaderContainer>
+      <React.Fragment>
+        <IOSStatusBar />
+        <HeaderContainer>
+          <FlexContainer>
+            {leftButton.map((rb, index) => {
+              return <GroupLeft key={index}>{rb}</GroupLeft>;
+            })}
+          </FlexContainer>
+          <Title>
+            <Text>{this.props.title}</Text>
+          </Title>
+          <FlexContainer>
+            {rightButton.map((rb, index) => {
+              return <GroupRight key={index}>{rb}</GroupRight>;
+            })}
+          </FlexContainer>
+        </HeaderContainer>
+      </React.Fragment>
     );
   }
 }
