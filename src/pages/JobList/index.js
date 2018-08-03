@@ -9,7 +9,7 @@ import {View, Text, Dimensions, Image, TouchableOpacity} from 'react-native';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 import {Entypo} from '../../components/Icons';
 import Header from '../../components/Header';
-import Filter from '../../components/Filter';
+import Filter from '../ModalFilter';
 
 const ViewTypes = {
   FULL: 0,
