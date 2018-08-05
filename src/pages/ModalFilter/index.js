@@ -5,6 +5,7 @@ import Toggle from '../../components/Abstract/Toggle';
 import styled from 'styled-components';
 import Switch, {FilterItem} from './swich';
 import List from '../../components/List';
+import LocationSelector from './location';
 
 const ListItem = List.Item;
 
@@ -23,7 +24,7 @@ class Filter extends React.Component {
   getFilterView = node => (this.filter = node);
 
   render() {
-    const FilterArray = ['Distance', 'Location', 'Type', 'Pay Range'];
+    const FilterArray = ['Distance', 'Location', 'Categories', 'Pay Range'];
 
     return (
       <Toggle>
@@ -54,7 +55,7 @@ class Filter extends React.Component {
                     <ListItem key="5" title="10 km" />
                   </List>
                 </View>
-                <Text>2</Text>
+                <LocationSelector h={350}>2</LocationSelector>
                 <Text>3</Text>
                 <Text>4</Text>
               </Switch>

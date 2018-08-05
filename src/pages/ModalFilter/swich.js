@@ -67,11 +67,13 @@ export default class Switch extends React.Component {
   }
 
   onSelect = idx => {
-    this.setState({
-      activeIndex: idx,
-    });
-    const height = this.props.children[idx].props.h || 200;
-    this.filter.transition({height: 0}, {height: height});
+    if (this.state.activeIndex !== idx) {
+      this.setState({
+        activeIndex: idx,
+      });
+      const height = this.props.children[idx].props.h || 200;
+      this.filter.transition({height: 0}, {height: height});
+    }
   };
 
   render() {

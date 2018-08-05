@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Text} from 'react-native';
 // import PropTypes from 'prop-types';
 import {Entypo} from '../Icons';
+import {Theme} from '../../utils/color';
 
 const IOSStatusBar = styled.View`
   height: 20px;
@@ -11,7 +12,7 @@ const IOSStatusBar = styled.View`
 
 const HeaderContainer = styled.View`
   height: 48px;
-  background-color: white;
+  background-color: ${Theme};
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
