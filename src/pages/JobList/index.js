@@ -7,7 +7,7 @@
 import React from 'react';
 import {View, Text, Dimensions, Image, TouchableOpacity} from 'react-native';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
-import {Entypo} from '../../components/Icons';
+import {EvilIcons, Entypo} from '../../components/Icons';
 import Header from '../../components/Header';
 import Filter from '../ModalFilter';
 
@@ -113,7 +113,10 @@ export default class JobList extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header leftButton={[<Text key="1">Job Search</Text>]} />
+        <Header
+          leftButton={[<Text key="1">Job Search</Text>]}
+          rightButton={[<EvilIcons key="1" name="search" size={24} />]}
+        />
         <Filter />
         <RecyclerListView
           layoutProvider={this._layoutProvider}

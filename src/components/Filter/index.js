@@ -1,10 +1,12 @@
 import React from 'react';
 import {View, TouchableOpacity, Platform, Text, Modal} from 'react-native';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
-import * as Animatable from 'react-native-animatable';
+
 import {Entypo} from '../Icons';
 import Toggle from '../Abstract/Toggle';
 import styled from 'styled-components';
+
+import * as Animatable from 'react-native-animatable';
 
 const FilterContainer = styled.View`
   height: 40px;
