@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, ScrollView, StatusBar} from 'react-native';
+import {Text, View, ScrollView} from 'react-native';
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -10,6 +10,7 @@ import {Ionicons} from './components/Icons';
 import Header from './components/Header';
 import Tab from './components/Tabs';
 import PostJob from './pages/PostJob';
+import JobList from './pages/JobList';
 import Edit from './pages/PostJob/edit';
 import Picker from './pages/PostJob/picker';
 import Account from './pages/Account';
@@ -31,10 +32,8 @@ class Notifications extends React.Component {
   render() {
     return (
       <View style={{backgroundColor: 'white', height: '100%'}}>
-        <StatusBar backgroundColor="white" barStyle="dark-content" />
         <Header
           rightButton={[
-            <Ionicons key={0} name="ios-people" size={24} color="#900" />,
             <Ionicons key={0} name="ios-people" size={24} color="#900" />,
           ]}
         />
@@ -60,12 +59,12 @@ class FindJob extends React.Component {
 const TabRoot = createBottomTabNavigator(
   {
     Notifications,
-    PostJob,
+    JobList,
     FindJob,
     Account,
   },
   {
-    initialRouteName: 'PostJob',
+    initialRouteName: 'JobList',
     tabBarOptions: {
       style: {
         backgroundColor: 'white',
@@ -82,6 +81,12 @@ const HomeStack = createStackNavigator({
   },
   Edit: {
     screen: Edit,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  PostJob: {
+    screen: PostJob,
     navigationOptions: {
       header: null,
     },

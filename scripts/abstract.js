@@ -1,5 +1,6 @@
 const JsonFile = require('../area.json');
 const fs = require('fs');
+const prettier = require('prettier');
 
 console.log('正在提取位置信息......');
 
@@ -25,14 +26,22 @@ Object.keys(JsonFile.regions).forEach(id => {
   d[id] = dd;
 });
 
-console.log(d);
-
 const JSfile = `export const Regions = ${JSON.stringify(
   r,
   null,
   2
 )}\n export const Disctrict = ${JSON.stringify(d, null, 2)}`;
 
-fs.writeFileSync('./src/pages/PostJob/area.js', JSfile, 'utf8');
+const formated = prettier.format(JSfile, {
+  semi: true,
+  parser: 'babylon',
+  printWidth: 80,
+  tabWidth: 2,
+  jsxBracketSameLine: true,
+  singleQuote: true,
+  bracketSpacing: false,
+  trailingComma: 'es5',
+});
+fs.writeFileSync('./src/pages/PostJob/area.js', formated, 'utf8');
 
 console.log('提取完毕');

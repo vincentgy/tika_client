@@ -10,10 +10,13 @@ import {
   Alert,
   PanResponder,
   View,
+  StatusBar,
 } from 'react-native';
 
 import TabRoot from './router';
-import {Logger} from './utils/logger';
+// import {Logger} from './utils/logger';
+
+// StatusBar.setBarStyle('light-content', true);
 
 YellowBox.ignoreWarnings([
   'Warning: isMounted(...) is deprecated',
@@ -51,8 +54,9 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <React.Fragment>
+          <StatusBar barStyle="light-content" />
           <TabRoot />
-          <Logger />
+          {/* <Logger /> */}
         </React.Fragment>
       </Provider>
     );
