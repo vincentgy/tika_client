@@ -172,7 +172,7 @@ Request,
     ‘minimum_pay’ : minimum salary,
     ‘maximum_pay’ : maximum salary,
     ‘region_id’ : region id,
-    ‘district_id’ : district id,
+    ‘district_ids’ : list of districts the jobs are in.
     ‘location’ : address key word,
     ‘category_ids’ : list of categories the job belongs.
 ],
