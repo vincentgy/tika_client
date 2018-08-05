@@ -175,6 +175,10 @@ Request,
     ‘district_id’ : district id,
     ‘location’ : address key word,
     ‘category_ids’ : list of categories the job belongs.
+],
+'location' =>[
+    ‘latitude’: latitude of current location,
+    ‘longitude’: ‘longitude’ of current location
 ]
 
 Response,
