@@ -1,11 +1,13 @@
 import React from 'react';
-import {View, TouchableOpacity, Text, Modal} from 'react-native';
+import {View, TouchableOpacity, Text, Modal, ScrollView} from 'react-native';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
 import Toggle from '../../components/Abstract/Toggle';
 import styled from 'styled-components';
 import Switch, {FilterItem} from './swich';
 import List from '../../components/List';
 import LocationSelector from './location';
+import FetchCategoris from '../../public/FetchCategoris';
+import ButtonGroup from '../../public/ButtonGroup';
 
 const ListItem = List.Item;
 
@@ -55,8 +57,11 @@ class Filter extends React.Component {
                     <ListItem key="5" title="10 km" />
                   </List>
                 </View>
-                <LocationSelector h={350}>2</LocationSelector>
-                <Text>3</Text>
+                <LocationSelector h={396} />
+                <ScrollView h={396}>
+                  <FetchCategoris />
+                  <ButtonGroup />
+                </ScrollView>
                 <Text>4</Text>
               </Switch>
               <TouchableOpacity

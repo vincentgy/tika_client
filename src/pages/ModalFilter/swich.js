@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Platform} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {Entypo} from '../../components/Icons';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
@@ -33,7 +33,7 @@ export const FilterItem = props => (
 );
 
 const RealFilter = styled.TouchableOpacity`
-  margin-top: ${() => (Platform.OS === 'ios' ? 68 : 48)}px;
+  margin-top: 68px;
   height: 40px;
   border-bottom-width: 1px;
   border-bottom-color: rgba(120, 120, 120, 0.1);

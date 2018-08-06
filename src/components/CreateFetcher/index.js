@@ -78,20 +78,30 @@ export class Fetcher extends React.Component {
       const res = await fetchPromise;
       const json = await res.json();
       Debugger.log(json);
-      this.setState({
-        fetchData: json,
-        loading: false,
-      });
+
+      if (this._isMount) {
+        this.setState({
+          fetchData: json,
+          loading: false,
+        });
+      }
     } catch (e) {
-      this.setState({
-        error: e,
-        loading: false,
-      });
+      if (this._isMount) {
+        this.setState({
+          error: e,
+          loading: false,
+        });
+      }
     }
   }
 
   componentDidMount() {
+    this._isMount = true;
     this.fetcher();
+  }
+
+  componentWillUnmount() {
+    this._isMount = false;
   }
 
   render() {
