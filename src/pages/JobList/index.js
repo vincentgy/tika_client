@@ -122,7 +122,15 @@ export default class JobList extends React.Component {
             </Text>,
           ]}
           rightButton={[
-            <EvilIcons color={'white'} key="1" name="search" size={24} />,
+            <EvilIcons
+              onPress={() => {
+                this.props.navigation.navigate('PostJob');
+              }}
+              color={'white'}
+              key="1"
+              name="search"
+              size={24}
+            />,
           ]}
         />
         <Filter />

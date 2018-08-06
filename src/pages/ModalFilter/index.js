@@ -26,7 +26,7 @@ class Filter extends React.Component {
   getFilterView = node => (this.filter = node);
 
   render() {
-    const FilterArray = ['Distance', 'Location', 'Categories', 'Pay Range'];
+    const FilterArray = ['Distance', 'Location', 'Categories', 'Job Info'];
 
     return (
       <Toggle>
@@ -58,10 +58,12 @@ class Filter extends React.Component {
                   </List>
                 </View>
                 <LocationSelector h={396} />
-                <ScrollView h={396}>
-                  <FetchCategoris />
+                <View h={396}>
+                  <ScrollView style={{height: 350}}>
+                    <FetchCategoris />
+                  </ScrollView>
                   <ButtonGroup />
-                </ScrollView>
+                </View>
                 <Text>4</Text>
               </Switch>
               <TouchableOpacity
