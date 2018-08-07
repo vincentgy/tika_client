@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 import TabRoot from './router';
+import filter from './controller/filter';
 // import {Logger} from './utils/logger';
 
 // StatusBar.setBarStyle('light-content', true);
@@ -25,6 +26,8 @@ YellowBox.ignoreWarnings([
 ]);
 
 Rluy.addController(user);
+Rluy.addController(filter);
+
 const store = Rluy.run();
 const alert = Alert.alert;
 
@@ -67,6 +70,7 @@ class App extends React.Component {
 // 3 finger touch can get the things out
 const DevMenuTrigger = ({children}) => {
   const {DevMenu} = NativeModules;
+
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: (evt, gestureState) => {
       if (gestureState.numberActiveTouches === 3) {

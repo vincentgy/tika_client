@@ -1,13 +1,16 @@
 import React from 'react';
-import {View, TouchableOpacity, Text, Modal} from 'react-native';
+import {View, TouchableOpacity, Modal, ScrollView} from 'react-native';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
 import Toggle from '../../components/Abstract/Toggle';
 import styled from 'styled-components';
 import Switch, {FilterItem} from './swich';
-import List from '../../components/List';
 import LocationSelector from './location';
-
-const ListItem = List.Item;
+import FetchCategoris from '../../public/FetchCategoris';
+import ButtonGroup from '../../public/ButtonGroup';
+import JobType from './type';
+import SelectItem from '../../public/SelectItem';
+import {connect} from 'react-redux';
+import {produce} from 'immer';
 
 const FilterContainer = styled.View`
   height: 40px;
@@ -18,14 +21,125 @@ const FilterContainer = styled.View`
   align-items: center;
 `;
 
+class Container extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const {defaultState} = props;
+
+    this.state = {
+      currentState: defaultState,
+    };
+  }
+
+  select = state => {
+    this.setState({
+      currentState: state,
+    });
+  };
+
+  confirm = () => {
+    this.props.confirm && this.props.confirm(this.state.currentState);
+  };
+
+  render() {
+    return (
+      <View>
+        {this.props.children(this.select, this.state.currentState)}
+        <ButtonGroup comfirm={this.confirm} />
+      </View>
+    );
+  }
+}
+
+class Categoris extends React.Component {
+  state = {
+    _categories: {},
+  };
+
+  componentDidMount() {
+    const {categories} = this.props;
+    this.setState({
+      _categories: categories,
+    });
+  }
+
+  onChange = ({id, name}) => {
+    const newState = produce(this.state._categories, draft => {
+      if (draft[name] === void 666) {
+        draft[name] = {id, name};
+      } else {
+        draft[name] = void 666;
+      }
+    });
+    this.setState(
+      {
+        _categories: newState,
+      },
+      () => this.props.onChange && this.props.onChange(this.state._categories)
+    );
+  };
+
+  render() {
+    return (
+      <ScrollView style={{height: 350}}>
+        <FetchCategoris
+          cache
+          selected={this.state._categories}
+          onPress={this.onChange}
+        />
+      </ScrollView>
+    );
+  }
+}
+
 class Filter extends React.Component {
   static defaultProps = {};
 
+  shouldComponentUpdate(nextProps) {
+    return (
+      this.props.distance !== nextProps.distance ||
+      this.props.jobType.jobType !== nextProps.jobType.jobType ||
+      this.props.jobType.payRange !== nextProps.jobType.payRange ||
+      this.props.categories !== nextProps.categories ||
+      this.props.location.region !== nextProps.location.region ||
+      this.props.location.disctrict !== nextProps.location.disctrict
+    );
+  }
+
   getFilterView = node => (this.filter = node);
 
-  render() {
-    const FilterArray = ['Distance', 'Location', 'Categories', 'Pay Range'];
+  getDistance = distance => {
+    this.props.dispatch({
+      type: 'queryFilter',
+      payload: {name: 'distance', data: distance},
+    });
+  };
 
+  getJobType = data => {
+    this.props.dispatch({
+      type: 'queryFilter',
+      payload: {name: 'jobType', data: data},
+    });
+  };
+
+  getLocation = data => {
+    this.props.dispatch({
+      type: 'queryFilter',
+      payload: {name: 'location', data: data},
+    });
+  };
+
+  getCategories = data => {
+    this.props.dispatch({
+      type: 'queryFilter',
+      payload: {name: 'categories', data: data},
+    });
+  };
+
+  render() {
+    const FilterArray = ['Distance', 'Location', 'Categories', 'Type'];
+    const Distance = ['Whole City', '1 km', '3 km', '5 km', '10 km'];
     return (
       <Toggle>
         {(ctrl, state, filterItem) => (
@@ -46,18 +160,67 @@ class Filter extends React.Component {
               visible={state}
               onRequestClose={() => ctrl()}>
               <Switch active={filterItem} Item={FilterArray}>
-                <View h={350}>
-                  <List>
-                    <ListItem key="1" title="whole city" />
-                    <ListItem key="2" title="1 km" />
-                    <ListItem key="3" title="3 km" />
-                    <ListItem key="4" title="5 km" />
-                    <ListItem key="5" title="10 km" />
-                  </List>
-                </View>
-                <LocationSelector h={350}>2</LocationSelector>
-                <Text>3</Text>
-                <Text>4</Text>
+                <Container
+                  h={276}
+                  defaultState={this.props.distance}
+                  confirm={data => {
+                    this.getDistance(data);
+                    ctrl();
+                  }}>
+                  {(selectFn, currentState) =>
+                    Distance.map((item, index) => (
+                      <SelectItem
+                        key={index}
+                        active={currentState === item}
+                        onPress={() => selectFn(item)}>
+                        {item}
+                      </SelectItem>
+                    ))
+                  }
+                </Container>
+                <Container
+                  h={396}
+                  confirm={data => {
+                    this.getLocation(data);
+                    ctrl();
+                  }}>
+                  {selectFn => (
+                    <LocationSelector
+                      region={this.props.location.region}
+                      disctrict={this.props.location.disctrict}
+                      onChange={data => selectFn(data)}
+                    />
+                  )}
+                </Container>
+                <Container
+                  h={396}
+                  confirm={data => {
+                    this.getCategories(data);
+                    ctrl();
+                  }}>
+                  {selectFn => (
+                    <Categoris
+                      categories={this.props.categories}
+                      onChange={selectFn}
+                    />
+                  )}
+                </Container>
+                <Container
+                  h={396}
+                  confirm={data => {
+                    this.getJobType(data);
+                    ctrl();
+                  }}>
+                  {selectFn => {
+                    return (
+                      <JobType
+                        jobType={this.props.jobType.jobType}
+                        payRange={this.props.jobType.payRange}
+                        onChange={data => selectFn(data)}
+                      />
+                    );
+                  }}
+                </Container>
               </Switch>
               <TouchableOpacity
                 onPress={ctrl}
@@ -76,4 +239,10 @@ class Filter extends React.Component {
   }
 }
 
-export default Filter;
+const mapState = state => {
+  return {
+    ...state.filter,
+  };
+};
+
+export default connect(mapState)(Filter);

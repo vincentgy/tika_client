@@ -33,7 +33,7 @@ export const FilterItem = props => (
 );
 
 const RealFilter = styled.TouchableOpacity`
-  margin-top: ${() => (Platform.OS === 'ios' ? 68 : 48)}px;
+  margin-top: ${Platform.OS === 'ios' ? 68 : 48}px;
   height: 40px;
   border-bottom-width: 1px;
   border-bottom-color: rgba(120, 120, 120, 0.1);

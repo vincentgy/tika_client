@@ -5,11 +5,21 @@
  A scrollable list with different item type
  */
 import React from 'react';
-import {View, Text, Dimensions, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Dimensions,
+  Image,
+  TouchableOpacity,
+  RefreshControl,
+} from 'react-native';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 import {EvilIcons, Entypo} from '../../components/Icons';
 import Header from '../../components/Header';
 import Filter from '../ModalFilter';
+import {WIDTH, HEIGHT} from '../../utils/plaform';
+import {Theme} from '../../utils/color';
+import {connect} from 'react-redux';
 
 const ViewTypes = {
   FULL: 0,
@@ -17,7 +27,7 @@ const ViewTypes = {
   HALF_RIGHT: 2,
 };
 
-export default class JobList extends React.Component {
+class JobList extends React.Component {
   constructor(args) {
     super(args);
 
@@ -51,24 +61,14 @@ export default class JobList extends React.Component {
       }
     );
 
-    this._rowRenderer = this._rowRenderer.bind(this);
-
     //Since component should always render once data has changed, make data provider part of the state
     this.state = {
-      dataProvider: dataProvider.cloneWithRows(this._generateArray(300)),
+      dataProvider: dataProvider,
     };
   }
 
-  _generateArray(n) {
-    let arr = new Array(n);
-    for (let i = 0; i < n; i++) {
-      arr[i] = i;
-    }
-    return arr;
-  }
-
   //Given type and data return the view component
-  _rowRenderer(type, data) {
+  _rowRenderer = (type, data) => {
     return (
       <TouchableOpacity activeOpacity={0.7} style={{backgroundColor: 'white'}}>
         <View
@@ -108,11 +108,11 @@ export default class JobList extends React.Component {
       </TouchableOpacity>
     );
     //You can return any view here, CellContainer has no special significance
-  }
-
-  componentDidMount() {}
+  };
 
   render() {
+    const size = this.props.list._size;
+
     return (
       <React.Fragment>
         <Header
@@ -122,16 +122,50 @@ export default class JobList extends React.Component {
             </Text>,
           ]}
           rightButton={[
-            <EvilIcons color={'white'} key="1" name="search" size={24} />,
+            <EvilIcons
+              onPress={() => {
+                this.props.navigation.navigate('PostJob');
+              }}
+              color={'white'}
+              key="1"
+              name="search"
+              size={24}
+            />,
           ]}
         />
         <Filter />
+        {size === 0 ? <Text>there is no data</Text> : null}
         <RecyclerListView
+          scrollViewProps={{
+            refreshControl: (
+              <RefreshControl
+                refreshing={this.props.loading}
+                onRefresh={() => {}}
+                tintColor={Theme}
+                titleColor={Theme}
+                colors={[Theme, Theme, Theme]}
+                progressBackgroundColor="white"
+              />
+            ),
+          }}
+          style={{
+            height: HEIGHT,
+            width: WIDTH,
+          }}
           layoutProvider={this._layoutProvider}
-          dataProvider={this.state.dataProvider}
+          dataProvider={this.props.list}
           rowRenderer={this._rowRenderer}
         />
       </React.Fragment>
     );
   }
 }
+
+const mapState = state => {
+  return {
+    loading: state.filter.loading,
+    list: state.filter.list,
+  };
+};
+
+export default connect(mapState)(JobList);
