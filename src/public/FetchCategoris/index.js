@@ -3,9 +3,9 @@ import {Fetcher} from '../../components/CreateFetcher';
 
 import SelectItem from '../SelectItem';
 
-export default ({onPress, selected}) => {
+export default ({onPress, selected, cache}) => {
   return (
-    <Fetcher body={{a: 'jc'}}>
+    <Fetcher body={{a: 'jc'}} cache={cache}>
       {({fetchData}) =>
         fetchData.data.map(d => (
           <SelectItem

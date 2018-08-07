@@ -19,7 +19,7 @@ const RegionItem = styled.TouchableOpacity`
   justify-content: space-between;
 `;
 
-class LocationSelector extends React.Component {
+class LocationSelector extends React.PureComponent {
   state = {
     selectedRegion: 'Auckland',
     currentDisctrict: Disctrict['1'],
@@ -36,26 +36,34 @@ class LocationSelector extends React.Component {
 
   componentDidMount() {
     const {region, disctrict} = this.props;
-    const id = Regions.find(item => item.region === region).id;
-    if (id) {
-      this.setState({
-        selectedRegion: region || 'Auckland',
-        currentDisctrict: Disctrict[id],
-        selectedDisctict: disctrict || {},
-      });
+    // 快速切换会崩溃,因此这里要判断
+    const selectedRegion = Regions.find(item => item.region === region);
+    if (selectedRegion) {
+      const id = selectedRegion.id;
+      if (id) {
+        this.setState({
+          selectedRegion: region || 'Auckland',
+          currentDisctrict: Disctrict[id],
+          selectedDisctict: disctrict || {},
+        });
+      }
     }
   }
 
   onSelectedRegion = Region => {
-    const id = Regions.find(item => item.region === Region).id;
-    this.setState(
-      {
-        selectedRegion: Region,
-        currentDisctrict: Disctrict[id],
-        selectedDisctict: {},
-      },
-      () => this.onChange()
-    );
+    // 快速切换会崩溃,因此这里要判断
+    const selectedRegion = Regions.find(item => item.region === Region);
+    if (selectedRegion) {
+      const id = selectedRegion.id;
+      this.setState(
+        {
+          selectedRegion: Region,
+          currentDisctrict: Disctrict[id],
+          selectedDisctict: {},
+        },
+        () => this.onChange()
+      );
+    }
   };
 
   onSelectedDisctict = Disctrict => {

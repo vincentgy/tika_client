@@ -20,10 +20,9 @@ export default ({onPress, active, children}) => {
       <StyledText active={active}>{children}</StyledText>
       {active ? (
         <Ionicons
-          size={20}
+          size={14}
           style={{marginRight: 4}}
           name="ios-checkmark-circle"
-          col
           color={Theme}
         />
       ) : null}

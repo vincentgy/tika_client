@@ -52,6 +52,8 @@ export const CreateFetcher = (
     };
 };
 
+const cache = null;
+
 export class Fetcher extends React.Component {
   state = {
     error: null,
@@ -60,6 +62,7 @@ export class Fetcher extends React.Component {
   };
 
   static defaultProps = {
+    cache: false,
     body: {},
     url: 'http://18.222.175.208',
   };
@@ -80,6 +83,8 @@ export class Fetcher extends React.Component {
       Debugger.log(json);
 
       if (this._isMount) {
+        // simple cached
+        cache = json;
         this.setState({
           fetchData: json,
           loading: false,
@@ -97,7 +102,14 @@ export class Fetcher extends React.Component {
 
   componentDidMount() {
     this._isMount = true;
-    this.fetcher();
+    if (this.props.cache && cache !== null) {
+      this.setState({
+        fetchData: cache,
+        loading: false,
+      });
+    } else {
+      this.fetcher();
+    }
   }
 
   componentWillUnmount() {

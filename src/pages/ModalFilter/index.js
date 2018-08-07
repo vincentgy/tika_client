@@ -84,6 +84,7 @@ class Categoris extends React.Component {
     return (
       <ScrollView style={{height: 350}}>
         <FetchCategoris
+          cache
           selected={this.state._categories}
           onPress={this.onChange}
         />
@@ -94,6 +95,17 @@ class Categoris extends React.Component {
 
 class Filter extends React.Component {
   static defaultProps = {};
+
+  shouldComponentUpdate(nextProps) {
+    return (
+      this.props.distance !== nextProps.distance ||
+      this.props.jobType.jobType !== nextProps.jobType.jobType ||
+      this.props.jobType.payRange !== nextProps.jobType.payRange ||
+      this.props.categories !== nextProps.categories ||
+      this.props.location.region !== nextProps.location.region ||
+      this.props.location.disctrict !== nextProps.location.disctrict
+    );
+  }
 
   getFilterView = node => (this.filter = node);
 
@@ -128,7 +140,6 @@ class Filter extends React.Component {
   render() {
     const FilterArray = ['Distance', 'Location', 'Categories', 'Type'];
     const Distance = ['Whole City', '1 km', '3 km', '5 km', '10 km'];
-
     return (
       <Toggle>
         {(ctrl, state, filterItem) => (

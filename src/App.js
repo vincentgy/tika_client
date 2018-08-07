@@ -15,7 +15,7 @@ import {
 
 import TabRoot from './router';
 import filter from './controller/filter';
-import {Logger} from './utils/logger';
+// import {Logger} from './utils/logger';
 
 // StatusBar.setBarStyle('light-content', true);
 
@@ -59,7 +59,7 @@ class App extends React.Component {
         <React.Fragment>
           <StatusBar barStyle="light-content" />
           <TabRoot />
-          <Logger />
+          {/* <Logger /> */}
         </React.Fragment>
       </Provider>
     );

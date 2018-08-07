@@ -1,5 +1,6 @@
 import {Regions, Disctrict} from '../pages/PostJob/area';
-import {Debugger} from '../utils/logger';
+import {DataProvider} from 'recyclerlistview';
+import {Alert} from 'react-native';
 
 const getPosition = () =>
   // eslint-disable-next-line
@@ -24,16 +25,28 @@ export default {
     jobType: {jobType: 0, payRange: {}},
     location: {region: 'Auckland', disctrict: {}},
     categories: {},
+    list: new DataProvider((r1, r2) => {
+      return r1 !== r2;
+    }),
+    loading: false,
   },
   reducers: {
     editFilter: (state, {payload}) => {
       const {data, name} = payload;
       return {...state, [name]: data};
     },
+    loading: (state, {payload}) => {
+      return {...state, loading: payload};
+    },
   },
   effects: {
     *queryFilter({put, select, call}, {payload}) {
       const {data, name} = payload;
+
+      yield put({
+        type: 'loading',
+        payload: true,
+      });
 
       yield put({
         type: 'editFilter',
@@ -60,7 +73,7 @@ export default {
           return filter.categories[key].id;
         });
 
-        const position = yield getPosition;
+        const position = yield getPosition();
 
         const url = 'http://18.222.175.208';
         const body = {
@@ -83,7 +96,7 @@ export default {
           },
         };
 
-        // Debugger.log(body);
+        console.log('position', position);
 
         // Alert.alert(JSON.stringify(body));
 
@@ -115,9 +128,20 @@ export default {
 
         const json = yield res.json();
 
-        Debugger.log(json);
+        yield put({
+          type: 'editFilter',
+          payload: {
+            name: 'list',
+            data: filter.list.cloneWithRows(json.data),
+          },
+        });
+
+        yield put({
+          type: 'loading',
+          payload: false,
+        });
       } catch (e) {
-        Debugger.log(e);
+        Alert.alert('error', JSON.stringify(e));
       }
     },
   },
