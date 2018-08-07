@@ -8,7 +8,7 @@ const StyledText = styled.Text`
   color: ${props => (props.active ? Theme : '#8c8c8c')};
 `;
 
-export default () => {
+export default ({comfirm}) => {
   return (
     <View
       style={{
@@ -20,6 +20,7 @@ export default () => {
         <StyledText style={{textAlign: 'center'}}>Reset</StyledText>
       </TouchableOpacity>
       <TouchableOpacity
+        onPress={comfirm}
         style={{
           borderLeftWidth: 1,
           borderLeftColor: 'rgba(120,120,120,0.1)',

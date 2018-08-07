@@ -5,11 +5,19 @@
  A scrollable list with different item type
  */
 import React from 'react';
-import {View, Text, Dimensions, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Dimensions,
+  Image,
+  TouchableOpacity,
+  RefreshControl,
+} from 'react-native';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 import {EvilIcons, Entypo} from '../../components/Icons';
 import Header from '../../components/Header';
 import Filter from '../ModalFilter';
+import {WIDTH, HEIGHT} from '../../utils/plaform';
 
 const ViewTypes = {
   FULL: 0,
@@ -134,7 +142,25 @@ export default class JobList extends React.Component {
           ]}
         />
         <Filter />
+
         <RecyclerListView
+          scrollViewProps={{
+            refreshControl: (
+              <RefreshControl
+                refreshing={false}
+                onRefresh={() => {}}
+                tintColor="#ff0000"
+                title="Loading..."
+                titleColor="#00ff00"
+                colors={['#ff0000', '#00ff00', '#0000ff']}
+                progressBackgroundColor="#ffff00"
+              />
+            ),
+          }}
+          style={{
+            height: HEIGHT,
+            width: WIDTH,
+          }}
           layoutProvider={this._layoutProvider}
           dataProvider={this.state.dataProvider}
           rowRenderer={this._rowRenderer}

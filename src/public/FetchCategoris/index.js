@@ -1,24 +1,21 @@
 import React from 'react';
 import {Fetcher} from '../../components/CreateFetcher';
-import List from '../../components/List';
 
-export default ({onPress}) => {
+import SelectItem from '../SelectItem';
+
+export default ({onPress, selected}) => {
   return (
     <Fetcher body={{a: 'jc'}}>
-      {({fetchData}) => (
-        <List>
-          {fetchData.data.map(d => {
-            return (
-              <List.Item
-                desc="choose"
-                onPress={onPress}
-                key={d.id}
-                title={d.name}
-              />
-            );
-          })}
-        </List>
-      )}
+      {({fetchData}) =>
+        fetchData.data.map(d => (
+          <SelectItem
+            active={selected[d.name] !== void 666}
+            onPress={() => onPress({id: d.id, name: d.name})}
+            key={d.id}>
+            {d.name}
+          </SelectItem>
+        ))
+      }
     </Fetcher>
   );
 };

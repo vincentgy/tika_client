@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Text} from 'react-native';
+import {Text, Platform} from 'react-native';
 // import PropTypes from 'prop-types';
 import {Entypo} from '../Icons';
 import {Theme} from '../../utils/color';
@@ -44,7 +44,7 @@ class Header extends React.Component {
 
     return (
       <React.Fragment>
-        <IOSStatusBar />
+        {Platform.OS === 'ios' ? <IOSStatusBar /> : null}
         <HeaderContainer>
           <FlexContainer>
             {leftButton.map((rb, index) => {
