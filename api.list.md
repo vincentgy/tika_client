@@ -173,6 +173,7 @@ Request,
     ‘maximum_pay’ : maximum salary,
     ‘region_id’ : region id,
     ‘district_ids’ : list of districts the jobs are in.
+    ‘distance’ : distance in meters from the current location.
     ‘location’ : address key word,
     ‘category_ids’ : list of categories the job belongs.
 ],
