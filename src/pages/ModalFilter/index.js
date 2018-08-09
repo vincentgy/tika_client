@@ -113,8 +113,6 @@ class Filter extends React.Component {
     );
   }
 
-  getFilterView = node => (this.filter = node);
-
   getDistance = distance => {
     this.props.dispatch({
       type: 'queryFilter',

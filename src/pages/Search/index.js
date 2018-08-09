@@ -5,7 +5,13 @@ import styled from 'styled-components';
 import {Theme} from '../../utils/color';
 import {WithGoback} from '../../utils/withGoback';
 
-const Cancel = styled.TouchableOpacity``;
+const Cancel = styled.TouchableOpacity`
+  height: 40px;
+  width: 60px;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+`;
 
 @WithGoback
 export default class SearchJob extends React.Component {

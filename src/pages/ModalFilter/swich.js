@@ -16,7 +16,7 @@ export const FilterItem = props => (
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      height: 24,
+      height: 32,
     }}>
     <View>
       <Text style={{textAlign: 'center', fontSize: 10, color: props.fontColor}}>

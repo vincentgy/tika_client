@@ -24,9 +24,6 @@ const FlexContainer = styled.View`
   height: 100%;
 `;
 
-const GroupRight = styled.View`
-  margin-right: 16px;
-`;
 const GroupLeft = styled.View`
   margin-left: 16px;
 `;
@@ -55,8 +52,8 @@ class Header extends React.Component {
           </FlexContainer>
           {this.props.title}
           <FlexContainer>
-            {rightButton.map((rb, index) => {
-              return <GroupRight key={index}>{rb}</GroupRight>;
+            {rightButton.map(rb => {
+              return rb;
             })}
           </FlexContainer>
         </HeaderContainer>

@@ -20,12 +20,21 @@ import Filter from '../ModalFilter';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
 import {Theme} from '../../utils/color';
 import {connect} from 'react-redux';
+import styled from 'styled-components';
 
 const ViewTypes = {
   FULL: 0,
   HALF_LEFT: 1,
   HALF_RIGHT: 2,
 };
+
+const Search = styled.TouchableOpacity`
+  height: 40px;
+  width: 40px;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+`;
 
 class JobList extends React.Component {
   constructor(args) {
@@ -126,13 +135,9 @@ class JobList extends React.Component {
             </Text>,
           ]}
           rightButton={[
-            <EvilIcons
-              onPress={this.gotoSearch}
-              color={'white'}
-              key="1"
-              name="search"
-              size={24}
-            />,
+            <Search key="1" onPress={this.gotoSearch}>
+              <EvilIcons color={'white'} name="search" size={24} />
+            </Search>,
           ]}
         />
         <Filter />
