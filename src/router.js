@@ -5,6 +5,7 @@ import {
   createStackNavigator,
   createSwitchNavigator,
 } from 'react-navigation';
+
 import {Page} from './components/PageHOC';
 import {Ionicons} from './components/Icons';
 import Header from './components/Header';
@@ -14,6 +15,9 @@ import JobList from './pages/JobList';
 import Edit from './pages/PostJob/edit';
 import Picker from './pages/PostJob/picker';
 import Account from './pages/Account';
+import SearchJob from './pages/Search';
+import {Theme} from './utils/color';
+import Description from './pages/PostJob/description';
 
 @Page({
   tabBarLabel: 'Notifications',
@@ -21,7 +25,7 @@ import Account from './pages/Account';
     <Ionicons
       name={focused ? 'ios-people' : 'ios-people-outline'}
       size={24}
-      color="#900"
+      color={Theme}
     />
   ),
   tabBarOnPress: ({defaultHandler}) => {
@@ -62,6 +66,7 @@ const TabRoot = createBottomTabNavigator(
     JobList,
     FindJob,
     Account,
+    PostJob,
   },
   {
     initialRouteName: 'JobList',
@@ -85,13 +90,20 @@ const HomeStack = createStackNavigator({
       header: null,
     },
   },
-  PostJob: {
-    screen: PostJob,
+
+  Picker: Picker,
+  SearchJob: {
+    screen: SearchJob,
     navigationOptions: {
       header: null,
     },
   },
-  Picker: Picker,
+  Description: {
+    screen: Description,
+    navigationOptions: {
+      header: null,
+    },
+  },
 });
 
 export default createSwitchNavigator({

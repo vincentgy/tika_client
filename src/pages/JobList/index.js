@@ -85,13 +85,13 @@ class JobList extends React.Component {
               source={require('./alibaba.png')}
             />
             <View style={{marginVertical: 8, marginLeft: 16}}>
-              <Text style={{color: 'black', fontSize: 16}}>Name: {data}</Text>
+              <Text style={{color: 'black', fontSize: 16}}>{data.company}</Text>
               <Text style={{color: 'black', fontSize: 12}}>
-                Location: {data}
+                {data.location}
               </Text>
             </View>
           </View>
-          <Text>Tag: {data}</Text>
+          <Text>{data.title}</Text>
         </View>
         <View
           style={{
@@ -102,7 +102,7 @@ class JobList extends React.Component {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <Text>HowManyPosition: {data}</Text>
+          <Text>HowManyPosition: {1}</Text>
           <Entypo size={12} key={0} name="chevron-thin-right" color="#2D59D9" />
         </View>
       </TouchableOpacity>
@@ -110,8 +110,12 @@ class JobList extends React.Component {
     //You can return any view here, CellContainer has no special significance
   };
 
+  gotoSearch = () => {
+    this.props.navigation.navigate('SearchJob');
+  };
+
   render() {
-    const size = this.props.list._size;
+    // const size = this.props.list._size;
 
     return (
       <React.Fragment>
@@ -123,9 +127,7 @@ class JobList extends React.Component {
           ]}
           rightButton={[
             <EvilIcons
-              onPress={() => {
-                this.props.navigation.navigate('PostJob');
-              }}
+              onPress={this.gotoSearch}
               color={'white'}
               key="1"
               name="search"
@@ -134,7 +136,7 @@ class JobList extends React.Component {
           ]}
         />
         <Filter />
-        {size === 0 ? <Text>there is no data</Text> : null}
+        {/* {size === 0 ? <Text>there is no data</Text> : null} */}
         <RecyclerListView
           scrollViewProps={{
             refreshControl: (

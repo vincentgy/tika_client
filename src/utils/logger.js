@@ -34,8 +34,12 @@ export class Logger extends React.Component {
       });
     });
   }
+  open = () => {
+    this.setState({open: !this.state.open});
+  };
 
   render() {
+    if (!this.state.open) return null;
     return (
       <View
         style={{
@@ -51,7 +55,7 @@ export class Logger extends React.Component {
           style={{
             borderWidth: 1,
             backgroundColor: 'white',
-            height: this.state.open ? 200 : 0,
+            height: 200,
             width: WIDTH / 2,
           }}>
           {this.state.loggerQueue.map((obj, index) => {
@@ -63,14 +67,6 @@ export class Logger extends React.Component {
           })}
         </ScrollView>
         <View style={{flexDirection: 'row'}}>
-          <Button
-            onPress={() => {
-              this.setState({
-                open: !this.state.open,
-              });
-            }}>
-            {this.state.open ? '关' : '开'}
-          </Button>
           <Button
             onPress={() => {
               this.setState({

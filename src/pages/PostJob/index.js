@@ -13,6 +13,7 @@ import PayRange from './config';
 import {Debugger} from '../../utils/logger';
 import {Regions, Disctrict} from './area';
 import PropsSelector from '../../components/PropsSelector';
+import {Theme} from '../../utils/color';
 
 const Item = List.Item;
 
@@ -204,14 +205,25 @@ class PostJob extends React.Component {
               />
             )}
           </ModalPicker>
-          <Item key="3" title="Job Description" desc={this.props.payRange} />
+          <Item
+            key="3"
+            title="Job Description"
+            desc={this.props.desc}
+            onPress={() => {
+              this.props.dispatch({
+                type: 'ChangeCurrentField',
+                payload: 'desc',
+              });
+              this.props.navigation.navigate('Description');
+            }}
+          />
         </List>
         <View style={{marginTop: 8, marginBottom: 8}}>
           <ModalFetcher>
             {startFetch => (
               <Button
                 title="Post a job"
-                backgroundColor="#2D59D9"
+                backgroundColor={Theme}
                 onPress={() => {
                   startFetch({
                     a: 'pj',
@@ -229,6 +241,7 @@ class PostJob extends React.Component {
                     ).id,
                     number: 1,
                     categories: this.props.categories_id,
+                    description: this.props.desc,
                   });
                 }}
               />

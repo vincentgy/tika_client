@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Text, Platform} from 'react-native';
+import {Platform, StatusBar} from 'react-native';
 // import PropTypes from 'prop-types';
 import {Entypo} from '../Icons';
 import {Theme} from '../../utils/color';
@@ -31,8 +31,6 @@ const GroupLeft = styled.View`
   margin-left: 16px;
 `;
 
-const Title = styled.View``;
-
 class Header extends React.Component {
   static defaultProps = {
     rightButton: [],
@@ -44,16 +42,18 @@ class Header extends React.Component {
 
     return (
       <React.Fragment>
-        {Platform.OS === 'ios' ? <IOSStatusBar /> : null}
+        {Platform.OS === 'ios' ? (
+          <IOSStatusBar />
+        ) : (
+          <StatusBar backgroundColor={Theme} />
+        )}
         <HeaderContainer>
           <FlexContainer>
             {leftButton.map((rb, index) => {
               return <GroupLeft key={index}>{rb}</GroupLeft>;
             })}
           </FlexContainer>
-          <Title>
-            <Text>{this.props.title}</Text>
-          </Title>
+          {this.props.title}
           <FlexContainer>
             {rightButton.map((rb, index) => {
               return <GroupRight key={index}>{rb}</GroupRight>;

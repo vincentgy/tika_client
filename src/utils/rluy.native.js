@@ -36,9 +36,20 @@ class Rluy {
       const fn = this.effects[type];
       if (fn !== void 666) {
         try {
+          const wholeState = yield select(state => state);
           yield call(
             fn,
-            {fork, take, select, call, put, race, takeEvery, takeLatest},
+            {
+              state: wholeState,
+              fork,
+              take,
+              select,
+              call,
+              put,
+              race,
+              takeEvery,
+              takeLatest,
+            },
             others
           );
         } catch (e) {

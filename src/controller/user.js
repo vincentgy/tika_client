@@ -22,6 +22,7 @@ export default {
     currentField: '',
     region_id: '',
     district_id: '',
+    desc: '',
   },
   reducers: {
     mapSome: (state, {payload}) => {

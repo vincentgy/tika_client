@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, TouchableOpacity, Modal, ScrollView} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Modal,
+  ScrollView,
+  Platform,
+} from 'react-native';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
 import Toggle from '../../components/Abstract/Toggle';
 import styled from 'styled-components';
@@ -15,7 +21,7 @@ import {produce} from 'immer';
 const FilterContainer = styled.View`
   height: 40px;
   border-bottom-width: 1px;
-  border-bottom-color: rgba(120, 120, 120, 0.1);
+  border-bottom-color: rgba(120, 120, 120, 0.2);
   background-color: white;
   flex-direction: row;
   align-items: center;
@@ -139,7 +145,7 @@ class Filter extends React.Component {
 
   render() {
     const FilterArray = ['Distance', 'Location', 'Categories', 'Type'];
-    const Distance = ['Whole City', '1 km', '3 km', '5 km', '10 km'];
+    const Distance = ['1 km', '3 km', '5 km', '10 km'];
     return (
       <Toggle>
         {(ctrl, state, filterItem) => (
@@ -159,9 +165,15 @@ class Filter extends React.Component {
               transparent={true}
               visible={state}
               onRequestClose={() => ctrl()}>
+              <TouchableOpacity
+                onPress={ctrl}
+                style={{
+                  height: Platform.OS === 'ios' ? 68 : 48,
+                }}
+              />
               <Switch active={filterItem} Item={FilterArray}>
                 <Container
-                  h={276}
+                  h={230}
                   defaultState={this.props.distance}
                   confirm={data => {
                     this.getDistance(data);

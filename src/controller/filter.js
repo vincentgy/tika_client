@@ -1,6 +1,7 @@
 import {Regions, Disctrict} from '../pages/PostJob/area';
 import {DataProvider} from 'recyclerlistview';
 import {Alert} from 'react-native';
+import {Debugger} from '../utils/logger';
 
 const getPosition = () =>
   // eslint-disable-next-line
@@ -48,10 +49,13 @@ export default {
         payload: true,
       });
 
-      yield put({
-        type: 'editFilter',
-        payload: {data, name},
-      });
+      // 完全不懂这个 Whole City 哪里来的
+      if (data !== 'Whole City' && name) {
+        yield put({
+          type: 'editFilter',
+          payload: {data, name},
+        });
+      }
 
       try {
         const filter = yield select(state => state.filter);
@@ -75,6 +79,7 @@ export default {
 
         const position = yield getPosition();
 
+        Debugger.log(disctrictList);
         const url = 'http://18.222.175.208';
         const body = {
           a: 'sj',
@@ -84,7 +89,7 @@ export default {
             description: '',
             type: filter.jobType.jobType,
             region_id: regionId,
-            district_ids: disctrictList,
+            district_ids: disctrictList[0],
             category_ids: categories,
             location: '',
             minimum_pay: 0,
@@ -96,28 +101,6 @@ export default {
           },
         };
 
-        console.log('position', position);
-
-        // Alert.alert(JSON.stringify(body));
-
-        //   'query' =>[
-        //     ‘title’ : job title key word,
-        //     ‘company’ : company name key word,
-        //     ‘description’ : job description key word,
-        //     ‘type’ : job type id,
-        //     ‘pay_type’ : pay type id,
-        //     ‘minimum_pay’ : minimum salary,
-        //     ‘maximum_pay’ : maximum salary,
-        //     ‘region_id’ : region id,
-        //     ‘district_ids’ : list of districts the jobs are in.
-        //     ‘location’ : address key word,
-        //     ‘category_ids’ : list of categories the job belongs.
-        // ],
-        // 'location' =>[
-        //     ‘latitude’: latitude of current location,
-        //     ‘longitude’: ‘longitude’ of current location
-        // ]
-
         const res = yield call(fetch, url, {
           method: 'POST',
           body: JSON.stringify({param: body}),
@@ -128,6 +111,7 @@ export default {
 
         const json = yield res.json();
 
+        Debugger.log(json.data);
         yield put({
           type: 'editFilter',
           payload: {
