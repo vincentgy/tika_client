@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Platform, StatusBar} from 'react-native';
 // import PropTypes from 'prop-types';
-import {Entypo} from '../Icons';
+
 import {Theme} from '../../utils/color';
 
 const IOSStatusBar = styled.View`
@@ -31,8 +31,10 @@ const GroupLeft = styled.View`
 class Header extends React.Component {
   static defaultProps = {
     rightButton: [],
-    leftButton: [<Entypo size={16} key={0} name="chevron-thin-left" />],
+    leftButton: null,
   };
+
+  // <Entypo size={16} color="white" key={0} name="chevron-thin-left" onPress />
 
   render() {
     const {leftButton, rightButton} = this.props;

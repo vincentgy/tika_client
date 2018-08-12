@@ -15,6 +15,23 @@ const Cancel = styled.TouchableOpacity`
 
 @WithGoback
 export default class SearchJob extends React.Component {
+  state = {
+    text: '',
+  };
+
+  handleEndEditing = () => {
+    // Alert.alert(this.state.text);
+    this.props.navigation.navigate('SearchResult', {
+      searchText: this.state.text,
+    });
+  };
+
+  handleOnChangeText = text => {
+    this.setState({
+      text: text,
+    });
+  };
+
   render() {
     return (
       <View>
@@ -44,11 +61,14 @@ export default class SearchJob extends React.Component {
                   borderRightWidth: 1,
                   borderRightColor: 'rgba(120,120,120,0.1)',
                 }}>
-                Auckland
+                placeholder
               </Text>
               <View style={{width: '70%', height: 38, paddingLeft: 6}}>
                 <TextInput
+                  onSubmitEditing={this.handleEndEditing}
+                  returnKeyType="done"
                   autoFocus
+                  onChangeText={this.handleOnChangeText}
                   selectionColor={Theme}
                   style={{fontSize: 12, height: 40}}
                   placeholder="job title or company"

@@ -141,9 +141,13 @@ class Filter extends React.Component {
     });
   };
 
+  componentDidMount() {
+    this.props.componentDidMount && this.props.componentDidMount();
+  }
+
   render() {
     const FilterArray = ['Distance', 'Location', 'Categories', 'Type'];
-    const Distance = ['1 km', '3 km', '5 km', '10 km'];
+    const Distance = ['Whole City', '1 km', '3 km', '5 km', '10 km'];
     return (
       <Toggle>
         {(ctrl, state, filterItem) => (
@@ -171,7 +175,7 @@ class Filter extends React.Component {
               />
               <Switch active={filterItem} Item={FilterArray}>
                 <Container
-                  h={230}
+                  h={248}
                   defaultState={this.props.distance}
                   confirm={data => {
                     this.getDistance(data);

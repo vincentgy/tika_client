@@ -18,6 +18,7 @@ import Account from './pages/Account';
 import SearchJob from './pages/Search';
 import {Theme} from './utils/color';
 import Description from './pages/PostJob/description';
+import ResultList from './pages/Search/resultList';
 
 @Page({
   tabBarLabel: 'Notifications',
@@ -77,33 +78,22 @@ const TabRoot = createBottomTabNavigator(
     },
   }
 );
-const HomeStack = createStackNavigator({
-  Tabs: {
-    screen: TabRoot,
-    navigationOptions: {
-      header: null,
-    },
-  },
-  Edit: {
-    screen: Edit,
-    navigationOptions: {
-      header: null,
-    },
-  },
 
+const withoutHeader = page => {
+  return {
+    screen: page,
+    navigationOptions: {
+      header: null,
+    },
+  };
+};
+const HomeStack = createStackNavigator({
+  Tabs: withoutHeader(TabRoot),
+  Edit: withoutHeader(Edit),
   Picker: Picker,
-  SearchJob: {
-    screen: SearchJob,
-    navigationOptions: {
-      header: null,
-    },
-  },
-  Description: {
-    screen: Description,
-    navigationOptions: {
-      header: null,
-    },
-  },
+  SearchJob: withoutHeader(SearchJob),
+  Description: withoutHeader(Description),
+  SearchResult: withoutHeader(ResultList),
 });
 
 export default createSwitchNavigator({

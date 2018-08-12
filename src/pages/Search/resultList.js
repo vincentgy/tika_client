@@ -5,32 +5,29 @@
  A scrollable list with different item type
  */
 import React from 'react';
-import {Text} from 'react-native';
 
-import {EvilIcons} from '../../components/Icons';
-
-import JobListTemplate, {Search} from '../../public/JobListPage';
+import JobListTemplate from '../../public/JobListPage';
+import {Entypo} from '../../components/Icons';
 import {connect} from 'react-redux';
 
 const List = props => {
+  console.log(props);
+
   return (
     <JobListTemplate
       componentDidMount={() => {
-        props.dispatch({
-          type: 'queryFilter',
-          payload: {name: 'distance', data: 'Whole City'},
-        });
+        const searchText = props.navigation.state.params.searchText;
+        props.dispatch({type: 'SearchJob', payload: searchText});
       }}
       {...props}
       leftButton={[
-        <Text style={{color: 'white'}} key="1">
-          Job Search
-        </Text>,
-      ]}
-      rightButton={[
-        <Search key="1" onPress={() => props.navigation.navigate('SearchJob')}>
-          <EvilIcons color={'white'} name="search" size={24} />
-        </Search>,
+        <Entypo
+          size={16}
+          color="white"
+          key={0}
+          name="chevron-thin-left"
+          onPress={() => props.navigation.goBack()}
+        />,
       ]}
     />
   );
