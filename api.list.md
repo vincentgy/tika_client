@@ -187,3 +187,32 @@ JSON object,
 ‘ret’, 0 means successful, otherwise failed.
 ‘data’, JSON encoded array of job list.
 ```
+---
+
+10.Add profile,
+
+```bash
+Request,
+‘a’:'up', update profile
+‘user_id’ : user id,
+‘description’ : self description,
+‘phone’ : phohe number,
+‘skills’ : skill tags, like plumper, electrician xxx,
+‘qualifications’ => [
+    ‘degree’ : degree,
+    ‘school’ : school name,
+    ‘major’ : major,
+    ‘start’ : start yearmonth, like 201008,
+    ‘end’ : start yearmonth, like 201208,
+],
+‘experiences’ => [
+    ‘place’ : company name or other location names,
+    ‘task’ : work content,
+    ‘start’ : start yearmonth, like 201008,
+    ‘end’ : start yearmonth, like 201208,
+]
+
+Response,
+JSON object,
+‘ret’, 0 means successful, otherwise failed.
+```
