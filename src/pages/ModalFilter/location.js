@@ -24,6 +24,7 @@ class LocationSelector extends React.PureComponent {
     selectedRegion: 'Auckland',
     currentDisctrict: Disctrict['1'],
     selectedDisctict: {},
+    deferMount: true,
   };
 
   onChange = () => {
@@ -35,19 +36,22 @@ class LocationSelector extends React.PureComponent {
   };
 
   componentDidMount() {
-    const {region, disctrict} = this.props;
-    // 快速切换会崩溃,因此这里要判断
-    const selectedRegion = Regions.find(item => item.region === region);
-    if (selectedRegion) {
-      const id = selectedRegion.id;
-      if (id) {
-        this.setState({
-          selectedRegion: region || 'Auckland',
-          currentDisctrict: Disctrict[id],
-          selectedDisctict: disctrict || {},
-        });
+    setTimeout(() => {
+      const {region, disctrict} = this.props;
+      // 快速切换会崩溃,因此这里要判断
+      const selectedRegion = Regions.find(item => item.region === region);
+      if (selectedRegion) {
+        const id = selectedRegion.id;
+        if (id) {
+          this.setState({
+            selectedRegion: region || 'Auckland',
+            currentDisctrict: Disctrict[id],
+            selectedDisctict: disctrict || {},
+            deferMount: false,
+          });
+        }
       }
-    }
+    }, 280);
   }
 
   onSelectedRegion = Region => {
@@ -85,8 +89,8 @@ class LocationSelector extends React.PureComponent {
   };
 
   render() {
-    return (
-      <View style={{flexDirection: 'row', height: 350}}>
+    const Temp = () => (
+      <React.Fragment>
         <ScrollView style={{width: WIDTH * 0.4, backgroundColor: 'white'}}>
           {Regions.map(item => (
             <RegionItem
@@ -110,6 +114,11 @@ class LocationSelector extends React.PureComponent {
             </SelectItem>
           ))}
         </ScrollView>
+      </React.Fragment>
+    );
+    return (
+      <View style={{flexDirection: 'row', height: 350}}>
+        {this.state.deferMount ? null : <Temp />}
       </View>
     );
   }

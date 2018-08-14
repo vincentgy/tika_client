@@ -9,6 +9,7 @@ import React from 'react';
 import JobListTemplate from '../../public/JobListPage';
 import {Entypo} from '../../components/Icons';
 import {connect} from 'react-redux';
+import {EasyTap} from '../../public/EasyTap';
 
 const List = props => {
   console.log(props);
@@ -21,13 +22,9 @@ const List = props => {
       }}
       {...props}
       leftButton={[
-        <Entypo
-          size={16}
-          color="white"
-          key={0}
-          name="chevron-thin-left"
-          onPress={() => props.navigation.goBack()}
-        />,
+        <EasyTap key="1" onPress={() => props.navigation.goBack()}>
+          <Entypo size={16} color="white" key={0} name="chevron-thin-left" />
+        </EasyTap>,
       ]}
     />
   );
@@ -36,7 +33,7 @@ const List = props => {
 const mapState = state => {
   return {
     loading: state.filter.loading,
-    list: state.filter.list,
+    list: state.filter.resultList,
   };
 };
 

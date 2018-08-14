@@ -23,7 +23,7 @@ const List = props => {
       }}
       {...props}
       leftButton={[
-        <Text style={{color: 'white'}} key="1">
+        <Text style={{color: 'white', marginLeft: 16}} key="1">
           Job Search
         </Text>,
       ]}
