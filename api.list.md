@@ -216,3 +216,54 @@ Response,
 JSON object,
 ‘ret’, 0 means successful, otherwise failed.
 ```
+---
+
+11.Get profile,
+
+```bash
+Request,
+‘a’:'gp', update profile
+‘user_id’ : user id
+
+Response,
+JSON object,
+‘ret’, 0 means successful, otherwise failed.
+‘data’, JSON encoded user profile.
+```
+
+---
+
+12.Update a certain qualification,
+
+```bash
+Request,
+‘a’:'uq', update qualification
+‘id’ : qualification id,
+‘degree’ : degree,
+‘school’ : school name,
+‘major’ : major,
+‘start’ : start yearmonth, like 201008,
+‘end’ : start yearmonth, like 201208,
+
+Response,
+JSON object,
+‘ret’, 0 means successful, otherwise failed.
+```
+
+---
+
+13.Update a certain work experience,
+
+```bash
+Request,
+‘a’:'ue', update qualification
+‘id’ : work experience id,
+‘place’ : company name or other location names,
+‘task’ : work content,
+‘start’ : start yearmonth, like 201008,
+‘end’ : start yearmonth, like 201208,
+
+Response,
+JSON object,
+‘ret’, 0 means successful, otherwise failed.
+```
