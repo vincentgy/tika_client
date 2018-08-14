@@ -267,3 +267,31 @@ Response,
 JSON object,
 ‘ret’, 0 means successful, otherwise failed.
 ```
+---
+
+14.Apply a position
+
+```bash
+Request,
+‘a’:'ap', apply position
+‘p’ : position id,
+‘u’ : user id
+
+Response,
+JSON object,
+‘ret’, 0 means successful, otherwise failed.
+```
+---
+
+15.Get application list
+
+```bash
+Request,
+‘a’:'gal', get application list,
+‘p’ : position id,
+
+Response,
+JSON object,
+‘ret’, 0 means successful, otherwise failed.
+‘data’, JSON encoded application list.
+```
