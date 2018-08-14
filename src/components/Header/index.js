@@ -24,14 +24,14 @@ const FlexContainer = styled.View`
   height: 100%;
 `;
 
-const GroupLeft = styled.View`
-  margin-left: 16px;
-`;
+// const GroupLeft = styled.View`
+//   margin-left: 16px;
+// `;
 
 class Header extends React.Component {
   static defaultProps = {
     rightButton: [],
-    leftButton: null,
+    leftButton: [],
   };
 
   // <Entypo size={16} color="white" key={0} name="chevron-thin-left" onPress />
@@ -48,8 +48,8 @@ class Header extends React.Component {
         )}
         <HeaderContainer>
           <FlexContainer>
-            {leftButton.map((rb, index) => {
-              return <GroupLeft key={index}>{rb}</GroupLeft>;
+            {leftButton.map(rb => {
+              return rb;
             })}
           </FlexContainer>
           {this.props.title}

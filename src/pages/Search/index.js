@@ -1,17 +1,11 @@
 import React from 'react';
 import {View, Text, TextInput} from 'react-native';
 import Header from '../../components/Header';
-import styled from 'styled-components';
+
 import {Theme} from '../../utils/color';
 import {WithGoback} from '../../utils/withGoback';
-
-const Cancel = styled.TouchableOpacity`
-  height: 40px;
-  width: 60px;
-  justify-content: center;
-  flex-direction: row;
-  align-items: center;
-`;
+import {EvilIcons} from '../../components/Icons';
+import {EasyTap} from '../../public/EasyTap';
 
 @WithGoback
 export default class SearchJob extends React.Component {
@@ -38,15 +32,15 @@ export default class SearchJob extends React.Component {
         <Header
           leftButton={[]}
           rightButton={[
-            <Cancel key={1} onPress={this.props.goback}>
-              <Text style={{color: 'white'}}>取消</Text>
-            </Cancel>,
+            <EasyTap key={1} onPress={this.props.goback}>
+              <EvilIcons name="close" color="white" size={24} />
+            </EasyTap>,
           ]}
           title={
             <View
               style={{
                 backgroundColor: 'white',
-                width: '75%',
+                width: '80%',
                 borderRadius: 100,
                 height: 32,
                 flexDirection: 'row',

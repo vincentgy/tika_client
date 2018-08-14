@@ -36,6 +36,9 @@ export default {
     }),
     loading: false,
     searchText: '',
+    resultList: new DataProvider((r1, r2) => {
+      return r1 !== r2;
+    }),
   },
   reducers: {
     editFilter: (state, {payload}) => {
@@ -89,7 +92,7 @@ export default {
       yield put({
         type: 'editFilter',
         payload: {
-          name: 'list',
+          name: 'resultList',
           data: filter.list.cloneWithRows(json.data),
         },
       });
