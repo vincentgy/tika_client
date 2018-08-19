@@ -22,9 +22,27 @@
     self.sectionHeaderHeight = 0;
     self.sectionFooterHeight = 0;
     self.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    UIRefreshControl * refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.tintColor = [UIColor grayColor];
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉刷新"];
+    
+    
+    [refreshControl addTarget:self action:@selector(refreshAction) forControlEvents:UIControlEventValueChanged];
+    
+    
+    self.refreshControl = refreshControl;
+    [self setBackgroundColor:[UIColor clearColor]];
     
   }
   return self;
+}
+
+-(void)refreshAction
+{
+  NSLog(@"下拉刷新");
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [self.refreshControl endRefreshing]; //结束刷新
+  });
 }
 
 #pragma mark - UITableViewDelegate
@@ -34,7 +52,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-  return 10;
+  return 8;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

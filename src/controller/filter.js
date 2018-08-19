@@ -130,7 +130,8 @@ export default {
           name => {
             return Disctrict[regionId]
               .filter(i => {
-                if (i.name === name) return i;
+                if (i.name === name && filter.location.disctrict[name] === true)
+                  return i;
               })
               .map(i => i.id);
           }
@@ -175,7 +176,6 @@ export default {
           'type',
           filter.jobType.jobType
         );
-
         const res = yield call(fetch, url, {
           method: 'POST',
           body: JSON.stringify({param: body}),

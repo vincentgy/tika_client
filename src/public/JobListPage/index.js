@@ -67,7 +67,7 @@ export default class JobList extends React.Component {
       },
       (type, dim) => {
         dim.width = width;
-        dim.height = 144;
+        dim.height = 125;
       }
     );
 

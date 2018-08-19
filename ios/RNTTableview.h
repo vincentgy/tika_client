@@ -16,4 +16,5 @@
 
 @interface RNTTableView : UITableView
 
+- (void) refreshAction;
 @end
