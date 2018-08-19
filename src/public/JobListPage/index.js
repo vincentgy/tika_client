@@ -12,6 +12,7 @@ import {
   Image,
   TouchableOpacity,
   RefreshControl,
+  Platform,
 } from 'react-native';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 import {Entypo} from '../../components/Icons';
@@ -67,7 +68,7 @@ export default class JobList extends React.Component {
       },
       (type, dim) => {
         dim.width = width;
-        dim.height = 125;
+        dim.height = Platform.OS === 'ios' ? 125 : 144;
       }
     );
 
@@ -94,11 +95,23 @@ export default class JobList extends React.Component {
               style={{width: 40, height: 40, zIndex: 1000}}
               source={require('./alibaba.png')}
             />
-            <View style={{marginVertical: 8, marginLeft: 16}}>
-              <Text style={{color: 'black', fontSize: 16}}>{data.company}</Text>
-              <Text style={{color: 'black', fontSize: 12}}>
-                {data.location}
-              </Text>
+            <View
+              style={{
+                marginVertical: 8,
+                marginLeft: 16,
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
+              <View>
+                <Text style={{color: 'black', fontSize: 16}}>
+                  {data.company}
+                </Text>
+                <Text style={{color: 'black', fontSize: 12}}>
+                  {data.location}
+                </Text>
+              </View>
+              <Text style={{fontWeight: '700', color: Theme}}>10k-20k</Text>
             </View>
           </View>
           <Text>{data.title}</Text>

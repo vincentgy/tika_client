@@ -16,10 +16,11 @@ class PageBase extends React.Component {
         : {};
 
     return (
-      <View>
+      <View style={this.props.style}>
         <ScrollView
           style={{
             ...Height,
+            ...this.props.containerStyle,
             width: WIDTH,
             marginTop: Platform.OS === 'ios' ? (hasStatusBar ? 20 : 0) : 0,
           }}>

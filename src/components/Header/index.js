@@ -7,7 +7,7 @@ import {Theme} from '../../utils/color';
 
 const IOSStatusBar = styled.View`
   height: 20px;
-  background-color: #2d59d9;
+  background-color: ${Theme};
 `;
 
 const HeaderContainer = styled.View`
@@ -24,10 +24,6 @@ const FlexContainer = styled.View`
   height: 100%;
 `;
 
-// const GroupLeft = styled.View`
-//   margin-left: 16px;
-// `;
-
 class Header extends React.Component {
   static defaultProps = {
     rightButton: [],
@@ -42,7 +38,9 @@ class Header extends React.Component {
     return (
       <React.Fragment>
         {Platform.OS === 'ios' ? (
-          <IOSStatusBar />
+          <IOSStatusBar>
+            <StatusBar barStyle={'light-content'} />
+          </IOSStatusBar>
         ) : (
           <StatusBar backgroundColor={Theme} />
         )}
