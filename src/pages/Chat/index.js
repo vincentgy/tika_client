@@ -10,11 +10,35 @@ import Header from '../../components/Header';
 
 @Page({
   tabBarIcon: ({focused}) => (
-    <FontAwesome
-      name="comments"
-      size={24}
-      color={focused ? Theme : '#abb0b0'}
-    />
+    <View>
+      <FontAwesome
+        name="comments"
+        size={24}
+        color={focused ? Theme : '#abb0b0'}
+      />
+      <View
+        style={{
+          position: 'absolute',
+          width: 20,
+          height: 20,
+          marginLeft: 16,
+          borderRadius: 10,
+          backgroundColor: '#FF5E5E',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <Text
+          style={{
+            backgroundColor: 'transparent',
+            textAlign: 'center',
+            fontSize: 12,
+            color: 'white',
+          }}>
+          99
+        </Text>
+      </View>
+    </View>
   ),
   tabBarOnPress: ({defaultHandler}) => {
     StatusBar.setBarStyle('dark-content', true);
