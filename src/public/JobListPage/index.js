@@ -81,7 +81,10 @@ export default class JobList extends React.Component {
   //Given type and data return the view component
   _rowRenderer = (type, data) => {
     return (
-      <TouchableOpacity activeOpacity={0.7} style={{backgroundColor: 'white'}}>
+      <TouchableOpacity
+        onPress={() => this.props.onSelect && this.props.onSelect(data)}
+        activeOpacity={0.7}
+        style={{backgroundColor: 'white'}}>
         <View
           style={{
             paddingVertical: 8,

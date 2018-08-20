@@ -12,15 +12,17 @@ import SearchJob from './pages/Search';
 import Description from './pages/PostJob/description';
 import ResultList from './pages/Search/resultList';
 import Chat from './pages/Chat';
+import JobDetail from './pages/JobDetail';
 
 const TabRoot = createBottomTabNavigator(
   {
     JobList,
     Chat,
     Account,
+    JobDetail,
   },
   {
-    initialRouteName: 'Account',
+    initialRouteName: 'JobDetail',
     tabBarOptions: {
       style: {
         backgroundColor: 'white',
@@ -40,6 +42,7 @@ const withoutHeader = page => {
 const HomeStack = createStackNavigator({
   Tabs: withoutHeader(TabRoot),
   Edit: withoutHeader(Edit),
+  JobDetail: withoutHeader(JobDetail),
   Picker: Picker,
   SearchJob: withoutHeader(SearchJob),
   Description: withoutHeader(Description),

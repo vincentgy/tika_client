@@ -17,6 +17,9 @@ import {Theme} from '../../utils/color';
 const List = props => {
   return (
     <JobListTemplate
+      onSelect={() => {
+        props.navigation.navigate('JobDetail');
+      }}
       componentDidMount={() => {
         props.dispatch({
           type: 'queryFilter',
