@@ -37,8 +37,13 @@
   return 10;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+  NSNumber * num = [(RNTTableView*)tableView cellHeight];
+  
+  return [num doubleValue];
+}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
   return @"分区开始";
 }
 
@@ -46,7 +51,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   UITableViewCell * cell = [[UITableViewCell alloc] init];
   cell.textLabel.text = @"asdasd";
-  
+  [cell addSubview: self.Item];
   return cell;
 }
 

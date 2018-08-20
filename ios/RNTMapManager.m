@@ -20,12 +20,14 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
-  CGRect rect = CGRectMake(0.0f, 0.0f, 320.0f, 320.0f);
+//  CGRect rect = CGRectMake(0.0f, 0.0f, 320.0f, 320.0f);
   RNTTableView * table = [[RNTTableView alloc] init];
-  
   [table setBackgroundColor:[UIColor clearColor]];
   
   return table;
 }
+
+RCT_EXPORT_VIEW_PROPERTY(cellHeight, NSNumber *)
+RCT_EXPORT_VIEW_PROPERTY(Item, UIView *)
 
 @end
