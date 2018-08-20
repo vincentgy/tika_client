@@ -11,6 +11,7 @@ yarn.lock
 package-lock.json
 package.json
 *.png
+*.jpeg
 *.sh
 .eslintignore
 
