@@ -4,9 +4,17 @@ import {View, ScrollView, Platform} from 'react-native';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
 
 class PageBase extends React.Component {
+  static defaultProps = {
+    update: true,
+  };
+
+  shouldComponentUpdate() {
+    return this.props.update;
+  }
+
   render() {
     const {hasStatusBar} = this.props;
-
+    console.log('shuaxin');
     const Height =
       Platform.OS === 'ios'
         ? {
@@ -18,6 +26,8 @@ class PageBase extends React.Component {
     return (
       <View style={this.props.style}>
         <ScrollView
+          scrollEventThrottle={32}
+          onScroll={this.props.onScroll}
           style={{
             ...Height,
             ...this.props.containerStyle,

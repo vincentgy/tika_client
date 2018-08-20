@@ -19,10 +19,10 @@ const TabRoot = createBottomTabNavigator(
     JobList,
     Chat,
     Account,
-    JobDetail,
+    // JobDetail,
   },
   {
-    initialRouteName: 'JobDetail',
+    initialRouteName: 'JobList',
     tabBarOptions: {
       style: {
         backgroundColor: 'white',

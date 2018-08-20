@@ -17,7 +17,7 @@ import Header from '../../components/Header';
     />
   ),
   tabBarOnPress: ({defaultHandler}) => {
-    StatusBar.setBarStyle('light-content', true);
+    StatusBar.setBarStyle('dark-content', true);
     defaultHandler();
   },
 })
@@ -66,7 +66,7 @@ export default class Chat extends React.Component {
             paddingVertical: 8,
             marginHorizontal: 16,
             backgroundColor: 'white',
-            borderBottomWidth: 1,
+            borderBottomWidth: 0.5,
             borderBottomColor: 'rgba(120,120,120,0.1)',
             flexDirection: 'row',
           }}>
@@ -76,7 +76,7 @@ export default class Chat extends React.Component {
           />
           <View style={{marginLeft: 16}}>
             <Text>{data}</Text>
-            <Text style={{marginTop: 8}}>lastTime</Text>
+            <Text style={{marginTop: 8, color: '#abb0b0'}}>lastTime</Text>
           </View>
         </View>
       </TouchableOpacity>
