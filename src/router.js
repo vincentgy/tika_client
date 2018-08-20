@@ -13,39 +13,6 @@ import Description from './pages/PostJob/description';
 import ResultList from './pages/Search/resultList';
 import Chat from './pages/Chat';
 
-// @Page({
-//   tabBarIcon: ({focused}) => (
-//     <FontAwesome
-//       name="comments"
-//       size={24}
-//       color={focused ? Theme : '#abb0b0'}
-//     />
-//   ),
-//   tabBarOnPress: ({defaultHandler}) => {
-//     defaultHandler();
-//   },
-// })
-// class Chat extends React.Component {
-//   render() {
-//     return (
-//       <View style={{backgroundColor: 'white', height: '100%'}}>
-//         <Header />
-//       </View>
-//     );
-//   }
-// }
-
-// @Page({tabBarLabel: 'Find a Job'})
-// class FindJob extends React.Component {
-//   render() {
-//     return (
-//       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-//         <Text>Find a Job</Text>
-//       </View>
-//     );
-//   }
-// }
-
 const TabRoot = createBottomTabNavigator(
   {
     JobList,

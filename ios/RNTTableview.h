@@ -17,6 +17,5 @@
 @interface RNTTableView : UITableView
 
 @property (nonatomic, strong) NSNumber *cellHeight;
-@property (nonatomic, strong) UIView *Item;
 
 @end

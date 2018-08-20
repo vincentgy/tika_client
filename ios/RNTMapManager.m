@@ -28,6 +28,5 @@ RCT_EXPORT_MODULE()
 }
 
 RCT_EXPORT_VIEW_PROPERTY(cellHeight, NSNumber *)
-RCT_EXPORT_VIEW_PROPERTY(Item, UIView *)
 
 @end

@@ -69,7 +69,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   UITableViewCell * cell = [[UITableViewCell alloc] init];
   cell.textLabel.text = @"asdasd";
-  [cell addSubview: self.Item];
+
   return cell;
 }
 
