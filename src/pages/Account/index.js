@@ -1,17 +1,44 @@
 import React from 'react';
+import {View, StatusBar} from 'react-native';
 import PageBase from '../../components/PageBase';
 import {Page} from '../../components/PageHOC';
 import styled from 'styled-components';
-import {Image} from 'react-native';
-import {WIDTH} from '../../utils/plaform';
+import {HEIGHT} from '../../utils/plaform';
+import {Entypo} from '../../components/Icons';
+import {Theme} from '../../utils/color';
 
-const Container = styled.View``;
+const ListGroup = ({children}) => {
+  return <View style={{marginTop: 8}}>{children}</View>;
+};
 const ProfileContainer = styled.View`
-  height: 300px;
+  height: 200px;
   background-color: white;
 `;
 
-@Page({tabBarLabel: 'My Account'})
+const Cell = styled.TouchableOpacity`
+  background-color: white;
+`;
+
+const CellInside = styled.View`
+  height: 56px;
+  margin-left: 8px;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(120, 120, 120, 0.1);
+`;
+
+// user
+
+@Page({
+  tabBarIcon: ({focused}) => (
+    <View style={{marginTop: 8}}>
+      <Entypo name="user" size={24} color={focused ? Theme : '#abb0b0'} />
+    </View>
+  ),
+  tabBarOnPress: ({defaultHandler}) => {
+    defaultHandler();
+    StatusBar.setBarStyle('dark-content', true);
+  },
+})
 export default class Account extends React.Component {
   state = {
     carMake: 'cadillac',
@@ -19,39 +46,27 @@ export default class Account extends React.Component {
   };
   render() {
     return (
-      <PageBase>
-        {/* <StatusBar
-          translucent
-          backgroundColor="transparent"
-          barStyle="dark-content"
-        /> */}
-
-        <Container>
-          <Image
-            style={{
-              width: WIDTH,
-              height: 174,
-            }}
-            source={require('./temp.png')}
-          />
-          <Image
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: 50,
-              position: 'absolute',
-              left: WIDTH / 2 - 50,
-              top: 174 - 50,
-              zIndex: 12,
-              shadowOpacity: 0.75,
-              shadowRadius: 5,
-              shadowColor: 'red',
-              shadowOffset: {height: 0, width: 0},
-            }}
-            source={require('./temp.png')}
-          />
-          <ProfileContainer />
-        </Container>
+      <PageBase
+        style={{
+          backgroundColor: '#f5f5f5',
+          height: HEIGHT - 44,
+        }}>
+        <StatusBar barStyle="dark-content" />
+        <ProfileContainer />
+        <ListGroup>
+          <Cell>
+            <CellInside />
+          </Cell>
+          <Cell>
+            <CellInside />
+          </Cell>
+          <Cell>
+            <CellInside />
+          </Cell>
+        </ListGroup>
+        <Cell>
+          <CellInside />
+        </Cell>
       </PageBase>
     );
   }

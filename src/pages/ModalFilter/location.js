@@ -7,6 +7,7 @@ import {Theme} from '../../utils/color';
 import {produce} from 'immer';
 import styled from 'styled-components';
 import SelectItem from '../../public/SelectItem';
+// import MapView from '../JobList/testmap';
 
 const StyledText = styled.Text`
   color: ${props => (props.active ? Theme : '#8c8c8c')};
@@ -18,6 +19,27 @@ const RegionItem = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
 `;
+
+/**
+ * 用于提升性能
+ */
+class RegionItemRC extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return (
+      this.props.active !== nextProps.active ||
+      this.props.children !== nextProps.children
+    );
+  }
+
+  render() {
+    const {active, onPress} = this.props;
+    return (
+      <RegionItem activeOpacity={1} active={active} onPress={onPress}>
+        <StyledText active={active}>{this.props.children}</StyledText>
+      </RegionItem>
+    );
+  }
+}
 
 class LocationSelector extends React.PureComponent {
   state = {
@@ -36,22 +58,20 @@ class LocationSelector extends React.PureComponent {
   };
 
   componentDidMount() {
-    setTimeout(() => {
-      const {region, disctrict} = this.props;
-      // 快速切换会崩溃,因此这里要判断
-      const selectedRegion = Regions.find(item => item.region === region);
-      if (selectedRegion) {
-        const id = selectedRegion.id;
-        if (id) {
-          this.setState({
-            selectedRegion: region || 'Auckland',
-            currentDisctrict: Disctrict[id],
-            selectedDisctict: disctrict || {},
-            deferMount: false,
-          });
-        }
+    const {region, disctrict} = this.props;
+    // 快速切换会崩溃,因此这里要判断
+    const selectedRegion = Regions.find(item => item.region === region);
+    if (selectedRegion) {
+      const id = selectedRegion.id;
+      if (id) {
+        this.setState({
+          selectedRegion: region || 'Auckland',
+          currentDisctrict: Disctrict[id],
+          selectedDisctict: disctrict || {},
+          deferMount: false,
+        });
       }
-    }, 280);
+    }
   }
 
   onSelectedRegion = Region => {
@@ -93,15 +113,12 @@ class LocationSelector extends React.PureComponent {
       <React.Fragment>
         <ScrollView style={{width: WIDTH * 0.4, backgroundColor: 'white'}}>
           {Regions.map(item => (
-            <RegionItem
-              activeOpacity={1}
+            <RegionItemRC
               active={item.region === this.state.selectedRegion}
               onPress={() => this.onSelectedRegion(item.region)}
               key={item.id}>
-              <StyledText active={item.region === this.state.selectedRegion}>
-                {item.region}
-              </StyledText>
-            </RegionItem>
+              {item.region}
+            </RegionItemRC>
           ))}
         </ScrollView>
         <ScrollView style={{width: WIDTH * 0.6, backgroundColor: '#f8f8f8'}}>
@@ -119,6 +136,7 @@ class LocationSelector extends React.PureComponent {
     return (
       <View style={{flexDirection: 'row', height: 350}}>
         {this.state.deferMount ? null : <Temp />}
+        {/* <MapView style={{flex: 1}} /> */}
       </View>
     );
   }

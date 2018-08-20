@@ -5,12 +5,14 @@
  A scrollable list with different item type
  */
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, View, StatusBar} from 'react-native';
 
-import {EvilIcons} from '../../components/Icons';
+import {EvilIcons, MaterialCommunityIcons} from '../../components/Icons';
 
 import JobListTemplate, {Search} from '../../public/JobListPage';
 import {connect} from 'react-redux';
+import {Page} from '../../components/PageHOC';
+import {Theme} from '../../utils/color';
 
 const List = props => {
   return (
@@ -43,4 +45,18 @@ const mapState = state => {
   };
 };
 
-export default connect(mapState)(List);
+export default Page({
+  tabBarIcon: ({focused}) => (
+    <View style={{marginTop: 8}}>
+      <MaterialCommunityIcons
+        name="clipboard-text"
+        size={24}
+        color={focused ? Theme : '#abb0b0'}
+      />
+    </View>
+  ),
+  tabBarOnPress: ({defaultHandler}) => {
+    defaultHandler();
+    StatusBar.setBarStyle('light-content', true);
+  },
+})(connect(mapState)(List));
