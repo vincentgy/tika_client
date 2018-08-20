@@ -16,5 +16,6 @@
 
 @interface RNTTableView : UITableView
 
-- (void) refreshAction;
+@property (nonatomic, strong) NSNumber *cellHeight;
+
 @end

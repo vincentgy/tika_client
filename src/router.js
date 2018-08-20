@@ -12,48 +12,17 @@ import SearchJob from './pages/Search';
 import Description from './pages/PostJob/description';
 import ResultList from './pages/Search/resultList';
 import Chat from './pages/Chat';
-
-// @Page({
-//   tabBarIcon: ({focused}) => (
-//     <FontAwesome
-//       name="comments"
-//       size={24}
-//       color={focused ? Theme : '#abb0b0'}
-//     />
-//   ),
-//   tabBarOnPress: ({defaultHandler}) => {
-//     defaultHandler();
-//   },
-// })
-// class Chat extends React.Component {
-//   render() {
-//     return (
-//       <View style={{backgroundColor: 'white', height: '100%'}}>
-//         <Header />
-//       </View>
-//     );
-//   }
-// }
-
-// @Page({tabBarLabel: 'Find a Job'})
-// class FindJob extends React.Component {
-//   render() {
-//     return (
-//       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-//         <Text>Find a Job</Text>
-//       </View>
-//     );
-//   }
-// }
+import JobDetail from './pages/JobDetail';
 
 const TabRoot = createBottomTabNavigator(
   {
     JobList,
     Chat,
     Account,
+    // JobDetail,
   },
   {
-    initialRouteName: 'Account',
+    initialRouteName: 'JobList',
     tabBarOptions: {
       style: {
         backgroundColor: 'white',
@@ -73,6 +42,7 @@ const withoutHeader = page => {
 const HomeStack = createStackNavigator({
   Tabs: withoutHeader(TabRoot),
   Edit: withoutHeader(Edit),
+  JobDetail: withoutHeader(JobDetail),
   Picker: Picker,
   SearchJob: withoutHeader(SearchJob),
   Description: withoutHeader(Description),

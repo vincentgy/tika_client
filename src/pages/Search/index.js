@@ -33,13 +33,13 @@ export default class SearchJob extends React.Component {
           leftButton={[]}
           rightButton={[
             <EasyTap key={1} onPress={this.props.goback}>
-              <EvilIcons name="close" color="white" size={24} />
+              <EvilIcons name="close" color="black" size={24} />
             </EasyTap>,
           ]}
           title={
             <View
               style={{
-                backgroundColor: 'white',
+                backgroundColor: '#f5f5f5',
                 width: '80%',
                 borderRadius: 100,
                 height: 32,

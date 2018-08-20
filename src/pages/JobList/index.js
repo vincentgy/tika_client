@@ -17,6 +17,9 @@ import {Theme} from '../../utils/color';
 const List = props => {
   return (
     <JobListTemplate
+      onSelect={() => {
+        props.navigation.navigate('JobDetail');
+      }}
       componentDidMount={() => {
         props.dispatch({
           type: 'queryFilter',
@@ -25,13 +28,13 @@ const List = props => {
       }}
       {...props}
       leftButton={[
-        <Text style={{color: 'white', marginLeft: 16}} key="1">
+        <Text style={{marginLeft: 16}} key="1">
           Job Search
         </Text>,
       ]}
       rightButton={[
         <Search key="1" onPress={() => props.navigation.navigate('SearchJob')}>
-          <EvilIcons color={'white'} name="search" size={24} />
+          <EvilIcons name="search" size={24} />
         </Search>,
       ]}
     />
@@ -57,6 +60,6 @@ export default Page({
   ),
   tabBarOnPress: ({defaultHandler}) => {
     defaultHandler();
-    StatusBar.setBarStyle('light-content', true);
+    StatusBar.setBarStyle('dark-content', true);
   },
 })(connect(mapState)(List));

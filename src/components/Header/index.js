@@ -4,11 +4,15 @@ import {Platform, StatusBar} from 'react-native';
 // import PropTypes from 'prop-types';
 
 import {Theme} from '../../utils/color';
-import {IOSBar} from '../StatusBar';
+
+const IOSStatusBar = styled.View`
+  height: 20px;
+  background-color: white;
+`;
 
 const HeaderContainer = styled.View`
   height: 48px;
-  background-color: ${Theme};
+  background-color: white;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -34,7 +38,9 @@ class Header extends React.Component {
     return (
       <React.Fragment>
         {Platform.OS === 'ios' ? (
-          <IOSBar />
+          <IOSStatusBar>
+            <StatusBar barStyle={'dark-content'} />
+          </IOSStatusBar>
         ) : (
           <StatusBar backgroundColor={Theme} />
         )}
