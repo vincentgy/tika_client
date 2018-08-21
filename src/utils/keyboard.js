@@ -30,7 +30,9 @@ export default class KeyboardDetector extends React.Component {
     if (!this.state.didMove) {
       this.View.transition(
         {paddingBottom: 0},
-        {paddingBottom: e.endCoordinates.height}
+        {paddingBottom: e.endCoordinates.height},
+        221,
+        'linear'
       );
     }
 

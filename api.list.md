@@ -9,13 +9,20 @@ Error Code,
 1.user login,
 
 Request,
+
+```
 ‘a’:'ul',
 ‘e’:email,
 ’p’:password, password should be hashed by md5.
+```
 
 Response,
+
 JSON object with `ret`,
+
+```
 ‘ret’, 0 means successful, otherwise failed.
+```
 
 ---
 

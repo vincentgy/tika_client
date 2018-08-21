@@ -1,6 +1,6 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-
+import {createStackNavigator} from 'react-navigation';
 import Rluy from './utils/rluy.native';
 import user from './controller/user';
 
@@ -11,11 +11,14 @@ import {
   PanResponder,
   View,
   StatusBar,
+  AsyncStorage,
 } from 'react-native';
 
 import TabRoot from './router';
 import filter from './controller/filter';
 import {Logger, Debugger} from './utils/logger';
+import CreateAccount from './pages/Login/create';
+import Login from './pages/Login';
 
 // StatusBar.setBarStyle('light-content', true);
 
@@ -31,7 +34,25 @@ Rluy.addController(filter);
 const store = Rluy.run();
 const alert = Alert.alert;
 
+const withoutHeader = page => {
+  return {
+    screen: page,
+    navigationOptions: {
+      header: null,
+    },
+  };
+};
+
+const LoginStack = createStackNavigator({
+  Login: withoutHeader(Login),
+  CreateAccount: withoutHeader(CreateAccount),
+});
+
 class App extends React.Component {
+  state = {
+    isLogin: false,
+  };
+
   getViewContainerRef = node => (this.View = node);
 
   async checkVersion() {
@@ -49,11 +70,21 @@ class App extends React.Component {
     }
   }
 
+  async checkLogin() {
+    const token = await AsyncStorage.getItem('token');
+    if (token !== null) {
+      this.setState({isLogin: true});
+    }
+  }
+
   componentDidMount() {
+    this.checkLogin();
     // this.checkVersion();
   }
 
   render() {
+    if (!this.state.isLogin) return <LoginStack />;
+
     return (
       <Provider store={store}>
         <React.Fragment>
