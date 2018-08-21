@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StatusBar, Text, Image} from 'react-native';
+import {View, StatusBar, Text, Image, TouchableOpacity} from 'react-native';
 import PageBase from '../../components/PageBase';
 import {Page} from '../../components/PageHOC';
 import styled from 'styled-components';
@@ -27,9 +27,12 @@ const Cell = styled.TouchableOpacity`
 
 const CellInside = styled.View`
   height: 56px;
-  margin-left: 8px;
-  border-bottom-width: 1px;
-  border-bottom-color: rgba(120, 120, 120, 0.1);
+  margin-left: 16px;
+  border-bottom-width: ${props => (props.no ? 0 : 1)};
+  border-bottom-color: ${props =>
+    props.no ? 'transparent' : `rgba(120, 120, 120, 0.1)`};
+  flex-direction: row;
+  align-items: center;
 `;
 
 const Name = styled.Text`
@@ -47,52 +50,71 @@ const Bref = ({children}) => {
   return <ShortBref>{Child}</ShortBref>;
 };
 
+const SettingCell = ({children, no}) => {
+  return (
+    <Cell>
+      <CellInside no={no}>{children}</CellInside>
+    </Cell>
+  );
+};
+
 const Profile = () => {
   return (
     <ProfileContainer>
       <View>
         <Name>Zheng Fang</Name>
         <Bref>have 3 years background of web dev</Bref>
-        <View style={{paddingTop: 8}}>
-          <Text>Edit profile</Text>
-        </View>
+        <TouchableOpacity
+          activeOpacity={1}
+          style={{
+            marginTop: 8,
+            maxWidth: 110,
+            padding: 4,
+            flexDirection: 'row',
+            borderRadius: 4,
+            backgroundColor: 'rgba(120,120,120,0.1)',
+          }}>
+          <Entypo name="edit" size={16} color="#abb0b0" />
+          <Text style={{color: '#abb0b0', paddingLeft: 8}}>Edit profile</Text>
+        </TouchableOpacity>
       </View>
       <Image
         source={require('./me.jpeg')}
-        style={{width: 64, height: 64, marginRight: 16, borderRadius: 32}}
+        style={{
+          width: 64,
+          height: 64,
+          marginRight: 16,
+          borderRadius: 32,
+        }}
       />
     </ProfileContainer>
   );
 };
 
 class Account extends React.Component {
-  state = {
-    carMake: 'cadillac',
-    modelIndex: 3,
-  };
   render() {
     return (
       <PageBase
         style={{
-          backgroundColor: '#f5f5f5',
+          backgroundColor: '#fafafa',
           height: HEIGHT - 44,
         }}>
         <IOSBar barStyle={'dark-content'} color="white" />
         <Profile />
         <ListGroup>
-          <Cell>
-            <CellInside />
-          </Cell>
-          <Cell>
-            <CellInside />
-          </Cell>
-          <Cell>
-            <CellInside />
-          </Cell>
+          <SettingCell>
+            <Text>Favorite</Text>
+          </SettingCell>
+          <SettingCell>
+            <Text>Help</Text>
+          </SettingCell>
+          <SettingCell>
+            <Text>Setting</Text>
+          </SettingCell>
+          <SettingCell no>
+            <Text>Private</Text>
+          </SettingCell>
         </ListGroup>
-        <Cell>
-          <CellInside />
-        </Cell>
       </PageBase>
     );
   }
