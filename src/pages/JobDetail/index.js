@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import styled from 'styled-components';
 import {Entypo} from '../../components/Icons';
 import {EasyTap} from '../../public/EasyTap';
+// import MapView from '../../components/MapView';
 
 const DetailContainer = styled.View`
   border-radius: 4px;
@@ -101,9 +102,35 @@ const Section = ({title, children}) => {
 export default class JobDetail extends React.Component {
   state = {
     opacity: 0,
+    loading: true,
+    region: {
+      latitude: 37.48,
+      longitude: 122.16,
+      latitudeDelta: 0.1,
+      longitudeDelta: 0.1,
+    },
   };
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(res => {
+      const lat = res.coords.latitude;
+      const long = res.coords.longitude;
+      this.setState({
+        loading: false,
+        region: {
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1,
+          latitude: lat,
+          longitude: long,
+        },
+      });
+    });
+  }
 
   render() {
+    // this.state.loading ? null : (
+    //   <MapView region={this.state.region} style={{flex: 1}} />
+    // );
+
     return (
       <React.Fragment>
         <Header
@@ -119,6 +146,7 @@ export default class JobDetail extends React.Component {
             </EasyTap>,
           ]}
         />
+
         <PageBase
           update={false}
           onScroll={cc => {

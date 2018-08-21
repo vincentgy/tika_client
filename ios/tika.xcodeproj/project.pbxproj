@@ -49,8 +49,9 @@
 		456634CA2108BF780041FB55 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 456634BF2108BF780041FB55 /* SimpleLineIcons.ttf */; };
 		456634CB2108BF780041FB55 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 456634C02108BF780041FB55 /* MaterialIcons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
-		6B7668CE21265D01004314FD /* RNTMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7668CD21265D01004314FD /* RNTMapManager.m */; };
+		6B7668CE21265D01004314FD /* RNTTableViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B7668CD21265D01004314FD /* RNTTableViewManager.m */; };
 		6B9029B1212691E10003FD1B /* RNTTableview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B9029B0212691E10003FD1B /* RNTTableview.m */; };
+		6BB4902C212BDE33005A26DF /* RNTMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB4902B212BDE33005A26DF /* RNTMapManager.m */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 /* End PBXBuildFile section */
@@ -508,10 +509,11 @@
 		456634BF2108BF780041FB55 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		456634C02108BF780041FB55 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
-		6B7668CD21265D01004314FD /* RNTMapManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTMapManager.m; sourceTree = "<group>"; };
+		6B7668CD21265D01004314FD /* RNTTableViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTTableViewManager.m; sourceTree = "<group>"; };
 		6B7668FC21266309004314FD /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		6B902969212675700003FD1B /* RNTTableview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTTableview.h; sourceTree = "<group>"; };
 		6B9029B0212691E10003FD1B /* RNTTableview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTTableview.m; sourceTree = "<group>"; };
+		6BB4902B212BDE33005A26DF /* RNTMapManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTMapManager.m; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -656,6 +658,7 @@
 		13B07FAE1A68108700A75B9A /* tika */ = {
 			isa = PBXGroup;
 			children = (
+				6BB48FF3212BDA0F005A26DF /* Mapview */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -663,7 +666,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				6B7668CD21265D01004314FD /* RNTMapManager.m */,
+				6B7668CD21265D01004314FD /* RNTTableViewManager.m */,
 				6B9029B0212691E10003FD1B /* RNTTableview.m */,
 				6B902969212675700003FD1B /* RNTTableview.h */,
 			);
@@ -767,6 +770,14 @@
 				6B76692E21266309004314FD /* libprivatedata-tvOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6BB48FF3212BDA0F005A26DF /* Mapview */ = {
+			isa = PBXGroup;
+			children = (
+				6BB4902B212BDE33005A26DF /* RNTMapManager.m */,
+			);
+			name = Mapview;
 			sourceTree = "<group>";
 		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
@@ -1516,7 +1527,8 @@
 			files = (
 				6B9029B1212691E10003FD1B /* RNTTableview.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				6B7668CE21265D01004314FD /* RNTMapManager.m in Sources */,
+				6BB4902C212BDE33005A26DF /* RNTMapManager.m in Sources */,
+				6B7668CE21265D01004314FD /* RNTTableViewManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -147,6 +147,7 @@ export default {
           });
 
         const position = yield getPosition();
+        console.log(position);
         // Debugger.log(disctrictList);
         const url = 'http://18.222.175.208';
 
