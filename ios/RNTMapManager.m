@@ -11,6 +11,40 @@
 
 #import <React/RCTViewManager.h>
 
+
+#import <React/RCTConvert.h>
+#import <CoreLocation/CoreLocation.h>
+#import <React/RCTConvert+CoreLocation.h>
+
+@interface RCTConvert (Mapkit)
+
++ (MKCoordinateSpan)MKCoordinateSpan:(id)json;
++ (MKCoordinateRegion)MKCoordinateRegion:(id)json;
+
+@end
+
+@implementation RCTConvert(MapKit)
+
++ (MKCoordinateSpan)MKCoordinateSpan:(id)json
+{
+  json = [self NSDictionary:json];
+  return (MKCoordinateSpan){
+    [self CLLocationDegrees:json[@"latitudeDelta"]],
+    [self CLLocationDegrees:json[@"longitudeDelta"]]
+  };
+}
+
++ (MKCoordinateRegion)MKCoordinateRegion:(id)json
+{
+  return (MKCoordinateRegion){
+    [self CLLocationCoordinate2D:json],
+    [self MKCoordinateSpan:json]
+  };
+}
+
+@end
+
+
 @interface RNTMapManager : RCTViewManager
 @end
 
@@ -20,16 +54,13 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
-  MKMapView * map = [[MKMapView alloc] init];
   
-//  MKCoordinateRegion region =  MKCoordinateRegionMake(map.userLocation.location.coordinate, changeSpan);
-  CLLocationCoordinate2D coord = {.latitude =  31.238184222049302, .longitude =  121.44425335351512};
-  MKCoordinateSpan span = {.latitudeDelta =  0.01, .longitudeDelta =  0.01};
-  MKCoordinateRegion region = {coord, span};
-  [map setRegion:region];
-  
-  [map setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-  return map;
+  return [[MKMapView alloc] init];
 }
 
+
+RCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView)
+{
+  [view setRegion:json ? [RCTConvert MKCoordinateRegion:json] : defaultView.region animated:YES];
+}
 @end

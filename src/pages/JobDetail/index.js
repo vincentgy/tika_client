@@ -102,11 +102,36 @@ const Section = ({title, children}) => {
 export default class JobDetail extends React.Component {
   state = {
     opacity: 0,
+    loading: true,
+    region: {
+      latitude: 37.48,
+      longitude: 122.16,
+      latitudeDelta: 0.1,
+      longitudeDelta: 0.1,
+    },
   };
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(res => {
+      const lat = res.coords.latitude;
+      const long = res.coords.longitude;
+      this.setState({
+        loading: false,
+        region: {
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1,
+          latitude: lat,
+          longitude: long,
+        },
+      });
+    });
+  }
 
   render() {
+    // this.state.loading ? null : (
+    //   <MapView region={this.state.region} style={{flex: 1}} />
+    // );
+
     return (
-      // <MapView style={{flex: 1}} />
       <React.Fragment>
         <Header
           title={<Text style={{opacity: this.state.opacity}}>123</Text>}
