@@ -2,14 +2,14 @@
 //  RNTMapManager.m
 //  tika
 //
-//  Created by zhengfang on 2018/8/17.
+//  Created by zhengfang on 2018/8/21.
 //  Copyright © 2018年 Facebook. All rights reserved.
 //
 
+// RNTMapManager.m
 #import <MapKit/MapKit.h>
 
 #import <React/RCTViewManager.h>
-#import "RNTTableview.h"
 
 @interface RNTMapManager : RCTViewManager
 @end
@@ -20,13 +20,16 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
-//  CGRect rect = CGRectMake(0.0f, 0.0f, 320.0f, 320.0f);
-  RNTTableView * table = [[RNTTableView alloc] init];
-  [table setBackgroundColor:[UIColor clearColor]];
+  MKMapView * map = [[MKMapView alloc] init];
   
-  return table;
+//  MKCoordinateRegion region =  MKCoordinateRegionMake(map.userLocation.location.coordinate, changeSpan);
+  CLLocationCoordinate2D coord = {.latitude =  31.238184222049302, .longitude =  121.44425335351512};
+  MKCoordinateSpan span = {.latitudeDelta =  0.01, .longitudeDelta =  0.01};
+  MKCoordinateRegion region = {coord, span};
+  [map setRegion:region];
+  
+  [map setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+  return map;
 }
-
-RCT_EXPORT_VIEW_PROPERTY(cellHeight, NSNumber *)
 
 @end

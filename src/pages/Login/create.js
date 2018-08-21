@@ -7,6 +7,11 @@ import KeyboardDetector from '../../utils/keyboard';
 import {Button} from 'react-native-elements';
 import styled from 'styled-components';
 import {Theme} from '../../utils/color';
+import {Post} from '../../utils/url';
+import {Loading} from '../../components/Loading';
+import Header from '../../components/Header';
+import {EasyTap} from '../../public/EasyTap';
+import {Entypo} from '../../components/Icons';
 
 const Center = styled.TouchableOpacity`
   flex-direction: row;
@@ -14,6 +19,31 @@ const Center = styled.TouchableOpacity`
 `;
 
 export default class CreateAccount extends React.Component {
+  state = {
+    loading: false,
+  };
+
+  async handleLogin(obj) {
+    const {Email, Password, Name} = obj;
+
+    this.setState({
+      loading: true,
+    });
+    const res = await Post({
+      a: 'ur',
+      e: Email,
+      p: Password,
+      n: Name,
+    });
+    this.setState({
+      loading: false,
+    });
+
+    if (res.ret !== 0) {
+      Alert.alert('This user has been create');
+    }
+  }
+
   render() {
     return (
       <KeyboardDetector>
@@ -24,11 +54,28 @@ export default class CreateAccount extends React.Component {
               height: '100%',
             }}>
             <Animatable.View ref={getViewContainerRef}>
-              <View style={{height: '30%'}} />
+              <View style={{height: '30%'}}>
+                <Header
+                  StatusBarStyle={{backgroundColor: '#2D59D9'}}
+                  style={{backgroundColor: '#2D59D9'}}
+                  leftButton={[
+                    <EasyTap
+                      key="1"
+                      onPress={() => this.props.navigation.goBack()}>
+                      <Entypo
+                        size={16}
+                        color="white"
+                        key={0}
+                        name="chevron-thin-left"
+                      />
+                    </EasyTap>,
+                  ]}
+                />
+              </View>
               <View style={{height: '70%', backgroundColor: 'white'}}>
                 <Form
                   onSumit={obj => {
-                    Alert.alert('title', JSON.stringify(obj));
+                    this.handleLogin(obj);
                   }}>
                   {(onChange, onSumit) => (
                     <React.Fragment>
@@ -51,13 +98,17 @@ export default class CreateAccount extends React.Component {
                           By signing up you agree to our terms and condition
                         </Text>
                       </Center>
-                      <Button
-                        buttonStyle={{height: 48, marginTop: 16}}
-                        backgroundColor="#0077FF"
-                        borderRadius={4}
-                        onPress={onSumit}
-                        title="Sign up"
-                      />
+                      {this.state.loading ? (
+                        <Loading />
+                      ) : (
+                        <Button
+                          buttonStyle={{height: 48, marginTop: 16}}
+                          backgroundColor="#0077FF"
+                          borderRadius={4}
+                          onPress={onSumit}
+                          title="Sign up"
+                        />
+                      )}
                       <Center
                         style={{marginTop: 16}}
                         onPress={() => {

@@ -29,7 +29,6 @@ export const CreateFetcher = (
 
           const res = await fetchPromise;
           const json = await res.json();
-          Debugger.log(json.data);
           this.setState({
             fetchData: json.data,
             loading: false,
@@ -80,7 +79,6 @@ export class Fetcher extends React.Component {
 
       const res = await fetchPromise;
       const json = await res.json();
-      Debugger.log(json);
 
       if (this._isMount) {
         // simple cached

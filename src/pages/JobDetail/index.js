@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import styled from 'styled-components';
 import {Entypo} from '../../components/Icons';
 import {EasyTap} from '../../public/EasyTap';
+// import MapView from '../../components/MapView';
 
 const DetailContainer = styled.View`
   border-radius: 4px;
@@ -105,6 +106,7 @@ export default class JobDetail extends React.Component {
 
   render() {
     return (
+      // <MapView style={{flex: 1}} />
       <React.Fragment>
         <Header
           title={<Text style={{opacity: this.state.opacity}}>123</Text>}
@@ -119,6 +121,7 @@ export default class JobDetail extends React.Component {
             </EasyTap>,
           ]}
         />
+
         <PageBase
           update={false}
           onScroll={cc => {

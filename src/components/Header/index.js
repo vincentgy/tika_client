@@ -33,18 +33,18 @@ class Header extends React.Component {
   // <Entypo size={16} color="white" key={0} name="chevron-thin-left" onPress />
 
   render() {
-    const {leftButton, rightButton} = this.props;
+    const {leftButton, rightButton, style, StatusBarStyle} = this.props;
 
     return (
       <React.Fragment>
         {Platform.OS === 'ios' ? (
-          <IOSStatusBar>
+          <IOSStatusBar style={StatusBarStyle}>
             <StatusBar barStyle={'dark-content'} />
           </IOSStatusBar>
         ) : (
           <StatusBar backgroundColor={Theme} />
         )}
-        <HeaderContainer>
+        <HeaderContainer style={style}>
           <FlexContainer>
             {leftButton.map(rb => {
               return rb;
