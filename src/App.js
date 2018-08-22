@@ -2,7 +2,9 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {createStackNavigator} from 'react-navigation';
 import Rluy from './utils/rluy.native';
+import PJ from './controller/postJob';
 import user from './controller/user';
+import filter from './controller/filter';
 
 import {
   NativeModules,
@@ -11,14 +13,12 @@ import {
   PanResponder,
   View,
   StatusBar,
-  AsyncStorage,
 } from 'react-native';
-
 import TabRoot from './router';
-import filter from './controller/filter';
 import {Logger, Debugger} from './utils/logger';
 import CreateAccount from './pages/Login/create';
 import Login from './pages/Login';
+import {connect} from 'react-redux';
 
 // StatusBar.setBarStyle('light-content', true);
 
@@ -28,8 +28,9 @@ YellowBox.ignoreWarnings([
   'Class RCTCxxModule',
 ]);
 
-Rluy.addController(user);
+Rluy.addController(PJ);
 Rluy.addController(filter);
+Rluy.addController(user);
 
 const store = Rluy.run();
 const alert = Alert.alert;
@@ -48,11 +49,10 @@ const LoginStack = createStackNavigator({
   CreateAccount: withoutHeader(CreateAccount),
 });
 
+@connect(state => {
+  return {isLogin: state.user.isLogin};
+})
 class App extends React.Component {
-  state = {
-    isLogin: true,
-  };
-
   getViewContainerRef = node => (this.View = node);
 
   async checkVersion() {
@@ -70,33 +70,20 @@ class App extends React.Component {
     }
   }
 
-  async checkLogin() {
-    const token = await AsyncStorage.getItem('token');
-    if (token !== null) {
-      this.setState({isLogin: true});
-    }
-  }
-
-  LoginDone = () => {
-    this.setState({isLogin: true});
-  };
-
   componentDidMount() {
-    this.checkLogin();
-    // this.checkVersion();
+    this.props.dispatch({type: 'checkLogin'});
   }
 
   render() {
-    if (!this.state.isLogin) return <LoginStack loginDone={this.LoginDone} />;
+    if (this.props.isLogin === 'init-login-props') return null;
+    if (!this.props.isLogin) return <LoginStack loginDone={this.LoginDone} />;
 
     return (
-      <Provider store={store}>
-        <React.Fragment>
-          <StatusBar barStyle="light-content" />
-          <TabRoot />
-          <Logger />
-        </React.Fragment>
-      </Provider>
+      <React.Fragment>
+        <StatusBar barStyle="light-content" />
+        <TabRoot />
+        <Logger />
+      </React.Fragment>
     );
   }
 }
@@ -124,7 +111,9 @@ const DevMenuTrigger = ({children}) => {
 };
 
 export default () => (
-  <DevMenuTrigger>
-    <App />
-  </DevMenuTrigger>
+  <Provider store={store}>
+    <DevMenuTrigger>
+      <App />
+    </DevMenuTrigger>
+  </Provider>
 );

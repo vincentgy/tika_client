@@ -1,5 +1,13 @@
 import React from 'react';
-import {View, StatusBar, Text, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StatusBar,
+  Text,
+  Image,
+  TouchableOpacity,
+  AsyncStorage,
+  Alert,
+} from 'react-native';
 import PageBase from '../../components/PageBase';
 import {Page} from '../../components/PageHOC';
 import styled from 'styled-components';
@@ -7,6 +15,9 @@ import {HEIGHT} from '../../utils/plaform';
 import {Entypo} from '../../components/Icons';
 import {Theme} from '../../utils/color';
 import {IOSBar} from '../../components/StatusBar';
+import {connect} from 'react-redux';
+// import {CreateFetcher, Fetcher} from '../../components/CreateFetcher';
+// import UserManager from '../../manager/userManager';
 
 const ListGroup = ({children}) => {
   return <View style={{marginTop: 8}}>{children}</View>;
@@ -28,7 +39,7 @@ const Cell = styled.TouchableOpacity`
 const CellInside = styled.View`
   height: 56px;
   margin-left: 16px;
-  border-bottom-width: ${props => (props.no ? 0 : 1)};
+  border-bottom-width: ${props => (props.no ? 0 : 0.5)};
   border-bottom-color: ${props =>
     props.no ? 'transparent' : `rgba(120, 120, 120, 0.1)`};
   flex-direction: row;
@@ -50,21 +61,22 @@ const Bref = ({children}) => {
   return <ShortBref>{Child}</ShortBref>;
 };
 
-const SettingCell = ({children, no}) => {
+const SettingCell = ({children, no, onPress}) => {
   return (
-    <Cell>
+    <Cell onPress={onPress}>
       <CellInside no={no}>{children}</CellInside>
     </Cell>
   );
 };
 
-const Profile = () => {
+const Profile = ({onEditProfile}) => {
   return (
     <ProfileContainer>
       <View>
         <Name>Zheng Fang</Name>
         <Bref>have 3 years background of web dev</Bref>
         <TouchableOpacity
+          onPress={onEditProfile}
           activeOpacity={1}
           style={{
             marginTop: 8,
@@ -91,7 +103,29 @@ const Profile = () => {
   );
 };
 
+@connect()
 class Account extends React.Component {
+  async logout() {
+    await AsyncStorage.removeItem('token');
+    this.props.dispatch({type: 'checkLogin'});
+  }
+
+  handleLogout = () => {
+    Alert.alert('Log out', 'Do you really want to log out this account?', [
+      {text: 'No', style: 'cancel', onPress: () => {}},
+      {
+        text: 'Yes',
+        onPress: () => {
+          this.logout();
+        },
+      },
+    ]);
+  };
+
+  handleEditProfile = () => {
+    this.props.navigation.navigate('EditProfile');
+  };
+
   render() {
     return (
       <PageBase
@@ -100,7 +134,7 @@ class Account extends React.Component {
           height: HEIGHT - 44,
         }}>
         <IOSBar barStyle={'dark-content'} color="white" />
-        <Profile />
+        <Profile onEditProfile={this.handleEditProfile} />
         <ListGroup>
           <SettingCell>
             <Text>Favorite</Text>
@@ -113,6 +147,11 @@ class Account extends React.Component {
           </SettingCell>
           <SettingCell no>
             <Text>Private</Text>
+          </SettingCell>
+        </ListGroup>
+        <ListGroup>
+          <SettingCell onPress={this.handleLogout} no>
+            <Text>Log out</Text>
           </SettingCell>
         </ListGroup>
       </PageBase>

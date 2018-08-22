@@ -306,6 +306,7 @@ JSON object,
 ‘ret’, 0 means successful, otherwise failed.
 ‘data’, JSON encoded application list.
 ```
+
 ---
 
 16.Upload Avatar
