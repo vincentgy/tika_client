@@ -50,7 +50,7 @@ const LoginStack = createStackNavigator({
 
 class App extends React.Component {
   state = {
-    isLogin: true,
+    isLogin: false,
   };
 
   getViewContainerRef = node => (this.View = node);
@@ -78,7 +78,7 @@ class App extends React.Component {
   }
 
   LoginDone = () => {
-    this.setState({isLogin: true});
+    this.checkLogin();
   };
 
   componentDidMount() {
@@ -87,7 +87,8 @@ class App extends React.Component {
   }
 
   render() {
-    if (!this.state.isLogin) return <LoginStack loginDone={this.LoginDone} />;
+    if (!this.state.isLogin)
+      return <LoginStack screenProps={{LoginDone: this.LoginDone}} />;
 
     return (
       <Provider store={store}>

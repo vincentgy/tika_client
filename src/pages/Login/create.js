@@ -12,6 +12,7 @@ import {Loading} from '../../components/Loading';
 import Header from '../../components/Header';
 import {EasyTap} from '../../public/EasyTap';
 import {Entypo} from '../../components/Icons';
+import MD5 from 'blueimp-md5';
 
 const Center = styled.TouchableOpacity`
   flex-direction: row;
@@ -32,7 +33,7 @@ export default class CreateAccount extends React.Component {
     const res = await Post({
       a: 'ur',
       e: Email,
-      p: Password,
+      p: MD5(Password, 'timix'),
       n: Name,
     });
     this.setState({

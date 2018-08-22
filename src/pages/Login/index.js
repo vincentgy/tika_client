@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, View, Alert, Text} from 'react-native';
+import {ScrollView, View, Alert, Text, AsyncStorage} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import {Theme} from '../../utils/color';
 import {Post} from '../../utils/url';
 import {Loading} from '../../components/Loading';
+import MD5 from 'blueimp-md5';
 
 const Center = styled.TouchableOpacity`
   flex-direction: row;
@@ -30,7 +31,7 @@ export default class Login extends React.Component {
       const res = await Post({
         a: 'ul',
         e: Email,
-        p: Password,
+        p: MD5(Password, 'timix'),
       });
       this.setState({
         loading: false,
@@ -39,7 +40,9 @@ export default class Login extends React.Component {
       if (res.ret !== 0) {
         Alert.alert('Please enter a correct email or password');
       } else {
-        this.props.loginDone();
+        await AsyncStorage.setItem('token', res.token);
+        this.props.screenProps.LoginDone();
+        // this.props.loginDone();
       }
     } catch (e) {
       Alert.alert('Our server just got some issues');
