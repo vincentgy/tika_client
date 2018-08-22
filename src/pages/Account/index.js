@@ -71,11 +71,11 @@ const SettingCell = ({children, no, onPress}) => {
 
 const Profile = ({onEditProfile}) => {
   return (
-    <FetcherNoCache body={{a: 'gp', user_id: userManager.getToken()}}>
-      {() => (
+    <FetcherNoCache body={{a: 'gp', token: userManager.getToken()}}>
+      {({fetchData}) => (
         <ProfileContainer>
           <View>
-            <Name>Zheng Fang</Name>
+            <Name>{fetchData.data.name}</Name>
             <Bref>have 3 years background of web dev</Bref>
             <TouchableOpacity
               onPress={onEditProfile}
