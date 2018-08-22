@@ -10,12 +10,14 @@ import {Theme} from '../../utils/color';
 import {Post} from '../../utils/url';
 import {Loading} from '../../components/Loading';
 import MD5 from 'blueimp-md5';
+import {connect} from 'react-redux';
 
 const Center = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: center;
 `;
 
+@connect()
 export default class Login extends React.Component {
   state = {
     loading: false,
@@ -41,8 +43,7 @@ export default class Login extends React.Component {
         Alert.alert('Please enter a correct email or password');
       } else {
         await AsyncStorage.setItem('token', res.token);
-        this.props.screenProps.LoginDone();
-        // this.props.loginDone();
+        this.props.dispatch({type: 'checkLogin'});
       }
     } catch (e) {
       Alert.alert('Our server just got some issues');

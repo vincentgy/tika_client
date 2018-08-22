@@ -13,6 +13,7 @@ import Description from './pages/PostJob/description';
 import ResultList from './pages/Search/resultList';
 import Chat from './pages/Chat';
 import JobDetail from './pages/JobDetail';
+import EditProfile from './pages/EditProfile';
 
 const TabRoot = createBottomTabNavigator(
   {
@@ -47,6 +48,7 @@ const HomeStack = createStackNavigator({
   SearchJob: withoutHeader(SearchJob),
   Description: withoutHeader(Description),
   SearchResult: withoutHeader(ResultList),
+  EditProfile: withoutHeader(EditProfile),
 });
 
 export default createSwitchNavigator({

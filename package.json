@@ -55,7 +55,6 @@
   },
   "pre-commit": [
     "format",
-    "lint",
     "gitadd"
   ]
 }

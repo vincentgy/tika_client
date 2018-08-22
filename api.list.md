@@ -306,3 +306,43 @@ JSON object,
 ‘ret’, 0 means successful, otherwise failed.
 ‘data’, JSON encoded application list.
 ```
+
+---
+
+16.Upload Avatar
+
+```bash
+Request,
+http://18.222.175.208/upload.php?token=xxx&c=u&id=3
+
+token:
+client token
+
+c:
+'u': user
+'p': position
+'c': company
+
+id:
+id of the object, and it is user, then no id is needed.
+
+Response,
+JSON object,
+‘ret’, 0 means successful, otherwise failed.
+‘url’, url of the avatar stored on Amazon s3.
+
+
+example:
+
+<!DOCTYPE html>
+<html>
+<body>
+  <!--This example can be used for testing the upload script-->
+  <form action="http://18.222.175.208/upload.php?token=xxxc=u&id=3" method="post" enctype="multipart/form-data">
+    <input type="file" name="fileToUpload"><br>
+    <input type="submit" value="Upload">
+  </form>
+
+</body>
+</html>
+```

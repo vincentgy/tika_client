@@ -1,61 +1,39 @@
-// const payType = [
-//   {id: '1', name: 'one-off'},
-//   {id: '2', name: 'annual'},
-//   {id: '3', name: 'hourly'},
-// ];
-import {Regions, Disctrict} from '../pages/PostJob/area';
+import {AsyncStorage} from 'react-native';
+import UserManager from '../manager/userManager';
 
 export default {
-  name: 'postJob',
+  name: 'user',
   state: {
-    title: 'edit',
-    company: 'edit',
-    type: 'choose',
-    payType: 'one-off',
-    payRange: 'choose',
-    region: 'choose',
-    district: '',
-    location: 'edit',
-    number: 'edit',
-    categories: 'choose',
-    categories_id: null,
-    currentField: '',
-    region_id: '',
-    district_id: '',
-    desc: '',
+    isLogin: 'init-login-props',
   },
   reducers: {
-    mapSome: (state, {payload}) => {
-      return {...state, [state.currentField]: payload};
-    },
-    EditCategoris: (state, {payload}) => {
-      const {name, id} = payload;
-      return {...state, categories: name, categories_id: id};
-    },
-    changeField: (state, {payload}) => {
-      return {...state, currentField: payload};
-    },
-    EditPlace: (state, {payload}) => {
-      const {region, district} = payload;
-      const region_id = Regions.find(i => i.region === region).id;
-      const district_id = Disctrict[region_id].find(i => i.name === district)
-        .id;
-
-      return {...state, region, district, region_id, district_id};
+    mutateUser: (state, {payload}) => {
+      return {...state, [payload.key]: payload.value};
     },
   },
   effects: {
-    *ChangeCurrentField({put}, {payload}) {
-      yield put({
-        type: 'changeField',
-        payload,
-      });
-    },
-    *EditPostJob({put}, {payload}) {
-      yield put({
-        type: 'mapSome',
-        payload,
-      });
+    *checkLogin({put}) {
+      const token = yield AsyncStorage.getItem('token');
+
+      if (token !== null) {
+        UserManager.setToken(token);
+        yield put({
+          type: 'mutateUser',
+          payload: {
+            key: 'isLogin',
+            value: true,
+          },
+        });
+      } else {
+        // 确保用户登出的时候，能回到登录页面
+        yield put({
+          type: 'mutateUser',
+          payload: {
+            key: 'isLogin',
+            value: false,
+          },
+        });
+      }
     },
   },
 };

@@ -68,7 +68,6 @@ export class Fetcher extends React.Component {
 
   async fetcher() {
     try {
-      Debugger.log('发起请求');
       const fetchPromise = fetch(this.props.url, {
         method: 'POST',
         body: JSON.stringify({param: this.props.body}),
@@ -83,6 +82,7 @@ export class Fetcher extends React.Component {
       if (this._isMount) {
         // simple cached
         cache = json;
+        console.log(json);
         this.setState({
           fetchData: json,
           loading: false,
@@ -108,6 +108,68 @@ export class Fetcher extends React.Component {
     } else {
       this.fetcher();
     }
+  }
+
+  componentWillUnmount() {
+    this._isMount = false;
+  }
+
+  render() {
+    const {error, loading, fetchData} = this.state;
+
+    if (loading) {
+      return <Loading />;
+    }
+    return this.props.children({error, loading, fetchData});
+  }
+}
+
+export class FetcherNoCache extends React.Component {
+  state = {
+    error: null,
+    loading: true,
+    fetchData: null,
+  };
+
+  static defaultProps = {
+    body: {},
+    url: 'http://18.222.175.208',
+  };
+
+  async fetcher() {
+    try {
+      const fetchPromise = fetch(this.props.url, {
+        method: 'POST',
+        body: JSON.stringify({param: this.props.body}),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencode',
+        },
+      });
+
+      const res = await fetchPromise;
+      const json = await res.json();
+
+      if (this._isMount) {
+        // simple cached
+        console.log(json);
+        this.setState({
+          fetchData: json,
+          loading: false,
+        });
+      }
+    } catch (e) {
+      if (this._isMount) {
+        this.setState({
+          error: e,
+          loading: false,
+        });
+      }
+    }
+  }
+
+  componentDidMount() {
+    this._isMount = true;
+    this.fetcher();
   }
 
   componentWillUnmount() {
