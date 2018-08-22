@@ -3,6 +3,7 @@
 #### pre 1.0
 
 - [ ] after create account,login directly
+- [ ] Get profile fix
 - [ ] job search page
   - [ ] city location with search
 - [ ] change `type` filter to `two-column selector`

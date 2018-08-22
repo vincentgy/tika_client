@@ -16,8 +16,8 @@ import {Entypo} from '../../components/Icons';
 import {Theme} from '../../utils/color';
 import {IOSBar} from '../../components/StatusBar';
 import {connect} from 'react-redux';
-// import {CreateFetcher, Fetcher} from '../../components/CreateFetcher';
-// import UserManager from '../../manager/userManager';
+import {FetcherNoCache} from '../../components/CreateFetcher';
+import userManager from '../../manager/userManager';
 
 const ListGroup = ({children}) => {
   return <View style={{marginTop: 8}}>{children}</View>;
@@ -71,35 +71,41 @@ const SettingCell = ({children, no, onPress}) => {
 
 const Profile = ({onEditProfile}) => {
   return (
-    <ProfileContainer>
-      <View>
-        <Name>Zheng Fang</Name>
-        <Bref>have 3 years background of web dev</Bref>
-        <TouchableOpacity
-          onPress={onEditProfile}
-          activeOpacity={1}
-          style={{
-            marginTop: 8,
-            maxWidth: 110,
-            padding: 4,
-            flexDirection: 'row',
-            borderRadius: 4,
-            backgroundColor: 'rgba(120,120,120,0.1)',
-          }}>
-          <Entypo name="edit" size={16} color="#abb0b0" />
-          <Text style={{color: '#abb0b0', paddingLeft: 8}}>Edit profile</Text>
-        </TouchableOpacity>
-      </View>
-      <Image
-        source={require('./me.jpeg')}
-        style={{
-          width: 64,
-          height: 64,
-          marginRight: 16,
-          borderRadius: 32,
-        }}
-      />
-    </ProfileContainer>
+    <FetcherNoCache body={{a: 'gp', user_id: userManager.getToken()}}>
+      {() => (
+        <ProfileContainer>
+          <View>
+            <Name>Zheng Fang</Name>
+            <Bref>have 3 years background of web dev</Bref>
+            <TouchableOpacity
+              onPress={onEditProfile}
+              activeOpacity={1}
+              style={{
+                marginTop: 8,
+                maxWidth: 110,
+                padding: 4,
+                flexDirection: 'row',
+                borderRadius: 4,
+                backgroundColor: 'rgba(120,120,120,0.1)',
+              }}>
+              <Entypo name="edit" size={16} color="#abb0b0" />
+              <Text style={{color: '#abb0b0', paddingLeft: 8}}>
+                Edit profile
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Image
+            source={require('./me.jpeg')}
+            style={{
+              width: 64,
+              height: 64,
+              marginRight: 16,
+              borderRadius: 32,
+            }}
+          />
+        </ProfileContainer>
+      )}
+    </FetcherNoCache>
   );
 };
 
