@@ -20,6 +20,7 @@ import {FetcherNoCache} from '../../components/CreateFetcher';
 import userManager from '../../manager/userManager';
 import ImagePicker from 'react-native-image-crop-picker';
 import LocationSelector from '../ModalFilter/location';
+import ActionSheet from 'react-native-actionsheet'; //https://github.com/beefe/react-native-actionsheet
 
 const ListGroup = ({children}) => {
   return <View style={{marginTop: 8}}>{children}</View>;
@@ -71,7 +72,7 @@ const SettingCell = ({children, no, onPress}) => {
   );
 };
 
-const Profile = ({onEditProfile}) => {
+const Profile = ({onEditProfile, onAatarPress}) => {
   return (
     <FetcherNoCache body={{a: 'gp', token: userManager.getToken()}}>
       {({fetchData}) => (
@@ -96,47 +97,10 @@ const Profile = ({onEditProfile}) => {
               </Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              ImagePicker.openPicker({
-                width: 400,
-                height: 400,
-                cropping: true,
-                cropperCircleOverlay: true,
-              })
-                .then(image => {
-                  console.log(image);
-                  let formData = new FormData();
-                  let file = {
-                    uri: image.path,
-                    type: image.mime,
-                    name: 'fileToUpload',
-                  };
-                  formData.append('fileToUpload', file);
-                  fetch(
-                    `http://18.222.175.208/upload.php?token=${userManager.getToken()}&c=u`,
-                    {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'multipart/form-data',
-                      },
-                      body: formData,
-                    }
-                  )
-                    .then(responseData => {
-                      responseData.json().then(res => {
-                        console.log(res);
-                      });
-                    })
-                    .catch(res => {
-                      console.log(res, '上传错误');
-                    });
-                })
-                .catch(e => {});
-            }}>
+          <TouchableOpacity onPress={onAatarPress}>
             <Image
               cache="reload"
-              source={{uri: fetchData.data.avatar}}
+              source={{uri: `${fetchData.data.avatar}?${Math.random()}`}}
               style={{
                 width: 64,
                 height: 64,
@@ -174,6 +138,58 @@ class Account extends React.Component {
     this.props.navigation.navigate('EditProfile');
   };
 
+  showActionSheet = () => {
+    this.ActionSheet.show();
+  };
+
+  Picture = () => {
+    ImagePicker.openPicker({
+      width: 400,
+      height: 400,
+      cropping: true,
+      cropperCircleOverlay: true,
+    })
+      .then(image => {
+        let formData = new FormData();
+        let file = {
+          uri: image.path,
+          type: image.mime,
+          name: 'fileToUpload',
+        };
+        formData.append('fileToUpload', file);
+        fetch(
+          `http://18.222.175.208/upload.php?token=${userManager.getToken()}&c=u`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+            body: formData,
+          }
+        )
+          .then(responseData => {
+            responseData.json().then(res => {
+              console.log(res);
+            });
+          })
+          .catch(res => {
+            console.log(res, '上传错误');
+          });
+      })
+      .catch(e => {});
+  };
+
+  TakePhoto = () => {
+    ImagePicker.openCamera({
+      width: 400,
+      height: 400,
+      cropping: true,
+      cropperCircleOverlay: true,
+    })
+      .then()
+      .catch();
+  };
+
   render() {
     return (
       <PageBase
@@ -182,7 +198,10 @@ class Account extends React.Component {
           height: HEIGHT - 44,
         }}>
         <IOSBar barStyle={'dark-content'} color="white" />
-        <Profile onEditProfile={this.handleEditProfile} />
+        <Profile
+          onEditProfile={this.handleEditProfile}
+          onAatarPress={this.showActionSheet}
+        />
         <ListGroup>
           <SettingCell>
             <Text>Favorite</Text>
@@ -202,6 +221,19 @@ class Account extends React.Component {
             <Text>Log out</Text>
           </SettingCell>
         </ListGroup>
+        <ActionSheet
+          ref={o => (this.ActionSheet = o)}
+          title={'Choose a picture or take a photo'}
+          options={['Picture', 'Take a photo', 'cancel']}
+          cancelButtonIndex={2}
+          onPress={index => {
+            if (index === 0) {
+              this.Picture();
+            } else if (index === 1) {
+              this.TakePhoto();
+            }
+          }}
+        />
       </PageBase>
     );
   }
