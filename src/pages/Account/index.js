@@ -66,7 +66,7 @@ const Bref = ({children}) => {
 
 const SettingCell = ({children, no, onPress}) => {
   return (
-    <Cell onPress={onPress}>
+    <Cell onPress={onPress} activeOpacity={1}>
       <CellInside no={no}>{children}</CellInside>
     </Cell>
   );
@@ -209,14 +209,14 @@ class Account extends React.Component {
           <SettingCell>
             <Text>Help</Text>
           </SettingCell>
-          <SettingCell>
-            <Text>Setting</Text>
-          </SettingCell>
           <SettingCell no>
-            <Text>Private</Text>
+            <Text>Setting</Text>
           </SettingCell>
         </ListGroup>
         <ListGroup>
+          <SettingCell>
+            <Text>Switch role</Text>
+          </SettingCell>
           <SettingCell onPress={this.handleLogout} no>
             <Text>Log out</Text>
           </SettingCell>
