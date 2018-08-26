@@ -34,9 +34,9 @@
                                             moduleName:@"tika"
                                      initialProperties:@{}];
   
-  RCTRootView *r = [[RCTRootView alloc] initWithBridge:_bridge
-                                                   moduleName:@"t"
-                                            initialProperties:@{}];
+//  RCTRootView *r = [[RCTRootView alloc] initWithBridge:_bridge
+//                                                   moduleName:@"t"
+//                                            initialProperties:@{}];
   
   
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];

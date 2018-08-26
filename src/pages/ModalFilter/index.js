@@ -146,8 +146,7 @@ class Filter extends React.Component {
   }
 
   render() {
-    const FilterArray = ['Distance', 'Location', 'Categories', 'Type'];
-    const Distance = ['Whole City', '1 km', '3 km', '5 km', '10 km'];
+    const FilterArray = ['Location', 'Categories', 'Type'];
     return (
       <Toggle>
         {(ctrl, state, filterItem) => (
@@ -156,7 +155,7 @@ class Filter extends React.Component {
               {FilterArray.map((item, index) => (
                 <FilterItem
                   key={index}
-                  style={{width: WIDTH / 4}}
+                  style={{width: WIDTH / FilterArray.length}}
                   onPress={() => ctrl(item)}>
                   {item}
                 </FilterItem>
@@ -174,24 +173,6 @@ class Filter extends React.Component {
                 }}
               />
               <Switch active={filterItem} Item={FilterArray}>
-                <Container
-                  h={248}
-                  defaultState={this.props.distance}
-                  confirm={data => {
-                    this.getDistance(data);
-                    ctrl();
-                  }}>
-                  {(selectFn, currentState) =>
-                    Distance.map((item, index) => (
-                      <SelectItem
-                        key={index}
-                        active={currentState === item}
-                        onPress={() => selectFn(item)}>
-                        {item}
-                      </SelectItem>
-                    ))
-                  }
-                </Container>
                 <Container
                   h={396}
                   confirm={data => {

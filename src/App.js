@@ -72,6 +72,28 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.dispatch({type: 'checkLogin'});
+
+    // ImagePicker.openPicker({
+    //   width: 300,
+    //   height: 400,
+    //   cropping: true,
+    // }).then(image => {
+    //   console.log(image);
+    //   let formData = new FormData();
+    //   let file = {uri: image.path, type: image.mime, name: image.filename};
+    //   formData.append(file);
+    //   fetch('http://18.222.175.208/upload.php?token=xxx&c=u&id=3', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data',
+    //     },
+    //     body: formData,
+    //   }).then(responseData => {
+    //     responseData.json().then(res => {
+    //       console.log(res);
+    //     });
+    //   });
+    // });
   }
 
   render() {

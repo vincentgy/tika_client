@@ -1,13 +1,15 @@
 import React from 'react';
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, Platform} from 'react-native';
 
 import {Regions, Disctrict} from '../PostJob/area';
-import {WIDTH} from '../../utils/plaform';
+import {WIDTH, HEIGHT} from '../../utils/plaform';
 import {Theme} from '../../utils/color';
 import {produce} from 'immer';
 import styled from 'styled-components';
 import SelectItem from '../../public/SelectItem';
-// import MapView from '../JobList/testmap';
+import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
+import {Entypo} from '../../components/Icons';
+import * as Animatable from 'react-native-animatable';
 
 const StyledText = styled.Text`
   color: ${props => (props.active ? Theme : '#8c8c8c')};
@@ -20,123 +22,117 @@ const RegionItem = styled.TouchableOpacity`
   justify-content: space-between;
 `;
 
-/**
- * 用于提升性能
- */
-class RegionItemRC extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    return (
-      this.props.active !== nextProps.active ||
-      this.props.children !== nextProps.children
-    );
-  }
-
-  render() {
-    const {active, onPress} = this.props;
-    return (
-      <RegionItem activeOpacity={1} active={active} onPress={onPress}>
-        <StyledText active={active}>{this.props.children}</StyledText>
-      </RegionItem>
-    );
-  }
-}
+const BlackBlock = styled.TouchableOpacity`
+  background-color: rgba(0, 0, 0, 0.3);
+  width: ${(WIDTH * 2) / 7};
+  height: 100%;
+`;
 
 class LocationSelector extends React.PureComponent {
-  state = {
-    selectedRegion: 'Auckland',
-    currentDisctrict: Disctrict['1'],
-    selectedDisctict: {},
-    deferMount: true,
+  static defaultProps = {
+    onChange: () => {},
   };
 
-  onChange = () => {
-    this.props.onChange &&
-      this.props.onChange({
-        region: this.state.selectedRegion,
-        disctrict: this.state.selectedDisctict,
-      });
+  state = {
+    region: true,
+    Disctrict: null,
+    currentDisctrict: {},
+    currentRegion: '',
   };
 
   componentDidMount() {
-    const {region, disctrict} = this.props;
-    // 快速切换会崩溃,因此这里要判断
-    const selectedRegion = Regions.find(item => item.region === region);
-    if (selectedRegion) {
-      const id = selectedRegion.id;
-      if (id) {
-        this.setState({
-          selectedRegion: region || 'Auckland',
-          currentDisctrict: Disctrict[id],
-          selectedDisctict: disctrict || {},
-          deferMount: false,
-        });
-      }
-    }
+    this.setState({
+      currentDisctrict: this.props.disctrict,
+      currentRegion: this.props.region,
+    });
   }
 
-  onSelectedRegion = Region => {
-    // 快速切换会崩溃,因此这里要判断
-    const selectedRegion = Regions.find(item => item.region === Region);
-    if (selectedRegion) {
-      const id = selectedRegion.id;
-      this.setState(
-        {
-          selectedRegion: Region,
-          currentDisctrict: Disctrict[id],
-          selectedDisctict: {},
-        },
-        () => this.onChange()
-      );
-    }
-  };
-
-  onSelectedDisctict = Disctrict => {
-    // 多选
-    const newState = produce(this.state.selectedDisctict, draft => {
-      if (draft[Disctrict] === true) {
-        draft[Disctrict] = false;
-      } else {
-        draft[Disctrict] = true;
-      }
-    });
-
+  selectRegion = ({id, region}) => {
     this.setState(
       {
-        selectedDisctict: newState,
+        region: false,
+        Disctrict: Disctrict[id],
+        currentRegion: region,
       },
-      () => this.onChange()
+      () => {
+        this.DistrictView.transition(
+          {marginLeft: WIDTH},
+          {marginLeft: 0},
+          240,
+          false
+        );
+      }
     );
   };
 
+  onBackToRegion = () => {
+    this.setState({
+      region: true,
+    });
+  };
+
+  onSelectDistrict = name => {
+    const newState = produce(this.state.currentDisctrict, draft => {
+      if (draft[name] === 1) {
+        draft[name] = 0;
+      } else {
+        draft[name] = 1;
+      }
+    });
+    this.setState({currentDisctrict: newState});
+    this.props.onChange({
+      region: this.state.currentRegion,
+      disctrict: newState,
+    });
+  };
+
+  getDistrictView = node => (this.DistrictView = node);
+  getRegionView = node => (this.RegionView = node);
+
   render() {
-    const Temp = () => (
-      <React.Fragment>
-        <ScrollView style={{width: WIDTH * 0.4, backgroundColor: 'white'}}>
-          {Regions.map(item => (
-            <RegionItemRC
-              active={item.region === this.state.selectedRegion}
-              onPress={() => this.onSelectedRegion(item.region)}
-              key={item.id}>
-              {item.region}
-            </RegionItemRC>
-          ))}
-        </ScrollView>
-        <ScrollView style={{width: WIDTH * 0.6, backgroundColor: '#f8f8f8'}}>
-          {this.state.currentDisctrict.map(item => (
-            <SelectItem
-              active={this.state.selectedDisctict[item.name] === true}
-              key={item.id}
-              onPress={() => this.onSelectedDisctict(item.name)}>
-              {item.name}
-            </SelectItem>
-          ))}
-        </ScrollView>
-      </React.Fragment>
-    );
     return (
-      <View style={{flexDirection: 'row', height: 350}}>
-        {this.state.deferMount ? null : <Temp />}
-        {/* <MapView style={{flex: 1}} /> */}
+      <View style={{width: WIDTH, height: 350}}>
+        <ScrollView>
+          <Animatable.View ref={this.getRegionView}>
+            {Regions.map(i => (
+              <RegionItem onPress={() => this.selectRegion(i)} key={i.id}>
+                <StyledText>{i.region}</StyledText>
+                <Entypo
+                  size={12}
+                  key={0}
+                  name="chevron-thin-right"
+                  color="#8c8c8c"
+                />
+              </RegionItem>
+            ))}
+          </Animatable.View>
+        </ScrollView>
+        {this.state.region ? null : (
+          <View style={{flex: 1, flexDirection: 'row', position: 'absolute'}}>
+            <BlackBlock onPress={this.onBackToRegion} activeOpacity={1} />
+            <ScrollView
+              style={{
+                height: 350,
+                width: WIDTH,
+                backgroundColor: 'white',
+              }}>
+              <Animatable.View
+                ref={this.getDistrictView}
+                style={{backgroundColor: 'white'}}>
+                {this.state.Disctrict.map(i => (
+                  <SelectItem
+                    onPress={() => this.onSelectDistrict(i.name)}
+                    key={i.name}
+                    active={
+                      this.state.currentDisctrict[i.name] === 1 ? true : false
+                    }>
+                    {i.name}
+                  </SelectItem>
+                ))}
+              </Animatable.View>
+            </ScrollView>
+          </View>
+        )}
       </View>
     );
   }

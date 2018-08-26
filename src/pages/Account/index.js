@@ -18,6 +18,8 @@ import {IOSBar} from '../../components/StatusBar';
 import {connect} from 'react-redux';
 import {FetcherNoCache} from '../../components/CreateFetcher';
 import userManager from '../../manager/userManager';
+import ImagePicker from 'react-native-image-crop-picker';
+import LocationSelector from '../ModalFilter/location';
 
 const ListGroup = ({children}) => {
   return <View style={{marginTop: 8}}>{children}</View>;
@@ -94,15 +96,55 @@ const Profile = ({onEditProfile}) => {
               </Text>
             </TouchableOpacity>
           </View>
-          <Image
-            source={require('./me.jpeg')}
-            style={{
-              width: 64,
-              height: 64,
-              marginRight: 16,
-              borderRadius: 32,
-            }}
-          />
+          <TouchableOpacity
+            onPress={() => {
+              ImagePicker.openPicker({
+                width: 400,
+                height: 400,
+                cropping: true,
+                cropperCircleOverlay: true,
+              })
+                .then(image => {
+                  console.log(image);
+                  let formData = new FormData();
+                  let file = {
+                    uri: image.path,
+                    type: image.mime,
+                    name: 'fileToUpload',
+                  };
+                  formData.append('fileToUpload', file);
+                  fetch(
+                    `http://18.222.175.208/upload.php?token=${userManager.getToken()}&c=u`,
+                    {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'multipart/form-data',
+                      },
+                      body: formData,
+                    }
+                  )
+                    .then(responseData => {
+                      responseData.json().then(res => {
+                        console.log(res);
+                      });
+                    })
+                    .catch(res => {
+                      console.log(res, '上传错误');
+                    });
+                })
+                .catch(e => {});
+            }}>
+            <Image
+              cache="reload"
+              source={{uri: fetchData.data.avatar}}
+              style={{
+                width: 64,
+                height: 64,
+                marginRight: 16,
+                borderRadius: 32,
+              }}
+            />
+          </TouchableOpacity>
         </ProfileContainer>
       )}
     </FetcherNoCache>

@@ -42,6 +42,9 @@ export default class CreateAccount extends React.Component {
 
     if (res.ret !== 0) {
       Alert.alert('This user has been create');
+    } else {
+      this.props.navigation.goBack();
+      Alert.alert('done!');
     }
   }
 
