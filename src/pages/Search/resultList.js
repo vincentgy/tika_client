@@ -23,7 +23,7 @@ const List = props => {
       {...props}
       leftButton={[
         <EasyTap key="1" onPress={() => props.navigation.goBack()}>
-          <Entypo size={16} color="white" key={0} name="chevron-thin-left" />
+          <Entypo size={16} color="#333333" key={0} name="chevron-thin-left" />
         </EasyTap>,
       ]}
     />

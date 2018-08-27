@@ -3,21 +3,39 @@
 
     <item
         is-multidex="false"
-        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.android.support/support-compat/27.1.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
-        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_46d3e5fef344beb437ca4d2250886e3118dc1746.jar" />
+        revision="27.0.3"
+        sha1="3d46095629eedbd5b79b4d129428fc499473a73b">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-27.1.0_6466ed1422be7c1e10b929091ed691b38e81033e.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/tika/react-native-spinkit/unspecified/jars/classes.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_e400cbc50ef90600a8d248c1be013e3498644ef8.jar" />
+        revision="27.0.3"
+        sha1="76a143f800dbb448450ea9bd728cc3ff5fe7d0e6">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/tika-react-native-spinkit-unspecified_65f5c6082da4173cbdaf4a72432e76c2105d81c8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/jars/libs/infer-annotations-4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_336c230df67e2dbf0ceba2fb0048f4612a01aa69.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.github.ybq/Android-SpinKit/1.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="21c0f1b0de29bfe601028757c5cb125c343f5164">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.github.ybq-Android-SpinKit-1.1.0_487317ea09d143e482ae0a88c29f3e0fdfa897f4.jar" />
     </item>
     <item
         is-multidex="false"
@@ -39,21 +57,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
-        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_b765ba89c69d99363e01a2a336008e46268ff836.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
         <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_f6e2c633620d4e507a6f08efabd481e88e2d114e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/27.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="705378853cb9f264315d7a0a8edb6743d72efe9b">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-27.1.0_90ef90cde762a6cefd200679733d883b11283ffd.jar" />
     </item>
     <item
         is-multidex="false"
@@ -66,21 +84,57 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.android.support/support-fragment/27.1.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
-        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_cf433392d015cc29a138b2aa72243791645c3fa2.jar" />
+        revision="27.0.3"
+        sha1="fe6c8fbfeeb1454c3eb605c9b66662991681fd55">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-27.1.0_99687e04cd351167bc7803cf3fe8fc55f8b22492.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/android.arch.core/common/1.1.0/8007981f7d7540d89cd18471b8e5dcd2b4f99167/common-1.1.0.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_68bb41f505aa36cb92d1fbda20138853262047bd.jar" />
+        revision="27.0.3"
+        sha1="8007981f7d7540d89cd18471b8e5dcd2b4f99167">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/common-1.1.0_e80b145a6498dac520caad59f4cf80b2d92c740a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_74296ddff5959ec13b4a2745c99a82613d88e11f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.3.0_5b67eb27da32a7cc5dc919fa4db597d50961ffb8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/android.arch.lifecycle/runtime/1.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="e2bbe48deed35056023eed2cdc0cc92e5c7d3617">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/android.arch.lifecycle-runtime-1.1.0_33317ff531de88595bd70f67613103232a4c2253.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/27.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="5c66801c7ac6def4ffef7859925b12ce7940438e">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-27.1.0_fe50b114549f2bd9bd3d0c4a99fc99be9094283d.jar" />
     </item>
     <item
         is-multidex="false"
@@ -93,30 +147,30 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/jars/libs/infer-annotations-4.0.jar"
+        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
-        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_336c230df67e2dbf0ceba2fb0048f4612a01aa69.jar" />
+        revision="27.0.3"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_8a08278621dd62eb84cf84f94da65a2e868aa66f.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
+        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
-        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_8b61882f4b9721145aedfcb838393fb317809b3c.jar" />
+        revision="27.0.3"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_46d3e5fef344beb437ca4d2250886e3118dc1746.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.3.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_36b66ae2f2597911ede86f19f8cfba67c04098f9.jar" />
+        revision="27.0.3"
+        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_2ef39f5355686d44c9955c10e43746a1205d5968.jar" />
     </item>
     <item
         is-multidex="false"
@@ -129,12 +183,39 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/Floveluy/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/android.arch.lifecycle/viewmodel/1.1.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
-        revision="23.0.1"
-        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1_cf2f06617760b7bfb2c4e6f50fa774f60e777759.jar" />
+        revision="27.0.3"
+        sha1="1fd3ceac7f415975323d52c6c6057db409a907f6">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/android.arch.lifecycle-viewmodel-1.1.0_12076c8528751a2e9711a68d4674e15413962537.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/android.arch.lifecycle/livedata-core/1.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="8a9fd7c97f1d13f97f3b52f9d2e54cd857d5acf9">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/android.arch.lifecycle-livedata-core-1.1.0_d41fbf56e5937d7ee85a44302612d2ae0bbaf869.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_b60bcfc57704bc8294699b46801e18d9c2fc1bce.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/com.android.support/support-annotations/27.1.0/39ded76b5e1ce1c5b2688e1d25cdc20ecee32007/support-annotations-27.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="39ded76b5e1ce1c5b2688e1d25cdc20ecee32007">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/support-annotations-27.1.0_29159f152e8cdd363e069e8b9dbc5881bff74a08.jar" />
     </item>
     <item
         is-multidex="false"
@@ -156,24 +237,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/tika/react-native-spinkit/unspecified/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="76a143f800dbb448450ea9bd728cc3ff5fe7d0e6">
-        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/tika-react-native-spinkit-unspecified_65f5c6082da4173cbdaf4a72432e76c2105d81c8.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
-        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_e84e542f67094422552e6981173646f8529a709c.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.github.ybq/Android-SpinKit/1.1.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
@@ -183,12 +246,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_cf433392d015cc29a138b2aa72243791645c3fa2.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.3.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
         <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_2ef39f5355686d44c9955c10e43746a1205d5968.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_8b61882f4b9721145aedfcb838393fb317809b3c.jar" />
     </item>
     <item
         is-multidex="false"
@@ -207,6 +288,222 @@
         revision="23.0.1"
         sha1="8f615bca00639150c9eb6175d4b5471193f70794">
         <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_562302b6ae96bec806fafff163250a04e0370f6e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/io.reactivex.rxjava2/rxjava/2.1.0/2fdf84dedcaaeabb9d70cde9dbb8aad4eccb80a1/rxjava-2.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="2fdf84dedcaaeabb9d70cde9dbb8aad4eccb80a1">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/rxjava-2.1.0_1b1c7180a8b8e6599a71f8a8dec345406e2355f8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/android.arch.lifecycle/common/1.1.0/edf3f7bfb84a7521d0599efa3b0113a0ee90f85/common-1.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="0edf3f7bfb84a7521d0599efa3b0113a0ee90f85">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/common-1.1.0_32e5433637a33e4e7ce75b11b8036bb389ec5e11.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_46d3e5fef344beb437ca4d2250886e3118dc1746.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.github.yalantis/ucrop/2.2.2-native/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="3bed41dc3164f618b7c22f37116f60b2017046e7">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.github.yalantis-ucrop-2.2.2-native_ba8551fda3b8ae2c5c38ad96a52faa186c551bca.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_e84e542f67094422552e6981173646f8529a709c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_cf433392d015cc29a138b2aa72243791645c3fa2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.3.0_8f01c55822fe84c5d16e09c5b201464699accf46.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_f6e2c633620d4e507a6f08efabd481e88e2d114e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/jars/libs/infer-annotations-4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_336c230df67e2dbf0ceba2fb0048f4612a01aa69.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_8b61882f4b9721145aedfcb838393fb317809b3c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/org.reactivestreams/reactive-streams/1.0.0/14b8c877d98005ba3941c9257cfe09f6ed0e0d74/reactive-streams-1.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="14b8c877d98005ba3941c9257cfe09f6ed0e0d74">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/reactive-streams-1.0.0_e447c84d54aa27202b620189e576ba756819e53b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.8.1/4d060ca3190df0eda4dc13415532a12e15ca5f11/okhttp-3.8.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="4d060ca3190df0eda4dc13415532a12e15ca5f11">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/okhttp-3.8.1_6b9f9bf945c0399607a4d8c83e8b80843a8b9682.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/27.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="6f209b73a488f358673f39317df394bd7a99c05e">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-27.1.0_98fc8998f0303eb9e25dee51362818f99eb46e36.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_562302b6ae96bec806fafff163250a04e0370f6e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/27.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="755c70a5a4e439030f67311dbafaa67b111377a6">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-27.1.0_e373a41027ecaa2e36410756421b29578b443f96.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/android.arch.core/runtime/1.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="71d380aeac037e63bab7bda2ba211777e16a2f42">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/android.arch.core-runtime-1.1.0_c27847d5d39d7627403c27274abcb8aeb08c1775.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/27.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="9a2ea9818b2f556b6663c0e7376bd664ee6c7550">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-27.1.0_7688620ac388ebde5585794d01717a10c52f30ea.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/tika/react-native-spinkit/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="76a143f800dbb448450ea9bd728cc3ff5fe7d0e6">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/tika-react-native-spinkit-unspecified_65f5c6082da4173cbdaf4a72432e76c2105d81c8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_e84e542f67094422552e6981173646f8529a709c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.6.0/3f9b16b774f2c36cfd86dd2053d0b3059531dacc/okhttp-urlconnection-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_d9e8c09b4619a582f7faab3ac3bf82e462ee3a40.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/tika/react-native-image-crop-picker/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="a432bf13b1a75796fa9946676c1d450dd98c77a1">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/tika-react-native-image-crop-picker-unspecified_cb430a0c07eb55d8307f2f9259feed3530265206.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_453e50245eecc22d7860831f54084fd7b7479057.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="e31331bdf6b5952badadbfc171f04b95c55d3b16">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.55.4_178ddaf0f08b6784e54092360831efa2d7d8c8e9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/exploded-aar/id.zelory/compressor/2.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="27.0.3"
+        sha1="6b1555196d65ffa1174f6f49efb2f278905f537a">
+        <dex dex="/Users/Floveluy/Desktop/tika/android/app/build/intermediates/pre-dexed/debug/id.zelory-compressor-2.1.0_993207be140238fc0e74a28fc94a08ab3f64a7ba.jar" />
     </item>
 
 </items>

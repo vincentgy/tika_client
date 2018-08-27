@@ -29,7 +29,7 @@ export default {
   state: {
     distance: 'Whole City',
     jobType: {jobType: 0, payRange: {}},
-    location: {region: 'Auckland', disctrict: {}},
+    location: {region: '', disctrict: {}},
     categories: {},
     list: new DataProvider((r1, r2) => {
       return r1 !== r2;
@@ -125,7 +125,9 @@ export default {
 
         const region = filter.location.region;
 
-        const regionId = Regions.find(i => i.region === region).id;
+        const regionId =
+          Regions.find(i => i.region === region) &&
+          Regions.find(i => i.region === region).id;
 
         const dList = [];
         const disctrictList = Object.keys(filter.location.disctrict).forEach(
@@ -150,11 +152,15 @@ export default {
         // Debugger.log(disctrictList);
         const url = 'http://18.222.175.208';
 
+        const makeBody = (bool, key, value) => {
+          if (bool) {
+            body.query[key] = value;
+          }
+        };
+
         const body = {
           a: 'sj',
           query: {
-            region_id: regionId,
-            district_ids: dList,
             // minimum_pay: 0,
             // maximum_pay: 0,
           },
@@ -163,11 +169,8 @@ export default {
             longitude: position.longitude,
           },
         };
-        const makeBody = (bool, key, value) => {
-          if (bool) {
-            body.query[key] = value;
-          }
-        };
+        makeBody(regionId, 'region_id', regionId);
+        makeBody(dList.length > 0, 'district_ids', dList);
 
         makeBody(distance && distance !== 'Whole City', 'distance', distance);
         makeBody(categories.length > 0, 'category_ids', categories);
@@ -176,8 +179,6 @@ export default {
           'type',
           filter.jobType.jobType
         );
-
-        console.log(body);
 
         const res = yield call(fetch, url, {
           method: 'POST',

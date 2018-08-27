@@ -130,7 +130,7 @@ export default class JobList extends React.Component {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <Text>HowManyPosition: {1}</Text>
+          <Text>{parseInt(data.distance)} km</Text>
           <Entypo size={12} key={0} name="chevron-thin-right" color="#2D59D9" />
         </View>
       </TouchableOpacity>
