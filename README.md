@@ -2,6 +2,7 @@
 
 #### pre 1.0
 
+- [ ] job type recreate
 - [ ] after create account,login directly
 - [ ] Get profile fix
 - [ ] job search page
