@@ -124,16 +124,16 @@ export default {
         const distance = DISTANCE_TYPE[filter.distance];
 
         const region = filter.location.region;
+
         const regionId = Regions.find(i => i.region === region).id;
 
-        const disctrictList = Object.keys(filter.location.disctrict).map(
+        const dList = [];
+        const disctrictList = Object.keys(filter.location.disctrict).forEach(
           name => {
-            return Disctrict[regionId]
-              .filter(i => {
-                if (i.name === name && filter.location.disctrict[name] === true)
-                  return i;
-              })
-              .map(i => i.id);
+            Disctrict[regionId].forEach(i => {
+              if (i.name === name && filter.location.disctrict[name] === 1)
+                dList.push(i.id);
+            });
           }
         );
 
@@ -147,7 +147,6 @@ export default {
           });
 
         const position = yield getPosition();
-        console.log(position);
         // Debugger.log(disctrictList);
         const url = 'http://18.222.175.208';
 
@@ -155,7 +154,7 @@ export default {
           a: 'sj',
           query: {
             region_id: regionId,
-            district_ids: disctrictList[0],
+            district_ids: dList,
             // minimum_pay: 0,
             // maximum_pay: 0,
           },
@@ -177,6 +176,9 @@ export default {
           'type',
           filter.jobType.jobType
         );
+
+        console.log(body);
+
         const res = yield call(fetch, url, {
           method: 'POST',
           body: JSON.stringify({param: body}),

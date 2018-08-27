@@ -42,6 +42,7 @@ const List = props => {
 };
 
 const mapState = state => {
+  console.log(state.filter.list);
   return {
     loading: state.filter.loading,
     list: state.filter.list,

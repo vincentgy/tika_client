@@ -37,8 +37,14 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Timix wants your Camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Timix wants your Microphone</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Timix wants your Photo</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

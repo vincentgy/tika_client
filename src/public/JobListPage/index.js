@@ -114,7 +114,9 @@ export default class JobList extends React.Component {
                   {data.location}
                 </Text>
               </View>
-              <Text style={{fontWeight: '700', color: Theme}}>10k-20k</Text>
+              <Text style={{fontWeight: '700', color: Theme}}>
+                {data.minimum_pay / 1000}k-{data.maximum_pay / 1000}k
+              </Text>
             </View>
           </View>
           <Text>{data.title}</Text>
