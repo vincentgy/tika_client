@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Ionicons} from '../../components/Icons';
+import {Ionicons, MaterialCommunityIcons} from '../../components/Icons';
 import {Theme} from '../../utils/color';
 
 const RegionItem = styled.TouchableOpacity`
@@ -25,7 +25,14 @@ export default ({onPress, active, children}) => {
           name="ios-checkmark-circle"
           color={Theme}
         />
-      ) : null}
+      ) : (
+        <MaterialCommunityIcons
+          size={14}
+          style={{marginRight: 4}}
+          name="checkbox-blank-circle-outline"
+          color="#abb0b0"
+        />
+      )}
     </RegionItem>
   );
 };

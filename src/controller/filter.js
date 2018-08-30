@@ -6,6 +6,7 @@ const getPosition = () =>
   new Promise((resovle, reject) => {
     navigator.geolocation.getCurrentPosition(
       res => {
+        console.log(res);
         resovle({
           latitude: res.coords.latitude,
           longitude: res.coords.longitude,
@@ -13,7 +14,8 @@ const getPosition = () =>
       },
       () => {
         reject('fail');
-      }
+      },
+      {enableHighAccuracy: true, timeout: 10000, maximumAge: 3000}
     );
   });
 

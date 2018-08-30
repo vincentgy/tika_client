@@ -14,7 +14,7 @@ const HeaderContainer = styled.View`
   height: 48px;
   background-color: white;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -44,19 +44,7 @@ class Header extends React.Component {
         ) : (
           <StatusBar backgroundColor={Theme} />
         )}
-        <HeaderContainer style={style}>
-          <FlexContainer>
-            {leftButton.map(rb => {
-              return rb;
-            })}
-          </FlexContainer>
-          {this.props.title}
-          <FlexContainer>
-            {rightButton.map(rb => {
-              return rb;
-            })}
-          </FlexContainer>
-        </HeaderContainer>
+        <HeaderContainer>{this.props.title}</HeaderContainer>
       </React.Fragment>
     );
   }

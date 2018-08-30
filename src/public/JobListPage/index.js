@@ -150,6 +150,7 @@ export default class JobList extends React.Component {
         <Header
           leftButton={this.props.leftButton}
           rightButton={this.props.rightButton}
+          title={this.props.title}
         />
         <Filter componentDidMount={this.props.componentDidMount} />
         {/* {size === 0 ? <Text>there is no data</Text> : null} */}
