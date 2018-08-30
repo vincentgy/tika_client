@@ -17,22 +17,35 @@ const getPosition = () =>
   });
 
 export class NetworkManager {
-  async searchByFilter(regionId, districtIds, categoriesIds) {
+  async searchByFilter(regionId, districtIds, categoriesIds, jobTypeId) {
+    console.log({regionId, districtIds, categoriesIds, jobTypeId})
     const distIds = Object.keys(districtIds);
     const cateIds = Object.keys(categoriesIds).filter(key => {
       if (categoriesIds[key] !== 0) return key;
     });
     const position = await getPosition();
 
+    
+    const query = {
+      region_id: regionId,
+      district_ids: distIds,
+      category_ids: cateIds,
+      type: jobTypeId,
+      // minimum_pay: 0,
+      // maximum_pay: 0,
+    };
+
+    Object.keys(query).forEach(key => {
+      if (query[key].length === 0 || query[key] < 0 || query[key] === '0') {
+        delete query[key];
+      }
+    });
+
+    console.log(query)
+
     const body = {
       a: 'sj',
-      query: {
-        region_id: regionId,
-        district_ids: distIds,
-        category_ids: cateIds,
-        // minimum_pay: 0,
-        // maximum_pay: 0,
-      },
+      query: query,
       location: {
         latitude: position.latitude,
         longitude: position.longitude,

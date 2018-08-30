@@ -61,47 +61,53 @@ class Filter extends React.Component {
     });
     const network = new NetworkManager();
     const s = getStore();
+
     Put(state => {
       state.job.loading = true;
     });
-    const json = await network.searchByFilter(s.regionId, s.districtIds,s.categoriesIds);
+    const json = await network.searchByFilter(
+      s.regionId,
+      s.districtIds,
+      s.categoriesIds,
+      s.jobTypeId
+    );
     Put(state => {
       state.job.list = s.job.list.cloneWithRows(json.data);
       state.job.loading = false;
     });
   }
 
+  componentDidMount() {
+    this.StartToFetcher();
+  }
+
   render() {
     return (
-      <View style={{padding: 8, backgroundColor: 'white'}}>
+      <View style={{padding: 8, backgroundColor: '#096dd9'}}>
         <SegmentedControlTab
-          tabTextStyle={{color: '#333'}}
-          tabStyle={{borderColor: '#333'}}
+          tabTextStyle={{color: 'white'}}
+          tabStyle={{borderColor: 'white', backgroundColor: '#096dd9'}}
           activeTabStyle={{backgroundColor: '#333'}}
           values={['Location', 'Job Category', 'Job Type']}
           selectedIndex={-1}
           onTabPress={this.handleOpen}
         />
         <Modal animationType="none" visible={this.state.modalOpen} transparent>
-          <TouchableOpacity
-            activeOpacity={1}
-            // onPress={this.handleClose}
+          <View
             style={{
-              height: HEIGHT,
-              width: WIDTH,
-              backgroundColor: 'rgba(120,120,120,0.4)',
-            }}>
-            <View
-              style={{
-                backgroundColor: 'white',
-                marginTop: 48 + 20,
-              }}>
-              <FilterTab
-                segmentIndex={this.state.selectedIndex}
-                onDone={() => this.StartToFetcher()}
-              />
-            </View>
-          </TouchableOpacity>
+              backgroundColor: 'transparent',
+              height: 48 + 20,
+            }}
+          />
+          <FilterTab
+            segmentIndex={this.state.selectedIndex}
+            onDone={() => this.StartToFetcher()}
+          />
+          <TouchableOpacity
+            onPress={this.handleClose}
+            activeOpacity={1}
+            style={{height: '100%', backgroundColor: 'rgba(0,0,0,0.2)'}}
+          />
         </Modal>
       </View>
     );

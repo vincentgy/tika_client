@@ -16,6 +16,8 @@ const FlexBox = styled.TouchableOpacity`
   flex-direction: row;
   width: ${WIDTH / 2};
   height: 40px;
+  border-bottom-color: rgba(120, 120, 120, 0.1);
+  border-bottom-width: 0.5px;
 `;
 
 const TableCell = styled.TouchableOpacity`
@@ -36,13 +38,18 @@ const BackButton = styled.TouchableOpacity`
   height: 24px;
   flex-direction: row;
   z-index: 1000;
-  margin-top: 2px;
+  margin-top: 4px;
   margin-left: 8px;
 `;
 
 const Category = Auto(state => ({
   categories: state.categories,
   categoriesIds: state.categoriesIds,
+}));
+
+const JobType = Auto(state => ({
+  jobType: state.jobType,
+  jobTypeIds: state.jobTypeId,
 }));
 
 export class FilterTab extends React.Component {
@@ -85,6 +92,9 @@ export class FilterTab extends React.Component {
 
   componentDidMount() {
     this.Container.transition({height: 0}, {height: 380});
+    if (this.District) {
+      this.District.transition({height: 0}, {height: 316});
+    }
   }
 
   handleSelectCate = i => {
@@ -127,6 +137,11 @@ export class FilterTab extends React.Component {
       }
     });
   };
+  handleSelectJobType = i => {
+    Put(state => {
+      state.jobTypeId = i;
+    });
+  };
 
   renderTab = () => {
     const index = this.state.selectedIndex;
@@ -136,14 +151,27 @@ export class FilterTab extends React.Component {
         <Ctx>
           {store => (
             <React.Fragment>
-              <BackButton onPress={this.handleGoBakc}>
-                <Entypo size={16} color="#40a9ff" name="chevron-thin-left" />
-                <Text
-                  style={{fontWeight: '700', marginLeft: 8, color: '#40a9ff'}}>
-                  back
-                </Text>
-              </BackButton>
-              <View style={{width: WIDTH, height: 24}}>
+              {store.regionId < 0 ? null : (
+                <BackButton onPress={this.handleGoBakc}>
+                  <Entypo size={16} color="#40a9ff" name="chevron-thin-left" />
+                  <Text
+                    style={{
+                      fontWeight: '700',
+                      marginLeft: 8,
+                      color: '#40a9ff',
+                    }}>
+                    back
+                  </Text>
+                </BackButton>
+              )}
+              <View
+                style={{
+                  width: WIDTH,
+                  height: 24,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
                 <Text style={{fontWeight: '700', textAlign: 'center'}}>
                   {this.state.selectedRegion}
                 </Text>
@@ -195,7 +223,20 @@ export class FilterTab extends React.Component {
           ))}
         </ScrollView>
       )),
-      2: null,
+      2: JobType(state => (
+        <View style={{height: 340}}>
+          {Object.keys(state.jobType).map((i, idx) => (
+            <SelectItem
+              key={idx}
+              active={state.jobTypeIds === i}
+              onPress={() => this.handleSelectJobType(i)}>
+              <Text style={{color: '#333', width: WIDTH}}>
+                {state.jobType[i]}
+              </Text>
+            </SelectItem>
+          ))}
+        </View>
+      )),
     };
 
     return Tabs[index];
@@ -205,15 +246,18 @@ export class FilterTab extends React.Component {
     return (
       <View>
         <SegmentedControlTab
-          tabsContainerStyle={{padding: 8}}
-          tabTextStyle={{color: '#333'}}
-          tabStyle={{borderColor: '#333'}}
-          activeTabStyle={{backgroundColor: '#333'}}
+          tabsContainerStyle={{padding: 8, backgroundColor: '#096dd9'}}
+          tabTextStyle={{color: 'white'}}
+          tabStyle={{borderColor: 'white', backgroundColor: '#096dd9'}}
+          activeTabTextStyle={{color: '#096dd9'}}
+          activeTabStyle={{backgroundColor: 'white'}}
           values={['Location', 'Job Category', 'Job Type']}
           selectedIndex={this.state.selectedIndex}
           onTabPress={this.handleIndexChange}
         />
-        <Animatable.View style={{width: WIDTH}} ref={this.getContainer}>
+        <Animatable.View
+          style={{width: WIDTH, backgroundColor: 'white'}}
+          ref={this.getContainer}>
           <this.renderTab />
           <View
             style={{
