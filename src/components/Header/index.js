@@ -9,14 +9,14 @@ import {WIDTH} from '../../utils/plaform';
 
 const IOSStatusBar = styled.View`
   height: 20px;
-  background-color: white;
+  background-color: #096dd9;
 `;
 
 const HeaderContainer = styled.View`
   height: 48px;
-  background-color: white;
+  background-color: #096dd9;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -40,23 +40,19 @@ class Header extends React.Component {
       <React.Fragment>
         {Platform.OS === 'ios' ? (
           <IOSStatusBar style={StatusBarStyle}>
-            <StatusBar barStyle={'dark-content'} />
+            <StatusBar barStyle={'light-content'} />
           </IOSStatusBar>
         ) : (
           <StatusBar backgroundColor={Theme} />
         )}
-        <LinearGradient
-          style={{
-            height: 48,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 0}}
-          colors={['#6f86d6', '#667eea']}>
+
+        <HeaderContainer>
+          {this.props.children}
           {this.props.title}
-        </LinearGradient>
+        </HeaderContainer>
+        <View style={{position: 'absolute', top: 24, right: 0}}>
+          {this.props.rightButton}
+        </View>
       </React.Fragment>
     );
   }

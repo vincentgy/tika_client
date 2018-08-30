@@ -5,6 +5,7 @@ import {
   Modal,
   ScrollView,
   Platform,
+  Text,
 } from 'react-native';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
 import Toggle from '../../components/Abstract/Toggle';
@@ -18,39 +19,97 @@ import SelectItem from '../../public/SelectItem';
 import {connect} from 'react-redux';
 import {produce} from 'immer';
 import SegmentedControlTab from 'react-native-segmented-control-tab'; //https://github.com/kirankalyan5/react-native-segmented-control-tab#props
-import LinearGradient from 'react-native-linear-gradient';
+import {FilterTab} from './filtertab';
+import {Regions} from '../PostJob/area';
+import {NetworkManager} from '../../manager/networkManager';
+import {Put, getStore} from '../../store';
 
 class Filter extends React.Component {
   constructor() {
     super();
     this.state = {
-      selectedIndex: -1,
+      selectedIndex: 0,
+      modalOpen: false,
     };
   }
 
   handleIndexChange = index => {
     this.setState({
-      ...this.state,
       selectedIndex: index,
     });
   };
+
+  handleOpen = index => {
+    this.setState({
+      selectedIndex: index,
+      modalOpen: true,
+    });
+  };
+  handleClose = () => {
+    this.setState({
+      selectedIndex: 0,
+      modalOpen: false,
+    });
+  };
+
+  /**
+   * 网络请求
+   */
+  async StartToFetcher() {
+    this.setState({
+      modalOpen: false,
+    });
+    const network = new NetworkManager();
+    const s = getStore();
+
+    Put(state => {
+      state.job.loading = true;
+    });
+    const json = await network.searchByFilter(
+      s.regionId,
+      s.districtIds,
+      s.categoriesIds,
+      s.jobTypeId
+    );
+    Put(state => {
+      state.job.list = s.job.list.cloneWithRows(json.data);
+      state.job.loading = false;
+    });
+  }
+
+  componentDidMount() {
+    this.StartToFetcher();
+  }
+
   render() {
     return (
-      <LinearGradient
-        start={{x: 0, y: 0}}
-        end={{x: 1, y: 0}}
-        colors={['#6f86d6', '#667eea']}
-        style={{padding: 8, backgroundColor: 'white'}}>
+      <View style={{padding: 8, backgroundColor: '#096dd9'}}>
         <SegmentedControlTab
           tabTextStyle={{color: 'white'}}
-          tabStyle={{borderColor: 'white', backgroundColor: 'transparent'}}
-          activeTabTextStyle={{color: '#667eea'}}
-          activeTabStyle={{backgroundColor: 'white'}}
+          tabStyle={{borderColor: 'white', backgroundColor: '#096dd9'}}
+          activeTabStyle={{backgroundColor: '#333'}}
           values={['Location', 'Job Category', 'Job Type']}
-          selectedIndex={this.state.selectedIndex}
-          onTabPress={this.handleIndexChange}
+          selectedIndex={-1}
+          onTabPress={this.handleOpen}
         />
-      </LinearGradient>
+        <Modal animationType="none" visible={this.state.modalOpen} transparent>
+          <View
+            style={{
+              backgroundColor: 'transparent',
+              height: 48 + 20,
+            }}
+          />
+          <FilterTab
+            segmentIndex={this.state.selectedIndex}
+            onDone={() => this.StartToFetcher()}
+          />
+          <TouchableOpacity
+            onPress={this.handleClose}
+            activeOpacity={1}
+            style={{height: '100%', backgroundColor: 'rgba(0,0,0,0.2)'}}
+          />
+        </Modal>
+      </View>
     );
   }
 }

@@ -23,6 +23,7 @@ import {WIDTH, HEIGHT} from '../../utils/plaform';
 import styled from 'styled-components';
 import Header from '../../components/Header';
 import {Theme} from '../../utils/color';
+import timeago from 'timeago.js';
 
 const ViewTypes = {
   FULL: 0,
@@ -80,11 +81,17 @@ export default class JobList extends React.Component {
 
   //Given type and data return the view component
   _rowRenderer = (type, data) => {
+    const nows = timeago().format(data.timestamp);
     return (
       <TouchableOpacity
         onPress={() => this.props.onSelect && this.props.onSelect(data)}
         activeOpacity={0.7}
-        style={{backgroundColor: 'white'}}>
+        style={{
+          backgroundColor: 'white',
+          marginHorizontal: 8,
+          borderRadius: 4,
+          marginTop: 8,
+        }}>
         <View
           style={{
             paddingVertical: 8,
@@ -107,19 +114,30 @@ export default class JobList extends React.Component {
                 justifyContent: 'space-between',
               }}>
               <View>
-                <Text style={{color: 'black', fontSize: 16}}>
-                  {data.company}
+                {/* <Text ellipsizeMode="tail" numberOfLines={1} width={100}>
+                  {data.title}
+                </Text> */}
+                <Text
+                  style={{color: 'black', fontSize: 16}}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}>
+                  {data.title}
+                  {/* {data.company} */}
                 </Text>
-                <Text style={{color: 'black', fontSize: 12}}>
-                  {data.location}
-                </Text>
+                <View style={{flexDirection: 'row'}}>
+                  <Text style={{color: 'black', fontSize: 12}}>
+                    {data.location}
+                  </Text>
+                  <Text style={{color: 'black', fontSize: 12}}>{nows}</Text>
+                </View>
+                <View style={{flexDirection: 'row'}}>
+                  <Text style={{fontWeight: '700', color: Theme}}>
+                    {data.minimum_pay / 1000}k-{data.maximum_pay / 1000}k
+                  </Text>
+                </View>
               </View>
-              <Text style={{fontWeight: '700', color: Theme}}>
-                {data.minimum_pay / 1000}k-{data.maximum_pay / 1000}k
-              </Text>
             </View>
           </View>
-          <Text>{data.title}</Text>
         </View>
         <View
           style={{
@@ -151,6 +169,7 @@ export default class JobList extends React.Component {
           title={this.props.title}
           leftButton={this.props.leftButton}
           rightButton={this.props.rightButton}
+          title={this.props.title}
         />
         <Filter componentDidMount={this.props.componentDidMount} />
         {/* {size === 0 ? <Text>there is no data</Text> : null} */}

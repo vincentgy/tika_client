@@ -13,48 +13,44 @@ import JobListTemplate, {Search} from '../../public/JobListPage';
 import {connect} from 'react-redux';
 import {Page} from '../../components/PageHOC';
 import {Theme} from '../../utils/color';
-import {WIDTH} from '../../utils/plaform';
+import {Auto, Put} from '../../store';
 
-const List = props => {
-  return (
-    <JobListTemplate
-      onSelect={() => {
-        props.navigation.navigate('JobDetail');
-      }}
-      title={
-        <Text
-          style={{
-            fontWeight: '700',
-            fontSize: 18,
-            color: 'white',
-            width: WIDTH,
-            textAlign: 'center',
-          }}>
-          Find a job
-        </Text>
-      }
-      {...props}
-      leftButton={[
-        <Text style={{marginLeft: 16}} key="1">
-          Job Search
-        </Text>,
-      ]}
-      rightButton={[
-        <Search key="1" onPress={() => props.navigation.navigate('SearchJob')}>
-          <EvilIcons name="search" size={24} />
-        </Search>,
-      ]}
-    />
-  );
-};
+const JobList = Auto(state => state.job);
 
-const mapState = state => {
-  console.log(state.filter.list);
-  return {
-    loading: state.filter.loading,
-    list: state.filter.list,
-  };
-};
+class JobListContainer extends React.Component {
+  render() {
+    return JobList(job => {
+      return (
+        <JobListTemplate
+          onSelect={() => {
+            this.props.navigation.navigate('JobDetail');
+          }}
+          title={
+            <Text
+              style={{fontSize: 18, fontWeight: '700', color: 'white'}}
+              key="1">
+              Find a job
+            </Text>
+          }
+          list={job.list}
+          loading={job.loading}
+          leftButton={[
+            <Text style={{marginLeft: 16}} key="1">
+              Job Search
+            </Text>,
+          ]}
+          rightButton={
+            <Search
+              key="1"
+              onPress={() => this.props.navigation.navigate('SearchJob')}>
+              <EvilIcons name="search" color="white" size={24} />
+            </Search>
+          }
+        />
+      );
+    });
+  }
+}
 
 export default Page({
   tabBarIcon: ({focused}) => (
@@ -70,4 +66,4 @@ export default Page({
     defaultHandler();
     StatusBar.setBarStyle('dark-content', true);
   },
-})(connect(mapState)(List));
+})(JobListContainer);
