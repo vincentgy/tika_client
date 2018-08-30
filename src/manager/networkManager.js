@@ -17,15 +17,43 @@ const getPosition = () =>
   });
 
 export class NetworkManager {
+  async textSearch(text) {
+    // ‘title’ : job title key word,
+    // ‘company’ : company name key word,
+    // ‘description’ : job description key word,
+    const position = await getPosition();
+
+    const body = {
+      a: 'sj',
+      query: {
+        title: text,
+        company: text,
+        description: text,
+      },
+      location: {
+        latitude: position.latitude,
+        longitude: position.longitude,
+      },
+    };
+    const res = await fetch('http://18.222.175.208/', {
+      method: 'POST',
+      body: JSON.stringify({param: body}),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencode',
+      },
+    });
+    const json = await res.json();
+
+    return json;
+  }
+
   async searchByFilter(regionId, districtIds, categoriesIds, jobTypeId) {
-    console.log({regionId, districtIds, categoriesIds, jobTypeId})
+    console.log({regionId, districtIds, categoriesIds, jobTypeId});
     const distIds = Object.keys(districtIds);
     const cateIds = Object.keys(categoriesIds).filter(key => {
       if (categoriesIds[key] !== 0) return key;
     });
-    const position = await getPosition();
 
-    
     const query = {
       region_id: regionId,
       district_ids: distIds,
@@ -41,7 +69,8 @@ export class NetworkManager {
       }
     });
 
-    console.log(query)
+    console.log(query);
+    const position = await getPosition();
 
     const body = {
       a: 'sj',

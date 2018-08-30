@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Platform, StatusBar} from 'react-native';
+import {Platform, StatusBar, View} from 'react-native';
 // import PropTypes from 'prop-types';
 
 import {Theme} from '../../utils/color';
@@ -16,7 +16,6 @@ const HeaderContainer = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
 `;
 
 const FlexContainer = styled.View`
@@ -45,7 +44,14 @@ class Header extends React.Component {
         ) : (
           <StatusBar backgroundColor={Theme} />
         )}
-        <HeaderContainer>{this.props.title}</HeaderContainer>
+
+        <HeaderContainer>
+          {this.props.children}
+          {this.props.title}
+        </HeaderContainer>
+        <View style={{position: 'absolute', top: 24, right: 0}}>
+          {this.props.rightButton}
+        </View>
       </React.Fragment>
     );
   }

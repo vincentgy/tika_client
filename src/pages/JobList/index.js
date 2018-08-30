@@ -39,13 +39,13 @@ class JobListContainer extends React.Component {
               Job Search
             </Text>,
           ]}
-          rightButton={[
+          rightButton={
             <Search
               key="1"
-              onPress={() => props.navigation.navigate('SearchJob')}>
-              <EvilIcons name="search" size={24} />
-            </Search>,
-          ]}
+              onPress={() => this.props.navigation.navigate('SearchJob')}>
+              <EvilIcons name="search" color="white" size={24} />
+            </Search>
+          }
         />
       );
     });
