@@ -13,6 +13,7 @@ import JobListTemplate, {Search} from '../../public/JobListPage';
 import {connect} from 'react-redux';
 import {Page} from '../../components/PageHOC';
 import {Theme} from '../../utils/color';
+import {WIDTH} from '../../utils/plaform';
 
 const List = props => {
   return (
@@ -20,12 +21,18 @@ const List = props => {
       onSelect={() => {
         props.navigation.navigate('JobDetail');
       }}
-      componentDidMount={() => {
-        props.dispatch({
-          type: 'queryFilter',
-          payload: {name: 'distance', data: 'Whole City'},
-        });
-      }}
+      title={
+        <Text
+          style={{
+            fontWeight: '700',
+            fontSize: 18,
+            color: 'white',
+            width: WIDTH,
+            textAlign: 'center',
+          }}>
+          Find a job
+        </Text>
+      }
       {...props}
       leftButton={[
         <Text style={{marginLeft: 16}} key="1">

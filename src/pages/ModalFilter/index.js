@@ -18,12 +18,13 @@ import SelectItem from '../../public/SelectItem';
 import {connect} from 'react-redux';
 import {produce} from 'immer';
 import SegmentedControlTab from 'react-native-segmented-control-tab'; //https://github.com/kirankalyan5/react-native-segmented-control-tab#props
+import LinearGradient from 'react-native-linear-gradient';
 
 class Filter extends React.Component {
   constructor() {
     super();
     this.state = {
-      selectedIndex: 0,
+      selectedIndex: -1,
     };
   }
 
@@ -35,16 +36,21 @@ class Filter extends React.Component {
   };
   render() {
     return (
-      <View style={{padding: 8, backgroundColor: 'white'}}>
+      <LinearGradient
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 0}}
+        colors={['#6f86d6', '#667eea']}
+        style={{padding: 8, backgroundColor: 'white'}}>
         <SegmentedControlTab
-          tabTextStyle={{color: '#333'}}
-          tabStyle={{borderColor: '#333'}}
-          activeTabStyle={{backgroundColor: '#333'}}
+          tabTextStyle={{color: 'white'}}
+          tabStyle={{borderColor: 'white', backgroundColor: 'transparent'}}
+          activeTabTextStyle={{color: '#667eea'}}
+          activeTabStyle={{backgroundColor: 'white'}}
           values={['Location', 'Job Category', 'Job Type']}
           selectedIndex={this.state.selectedIndex}
           onTabPress={this.handleIndexChange}
         />
-      </View>
+      </LinearGradient>
     );
   }
 }

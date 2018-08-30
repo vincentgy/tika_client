@@ -148,6 +148,7 @@ export default class JobList extends React.Component {
     return (
       <React.Fragment>
         <Header
+          title={this.props.title}
           leftButton={this.props.leftButton}
           rightButton={this.props.rightButton}
         />

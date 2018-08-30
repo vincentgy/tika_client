@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Platform, StatusBar} from 'react-native';
+import {Platform, StatusBar, View} from 'react-native';
 // import PropTypes from 'prop-types';
 
 import {Theme} from '../../utils/color';
+import LinearGradient from 'react-native-linear-gradient';
+import {WIDTH} from '../../utils/plaform';
 
 const IOSStatusBar = styled.View`
   height: 20px;
@@ -21,7 +23,6 @@ const HeaderContainer = styled.View`
 const FlexContainer = styled.View`
   flex-direction: row;
   align-items: center;
-  height: 100%;
 `;
 
 class Header extends React.Component {
@@ -44,19 +45,18 @@ class Header extends React.Component {
         ) : (
           <StatusBar backgroundColor={Theme} />
         )}
-        <HeaderContainer style={style}>
-          <FlexContainer>
-            {leftButton.map(rb => {
-              return rb;
-            })}
-          </FlexContainer>
+        <LinearGradient
+          style={{
+            height: 48,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+          colors={['#6f86d6', '#667eea']}>
           {this.props.title}
-          <FlexContainer>
-            {rightButton.map(rb => {
-              return rb;
-            })}
-          </FlexContainer>
-        </HeaderContainer>
+        </LinearGradient>
       </React.Fragment>
     );
   }
