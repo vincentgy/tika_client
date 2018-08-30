@@ -92,11 +92,15 @@ class Filter extends React.Component {
           selectedIndex={-1}
           onTabPress={this.handleOpen}
         />
-        <Modal animationType="none" visible={this.state.modalOpen} transparent>
+        <Modal
+          onRequestClose={() => {}}
+          animationType="none"
+          visible={this.state.modalOpen}
+          transparent>
           <View
             style={{
               backgroundColor: 'transparent',
-              height: 48 + 20,
+              height: 48 + (Platform.OS === 'ios' ? 20 : 0),
             }}
           />
           <FilterTab

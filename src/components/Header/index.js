@@ -45,12 +45,16 @@ class Header extends React.Component {
         ) : (
           <StatusBar backgroundColor={Theme} />
         )}
-
         <HeaderContainer>
           {this.props.children}
           {this.props.title}
         </HeaderContainer>
-        <View style={{position: 'absolute', top: 24, right: 0}}>
+        <View
+          style={{
+            position: 'absolute',
+            top: Platform.OS === 'ios' ? 24 : 6,
+            right: 0,
+          }}>
           {this.props.rightButton}
         </View>
       </React.Fragment>
