@@ -36,6 +36,30 @@ class Header extends React.Component {
   render() {
     const {leftButton, rightButton, style, StatusBarStyle} = this.props;
 
+    const Right =
+      rightButton instanceof Array ? (
+        rightButton.map((i, idx) => (
+          <View
+            key={idx}
+            style={{
+              position: 'absolute',
+              top: Platform.OS === 'ios' ? 24 : 6,
+              right: idx * 32,
+            }}>
+            {i}
+          </View>
+        ))
+      ) : (
+        <View
+          style={{
+            position: 'absolute',
+            top: Platform.OS === 'ios' ? 24 : 6,
+            right: 0,
+          }}>
+          {this.props.rightButton}
+        </View>
+      );
+
     return (
       <React.Fragment>
         {Platform.OS === 'ios' ? (
@@ -45,18 +69,19 @@ class Header extends React.Component {
         ) : (
           <StatusBar backgroundColor={Theme} />
         )}
-        <HeaderContainer>
-          {this.props.children}
-          {this.props.title}
-        </HeaderContainer>
         <View
           style={{
             position: 'absolute',
             top: Platform.OS === 'ios' ? 24 : 6,
-            right: 0,
+            zIndex: 1000,
           }}>
-          {this.props.rightButton}
+          {this.props.leftButton}
         </View>
+        <HeaderContainer>
+          {this.props.children}
+          {this.props.title}
+        </HeaderContainer>
+        {Right}
       </React.Fragment>
     );
   }

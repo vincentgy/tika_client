@@ -28,14 +28,15 @@ class PageBase extends React.Component {
         <ScrollView
           scrollEventThrottle={32}
           onScroll={this.props.onScroll}
+          contentContainerStyle={{...this.props.containerStyle}}
           style={{
             ...Height,
-            ...this.props.containerStyle,
             width: WIDTH,
             marginTop: Platform.OS === 'ios' ? (hasStatusBar ? 20 : 0) : 0,
           }}>
           {this.props.children}
         </ScrollView>
+        {this.props.bar}
       </View>
     );
   }

@@ -54,10 +54,13 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
+  MKMapView * mapview = [[MKMapView alloc] init];
+ 
   
-  return [[MKMapView alloc] init];
+  return mapview;
 }
 
+RCT_EXPORT_VIEW_PROPERTY(scrollEnabled, BOOL)
 
 RCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView)
 {

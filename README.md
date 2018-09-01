@@ -2,7 +2,7 @@
 
 #### pre 1.0
 
-- [ ] job type recreate
+- [x] job type recreate
 - [ ] after create account,login directly
 - [ ] Get profile fix
 - [ ] job search page
@@ -11,7 +11,7 @@
 - [ ] edit profile pages
   - [ ] preview micro CV
   - [ ] upload user avatar
-- [ ] company infomation
+- [x] company infomation
   - [ ] mapview with company location
   - [ ] map navigation
   - [ ] apply / chat

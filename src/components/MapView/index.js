@@ -10,6 +10,11 @@ class MapView extends React.Component {
 }
 
 MapView.propTypes = {
+  /**
+   * A Boolean value that determines whether the user may use pinch
+   * gestures to zoom in and out of the map.
+   */
+  scrollEnabled: PropTypes.bool,
   region: PropTypes.shape({
     /**
      * Coordinates for the center of the map.
