@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.oblador.vectoricons.VectorIconsPackage;
-import com.beefe.picker.PickerViewPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.facebook.react.ReactNativeHost;
@@ -13,6 +12,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 // https://github.com/maxs15/react-native-spinkit/wiki/Manual-linking---Android
 import com.react.rnspinkit.RNSpinkitPackage;
+import com.zyu.ReactNativeWheelPickerPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,8 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
             new VectorIconsPackage(),
-            new PickerViewPackage(),
             new LinearGradientPackage(),
+            new ReactNativeWheelPickerPackage(),
             new PickerPackage(), new CustomHotUpdateModulePackage(),new RNSpinkitPackage());
     }
 

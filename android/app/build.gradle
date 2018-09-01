@@ -151,10 +151,10 @@ android {
 
 dependencies {
     compile project(':react-native-vector-icons')
-    compile project(':react-native-picker')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-image-crop-picker')
     compile project(':react-native-spinkit')
+    compile project(':react-native-wheel-picker')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile 'com.android.support:appcompat-v7:27.0.3'
     compile "com.facebook.react:react-native:+"  // From node_modules

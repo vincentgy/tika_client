@@ -34,11 +34,6 @@ class JobListContainer extends React.Component {
           }
           list={job.list}
           loading={job.loading}
-          leftButton={[
-            <Text style={{marginLeft: 16}} key="1">
-              Job Search
-            </Text>,
-          ]}
           rightButton={
             <Search
               key="1"

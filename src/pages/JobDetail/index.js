@@ -238,13 +238,28 @@ export default class JobDetail extends React.Component {
             </EasyTap>
           }
           rightButton={[
-            <EasyTap onPress={() => this.props.navigation.goBack()}>
+            <EasyTap>
               <FontAwesome size={18} color="white" name="bell-o" />
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: 18,
+                  width: 18,
+                  position: 'absolute',
+                  top: 4,
+                  right: 4,
+                  borderRadius: 10,
+                  backgroundColor: 'red',
+                }}>
+                <Text style={{fontSize: 10, color: 'white'}}>10</Text>
+              </View>
             </EasyTap>,
-            <EasyTap onPress={() => this.props.navigation.goBack()}>
+            <EasyTap>
               <FontAwesome size={18} color="white" name="bookmark-o" />
             </EasyTap>,
-            <EasyTap onPress={() => this.props.navigation.goBack()}>
+            <EasyTap>
               <EvilIcons size={26} color="white" name="share-apple" />
             </EasyTap>,
           ]}
