@@ -1860,7 +1860,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tika.react.native;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tika.react;
 				PRODUCT_NAME = tika;
 				USER_HEADER_SEARCH_PATHS = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1885,7 +1885,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tika.react.native;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tika.react;
 				PRODUCT_NAME = tika;
 				USER_HEADER_SEARCH_PATHS = "";
 				VERSIONING_SYSTEM = "apple-generic";

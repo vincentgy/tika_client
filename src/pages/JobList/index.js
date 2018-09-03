@@ -10,10 +10,9 @@ import {Text, View, StatusBar} from 'react-native';
 import {EvilIcons, MaterialCommunityIcons} from '../../components/Icons';
 
 import JobListTemplate, {Search} from '../../public/JobListPage';
-import {connect} from 'react-redux';
 import {Page} from '../../components/PageHOC';
 import {Theme} from '../../utils/color';
-import {Auto, Put} from '../../store';
+import {Auto} from '../../store';
 
 const JobList = Auto(state => state.job);
 

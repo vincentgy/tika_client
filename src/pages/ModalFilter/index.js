@@ -68,7 +68,8 @@ class Filter extends React.Component {
       s.regionId,
       s.districtIds,
       s.categoriesIds,
-      s.jobTypeId
+      s.jobTypeId,
+      s.moneyRange
     );
     Put(state => {
       state.job.list = s.job.list.cloneWithRows(json.data);

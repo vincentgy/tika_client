@@ -36,4 +36,4 @@ const Store = init({
 export const Put = Store.Put;
 export const Ctx = Store.Ctx;
 export const Auto = Store.Auto;
-export const getStore = Store._store;
+export const getStore = Store.Store;

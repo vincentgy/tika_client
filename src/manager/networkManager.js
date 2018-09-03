@@ -53,20 +53,35 @@ export class NetworkManager {
    * @param {*} categoriesIds
    * @param {*} jobTypeId
    */
-  async searchByFilter(regionId, districtIds, categoriesIds, jobTypeId) {
+  async searchByFilter(
+    regionId,
+    districtIds,
+    categoriesIds,
+    jobTypeId,
+    moneyRange
+  ) {
     try {
       const distIds = Object.keys(districtIds);
       const cateIds = Object.keys(categoriesIds).filter(key => {
         if (categoriesIds[key] !== 0) return key;
       });
+      const money = {
+        0: 0,
+        1: 50000,
+        2: 75000,
+        3: 100000,
+        4: 125000,
+        5: 150000,
+        6: 200000,
+      };
 
       const query = {
         region_id: regionId,
         district_ids: distIds,
         category_ids: cateIds,
         type: jobTypeId,
-        // minimum_pay: 0,
-        // maximum_pay: 0,
+        minimum_pay: money[moneyRange.min],
+        maximum_pay: money[moneyRange.max],
       };
 
       Object.keys(query).forEach(key => {
