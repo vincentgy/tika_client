@@ -10,7 +10,6 @@ import {
 import {WIDTH, HEIGHT} from '../../utils/plaform';
 import Toggle from '../../components/Abstract/Toggle';
 import styled from 'styled-components';
-import Switch, {FilterItem} from './swich';
 import LocationSelector from './location';
 import FetchCategoris from '../../public/FetchCategoris';
 import ButtonGroup from '../../public/ButtonGroup';
@@ -53,7 +52,7 @@ class Filter extends React.Component {
   };
 
   /**
-   * 网络请求
+   * 发送请求给后台，获取当前选择的filter
    */
   async StartToFetcher() {
     this.setState({

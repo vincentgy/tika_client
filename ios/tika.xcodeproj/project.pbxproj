@@ -37,6 +37,7 @@
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		30C653E1E8394258BE4F0B00 /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E65E484E5BE74D1881F4D375 /* libRCTBEEPickerManager.a */; };
 		450CA9A6210CC7930056AB17 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 450CA9A2210CC6EA0056AB17 /* libRNSpinkit.a */; };
+		4521D280213AFB2700A79F34 /* RNTMapview.m in Sources */ = {isa = PBXBuildFile; fileRef = 4521D27F213AFB2700A79F34 /* RNTMapview.m */; };
 		454082C02130408900456980 /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4540828821303E0800456980 /* libimageCropPicker.a */; };
 		454082C22130428200456980 /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 454082C12130428200456980 /* RSKImageCropper.framework */; };
 		454082C32130428200456980 /* RSKImageCropper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 454082C12130428200456980 /* RSKImageCropper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -561,6 +562,8 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		32FCA9B3CE15494688430D33 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
 		450CA977210CC6EA0056AB17 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
+		4521D27E213AFB2700A79F34 /* RNTMapview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTMapview.h; sourceTree = "<group>"; };
+		4521D27F213AFB2700A79F34 /* RNTMapview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTMapview.m; sourceTree = "<group>"; };
 		4540828121303E0800456980 /* imageCropPicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = imageCropPicker.xcodeproj; path = "../node_modules/react-native-image-crop-picker/ios/imageCropPicker.xcodeproj"; sourceTree = "<group>"; };
 		454082C12130428200456980 /* RSKImageCropper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RSKImageCropper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		454082C52130428600456980 /* QBImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = QBImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -912,6 +915,8 @@
 			isa = PBXGroup;
 			children = (
 				6BB4902B212BDE33005A26DF /* RNTMapManager.m */,
+				4521D27E213AFB2700A79F34 /* RNTMapview.h */,
+				4521D27F213AFB2700A79F34 /* RNTMapview.m */,
 			);
 			name = Mapview;
 			sourceTree = "<group>";
@@ -1724,6 +1729,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				6BB4902C212BDE33005A26DF /* RNTMapManager.m in Sources */,
 				6B7668CE21265D01004314FD /* RNTTableViewManager.m in Sources */,
+				4521D280213AFB2700A79F34 /* RNTMapview.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

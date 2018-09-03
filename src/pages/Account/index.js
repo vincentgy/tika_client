@@ -21,8 +21,7 @@ import userManager from '../../manager/userManager';
 import ImagePicker from 'react-native-image-crop-picker';
 import LocationSelector from '../ModalFilter/location';
 import ActionSheet from 'react-native-actionsheet'; //https://github.com/beefe/react-native-actionsheet
-import Picker from 'react-native-wheel-picker';
-var PickerItem = Picker.Item;
+
 
 const ListGroup = ({children}) => {
   return <View style={{marginTop: 8}}>{children}</View>;
@@ -119,25 +118,7 @@ const Profile = ({onEditProfile, onAatarPress}) => {
 
 @connect()
 class Account extends React.Component {
-  state = {
-    selectedItem: 2,
-    itemList: [
-      '刘备',
-      '张飞',
-      '关羽',
-      '赵云',
-      '黄忠',
-      '马超',
-      '魏延',
-      '诸葛亮',
-    ],
-  };
-  onPickerSelect(index) {
-    this.setState({
-      selectedItem: index,
-    });
-  }
-
+ 
   async logout() {
     await AsyncStorage.removeItem('token');
     this.props.dispatch({type: 'checkLogin'});
@@ -223,15 +204,7 @@ class Account extends React.Component {
           onEditProfile={this.handleEditProfile}
           onAatarPress={this.showActionSheet}
         />
-        <Picker
-          style={{width: WIDTH, height: 180}}
-          selectedValue={this.state.selectedItem}
-          itemStyle={{color: 'black',borderColor:'black', fontSize: 26}}
-          onValueChange={index => this.onPickerSelect(index)}>
-          {this.state.itemList.map((value, i) => (
-            <PickerItem label={value} value={i} key={'money' + value} />
-          ))}
-        </Picker>
+        
         <ListGroup>
           <SettingCell>
             <Text>Favorite</Text>

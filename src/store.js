@@ -17,6 +17,10 @@ const Store = init({
     3: 'part-time',
     4: 'one-off',
   },
+  moneyRange: {
+    min: 0,
+    max: 2,
+  },
   regionId: -1,
   districtIds: {},
   categories: [],

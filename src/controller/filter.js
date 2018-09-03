@@ -15,7 +15,7 @@ const getPosition = () =>
       () => {
         reject('fail');
       },
-      {enableHighAccuracy: true, timeout: 10000, maximumAge: 3000}
+      {enableHighAccuracy: true, timeout: 1000, maximumAge: 100}
     );
   });
 

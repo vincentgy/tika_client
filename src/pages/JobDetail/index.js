@@ -99,7 +99,7 @@ const shadowStyle = {
   backgroundColor: 'white',
 };
 
-const Detail = () => {
+const Detail = ({longitude, latitude}) => {
   return (
     <DetailContainer style={shadowStyle}>
       <JobTitle>Front of house and kitchen hand</JobTitle>
@@ -120,11 +120,12 @@ const Detail = () => {
       </InformationContainer>
       <Location title="73 Tatora street, Auckland CBD, Auckland" />
       <MapView
-        scrollEnabled={false}
         style={{width: WIDTH - 48, height: 165, borderRadius: 8, marginTop: 16}}
+        x={latitude}
+        y={longitude}
         region={{
-          longitude: 121,
-          latitude: 31.0,
+          longitude: longitude,
+          latitude: latitude,
           longitudeDelta: 0.1,
           latitudeDelta: 0.1,
         }}
@@ -208,19 +209,27 @@ export default class JobDetail extends React.Component {
     },
   };
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(res => {
-      const lat = res.coords.latitude;
-      const long = res.coords.longitude;
-      this.setState({
-        loading: false,
-        region: {
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
-          latitude: lat,
-          longitude: long,
-        },
-      });
-    });
+    navigator.geolocation.getCurrentPosition(
+      res => {
+        const lat = res.coords.latitude;
+        const long = res.coords.longitude;
+        this.setState({
+          loading: false,
+          region: {
+            latitudeDelta: 0.001,
+            longitudeDelta: 0.001,
+            latitude: lat,
+            longitude: long,
+          },
+        });
+      },
+      () => {},
+      {
+        enableHighAccuracy: false,
+        timeout: 1000,
+        maxAge: 100,
+      }
+    );
   }
 
   render() {
@@ -298,7 +307,12 @@ export default class JobDetail extends React.Component {
               </TouchableOpacity>
             </View>
           }>
-          <Detail />
+          {this.state.loading ? null : (
+            <Detail
+              latitude={this.state.region.latitude}
+              longitude={this.state.region.longitude}
+            />
+          )}
           <Recruiter />
           <Section title="Job Description" />
         </PageBase>

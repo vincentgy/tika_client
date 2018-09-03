@@ -15,6 +15,7 @@
 #import <React/RCTConvert.h>
 #import <CoreLocation/CoreLocation.h>
 #import <React/RCTConvert+CoreLocation.h>
+#import "RNTMapview.h"
 
 @interface RCTConvert (Mapkit)
 
@@ -54,15 +55,43 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
-  MKMapView * mapview = [[MKMapView alloc] init];
- 
+  RNTMapView * mapview = [[RNTMapView alloc] init];
+  mapview.userTrackingMode = MKUserTrackingModeFollow;
   
   return mapview;
 }
 
 RCT_EXPORT_VIEW_PROPERTY(scrollEnabled, BOOL)
 
-RCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView)
+RCT_CUSTOM_VIEW_PROPERTY(x, double, RNTMapView)
+{
+  if (!json) {
+    return;
+  }
+  double x = [RCTConvert double:json];
+  view.x = x;
+//  view.x = [NSJSONSerialization JSONObjectWithData:[x dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+  if (!view.x) {
+    view.x = x;
+  }
+  
+}
+RCT_CUSTOM_VIEW_PROPERTY(y, double, RNTMapView)
+{
+  if (!json) {
+    return;
+  }
+  double y = [RCTConvert double:json];
+  view.y = y;
+//  view.y = [NSJSONSerialization JSONObjectWithData:[y dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+  if (!view.y) {
+    view.y = y;
+  }
+  [view addMark];
+}
+
+
+RCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, RNTMapView)
 {
   [view setRegion:json ? [RCTConvert MKCoordinateRegion:json] : defaultView.region animated:YES];
 }

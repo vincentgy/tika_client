@@ -9,6 +9,7 @@ import {Regions, Disctrict} from '../PostJob/area';
 import {Put, Ctx, Auto} from '../../store';
 import SelectItem from '../../public/SelectItem';
 import {NetworkManager} from '../../manager/networkManager';
+import MoneyRange from '../../public/PricePicker';
 
 const FlexBox = styled.TouchableOpacity`
   justify-content: center;
@@ -51,6 +52,8 @@ const JobType = Auto(state => ({
   jobType: state.jobType,
   jobTypeIds: state.jobTypeId,
 }));
+
+const Range = Auto(state => state.moneyRange);
 
 export class FilterTab extends React.Component {
   constructor(props) {
@@ -137,9 +140,17 @@ export class FilterTab extends React.Component {
       }
     });
   };
+
   handleSelectJobType = i => {
     Put(state => {
       state.jobTypeId = i;
+    });
+  };
+
+  OnSelectMoneyRange = range => {
+    Put(state => {
+      state.moneyRange.min = range.min;
+      state.moneyRange.max = range.max;
     });
   };
 
@@ -234,6 +245,13 @@ export class FilterTab extends React.Component {
                 {state.jobType[i]}
               </Text>
             </SelectItem>
+          ))}
+          {Range(state => (
+            <MoneyRange
+              minValue={state.min}
+              maxValue={state.max}
+              onChange={this.OnSelectMoneyRange}
+            />
           ))}
         </View>
       )),
