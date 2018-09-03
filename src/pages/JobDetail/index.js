@@ -8,6 +8,10 @@ import {EasyTap} from '../../public/EasyTap';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
 
 import MapView from '../../components/MapView';
+import InformationContainer from '../../public/InformationContainer';
+import {shadowStyle} from '../../public/shadowStyle';
+
+const Info = InformationContainer.Info;
 
 const DetailContainer = styled.View`
   border-radius: 4px;
@@ -23,20 +27,6 @@ const JobTitle = styled.Text`
   font-weight: 500;
   font-size: 24px;
 `;
-const InformationContainer = styled.View`
-  border-radius: 8px;
-  background-color: #fafafa;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 8px;
-  margin-top: 16px;
-`;
-
-const InfoBlock = styled.View`
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
 const Margin8 = styled.Text`
   margin-top: 8px;
@@ -51,20 +41,6 @@ const Salary = Margin8.extend`
   font-size: 18px;
   color: #fc740d;
 `;
-
-const Info = ({title, img, info}) => {
-  return (
-    <InfoBlock>
-      <Image
-        source={img}
-        style={{width: 30, height: 22, marginBottom: 8}}
-        resizeMode="contain"
-      />
-      <Text style={{fontWeight: '100', fontSize: 12}}>{title}</Text>
-      <Text style={{fontSize: 12}}>{info}</Text>
-    </InfoBlock>
-  );
-};
 
 const Location = ({title}) => {
   return (
@@ -85,20 +61,6 @@ const Location = ({title}) => {
   );
 };
 
-const shadowStyle = {
-  shadowColor: '#abb0b0',
-  shadowOffset: {h: 16, w: 16},
-  shadowRadius: 8,
-  shadowOpacity: 0.3,
-  padding: 16,
-  borderRadius: 4,
-  borderWidth: 0.5,
-  borderColor: 'rgba(120,120,120,0.1)',
-  marginBottom: 8,
-  marginHorizontal: 8,
-  backgroundColor: 'white',
-};
-
 const Detail = ({longitude, latitude}) => {
   return (
     <DetailContainer style={shadowStyle}>
@@ -109,13 +71,17 @@ const Detail = ({longitude, latitude}) => {
         <Info
           title="Qualification"
           info="bachelor"
-          img={require('./quali.png')}
+          img={require('../../asset/quali.png')}
         />
-        <Info title="Job Type" info="Full time" img={require('./time.png')} />
         <Info
-          title="Job Experience"
+          title="Job Type"
+          info="Full time"
+          img={require('../../asset/time.png')}
+        />
+        <Info
+          title="Experience"
           info="4+ years"
-          img={require('./case.png')}
+          img={require('../../asset/case.png')}
         />
       </InformationContainer>
       <Location title="73 Tatora street, Auckland CBD, Auckland" />
@@ -146,7 +112,7 @@ const Section = ({title, children}) => {
           marginBottom: 16,
         }}>
         <Image
-          source={require('./case.png')}
+          source={require('../../asset/case.png')}
           style={{width: 30, height: 22}}
           resizeMode="contain"
         />
