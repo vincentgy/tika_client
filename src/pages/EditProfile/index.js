@@ -1,11 +1,13 @@
 import React from 'react';
-import {View, TouchableOpacity, Image} from 'react-native';
+import {View, TouchableOpacity, Image, Text} from 'react-native';
 import PageBase from '../../components/PageBase';
 import InformationContainer from '../../public/InformationContainer';
 import {shadowStyle} from '../../public/shadowStyle';
 import Header from '../../components/Header';
 import styled from 'styled-components';
-import {WIDTH} from '../../utils/plaform';
+import {WIDTH, HEIGHT} from '../../utils/plaform';
+import {Entypo} from '../../components/Icons';
+import {EasyTap} from '../../public/EasyTap';
 
 const Info = InformationContainer.Info;
 
@@ -20,12 +22,58 @@ const ShortBref = styled.Text`
   margin-top: 16px;
 `;
 
+const EditBlock = ({title, icon, desc}) => {
+  return (
+    <View style={shadowStyle}>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+        <Image source={icon} style={{width: 24, height: 24}} />
+        <Text style={{fontSize: 18, fontWeight: '700', marginLeft: 16}}>
+          {title}
+        </Text>
+      </View>
+      <View
+        style={{
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: 16,
+        }}>
+        <TouchableOpacity>
+          <Image
+            source={require('../../asset/add.png')}
+            style={{width: 48, height: 48}}
+          />
+        </TouchableOpacity>
+        <Text style={{fontSize: 12, padding: 16, color: '#FC4C0D'}}>
+          {desc}
+        </Text>
+      </View>
+    </View>
+  );
+};
+
 export default class EditProfile extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
-        <PageBase style={{backgroundColor: '#fafafa'}}>
+        <Header
+          leftButton={[
+            <EasyTap key={1} onPress={() => this.props.navigation.goBack()}>
+              <Entypo
+                size={16}
+                color="white"
+                key={0}
+                name="chevron-thin-left"
+              />
+            </EasyTap>,
+          ]}
+        />
+        <PageBase
+          style={{backgroundColor: '#fafafa', height: HEIGHT - 48 - 20}}>
           <View style={{...shadowStyle, marginTop: 8}}>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -70,11 +118,31 @@ export default class EditProfile extends React.Component {
               />
             </InformationContainer>
           </View>
-          <View style={shadowStyle} />
-          <View style={shadowStyle} />
-          <View style={shadowStyle} />
-          <View style={shadowStyle} />
-          <View style={shadowStyle} />
+          <EditBlock
+            title="About me"
+            icon={require('../../asset/me.png')}
+            desc="Click here to write somehting about yourself so employers get to know you better"
+          />
+          <EditBlock
+            title="Employment history"
+            icon={require('../../asset/me.png')}
+            desc="Click here to add your employment history, this will help employers to see if you have experience with the role."
+          />
+          <EditBlock
+            title="Qualification"
+            icon={require('../../asset/me.png')}
+            desc="Click here to add your qualifications, this will help employers to see if you have experience with the role."
+          />
+          <EditBlock
+            title="Skills"
+            icon={require('../../asset/me.png')}
+            desc="Click here to add skills to your Job profile. This will make it easier for employers to see what you are good at "
+          />
+          <EditBlock
+            title="Portfolio/LinkedIn"
+            icon={require('../../asset/me.png')}
+            desc="Click here to add your linkedIn, Portfolio or anything else you think your employer might want to see"
+          />
         </PageBase>
       </React.Fragment>
     );
