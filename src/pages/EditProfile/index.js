@@ -22,7 +22,7 @@ const ShortBref = styled.Text`
   margin-top: 16px;
 `;
 
-const EditBlock = ({title, icon, desc}) => {
+const EditBlock = ({title, icon, desc, onPress}) => {
   return (
     <View style={shadowStyle}>
       <View
@@ -42,7 +42,7 @@ const EditBlock = ({title, icon, desc}) => {
           justifyContent: 'center',
           marginTop: 16,
         }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
           <Image
             source={require('../../asset/add.png')}
             style={{width: 48, height: 48}}
@@ -57,6 +57,10 @@ const EditBlock = ({title, icon, desc}) => {
 };
 
 export default class EditProfile extends React.Component {
+  navigation = pages => {
+    this.props.navigation.navigate(pages);
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -119,6 +123,7 @@ export default class EditProfile extends React.Component {
             </InformationContainer>
           </View>
           <EditBlock
+            onPress={() => this.navigation('AboutMe')}
             title="About me"
             icon={require('../../asset/me.png')}
             desc="Click here to write somehting about yourself so employers get to know you better"

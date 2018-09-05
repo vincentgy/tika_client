@@ -28,12 +28,13 @@ export default class KeyboardDetector extends React.Component {
 
   _keyboardDidShow = e => {
     if (!this.state.didMove) {
-      this.View.transition(
-        {paddingBottom: 0},
-        {paddingBottom: e.endCoordinates.height},
-        221,
-        'linear'
-      );
+      this.View &&
+        this.View.transition(
+          {paddingBottom: 0},
+          {paddingBottom: e.endCoordinates.height},
+          221,
+          'linear'
+        );
     }
 
     this.setState({
@@ -44,10 +45,11 @@ export default class KeyboardDetector extends React.Component {
   };
 
   _keyboardDidHide = () => {
-    this.View.transition(
-      {paddingBottom: this.state.height},
-      {paddingBottom: 0}
-    );
+    this.View &&
+      this.View.transition(
+        {paddingBottom: this.state.height},
+        {paddingBottom: 0}
+      );
     this.setState({
       isShow: false,
       didMove: false,

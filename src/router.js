@@ -14,6 +14,7 @@ import ResultList from './pages/Search/resultList';
 import Chat from './pages/Chat';
 import JobDetail from './pages/JobDetail';
 import EditProfile from './pages/EditProfile';
+import AboutMe from './pages/AboutMe';
 
 const TabRoot = createBottomTabNavigator(
   {
@@ -21,7 +22,8 @@ const TabRoot = createBottomTabNavigator(
     Chat,
     Account,
     // JobDetail,
-    // EditProfile
+    // EditProfile,
+    // AboutMe,
   },
   {
     initialRouteName: 'JobList',
@@ -50,6 +52,7 @@ const HomeStack = createStackNavigator({
   Description: withoutHeader(Description),
   SearchResult: withoutHeader(ResultList),
   EditProfile: withoutHeader(EditProfile),
+  AboutMe: withoutHeader(AboutMe),
 });
 
 export default createSwitchNavigator({
