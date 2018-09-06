@@ -22,7 +22,6 @@ import ImagePicker from 'react-native-image-crop-picker';
 import LocationSelector from '../ModalFilter/location';
 import ActionSheet from 'react-native-actionsheet'; //https://github.com/beefe/react-native-actionsheet
 
-
 const ListGroup = ({children}) => {
   return <View style={{marginTop: 8}}>{children}</View>;
 };
@@ -76,49 +75,51 @@ const SettingCell = ({children, no, onPress}) => {
 const Profile = ({onEditProfile, onAatarPress}) => {
   return (
     <FetcherNoCache body={{a: 'gp', token: userManager.getToken()}}>
-      {({fetchData}) => (
-        <ProfileContainer>
-          <View>
-            <Name>{fetchData.data.name}</Name>
-            <Bref>have 3 years background of web dev</Bref>
-            <TouchableOpacity
-              onPress={onEditProfile}
-              activeOpacity={1}
-              style={{
-                marginTop: 8,
-                maxWidth: 110,
-                padding: 4,
-                flexDirection: 'row',
-                borderRadius: 4,
-                backgroundColor: 'rgba(120,120,120,0.1)',
-              }}>
-              <Entypo name="edit" size={16} color="#abb0b0" />
-              <Text style={{color: '#abb0b0', paddingLeft: 8}}>
-                Edit profile
-              </Text>
+      {({fetchData}) => {
+        console.log(fetchData);
+        return (
+          <ProfileContainer>
+            <View>
+              <Name>{fetchData.data.name}</Name>
+              <Bref>have 3 years background of web dev</Bref>
+              <TouchableOpacity
+                onPress={onEditProfile}
+                activeOpacity={1}
+                style={{
+                  marginTop: 8,
+                  maxWidth: 110,
+                  padding: 4,
+                  flexDirection: 'row',
+                  borderRadius: 4,
+                  backgroundColor: 'rgba(120,120,120,0.1)',
+                }}>
+                <Entypo name="edit" size={16} color="#abb0b0" />
+                <Text style={{color: '#abb0b0', paddingLeft: 8}}>
+                  Edit profile
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity onPress={onAatarPress}>
+              <Image
+                cache="reload"
+                source={{uri: fetchData.data.avatar}}
+                style={{
+                  width: 64,
+                  height: 64,
+                  marginRight: 16,
+                  borderRadius: 32,
+                }}
+              />
             </TouchableOpacity>
-          </View>
-          <TouchableOpacity onPress={onAatarPress}>
-            <Image
-              cache="reload"
-              source={{uri: `${fetchData.data.avatar}?${Math.random()}`}}
-              style={{
-                width: 64,
-                height: 64,
-                marginRight: 16,
-                borderRadius: 32,
-              }}
-            />
-          </TouchableOpacity>
-        </ProfileContainer>
-      )}
+          </ProfileContainer>
+        );
+      }}
     </FetcherNoCache>
   );
 };
 
 @connect()
 class Account extends React.Component {
- 
   async logout() {
     await AsyncStorage.removeItem('token');
     this.props.dispatch({type: 'checkLogin'});
@@ -204,7 +205,7 @@ class Account extends React.Component {
           onEditProfile={this.handleEditProfile}
           onAatarPress={this.showActionSheet}
         />
-        
+
         <ListGroup>
           <SettingCell>
             <Text>Favorite</Text>
