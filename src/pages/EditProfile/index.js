@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
 import {Entypo} from '../../components/Icons';
 import {EasyTap} from '../../public/EasyTap';
+import {Auto} from '../../store';
 
 const Info = InformationContainer.Info;
 
@@ -22,7 +23,14 @@ const ShortBref = styled.Text`
   margin-top: 16px;
 `;
 
-const EditBlock = ({title, icon, desc, onPress}) => {
+const EditBlock = ({
+  title,
+  icon,
+  desc,
+  onPress,
+  renderContent,
+  isShow = true,
+}) => {
   return (
     <View style={shadowStyle}>
       <View
@@ -35,26 +43,31 @@ const EditBlock = ({title, icon, desc, onPress}) => {
           {title}
         </Text>
       </View>
-      <View
-        style={{
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginTop: 16,
-        }}>
-        <TouchableOpacity onPress={onPress}>
-          <Image
-            source={require('../../asset/add.png')}
-            style={{width: 48, height: 48}}
-          />
-        </TouchableOpacity>
-        <Text style={{fontSize: 12, padding: 16, color: '#FC4C0D'}}>
-          {desc}
-        </Text>
-      </View>
+      {renderContent && renderContent()}
+      {isShow ? (
+        <View
+          style={{
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: 16,
+          }}>
+          <TouchableOpacity onPress={onPress}>
+            <Image
+              source={require('../../asset/add.png')}
+              style={{width: 48, height: 48}}
+            />
+          </TouchableOpacity>
+          <Text style={{fontSize: 12, padding: 16, color: '#FC4C0D'}}>
+            {desc}
+          </Text>
+        </View>
+      ) : null}
     </View>
   );
 };
+
+const AboutMeText = Auto(state => state.profile.aboutMe);
 
 export default class EditProfile extends React.Component {
   navigation = pages => {
@@ -122,18 +135,25 @@ export default class EditProfile extends React.Component {
               />
             </InformationContainer>
           </View>
+          {AboutMeText(text => (
+            <EditBlock
+              isShow={text.length === 0}
+              onPress={() => this.navigation('AboutMe')}
+              title="About me"
+              icon={require('../../asset/me.png')}
+              renderContent={() => <Text>{text}</Text>}
+              desc="Click here to write somehting about yourself so employers get to know you better"
+            />
+          ))}
+
           <EditBlock
-            onPress={() => this.navigation('AboutMe')}
-            title="About me"
-            icon={require('../../asset/me.png')}
-            desc="Click here to write somehting about yourself so employers get to know you better"
-          />
-          <EditBlock
+            onPress={() => this.navigation('WorkExprience')}
             title="Employment history"
             icon={require('../../asset/me.png')}
             desc="Click here to add your employment history, this will help employers to see if you have experience with the role."
           />
           <EditBlock
+            onPress={() => this.navigation('Qualification')}
             title="Qualification"
             icon={require('../../asset/me.png')}
             desc="Click here to add your qualifications, this will help employers to see if you have experience with the role."

@@ -3,14 +3,41 @@ import {TextInput, Text, View} from 'react-native';
 import PageBase from '../../components/PageBase';
 import Header from '../../components/Header';
 import KeyboardDetector from '../../utils/keyboard';
+import {Put, Auto} from '../../store';
+import {EasyTap} from '../../public/EasyTap';
+import {Entypo} from '../../components/Icons';
+
+const AboutMeText = Auto(s => s.profile.aboutMe);
+const WORD_LIMITS = 600;
 
 export default class AboutMe extends React.Component {
+  onTextChange = text => {
+    Put(state => {
+      state.profile.aboutMe = text;
+    });
+  };
+
   render() {
     return (
       <KeyboardDetector>
         {(isShow, height) => (
           <React.Fragment>
-            {isShow ? null : <Header />}
+            {isShow ? null : (
+              <Header
+                leftButton={[
+                  <EasyTap
+                    key={1}
+                    onPress={() => this.props.navigation.goBack()}>
+                    <Entypo
+                      size={16}
+                      color="white"
+                      key={0}
+                      name="chevron-thin-left"
+                    />
+                  </EasyTap>,
+                ]}
+              />
+            )}
             <PageBase>
               <Text
                 style={{
@@ -22,9 +49,33 @@ export default class AboutMe extends React.Component {
                 Write something about yourself so employers get to know you
                 better.
               </Text>
-              <View style={{backgroundColor: 'white', padding: 16}}>
-                <Text style={{color: '#FC4C0D'}}>About me</Text>
-                <TextInput multiline numberOfLines={8} style={{height: 200}} />
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  paddingHorizontal: 16,
+                  paddingTop: 8,
+                }}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}>
+                  <Text style={{color: '#FC4C0D'}}>About me</Text>
+                  {AboutMeText(text => (
+                    <Text style={{color: '#FC4C0D'}}>
+                      {text.length}/{WORD_LIMITS}
+                    </Text>
+                  ))}
+                </View>
+                {AboutMeText(text => (
+                  <TextInput
+                    onChangeText={this.onTextChange}
+                    value={text}
+                    multiline
+                    numberOfLines={8}
+                    style={{height: 200}}
+                  />
+                ))}
               </View>
             </PageBase>
           </React.Fragment>

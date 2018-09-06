@@ -25,6 +25,14 @@ const Store = init({
   districtIds: {},
   categories: [],
   categoriesIds: {},
+  profile: {
+    aboutMe: '',
+    qualification: [],
+    major: '',
+    employedFrom: '',
+    employedTo: '',
+    skills: [],
+  },
   job: {
     list: new DataProvider((r1, r2) => {
       return r1 !== r2;
