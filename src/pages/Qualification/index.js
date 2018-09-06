@@ -32,28 +32,36 @@ export default class QualificationEditor extends React.Component {
     return (
       <KeyboardDetector
         Show={height => {
-          this.view.transition({marginTop: 0}, {marginTop: -height / 2},700,false);
+          this.view.transition(
+            {marginTop: 0},
+            {marginTop: -height / 2},
+            500,
+            false
+          );
         }}
         Hide={() => {
           this.view.transitionTo({marginTop: 0});
         }}>
         {() => (
-          <Animatable.View ref={Node => (this.view = Node)}>
+          <React.Fragment>
             <Header />
+
             <PageBase>
-              <List>
-                {Quali.map((data, idx) => (
-                  <SelectItem
-                    onPress={() => this.selectQuali(data)}
-                    active={this.state.currentSelect === data}
-                    key={idx}>
-                    <Text>{data}</Text>
-                  </SelectItem>
-                ))}
-              </List>
-              <Input placeholder="Course" />
+              <Animatable.View ref={Node => (this.view = Node)}>
+                <List>
+                  {Quali.map((data, idx) => (
+                    <SelectItem
+                      onPress={() => this.selectQuali(data)}
+                      active={this.state.currentSelect === data}
+                      key={idx}>
+                      <Text>{data}</Text>
+                    </SelectItem>
+                  ))}
+                </List>
+                <Input placeholder="Course" />
+              </Animatable.View>
             </PageBase>
-          </Animatable.View>
+          </React.Fragment>
         )}
       </KeyboardDetector>
     );
