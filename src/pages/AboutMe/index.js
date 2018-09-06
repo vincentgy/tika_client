@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import KeyboardDetector from '../../utils/keyboard';
 import {Put, Auto} from '../../store';
 import {EasyTap} from '../../public/EasyTap';
-import {Entypo} from '../../components/Icons';
+import {Entypo, MaterialIcons} from '../../components/Icons';
 
 const AboutMeText = Auto(s => s.profile.aboutMe);
 const WORD_LIMITS = 600;
@@ -33,6 +33,18 @@ export default class AboutMe extends React.Component {
                       color="white"
                       key={0}
                       name="chevron-thin-left"
+                    />
+                  </EasyTap>,
+                ]}
+                rightButton={[
+                  <EasyTap
+                    key={1}
+                    onPress={() => this.props.navigation.goBack()}>
+                    <MaterialIcons
+                      size={20}
+                      color="white"
+                      key={0}
+                      name="check"
                     />
                   </EasyTap>,
                 ]}

@@ -141,11 +141,14 @@ export default class EditProfile extends React.Component {
               onPress={() => this.navigation('AboutMe')}
               title="About me"
               icon={require('../../asset/me.png')}
-              renderContent={() => <Text>{text}</Text>}
+              renderContent={() => (
+                <Text style={{padding: 16, color: '#333', fontWeight: '300'}}>
+                  {text}
+                </Text>
+              )}
               desc="Click here to write somehting about yourself so employers get to know you better"
             />
           ))}
-
           <EditBlock
             onPress={() => this.navigation('WorkExprience')}
             title="Employment history"

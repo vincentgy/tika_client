@@ -28,6 +28,7 @@ export default class KeyboardDetector extends React.Component {
 
   _keyboardDidShow = e => {
     if (!this.state.didMove) {
+      this.props.Show && this.props.Show(this.state.height);
       this.View &&
         this.View.transition(
           {paddingBottom: 0},
@@ -45,6 +46,7 @@ export default class KeyboardDetector extends React.Component {
   };
 
   _keyboardDidHide = () => {
+    this.props.Hide && this.props.Hide();
     this.View &&
       this.View.transition(
         {paddingBottom: this.state.height},
