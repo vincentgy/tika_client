@@ -7,6 +7,7 @@ import {List} from 'react-native-elements';
 import Input from '../../components/Input';
 import KeyboardDetector from '../../utils/keyboard';
 import * as Animatable from 'react-native-animatable';
+import ListTicker from '../../components/ListTicker';
 
 export default class QualificationEditor extends React.Component {
   state = {
@@ -45,19 +46,13 @@ export default class QualificationEditor extends React.Component {
         {() => (
           <React.Fragment>
             <Header />
-
             <PageBase>
               <Animatable.View ref={Node => (this.view = Node)}>
-                <List>
-                  {Quali.map((data, idx) => (
-                    <SelectItem
-                      onPress={() => this.selectQuali(data)}
-                      active={this.state.currentSelect === data}
-                      key={idx}>
-                      <Text>{data}</Text>
-                    </SelectItem>
-                  ))}
-                </List>
+                <ListTicker
+                  data={Quali}
+                  onChange={this.selectQuali}
+                  currentActive={this.state.currentSelect}
+                />
                 <Input placeholder="Course" />
               </Animatable.View>
             </PageBase>

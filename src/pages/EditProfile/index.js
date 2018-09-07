@@ -6,7 +6,7 @@ import {shadowStyle} from '../../public/shadowStyle';
 import Header from '../../components/Header';
 import styled from 'styled-components';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
-import {Entypo} from '../../components/Icons';
+import {Entypo, Ionicons} from '../../components/Icons';
 import {EasyTap} from '../../public/EasyTap';
 import {Auto} from '../../store';
 
@@ -32,40 +32,58 @@ const EditBlock = ({
   isShow = true,
 }) => {
   return (
-    <View style={shadowStyle}>
+    <View style={{...shadowStyle, paddingBottom: 0}}>
       <View
         style={{
           flexDirection: 'row',
           alignItems: 'center',
         }}>
-        <Image source={icon} style={{width: 24, height: 24}} />
-        <Text style={{fontSize: 18, fontWeight: '700', marginLeft: 16}}>
-          {title}
-        </Text>
+        <Image source={icon} style={{width: 16, height: 16}} />
+        <Text style={{marginLeft: 8}}>{title}</Text>
       </View>
-      {renderContent && renderContent()}
-      {isShow ? (
-        <View
-          style={{
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: 16,
-          }}>
-          <TouchableOpacity onPress={onPress}>
-            <Image
-              source={require('../../asset/add.png')}
-              style={{width: 48, height: 48}}
-            />
-          </TouchableOpacity>
-          <Text style={{fontSize: 12, padding: 16, color: '#FC4C0D'}}>
-            {desc}
-          </Text>
-        </View>
-      ) : null}
+      <TouchableOpacity
+        onPress={onPress}
+        activeOpacity={1}
+        style={{
+          borderTopColor: 'rgba(120,120,120,0.2)',
+          borderTopWidth: 0.5,
+          marginTop: 8,
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: 40,
+        }}>
+        <Ionicons
+          name="ios-add"
+          size={22}
+          style={{marginRight: 8}}
+          color="#FC740D"
+        />
+      </TouchableOpacity>
     </View>
   );
 };
+
+// {renderContent && renderContent()}
+//       {isShow ? (
+//         <View
+//           style={{
+//             flexDirection: 'column',
+//             alignItems: 'center',
+//             justifyContent: 'center',
+//             marginTop: 16,
+//           }}>
+//           <TouchableOpacity onPress={onPress}>
+//             <Image
+//               source={require('../../asset/add.png')}
+//               style={{width: 48, height: 48}}
+//             />
+//           </TouchableOpacity>
+//           <Text style={{fontSize: 12, padding: 16, color: '#FC4C0D'}}>
+//             {desc}
+//           </Text>
+//         </View>
+//       ) : null}
 
 const AboutMeText = Auto(state => state.profile.aboutMe);
 
@@ -96,7 +114,6 @@ export default class EditProfile extends React.Component {
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <View style={{width: WIDTH / 3}}>
                 <Name>Kenneth van Reeves</Name>
-                <ShortBref>Looking for work</ShortBref>
               </View>
               <TouchableOpacity
                 style={{
@@ -117,23 +134,6 @@ export default class EditProfile extends React.Component {
                 />
               </TouchableOpacity>
             </View>
-            <InformationContainer>
-              <Info
-                title="Experience"
-                info="4+ years"
-                img={require('../../asset/case.png')}
-              />
-              <Info
-                title="Qualification"
-                info="Bachelor"
-                img={require('../../asset/quali.png')}
-              />
-              <Info
-                title="Visa"
-                info="Citizen"
-                img={require('../../asset/time.png')}
-              />
-            </InformationContainer>
           </View>
           {AboutMeText(text => (
             <EditBlock
@@ -152,13 +152,13 @@ export default class EditProfile extends React.Component {
           <EditBlock
             onPress={() => this.navigation('WorkExprience')}
             title="Employment history"
-            icon={require('../../asset/me.png')}
+            icon={require('../../asset/employment_history.png')}
             desc="Click here to add your employment history, this will help employers to see if you have experience with the role."
           />
           <EditBlock
             onPress={() => this.navigation('Qualification')}
             title="Qualification"
-            icon={require('../../asset/me.png')}
+            icon={require('../../asset/qualification.png')}
             desc="Click here to add your qualifications, this will help employers to see if you have experience with the role."
           />
           <EditBlock
@@ -168,7 +168,7 @@ export default class EditProfile extends React.Component {
           />
           <EditBlock
             title="Portfolio/LinkedIn"
-            icon={require('../../asset/me.png')}
+            icon={require('../../asset/social.png')}
             desc="Click here to add your linkedIn, Portfolio or anything else you think your employer might want to see"
           />
         </PageBase>

@@ -10,6 +10,8 @@ import {Put, Ctx, Auto} from '../../store';
 import SelectItem from '../../public/SelectItem';
 import {NetworkManager} from '../../manager/networkManager';
 import MoneyRange from '../../public/PricePicker';
+import LinearGradient from 'react-native-linear-gradient';
+import ListTicker from '../../components/ListTicker';
 
 const FlexBox = styled.TouchableOpacity`
   justify-content: center;
@@ -236,16 +238,12 @@ export class FilterTab extends React.Component {
       )),
       2: JobType(state => (
         <View style={{height: 340}}>
-          {Object.keys(state.jobType).map((i, idx) => (
-            <SelectItem
-              key={idx}
-              active={state.jobTypeIds === i}
-              onPress={() => this.handleSelectJobType(i)}>
-              <Text style={{color: '#333', width: WIDTH}}>
-                {state.jobType[i]}
-              </Text>
-            </SelectItem>
-          ))}
+          <ListTicker
+            data={Object.keys(state.jobType)}
+            onChange={this.handleSelectJobType}
+            currentActive={state.jobTypeIds}
+            renderText={data => state.jobType[data]}
+          />
           {Range(state => (
             <MoneyRange
               minValue={state.min}
@@ -262,11 +260,14 @@ export class FilterTab extends React.Component {
 
   render() {
     return (
-      <View>
+      <LinearGradient
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 0}}
+        colors={['#597ef7', '#2f54eb']}>
         <SegmentedControlTab
-          tabsContainerStyle={{padding: 8, backgroundColor: '#096dd9'}}
+          tabsContainerStyle={{padding: 8}}
           tabTextStyle={{color: 'white'}}
-          tabStyle={{borderColor: 'white', backgroundColor: '#096dd9'}}
+          tabStyle={{borderColor: 'white', backgroundColor: 'transparent'}}
           activeTabTextStyle={{color: '#096dd9'}}
           activeTabStyle={{backgroundColor: 'white'}}
           values={['Location', 'Job Category', 'Job Type']}
@@ -291,7 +292,7 @@ export class FilterTab extends React.Component {
             </FlexBox>
           </View>
         </Animatable.View>
-      </View>
+      </LinearGradient>
     );
   }
 }

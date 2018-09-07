@@ -10,6 +10,8 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+//https://github.com/react-community/react-native-maps/blob/master/docs/installation.md
+import com.airbnb.android.react.maps.MapsPackage;
 // https://github.com/maxs15/react-native-spinkit/wiki/Manual-linking---Android
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.zyu.ReactNativeWheelPickerPackage;
@@ -31,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new LinearGradientPackage(),
             new ReactNativeWheelPickerPackage(),
+            new MapsPackage(),
             new PickerPackage(), new CustomHotUpdateModulePackage(),new RNSpinkitPackage());
     }
 

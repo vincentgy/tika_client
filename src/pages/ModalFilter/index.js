@@ -22,6 +22,7 @@ import {FilterTab} from './filtertab';
 import {Regions} from '../PostJob/area';
 import {NetworkManager} from '../../manager/networkManager';
 import {Put, getStore} from '../../store';
+import LinearGradient from 'react-native-linear-gradient';
 
 class Filter extends React.Component {
   constructor() {
@@ -83,10 +84,14 @@ class Filter extends React.Component {
 
   render() {
     return (
-      <View style={{padding: 8, backgroundColor: '#096dd9'}}>
+      <LinearGradient
+        style={{padding: 8}}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 0}}
+        colors={['#597ef7', '#2f54eb']}>
         <SegmentedControlTab
           tabTextStyle={{color: 'white'}}
-          tabStyle={{borderColor: 'white', backgroundColor: '#096dd9'}}
+          tabStyle={{borderColor: 'white', backgroundColor: 'transparent'}}
           activeTabStyle={{backgroundColor: '#333'}}
           values={['Location', 'Job Category', 'Job Type']}
           selectedIndex={-1}
@@ -113,7 +118,7 @@ class Filter extends React.Component {
             style={{height: '100%', backgroundColor: 'rgba(0,0,0,0.2)'}}
           />
         </Modal>
-      </View>
+      </LinearGradient>
     );
   }
 }

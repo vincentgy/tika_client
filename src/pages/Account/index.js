@@ -21,6 +21,7 @@ import userManager from '../../manager/userManager';
 import ImagePicker from 'react-native-image-crop-picker';
 import LocationSelector from '../ModalFilter/location';
 import ActionSheet from 'react-native-actionsheet'; //https://github.com/beefe/react-native-actionsheet
+import MapView from 'react-native-maps';
 
 const ListGroup = ({children}) => {
   return <View style={{marginTop: 8}}>{children}</View>;
@@ -71,6 +72,29 @@ const SettingCell = ({children, no, onPress}) => {
     </Cell>
   );
 };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     ...StyleSheet.absoluteFillObject,
+//     height: 400,
+//     width: 400,
+//     justifyContent: 'flex-end',
+//     alignItems: 'center',
+//   },
+//   map: {
+//     ...StyleSheet.absoluteFillObject,
+//   },
+// });
+
+// <MapView
+//       style={styles.map}
+//         initialRegion={{
+//           latitude: 37.78825,
+//           longitude: -122.4324,
+//           latitudeDelta: 0.0922,
+//           longitudeDelta: 0.0421,
+//         }}
+//       />
 
 const Profile = ({onEditProfile, onAatarPress}) => {
   return (
@@ -205,7 +229,7 @@ class Account extends React.Component {
           onEditProfile={this.handleEditProfile}
           onAatarPress={this.showActionSheet}
         />
-
+        
         <ListGroup>
           <SettingCell>
             <Text>Favorite</Text>

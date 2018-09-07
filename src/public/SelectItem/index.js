@@ -21,7 +21,7 @@ export default ({onPress, active, children}) => {
       {active ? (
         <Ionicons
           size={14}
-          style={{marginRight: 4}}
+          style={{marginRight: 5.5}}
           name="ios-checkmark-circle"
           color={Theme}
         />

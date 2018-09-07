@@ -45,6 +45,7 @@
     "react-native-elements": "^0.19.1",
     "react-native-image-crop-picker": "^0.21.1",
     "react-native-linear-gradient": "^2.4.2",
+    "react-native-maps": "^0.21.0",
     "react-native-material-tabs": "^3.6.0",
     "react-native-segmented-control-tab": "^3.3.1",
     "react-native-spinkit": "^1.1.1",

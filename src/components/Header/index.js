@@ -7,19 +7,6 @@ import {Theme} from '../../utils/color';
 import LinearGradient from 'react-native-linear-gradient';
 import {WIDTH} from '../../utils/plaform';
 
-const IOSStatusBar = styled.View`
-  height: 20px;
-  background-color: #096dd9;
-`;
-
-const HeaderContainer = styled.View`
-  height: 48px;
-  background-color: #096dd9;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-`;
-
 const FlexContainer = styled.View`
   flex-direction: row;
   align-items: center;
@@ -63,9 +50,13 @@ class Header extends React.Component {
     return (
       <React.Fragment>
         {Platform.OS === 'ios' ? (
-          <IOSStatusBar style={StatusBarStyle}>
+          <LinearGradient
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 0}}
+            colors={['#597ef7', '#2f54eb']}
+            style={{...StatusBarStyle, height: 20}}>
             <StatusBar barStyle={'light-content'} />
-          </IOSStatusBar>
+          </LinearGradient>
         ) : (
           <StatusBar backgroundColor={Theme} />
         )}
@@ -77,10 +68,19 @@ class Header extends React.Component {
           }}>
           {this.props.leftButton}
         </View>
-        <HeaderContainer>
+        <LinearGradient
+          style={{
+            height: 48,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+          colors={['#597ef7', '#2f54eb']}>
           {this.props.children}
           {this.props.title}
-        </HeaderContainer>
+        </LinearGradient>
         {Right}
       </React.Fragment>
     );
