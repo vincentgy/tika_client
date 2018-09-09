@@ -1,3 +1,5 @@
+import userManager from './userManager';
+
 const getPosition = () =>
   // eslint-disable-next-line
   new Promise((resovle, reject) => {
@@ -118,6 +120,9 @@ export class NetworkManager {
     }
   }
 
+  /**
+   * 从服务器获取category
+   */
   async getCategory() {
     const res = await fetch('http://18.222.175.208/', {
       method: 'POST',
@@ -130,5 +135,17 @@ export class NetworkManager {
     const json = await res.json();
 
     return json;
+  }
+
+  async getProfile() {
+    const res = await fetch('http://18.222.175.208/', {
+      method: 'POST',
+      body: JSON.stringify({param: {a: 'gp', token: userManager.getToken()}}),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencode',
+      },
+    });
+
+    return await res.json();
   }
 }

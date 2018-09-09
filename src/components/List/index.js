@@ -8,22 +8,25 @@ import {
 } from 'react-native';
 import {Entypo} from '../Icons';
 
-const List = ({children}) => {
+const List = ({title, children}) => {
   const Children = children instanceof Array ? children : [children];
   return (
-    <View style={{backgroundColor: 'white', marginTop: 8}}>
-      {Children.map((child, index) => {
-        if (index !== 0) {
-          return React.cloneElement(child, {
-            style: {
-              borderTopWidth: 1,
-              borderTopColor: 'rgba(120, 120, 120, 0.2)',
-            },
-          });
-        }
-        return child;
-      })}
-    </View>
+    <React.Fragment>
+      {title}
+      <View style={{backgroundColor: 'white', marginTop: 8}}>
+        {Children.map((child, index) => {
+          if (index !== 0) {
+            return React.cloneElement(child, {
+              style: {
+                borderTopWidth: 1,
+                borderTopColor: 'rgba(120, 120, 120, 0.2)',
+              },
+            });
+          }
+          return child;
+        })}
+      </View>
+    </React.Fragment>
   );
 };
 

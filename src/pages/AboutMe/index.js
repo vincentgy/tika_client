@@ -24,6 +24,7 @@ export default class AboutMe extends React.Component {
           <React.Fragment>
             {isShow ? null : (
               <Header
+                title={<Text style={{color: 'white'}}>About Me</Text>}
                 leftButton={[
                   <EasyTap
                     key={1}

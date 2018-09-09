@@ -2,13 +2,13 @@ import React from 'react';
 import {View, TouchableOpacity, Image, Text} from 'react-native';
 import PageBase from '../../components/PageBase';
 import InformationContainer from '../../public/InformationContainer';
-import {shadowStyle} from '../../public/shadowStyle';
 import Header from '../../components/Header';
 import styled from 'styled-components';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
 import {Entypo, Ionicons} from '../../components/Icons';
 import {EasyTap} from '../../public/EasyTap';
 import {Auto} from '../../store';
+import Card from '../../components/Card';
 
 const Info = InformationContainer.Info;
 
@@ -23,44 +23,50 @@ const ShortBref = styled.Text`
   margin-top: 16px;
 `;
 
+const AddButton = ({onPress}) => {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={1}
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 40,
+      }}>
+      <Ionicons
+        name="ios-add"
+        size={22}
+        style={{marginRight: 8}}
+        color="#FC740D"
+      />
+    </TouchableOpacity>
+  );
+};
+
 const EditBlock = ({
   title,
   icon,
   desc,
   onPress,
   renderContent,
-  isShow = true,
+  isRenderContent,
 }) => {
   return (
-    <View style={{...shadowStyle, paddingBottom: 0}}>
+    <Card style={{paddingBottom: 0}}>
       <View
         style={{
           flexDirection: 'row',
           alignItems: 'center',
+          borderBottomColor: 'rgba(120,120,120,0.2)',
+          borderBottomWidth: 0.5,
+          paddingBottom: 8,
         }}>
         <Image source={icon} style={{width: 16, height: 16}} />
         <Text style={{marginLeft: 8}}>{title}</Text>
       </View>
-      <TouchableOpacity
-        onPress={onPress}
-        activeOpacity={1}
-        style={{
-          borderTopColor: 'rgba(120,120,120,0.2)',
-          borderTopWidth: 0.5,
-          marginTop: 8,
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: 40,
-        }}>
-        <Ionicons
-          name="ios-add"
-          size={22}
-          style={{marginRight: 8}}
-          color="#FC740D"
-        />
-      </TouchableOpacity>
-    </View>
+      {isRenderContent ? renderContent() : <AddButton onPress={onPress} />}
+    </Card>
   );
 };
 
@@ -109,7 +115,7 @@ export default class EditProfile extends React.Component {
         />
         <PageBase
           style={{backgroundColor: '#fafafa', height: HEIGHT - 48 - 20}}>
-          <View style={{...shadowStyle, marginTop: 8}}>
+          <Card style={{marginTop: 8}}>
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
               <View style={{width: WIDTH / 3}}>
@@ -134,19 +140,27 @@ export default class EditProfile extends React.Component {
                 />
               </TouchableOpacity>
             </View>
-          </View>
+          </Card>
           {AboutMeText(text => (
             <EditBlock
-              isShow={text.length === 0}
+              isRenderContent={text.length !== 0}
               onPress={() => this.navigation('AboutMe')}
               title="About me"
               icon={require('../../asset/me.png')}
               renderContent={() => (
-                <Text style={{padding: 16, color: '#333', fontWeight: '300'}}>
-                  {text}
-                </Text>
+                <TouchableOpacity
+                  activeOpacity={1}
+                  onPress={() => this.navigation('AboutMe')}
+                  style={{
+                    paddingVertical: 8,
+                    flexDirection: 'row',
+                  }}>
+                  <Text style={{color: '#333', fontWeight: '300'}}>
+                    <Entypo name="edit" size={16} color="#abb0b0" />
+                    {`  ${text}`}
+                  </Text>
+                </TouchableOpacity>
               )}
-              desc="Click here to write somehting about yourself so employers get to know you better"
             />
           ))}
           <EditBlock
