@@ -5,12 +5,19 @@ import Input from '../../components/Input';
 import List from '../../components/List';
 import Header from '../../components/Header';
 import DataPicker from '../../components/DataPicker';
+import {EasyTap} from '../../public/EasyTap';
+import {Entypo} from '../../components/Icons';
 
 export default class WorkExprience extends React.Component {
   render() {
     return (
       <React.Fragment>
         <Header
+          leftButton={[
+            <EasyTap key={0} onPress={() => this.props.navigation.goBack()}>
+              <Entypo size={16} color="white" name="chevron-thin-left" />
+            </EasyTap>,
+          ]}
           title={<Text style={{color: 'white'}}>Employment History</Text>}
         />
         <PageBase>
@@ -22,8 +29,16 @@ export default class WorkExprience extends React.Component {
                 Employment period
               </Text>
             }>
-            <List.Item key={1} title="Start" desc="8.2018" />
-            <List.Item key={2} title="End" desc="8.2018" />
+            <DataPicker key={1}>
+              {setOpen => (
+                <List.Item onPress={setOpen} title="Start" desc="8.2018" />
+              )}
+            </DataPicker>
+            <DataPicker key={2}>
+              {setOpen => (
+                <List.Item onPress={setOpen} title="End" desc="8.2018" />
+              )}
+            </DataPicker>
           </List>
           <List>
             <List.Item key={1} title="Category" />

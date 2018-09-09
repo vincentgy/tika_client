@@ -42,8 +42,8 @@ export default class DataPicker extends React.Component {
     super(props);
 
     this.state = {
-      day: '',
-      date: '',
+      month: [],
+      year: [],
       modalVisible: false,
     };
   }
@@ -98,7 +98,7 @@ export default class DataPicker extends React.Component {
                 </TouchableOpacity>
               </ButtonGroup>
               <View style={{flexDirection: 'row'}}>
-                {Object.keys(this.props.data).map((key, idx) => (
+                {/* {this.state.month.map((key, idx) => (
                   <PickerCompat
                     selectedValue={this.state.value[idx]}
                     onValueChange={value => {
@@ -122,7 +122,7 @@ export default class DataPicker extends React.Component {
                       />
                     ))}
                   </PickerCompat>
-                ))}
+                ))} */}
               </View>
             </ModalInside>
           </View>
