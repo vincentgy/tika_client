@@ -3,6 +3,7 @@ package com.tika;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rnfs.RNFSPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
@@ -15,6 +16,11 @@ import com.airbnb.android.react.maps.MapsPackage;
 // https://github.com/maxs15/react-native-spinkit/wiki/Manual-linking---Android
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.zyu.ReactNativeWheelPickerPackage;
+//https://github.com/remobile/react-native-zip
+import com.remobile.zip.RCTZipPackage;
+
+//https://github.com/remobile/react-native-file-transfer
+import com.remobile.filetransfer.RCTFileTransferPackage; 
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,10 +36,13 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new RNFSPackage(),
             new VectorIconsPackage(),
             new LinearGradientPackage(),
             new ReactNativeWheelPickerPackage(),
             new MapsPackage(),
+            new RCTZipPackage(),
+            new RCTFileTransferPackage(),
             new PickerPackage(), new CustomHotUpdateModulePackage(),new RNSpinkitPackage());
     }
 
