@@ -32,7 +32,6 @@ const ButtonGroup = styled.View`
 `;
 
 const StyledText = styled.Text`
-  font-weight: 900;
   color: #0077ff;
   font-size: 16px;
 `;
@@ -41,10 +40,30 @@ export default class DataPicker extends React.Component {
   constructor(props) {
     super(props);
 
+    const year = [];
+    for (let index = 2000; index < 2020; index++) {
+      year.push(index);
+    }
+
     this.state = {
-      month: [],
-      year: [],
+      month: [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'June',
+        'July',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ],
+      year: year,
       modalVisible: false,
+      selectedMonth: 'Jan',
+      selectedYear: 2017,
     };
   }
 
@@ -78,19 +97,13 @@ export default class DataPicker extends React.Component {
                   style={{padding: 16}}>
                   <StyledText>Cancel</StyledText>
                 </TouchableOpacity>
-                <Text
-                  style={{
-                    padding: 16,
-                    fontWeight: '900',
-                    color: '#a0b0b0',
-                    fontSize: 16,
-                  }}>
-                  {this.props.title}
-                </Text>
                 <TouchableOpacity
                   onPress={() => {
                     this.props.onComfirm &&
-                      this.props.onComfirm(this.state.value);
+                      this.props.onComfirm(
+                        this.state.selectedMonth,
+                        this.state.selectedYear
+                      );
                     this.setModalVisible(false);
                   }}
                   style={{padding: 16}}>
@@ -98,31 +111,32 @@ export default class DataPicker extends React.Component {
                 </TouchableOpacity>
               </ButtonGroup>
               <View style={{flexDirection: 'row'}}>
-                {/* {this.state.month.map((key, idx) => (
-                  <PickerCompat
-                    selectedValue={this.state.value[idx]}
-                    onValueChange={value => {
-                      this.props.onValueChange &&
-                        this.props.onValueChange(value, key);
-                      this.setState({
-                        value: produce(this.state.value, draft => {
-                          draft[idx] = value;
-                        }),
-                      });
-                    }}
-                    key={key}
-                    style={{
-                      width: WIDTH / this.props.row,
-                    }}>
-                    {this.props.data[key].map((item, index) => (
-                      <PickerItem
-                        key={index}
-                        label={item.label}
-                        value={item.value}
-                      />
-                    ))}
-                  </PickerCompat>
-                ))} */}
+                <PickerCompat
+                  selectedValue={this.state.selectedMonth}
+                  onValueChange={value => {
+                    this.props.onValueChange && this.props.onValueChange(value);
+                    this.setState({
+                      selectedMonth: value,
+                    });
+                  }}
+                  style={{width: WIDTH / 2}}>
+                  {this.state.month.map((item, index) => (
+                    <Picker.Item key={index} label={item + ''} value={item} />
+                  ))}
+                </PickerCompat>
+                <PickerCompat
+                  selectedValue={this.state.selectedYear}
+                  onValueChange={value => {
+                    this.props.onValueChange && this.props.onValueChange(value);
+                    this.setState({
+                      selectedYear: value,
+                    });
+                  }}
+                  style={{width: WIDTH / 2}}>
+                  {this.state.year.map((item, index) => (
+                    <Picker.Item key={index} label={item + ''} value={item} />
+                  ))}
+                </PickerCompat>
               </View>
             </ModalInside>
           </View>

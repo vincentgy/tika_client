@@ -151,7 +151,6 @@ export class FetcherNoCache extends React.Component {
 
       if (this._isMount) {
         // simple cached
-        console.log(json);
         this.setState({
           fetchData: json,
           loading: false,

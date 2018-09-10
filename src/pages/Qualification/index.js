@@ -8,6 +8,8 @@ import Input from '../../components/Input';
 import KeyboardDetector from '../../utils/keyboard';
 import * as Animatable from 'react-native-animatable';
 import ListTicker from '../../components/ListTicker';
+import {Entypo} from '../../components/Icons';
+import {EasyTap} from '../../public/EasyTap';
 
 export default class QualificationEditor extends React.Component {
   state = {
@@ -45,7 +47,19 @@ export default class QualificationEditor extends React.Component {
         }}>
         {() => (
           <React.Fragment>
-            <Header />
+            <Header
+              leftButton={[
+                <EasyTap key={1} onPress={() => this.props.navigation.goBack()}>
+                  <Entypo
+                    size={16}
+                    color="white"
+                    key={0}
+                    name="chevron-thin-left"
+                  />
+                </EasyTap>,
+              ]}
+              title={<Text style={{color: 'white'}}>Qualification</Text>}
+            />
             <PageBase>
               <Animatable.View ref={Node => (this.view = Node)}>
                 <ListTicker

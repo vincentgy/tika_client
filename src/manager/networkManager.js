@@ -145,7 +145,18 @@ export class NetworkManager {
         'Content-Type': 'application/x-www-form-urlencode',
       },
     });
+    const data = await res.json();
+    const json = data.data;
 
-    return await res.json();
+    return {
+      avatar: json.avatar,
+      description: json.description,
+      email: json.email,
+      experiences: json.experiences,
+      name: json.name,
+      phone: json.phone,
+      qualifications: json.qualifications,
+      skills: json.skills,
+    };
   }
 }
