@@ -26,6 +26,8 @@ YellowBox.ignoreWarnings([
   'Warning: isMounted(...) is deprecated',
   'Module RCTImageLoader',
   'Class RCTCxxModule',
+  'Module CDVFileTransfer', //
+  'Module ZipPlugin',
 ]);
 
 Rluy.addController(PJ);
@@ -120,9 +122,9 @@ const DevMenuTrigger = ({children}) => {
       if (gestureState.numberActiveTouches === 3) {
         DevMenu.show();
       }
-      if (gestureState.numberActiveTouches === 2) {
-        Debugger.open();
-      }
+      // if (gestureState.numberActiveTouches === 2) {
+      //   Debugger.open();
+      // }
     },
   });
   return (
