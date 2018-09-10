@@ -1,6 +1,13 @@
 import {init} from 'rectx';
 import {DataProvider} from 'recyclerlistview';
 
+// ‘experiences’ => [
+//   ‘place’ : company name or other location names,
+//   ‘task’ : work content,
+//   ‘start’ : start yearmonth, like 201008,
+//   ‘end’ : start yearmonth, like 201208,
+// ]
+
 const Store = init({
   /**
    * all:0
@@ -26,12 +33,22 @@ const Store = init({
   categories: [],
   categoriesIds: {},
   profile: {
+    name: '',
+    avatar: '',
     aboutMe: '',
     qualification: [],
     major: '',
     employedFrom: '',
     employedTo: '',
     skills: [],
+    experiences: [
+      {
+        place: '',
+        task: '',
+        start: '',
+        end: '',
+      },
+    ],
   },
   job: {
     list: new DataProvider((r1, r2) => {

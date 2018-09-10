@@ -11,7 +11,7 @@ export default class ListTicker extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={{backgroundColor: 'white'}}>
         {this.props.data.map((data, idx) => (
           <SelectItem
             key={idx}

@@ -22,6 +22,8 @@ import ImagePicker from 'react-native-image-crop-picker';
 import LocationSelector from '../ModalFilter/location';
 import ActionSheet from 'react-native-actionsheet'; //https://github.com/beefe/react-native-actionsheet
 import MapView from 'react-native-maps';
+import {NetworkManager} from '../../manager/networkManager';
+import {Put, Auto} from '../../store';
 
 const ListGroup = ({children}) => {
   return <View style={{marginTop: 8}}>{children}</View>;
@@ -96,51 +98,50 @@ const SettingCell = ({children, no, onPress}) => {
 //         }}
 //       />
 
-const Profile = ({onEditProfile, onAatarPress}) => {
+const Profile = ({onEditProfile, onAatarPress, aboutMe, name, avatar}) => {
   return (
-    <FetcherNoCache body={{a: 'gp', token: userManager.getToken()}}>
-      {({fetchData}) => {
-        console.log(fetchData);
-        return (
-          <ProfileContainer>
-            <View>
-              <Name>{fetchData.data.name}</Name>
-              <Bref>have 3 years background of web dev</Bref>
-              <TouchableOpacity
-                onPress={onEditProfile}
-                activeOpacity={1}
-                style={{
-                  marginTop: 8,
-                  maxWidth: 110,
-                  padding: 4,
-                  flexDirection: 'row',
-                  borderRadius: 4,
-                  backgroundColor: 'rgba(120,120,120,0.1)',
-                }}>
-                <Entypo name="edit" size={16} color="#abb0b0" />
-                <Text style={{color: '#abb0b0', paddingLeft: 8}}>
-                  Edit profile
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <TouchableOpacity onPress={onAatarPress}>
-              <Image
-                cache="reload"
-                source={{uri: fetchData.data.avatar}}
-                style={{
-                  width: 64,
-                  height: 64,
-                  marginRight: 16,
-                  borderRadius: 32,
-                }}
-              />
-            </TouchableOpacity>
-          </ProfileContainer>
-        );
-      }}
-    </FetcherNoCache>
+    <ProfileContainer>
+      <View>
+        <Name>{name}</Name>
+        <Bref>{aboutMe}</Bref>
+        <TouchableOpacity
+          onPress={onEditProfile}
+          activeOpacity={1}
+          style={{
+            marginTop: 8,
+            maxWidth: 110,
+            padding: 4,
+            flexDirection: 'row',
+            borderRadius: 4,
+            backgroundColor: 'rgba(120,120,120,0.1)',
+          }}>
+          <Entypo name="edit" size={16} color="#abb0b0" />
+          <Text style={{color: '#abb0b0', paddingLeft: 8}}>Edit profile</Text>
+        </TouchableOpacity>
+      </View>
+      <TouchableOpacity onPress={onAatarPress}>
+        {avatar ? (
+          <Image
+            cache="reload"
+            source={{uri: avatar}}
+            style={{
+              width: 64,
+              height: 64,
+              marginRight: 16,
+              borderRadius: 32,
+            }}
+          />
+        ) : null}
+      </TouchableOpacity>
+    </ProfileContainer>
   );
 };
+
+const ProfileStore = Auto(state => ({
+  name: state.profile.name,
+  aboutMe: state.profile.aboutMe,
+  avatar: state.profile.avatar,
+}));
 
 @connect()
 class Account extends React.Component {
@@ -217,6 +218,19 @@ class Account extends React.Component {
       .catch();
   };
 
+  async getUserProfile() {
+    const manager = new NetworkManager();
+    const profile = await manager.getProfile();
+    Put(state => {
+      state.profile.name = profile.name;
+      state.profile.avatar = profile.avatar;
+    });
+  }
+
+  componentDidMount() {
+    this.getUserProfile();
+  }
+
   render() {
     return (
       <PageBase
@@ -224,12 +238,19 @@ class Account extends React.Component {
           backgroundColor: '#fafafa',
           height: HEIGHT - 44,
         }}>
-        <IOSBar barStyle={'dark-content'} color="white" />
-        <Profile
-          onEditProfile={this.handleEditProfile}
-          onAatarPress={this.showActionSheet}
-        />
-        
+        <IOSBar barStyle="dark-content" color="white" />
+        {ProfileStore(state => {
+          console.log(state);
+          return (
+            <Profile
+              name={state.name}
+              onEditProfile={this.handleEditProfile}
+              onAatarPress={this.showActionSheet}
+              avatar={state.avatar}
+              aboutMe={state.aboutMe}
+            />
+          );
+        })}
         <ListGroup>
           <SettingCell>
             <Text>Favorite</Text>

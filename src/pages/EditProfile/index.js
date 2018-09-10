@@ -176,6 +176,7 @@ export default class EditProfile extends React.Component {
             desc="Click here to add your qualifications, this will help employers to see if you have experience with the role."
           />
           <EditBlock
+            onPress={() => this.navigation('Skills')}
             title="Skills"
             icon={require('../../asset/me.png')}
             desc="Click here to add skills to your Job profile. This will make it easier for employers to see what you are good at "

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TextInput} from 'react-native';
+import {View, TextInput, Platform} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import styled from 'styled-components';
 
@@ -18,6 +18,17 @@ class Input extends React.Component {
   state = {
     filled: false,
   };
+
+  shouldComponentUpdate(nextProps) {
+    return (
+      Platform.OS !== 'ios' ||
+      (this.props.value === nextProps.value &&
+        (nextProps.defaultValue == undefined ||
+          nextProps.defaultValue == '')) ||
+      (this.props.defaultValue === nextProps.defaultValue &&
+        (nextProps.value == undefined || nextProps.value == ''))
+    );
+  }
 
   handleTextRef = ref => (this.text = ref);
 
@@ -62,6 +73,7 @@ class Input extends React.Component {
               height: 51,
               fontSize: 15,
             }}
+            value={this.props.value}
             autoFocus={this.props.autoFocus}
             onEndEditing={this.props.onEndEditing}
             onChangeText={this.handleChangeText}
