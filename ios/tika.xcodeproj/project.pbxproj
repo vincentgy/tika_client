@@ -43,6 +43,10 @@
 		454082C32130428200456980 /* RSKImageCropper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 454082C12130428200456980 /* RSKImageCropper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		454082C62130428600456980 /* QBImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 454082C52130428600456980 /* QBImagePicker.framework */; };
 		454082C72130428600456980 /* QBImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 454082C52130428600456980 /* QBImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		455F56092146B6D200A9672E /* UpdateModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 455F56082146B6D200A9672E /* UpdateModule.m */; };
+		455F560C2146B76A00A9672E /* BSDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = 455F560B2146B76A00A9672E /* BSDiff.m */; };
+		455F560F2146B7B200A9672E /* bspatch.c in Sources */ = {isa = PBXBuildFile; fileRef = 455F560E2146B7B200A9672E /* bspatch.c */; };
+		455F56112146B94D00A9672E /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 455F56102146B94C00A9672E /* libbz2.tbd */; };
 		456634B42108BE550041FB55 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 456634B32108BE3D0041FB55 /* libRNVectorIcons.a */; };
 		456634C12108BF780041FB55 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 456634B62108BF780041FB55 /* Octicons.ttf */; };
 		456634C22108BF780041FB55 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 456634B72108BF780041FB55 /* Feather.ttf */; };
@@ -567,6 +571,13 @@
 		4540828121303E0800456980 /* imageCropPicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = imageCropPicker.xcodeproj; path = "../node_modules/react-native-image-crop-picker/ios/imageCropPicker.xcodeproj"; sourceTree = "<group>"; };
 		454082C12130428200456980 /* RSKImageCropper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RSKImageCropper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		454082C52130428600456980 /* QBImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = QBImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		455F55CD2146B69D00A9672E /* UpdateModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateModule.h; sourceTree = "<group>"; };
+		455F56082146B6D200A9672E /* UpdateModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateModule.m; sourceTree = "<group>"; };
+		455F560A2146B6FA00A9672E /* BSDiff.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BSDiff.h; sourceTree = "<group>"; };
+		455F560B2146B76A00A9672E /* BSDiff.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BSDiff.m; sourceTree = "<group>"; };
+		455F560D2146B79500A9672E /* bspatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bspatch.h; sourceTree = "<group>"; };
+		455F560E2146B7B200A9672E /* bspatch.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = bspatch.c; sourceTree = "<group>"; };
+		455F56102146B94C00A9672E /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		456634892108BE3C0041FB55 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		456634B62108BF780041FB55 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		456634B72108BF780041FB55 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
@@ -614,6 +625,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				455F56112146B94D00A9672E /* libbz2.tbd in Frameworks */,
 				454082C02130408900456980 /* libimageCropPicker.a in Frameworks */,
 				450CA9A6210CC7930056AB17 /* libRNSpinkit.a in Frameworks */,
 				456634B42108BE550041FB55 /* libRNVectorIcons.a in Frameworks */,
@@ -756,6 +768,12 @@
 				6B7668CD21265D01004314FD /* RNTTableViewManager.m */,
 				6B9029B0212691E10003FD1B /* RNTTableview.m */,
 				6B902969212675700003FD1B /* RNTTableview.h */,
+				455F55CD2146B69D00A9672E /* UpdateModule.h */,
+				455F56082146B6D200A9672E /* UpdateModule.m */,
+				455F560A2146B6FA00A9672E /* BSDiff.h */,
+				455F560B2146B76A00A9672E /* BSDiff.m */,
+				455F560D2146B79500A9672E /* bspatch.h */,
+				455F560E2146B7B200A9672E /* bspatch.c */,
 			);
 			name = tika;
 			sourceTree = "<group>";
@@ -786,6 +804,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				455F56102146B94C00A9672E /* libbz2.tbd */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 			);
 			name = Frameworks;
@@ -1726,6 +1745,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				455F56092146B6D200A9672E /* UpdateModule.m in Sources */,
+				455F560C2146B76A00A9672E /* BSDiff.m in Sources */,
+				455F560F2146B7B200A9672E /* bspatch.c in Sources */,
 				6B9029B1212691E10003FD1B /* RNTTableview.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				6BB4902C212BDE33005A26DF /* RNTMapManager.m in Sources */,
