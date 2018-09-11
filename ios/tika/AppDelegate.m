@@ -9,6 +9,7 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import "UpdateModule.h"
 
 
 @implementation AppDelegate
@@ -53,8 +54,10 @@
 
 - (NSURL *)sourceURLForBridge:(__unused RCTBridge *)bridge
 {
-  return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"
-                                                        fallbackResource:nil];
+//  [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"
+//                                                 fallbackResource:nil];
+ 
+  return [UpdateModule bundleURL];
 }
 
 @end
