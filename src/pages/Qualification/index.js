@@ -13,10 +13,21 @@ import {EasyTap} from '../../public/EasyTap';
 import TimixForm from '../../components/TimixForm';
 
 const Ft = TimixForm.FormType;
+const Combind = TimixForm.Combind;
 
-const QualificationForm = TimixForm({
-  Qualification: Ft.Tick,
-  Course: Ft.Text,
+const QualificationForm = Combind({
+  Degree: {
+    header: 'Your degree',
+    form: TimixForm({
+      degree: Ft.Tick,
+    }),
+  },
+  Course: {
+    header: 'Your major',
+    form: TimixForm({
+      Course: Ft.Text,
+    }),
+  },
 });
 
 export default class QualificationEditor extends React.Component {
@@ -56,7 +67,7 @@ export default class QualificationEditor extends React.Component {
           title={<Text style={{color: 'white'}}>Qualification</Text>}
         />
         <PageBase>
-          <QualificationForm Qualification={Quali} />
+          <QualificationForm degree={Quali} />
         </PageBase>
       </React.Fragment>
     );

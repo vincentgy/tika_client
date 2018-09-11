@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, findNodeHandle} from 'react-native';
+import {View, findNodeHandle, Text, TextInput, Platform} from 'react-native';
 import TagInput from '../TagInput';
 import ListTicker from '../ListTicker';
 import DataPicker from '../DataPicker';
@@ -18,6 +18,20 @@ const FormType = {
   Tags: 'tags',
 };
 
+const UseKeyboardAwareScrollView = ({notUse, children}) => {
+  if (notUse) return children;
+  return (
+    <KeyboardAwareScrollView
+      enableAutomaticScroll
+      enableOnAndroid
+      extraHeight={-64}
+      extraScrollHeight={-64}
+      resetScrollToCoords={{x: 0, y: 0}}>
+      {children}
+    </KeyboardAwareScrollView>
+  );
+};
+
 const TimixForm = formScheme => {
   const formData = {};
   Object.keys(formScheme).forEach(key => {
@@ -25,6 +39,9 @@ const TimixForm = formScheme => {
   });
 
   return class Form extends React.Component {
+    static defaultProps = {
+      notUseKeyboardAwareScrollView: false,
+    };
     constructor(props) {
       super(props);
       this.state = {...formData};
@@ -48,13 +65,8 @@ const TimixForm = formScheme => {
 
     render() {
       return (
-        <KeyboardAwareScrollView
-          enableAutomaticScroll
-          enableOnAndroid
-          extraHeight={-64}
-          extraScrollHeight={-64}
-          keyboardOpeningTime={50}
-          resetScrollToCoords={{x: 0, y: 0}}>
+        <UseKeyboardAwareScrollView
+          notUse={this.props.notUseKeyboardAwareScrollView}>
           <View>
             {Object.keys(this.state).map((key, index) => {
               const elementType = this.state[key].type;
@@ -62,22 +74,23 @@ const TimixForm = formScheme => {
                 return (
                   <Kohana
                     inputStyle={{fontSize: 14}}
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      height: 48,
-                    }}
                     useNativeDriver
                     label={`${key}`}
-                    onChangeText={text => this.onFormChange(key, text)}
                     key={index}
                     labelStyle={{fontWeight: '100', fontSize: 14}}
                     iconSize={14}
                     iconClass={FontAwesome}
                     iconName={'pencil'}
                     // TextInput props
+                    value={this.state[key].value}
+                    onChangeText={text => this.onFormChange(key, text)}
                     autoCapitalize={'none'}
                     autoCorrect={false}
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      height: 48,
+                    }}
                   />
                 );
               }
@@ -123,19 +136,73 @@ const TimixForm = formScheme => {
               return null;
             })}
           </View>
-        </KeyboardAwareScrollView>
+        </UseKeyboardAwareScrollView>
       );
     }
   };
 };
 
-
-
-
 TimixForm.FormType = FormType;
-TimixForm.Combind = (forms)=>{
+TimixForm.Combind = forms => {
+  return class wrapper extends React.Component {
+    getFormData = () => {
+      const CombindData = {};
+      Object.keys(this.refs).forEach(key => {
+        const instance = this.refs[key];
+        const info = instance.getFormData();
+        Object.keys(info).forEach(k => {
+          CombindData[k] = info[k];
+        });
+      });
 
-  
-}
+      return CombindData;
+    };
+
+    render() {
+      const FormsCombinded = Object.keys(forms).map(key => {
+        //如果有header
+        if (forms[key].header) {
+          const FormWithHeader = forms[key].form;
+          return (
+            <List
+              key={key}
+              title={
+                <Text style={{marginLeft: 16, marginTop: 16, color: '#abb0b0'}}>
+                  {forms[key].header}
+                </Text>
+              }>
+              <FormWithHeader
+                {...this.props}
+                notUseKeyboardAwareScrollView
+                ref={`${key}`}
+              />
+            </List>
+          );
+        }
+        // 如果没有header
+        const FormWithNoHeader = forms[key];
+        return (
+          <FormWithNoHeader
+            {...this.props}
+            notUseKeyboardAwareScrollView
+            key={key}
+            ref={`${key}`}
+          />
+        );
+      });
+
+      return (
+        <KeyboardAwareScrollView
+          enableAutomaticScroll
+          enableOnAndroid
+          extraHeight={-64}
+          extraScrollHeight={-64}
+          resetScrollToCoords={{x: 0, y: 0}}>
+          {FormsCombinded}
+        </KeyboardAwareScrollView>
+      );
+    }
+  };
+};
 
 export default TimixForm;

@@ -19,6 +19,27 @@ const ListPicker = ({title, onComfirm}) => (
 );
 
 const Ft = TimixForm.FormType;
+const Combind = TimixForm.Combind;
+
+const EmploymentHistForm = Combind({
+  JobInfo: TimixForm({
+    JobTitle: Ft.Text,
+    Company: Ft.Text,
+  }),
+  Time: {
+    header: 'Employment Period',
+    form: TimixForm({
+      Start: Ft.Date,
+      End: Ft.Date,
+    }),
+  },
+  Skills: {
+    header: 'Skills',
+    form: TimixForm({
+      Skills: Ft.Tags,
+    }),
+  },
+});
 
 const EmploymentHistory = TimixForm({
   JobTitle: Ft.Text,
@@ -29,26 +50,28 @@ const EmploymentHistory = TimixForm({
 });
 
 export default class WorkExprience extends React.Component {
-  onTimeChange = (type, month, year) => {};
+  FinisheEditing = () => {
+    const HistoryInfo = this.form.getFormData();
+  };
 
   render() {
     return (
       <React.Fragment>
         <Header
           leftButton={[
-            <EasyTap key={0} onPress={() => this.props.navigation.goBack()}>
+            <EasyTap key={0} onPress={this.props.navigation.goBack}>
               <Entypo size={16} color="white" name="chevron-thin-left" />
             </EasyTap>,
           ]}
           rightButton={[
-            <EasyTap key={1} onPress={() => this.props.navigation.goBack()}>
+            <EasyTap key={1} onPress={this.FinisheEditing}>
               <MaterialIcons size={20} color="white" key={0} name="check" />
             </EasyTap>,
           ]}
           title={<Text style={{color: 'white'}}>Employment History</Text>}
         />
         <PageBase>
-          <EmploymentHistory />
+          <EmploymentHistForm ref={node => (this.form = node)} />
         </PageBase>
       </React.Fragment>
     );

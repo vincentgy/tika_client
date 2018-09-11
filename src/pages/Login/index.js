@@ -11,6 +11,7 @@ import {Post} from '../../utils/url';
 import {Loading} from '../../components/Loading';
 import MD5 from 'blueimp-md5';
 import {connect} from 'react-redux';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const Center = styled.TouchableOpacity`
   flex-direction: row;
@@ -55,63 +56,53 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <KeyboardDetector>
-        {(isShow, height, getViewContainerRef) => (
-          <ScrollView
-            contentContainerStyle={{
-              backgroundColor: '#2D59D9',
-              height: '100%',
+      <KeyboardAwareScrollView
+        contentContainerStyle={{
+          backgroundColor: '#2D59D9',
+          height: '100%',
+        }}>
+        <View style={{height: '50%'}} />
+        <View style={{height: '50%', backgroundColor: 'white'}}>
+          <Form
+            onSumit={obj => {
+              this.handleLogin(obj);
             }}>
-            <Animatable.View ref={getViewContainerRef}>
-              <View style={{height: '50%'}} />
-              <View style={{height: '50%', backgroundColor: 'white'}}>
-                <Form
-                  onSumit={obj => {
-                    this.handleLogin(obj);
+            {(onChange, onSumit) => (
+              <React.Fragment>
+                <Input
+                  placeholder="Email"
+                  onChangeText={t => onChange({key: 'Email', value: t})}
+                />
+                <Input
+                  placeholder="Password"
+                  onChangeText={t => onChange({key: 'Password', value: t})}
+                />
+                {this.state.loading ? (
+                  <Loading />
+                ) : (
+                  <Button
+                    buttonStyle={{height: 48, marginTop: 16}}
+                    backgroundColor="#0077FF"
+                    borderRadius={4}
+                    onPress={onSumit}
+                    title="Log in"
+                  />
+                )}
+                <Center style={{marginTop: 16}}>
+                  <Text style={{color: Theme}}>Forgot your password?</Text>
+                </Center>
+                <Center
+                  style={{marginTop: 16}}
+                  onPress={() => {
+                    this.props.navigation.navigate('CreateAccount');
                   }}>
-                  {(onChange, onSumit) => (
-                    <React.Fragment>
-                      <Input
-                        placeholder="Email"
-                        onChangeText={t => onChange({key: 'Email', value: t})}
-                      />
-                      <Input
-                        placeholder="Password"
-                        onChangeText={t =>
-                          onChange({key: 'Password', value: t})
-                        }
-                      />
-                      {this.state.loading ? (
-                        <Loading />
-                      ) : (
-                        <Button
-                          buttonStyle={{height: 48, marginTop: 16}}
-                          backgroundColor="#0077FF"
-                          borderRadius={4}
-                          onPress={onSumit}
-                          title="Log in"
-                        />
-                      )}
-                      <Center style={{marginTop: 16}}>
-                        <Text style={{color: Theme}}>
-                          Forgot your password?
-                        </Text>
-                      </Center>
-                      <Center
-                        style={{marginTop: 16}}
-                        onPress={() => {
-                          this.props.navigation.navigate('CreateAccount');
-                        }}>
-                        <Text style={{color: Theme}}>Create an account</Text>
-                      </Center>
-                    </React.Fragment>
-                  )}
-                </Form>
-              </View>
-            </Animatable.View>
-          </ScrollView>
-        )}
-      </KeyboardDetector>
+                  <Text style={{color: Theme}}>Create an account</Text>
+                </Center>
+              </React.Fragment>
+            )}
+          </Form>
+        </View>
+      </KeyboardAwareScrollView>
     );
   }
 }
