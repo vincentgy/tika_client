@@ -59,10 +59,10 @@ const TabRoot = createBottomTabNavigator(
     // JobDetail,
     EditProfile,
     // AboutMe,
-    TimixFormTest,
+    // TimixFormTest,
   },
   {
-    initialRouteName: 'TimixFormTest',
+    initialRouteName: 'EditProfile',
     tabBarOptions: {
       style: {
         backgroundColor: 'white',

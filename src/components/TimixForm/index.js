@@ -16,6 +16,7 @@ const FormType = {
   Bool: 'bool',
   Tick: 'tick',
   Tags: 'tags',
+  Group: () => [],
 };
 
 const TimixForm = formScheme => {
@@ -52,6 +53,8 @@ const TimixForm = formScheme => {
           enableAutomaticScroll
           enableOnAndroid
           extraHeight={-64}
+          extraScrollHeight={-64}
+          keyboardOpeningTime={50}
           resetScrollToCoords={{x: 0, y: 0}}>
           <View>
             {Object.keys(this.state).map((key, index) => {
@@ -103,14 +106,19 @@ const TimixForm = formScheme => {
               }
               if (elementType === 'date') {
                 return (
-                  <List key={index}>
-                    <DataPicker
-                      onComfirm={(month, year) =>
-                        this.onFormChange(key, [month, year])
-                      }>
-                      {setOpen => <List.Item onPress={setOpen} title={key} />}
-                    </DataPicker>
-                  </List>
+                  <DataPicker
+                    key={index}
+                    onComfirm={(month, year) =>
+                      this.onFormChange(key, [month, year])
+                    }>
+                    {(setOpen, props, data) => (
+                      <List.Item
+                        onPress={setOpen}
+                        title={key}
+                        desc={`${data[0]}/${data[1]}`}
+                      />
+                    )}
+                  </DataPicker>
                 );
               }
               return null;

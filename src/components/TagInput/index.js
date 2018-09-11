@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity, Platform} from 'react-native';
 
 //https://github.com/halilb/react-native-textinput-effects
 import {Kohana} from 'react-native-textinput-effects';
-import {EvilIcons, MaterialIcons} from '../Icons';
+import {EvilIcons, MaterialIcons, FontAwesome} from '../Icons';
 
 const Tag = ({text, onPress}) => {
   return (
@@ -74,10 +74,10 @@ export default class TagInput extends React.Component {
         <Kohana
           inputStyle={{fontSize: 14}}
           style={{flexDirection: 'row', alignItems: 'center', height: 48}}
-          iconClass={MaterialIcons}
+          iconClass={FontAwesome}
           labelStyle={{fontWeight: '100', fontSize: 14}}
-          iconName={'directions-bus'}
-          iconSize={14}
+          iconName={'tag'}
+          iconSize={12}
           value={this.state.currentText}
           onChangeText={text => {
             this.setState({

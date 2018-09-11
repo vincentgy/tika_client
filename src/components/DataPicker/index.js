@@ -81,8 +81,11 @@ export default class DataPicker extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        {this.props.children(this.forRenderProps, this.props)}
+      <View style={{backgroundColor: 'white'}}>
+        {this.props.children(this.forRenderProps, this.props, [
+          this.state.selectedMonth,
+          this.state.selectedYear,
+        ])}
         <Modal
           animationType="slide"
           transparent={true}
@@ -141,7 +144,7 @@ export default class DataPicker extends React.Component {
             </ModalInside>
           </View>
         </Modal>
-      </React.Fragment>
+      </View>
     );
   }
 }
