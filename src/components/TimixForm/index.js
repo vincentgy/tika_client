@@ -16,7 +16,6 @@ const FormType = {
   Bool: 'bool',
   Tick: 'tick',
   Tags: 'tags',
-  Group: () => [],
 };
 
 const TimixForm = formScheme => {
@@ -130,6 +129,13 @@ const TimixForm = formScheme => {
   };
 };
 
+
+
+
 TimixForm.FormType = FormType;
+TimixForm.Combind = (forms)=>{
+
+  
+}
 
 export default TimixForm;
