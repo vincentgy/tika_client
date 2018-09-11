@@ -7,10 +7,10 @@ import FileTransfer from '@remobile/react-native-file-transfer';
 import Zip from '@remobile/react-native-zip';
 import fs from 'react-native-fs';
 import * as net from './net';
-import { hexMd5 } from './md5';
+import hexMd5 from 'blueimp-md5';
 
 // 是否开启热更新
-const ENABLED = false;
+const ENABLED = true;
 // const UPDATE_HOST = "https://static.btcchinacdn.com/plus/app";
 const UPDATE_HOST = 'http://10.0.23.100';
 

@@ -5,6 +5,7 @@ import {Theme} from '../../utils/color';
 
 const RegionItem = styled.TouchableOpacity`
   padding: 12px;
+  padding-left: 16px;
   background-color: ${props => (props.active ? '#f8f8f8' : 'null')};
   flex-direction: row;
   justify-content: space-between;

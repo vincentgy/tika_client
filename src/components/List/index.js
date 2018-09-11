@@ -43,7 +43,7 @@ const ItemContainer = styled.View`
 `;
 
 const T = styled.Text`
-  font-size: 16px;
+  color: #abb0b0;
 `;
 
 const TextMargined = T.extend`

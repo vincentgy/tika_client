@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -18,6 +19,37 @@ import AboutMe from './pages/AboutMe';
 import WorkExprience from './pages/WorkExprience';
 import QualificationEditor from './pages/Qualification';
 import Skills from './pages/Skills';
+import {View} from 'react-native';
+import PageBase from './components/PageBase';
+import TimixForm from './components/TimixForm';
+import {Button} from 'react-native-elements';
+
+const TestForm = TimixForm({
+  text: TimixForm.FormType.Text,
+  zhengfang: TimixForm.FormType.Text,
+  date: TimixForm.FormType.Date,
+  tick: TimixForm.FormType.Tick,
+  bool: TimixForm.FormType.Bool,
+  tags: TimixForm.FormType.Tags,
+});
+
+class TimixFormTest extends React.Component {
+  render() {
+    return (
+      <View>
+        <PageBase>
+          <TestForm ref={node => (this.form = node)} tick={['2', '3', '6']} />
+          <Button
+            title="确定"
+            onPress={() => {
+              console.log(this.form.getFormData());
+            }}
+          />
+        </PageBase>
+      </View>
+    );
+  }
+}
 
 const TabRoot = createBottomTabNavigator(
   {
@@ -27,6 +59,7 @@ const TabRoot = createBottomTabNavigator(
     // JobDetail,
     EditProfile,
     // AboutMe,
+    // TimixFormTest,
   },
   {
     initialRouteName: 'EditProfile',

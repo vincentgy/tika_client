@@ -8,6 +8,7 @@ import DataPicker from '../../components/DataPicker';
 import {EasyTap} from '../../public/EasyTap';
 import {Entypo, MaterialIcons} from '../../components/Icons';
 import TagInput from '../../components/TagInput';
+import TimixForm from '../../components/TimixForm';
 
 const ListPicker = ({title, onComfirm}) => (
   <DataPicker>
@@ -17,15 +18,18 @@ const ListPicker = ({title, onComfirm}) => (
   </DataPicker>
 );
 
+const Ft = TimixForm.FormType;
+
+const EmploymentHistory = TimixForm({
+  JobTitle: Ft.Text,
+  Company: Ft.Text,
+  Start: Ft.Date,
+  End: Ft.Date,
+  Skills: Ft.Tags,
+});
+
 export default class WorkExprience extends React.Component {
   onTimeChange = (type, month, year) => {};
-
-  onShow = height => {
-    this.page.transition({marginTop: 0}, {marginTop: -height});
-  };
-  onHide = () => {
-    this.page.transitionTo({marginTop: 0});
-  };
 
   render() {
     return (
@@ -44,38 +48,7 @@ export default class WorkExprience extends React.Component {
           title={<Text style={{color: 'white'}}>Employment History</Text>}
         />
         <PageBase>
-          <Input placeholder="Job title" />
-          <Input placeholder="Company" />
-          <List
-            title={
-              <Text style={{marginTop: 16, marginLeft: 8, color: '#abb0b0'}}>
-                Skills
-              </Text>
-            }>
-            <TagInput />
-          </List>
-          <List
-            title={
-              <Text style={{marginTop: 16, marginLeft: 8, color: '#abb0b0'}}>
-                Employment period
-              </Text>
-            }>
-            <ListPicker
-              onComfirm={(month, year) =>
-                this.onTimeChange('start', month, year)
-              }
-              key={1}
-              title="Start"
-            />
-            <ListPicker
-              onComfirm={(month, year) => this.onTimeChange('end', month, year)}
-              key={2}
-              title="End"
-            />
-          </List>
-          <List>
-            <List.Item key={1} title="Category" />
-          </List>
+          <EmploymentHistory />
         </PageBase>
       </React.Fragment>
     );

@@ -19,6 +19,7 @@ import {Logger, Debugger} from './utils/logger';
 import CreateAccount from './pages/Login/create';
 import Login from './pages/Login';
 import {connect} from 'react-redux';
+import {start} from './utils/update';
 
 // StatusBar.setBarStyle('light-content', true);
 
