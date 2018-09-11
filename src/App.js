@@ -27,6 +27,8 @@ YellowBox.ignoreWarnings([
   'Warning: isMounted(...) is deprecated',
   'Module RCTImageLoader',
   'Class RCTCxxModule',
+  'Module ZipPlugin',
+  'Module CDVFileTransfer',
 ]);
 
 Rluy.addController(PJ);
