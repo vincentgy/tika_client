@@ -35,7 +35,11 @@ const UseKeyboardAwareScrollView = ({notUse, children}) => {
 const TimixForm = formScheme => {
   const formData = {};
   Object.keys(formScheme).forEach(key => {
-    formData[key] = {type: formScheme[key], value: ''};
+    if (formScheme[key] === 'date') {
+      formData[key] = {type: formScheme[key], value: ['Jan', 2017]};
+    } else {
+      formData[key] = {type: formScheme[key], value: ''};
+    }
   });
 
   return class Form extends React.Component {
@@ -196,7 +200,9 @@ TimixForm.Combind = forms => {
           enableAutomaticScroll
           enableOnAndroid
           extraHeight={-64}
-          extraScrollHeight={-64}
+          extraScrollHeight={
+            this.props.offset === void 666 ? -64 : this.props.offset
+          }
           resetScrollToCoords={{x: 0, y: 0}}>
           {FormsCombinded}
         </KeyboardAwareScrollView>

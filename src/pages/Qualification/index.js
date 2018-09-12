@@ -28,6 +28,10 @@ const QualificationForm = Combind({
       Course: Ft.Text,
     }),
   },
+  Peroid: TimixForm({
+    start: Ft.Date,
+    end: Ft.Date,
+  }),
 });
 
 export default class QualificationEditor extends React.Component {
@@ -67,7 +71,7 @@ export default class QualificationEditor extends React.Component {
           title={<Text style={{color: 'white'}}>Qualification</Text>}
         />
         <PageBase>
-          <QualificationForm degree={Quali} />
+          <QualificationForm offset={0} degree={Quali} />
         </PageBase>
       </React.Fragment>
     );

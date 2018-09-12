@@ -32,8 +32,8 @@ const Info = ({title, img, info, width = WIDTH / 3 - 32}) => {
   );
 };
 
-const Container = ({children}) => {
-  return <InformationContainer>{children}</InformationContainer>;
+const Container = ({children, style}) => {
+  return <InformationContainer style={style}>{children}</InformationContainer>;
 };
 
 Container.Info = Info;

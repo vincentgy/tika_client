@@ -115,9 +115,33 @@ export class NetworkManager {
 
       return json;
     } catch (e) {
-      console.log(e);
-      return {};
+      return [];
     }
+  }
+
+  async UpdateProfile(aboutme, skills, qualifications, experiences) {
+    const userId = userManager.getToken();
+    const body = {
+      a: 'up',
+      user_id: userId,
+      description: aboutme,
+      phone: '',
+      skills: skills,
+      qualifications: qualifications,
+      experiences: experiences,
+    };
+    console.log('body', body);
+
+    const res = await fetch('http://18.222.175.208/', {
+      method: 'POST',
+      body: JSON.stringify({param: body}),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencode',
+      },
+    });
+
+    const json = await res.json();
+    console.log(json);
   }
 
   /**

@@ -24,12 +24,14 @@ import ActionSheet from 'react-native-actionsheet'; //https://github.com/beefe/r
 import MapView from 'react-native-maps';
 import {NetworkManager} from '../../manager/networkManager';
 import {Put, Auto} from '../../store';
+import Container from '../../public/InformationContainer';
+
+const Info = Container.Info;
 
 const ListGroup = ({children}) => {
   return <View style={{marginTop: 8}}>{children}</View>;
 };
 const ProfileContainer = styled.View`
-  height: 200px;
   background-color: white;
   padding-top: 48px;
   padding-left: 16px;
@@ -100,40 +102,59 @@ const SettingCell = ({children, no, onPress}) => {
 
 const Profile = ({onEditProfile, onAatarPress, aboutMe, name, avatar}) => {
   return (
-    <ProfileContainer>
-      <View>
-        <Name>{name}</Name>
-        <Bref>{aboutMe}</Bref>
-        <TouchableOpacity
-          onPress={onEditProfile}
-          activeOpacity={1}
-          style={{
-            marginTop: 8,
-            maxWidth: 110,
-            padding: 4,
-            flexDirection: 'row',
-            borderRadius: 4,
-            backgroundColor: 'rgba(120,120,120,0.1)',
-          }}>
-          <Entypo name="edit" size={16} color="#abb0b0" />
-          <Text style={{color: '#abb0b0', paddingLeft: 8}}>Edit profile</Text>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity onPress={onAatarPress}>
-        {avatar ? (
-          <Image
-            cache="reload"
-            source={{uri: avatar}}
+    <View style={{backgroundColor: 'white'}}>
+      <ProfileContainer>
+        <View>
+          <Name>{name}</Name>
+          <Bref>{aboutMe}</Bref>
+          <TouchableOpacity
+            onPress={onEditProfile}
+            activeOpacity={1}
             style={{
-              width: 64,
-              height: 64,
-              marginRight: 16,
-              borderRadius: 32,
-            }}
-          />
-        ) : null}
-      </TouchableOpacity>
-    </ProfileContainer>
+              marginTop: 8,
+              maxWidth: 110,
+              padding: 4,
+              flexDirection: 'row',
+              borderRadius: 4,
+              backgroundColor: 'rgba(120,120,120,0.1)',
+            }}>
+            <Entypo name="edit" size={16} color="#abb0b0" />
+            <Text style={{color: '#abb0b0', paddingLeft: 8}}>Edit profile</Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity onPress={onAatarPress}>
+          {avatar ? (
+            <Image
+              cache="reload"
+              source={{uri: avatar}}
+              style={{
+                width: 64,
+                height: 64,
+                marginRight: 16,
+                borderRadius: 32,
+              }}
+            />
+          ) : null}
+        </TouchableOpacity>
+      </ProfileContainer>
+      <Container style={{margin: 16}}>
+        <Info
+          title="Applications"
+          info="0"
+          img={require('../../asset/resume.png')}
+        />
+        <Info
+          title="Completed"
+          info="0"
+          img={require('../../asset/resume.png')}
+        />
+        <Info
+          title="Interview"
+          info="0"
+          img={require('../../asset/interview.png')}
+        />
+      </Container>
+    </View>
   );
 };
 
@@ -253,18 +274,15 @@ class Account extends React.Component {
         })}
         <ListGroup>
           <SettingCell>
-            <Text>Favorite</Text>
-          </SettingCell>
-          <SettingCell>
-            <Text>Help</Text>
+            <Text>Account settings</Text>
           </SettingCell>
           <SettingCell no>
-            <Text>Setting</Text>
+            <Text>Notifications</Text>
           </SettingCell>
         </ListGroup>
         <ListGroup>
           <SettingCell>
-            <Text>Switch role</Text>
+            <Text>Recruiter</Text>
           </SettingCell>
           <SettingCell onPress={this.handleLogout} no>
             <Text>Log out</Text>

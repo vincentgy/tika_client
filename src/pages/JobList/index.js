@@ -58,6 +58,6 @@ export default Page({
   ),
   tabBarOnPress: ({defaultHandler}) => {
     defaultHandler();
-    StatusBar.setBarStyle('dark-content', true);
+    StatusBar.setBarStyle('light-content', true);
   },
 })(JobListContainer);

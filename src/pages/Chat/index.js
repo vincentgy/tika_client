@@ -41,7 +41,7 @@ import Header from '../../components/Header';
     </View>
   ),
   tabBarOnPress: ({defaultHandler}) => {
-    StatusBar.setBarStyle('dark-content', true);
+    StatusBar.setBarStyle('light-content', true);
     defaultHandler();
   },
 })
@@ -76,6 +76,7 @@ export default class Chat extends React.Component {
     for (let index = 0; index < 20; index++) {
       chat.push(index);
     }
+
     this.state = {
       dataProvider: dataProvider.cloneWithRows(chat),
     };

@@ -36,18 +36,29 @@ const Store = init({
     name: '',
     avatar: '',
     aboutMe: '',
-    qualification: [],
+    qualification: [
+      {
+        degree: 'Bachelor',
+        school: 'AUT',
+        start: 'Jan 2017',
+        end: 'Jan 2018',
+        major: 'Information techonology',
+      },
+      {
+        degree: 'Bachelor',
+        school: 'AUT',
+        start: 'Jan 2017',
+        end: 'Jan 2018',
+        major: 'Information techonology',
+      },
+    ],
     major: '',
     employedFrom: '',
     employedTo: '',
-    skills: [],
+    skills: ['JavaScript', 'TypeScript', 'Nodejs', 'React Native'],
     experiences: [
-      {
-        place: '',
-        task: '',
-        start: '',
-        end: '',
-      },
+      {place: 'timix', task: 'web', start: 'Jan 2017', end: 'Jan 2018'},
+      {place: 'timix', task: 'web', start: 'Jan 2017', end: 'Jan 2018'},
     ],
   },
   job: {

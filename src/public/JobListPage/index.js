@@ -69,7 +69,7 @@ export default class JobList extends React.Component {
       },
       (type, dim) => {
         dim.width = width;
-        dim.height = Platform.OS === 'ios' ? 125 : 144;
+        dim.height = Platform.OS === 'ios' ? 96 : 144;
       }
     );
 
@@ -82,6 +82,7 @@ export default class JobList extends React.Component {
   //Given type and data return the view component
   _rowRenderer = (type, data) => {
     const nows = timeago().format(data.timestamp);
+    console.log(data);
     return (
       <TouchableOpacity
         onPress={() => this.props.onSelect && this.props.onSelect(data)}
@@ -91,23 +92,20 @@ export default class JobList extends React.Component {
           marginHorizontal: 8,
           borderRadius: 4,
           marginTop: 8,
+          height: 88,
         }}>
         <View
           style={{
-            paddingVertical: 8,
-            marginHorizontal: 16,
             backgroundColor: 'white',
-            borderBottomWidth: 1,
-            borderBottomColor: 'rgba(120,120,120,0.1)',
+            borderRadius: 4,
           }}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{flexDirection: 'row', padding: 8}}>
             <Image
-              style={{width: 40, height: 40, zIndex: 1000}}
+              style={{width: 40, height: 40}}
               source={require('./alibaba.png')}
             />
             <View
               style={{
-                marginVertical: 8,
                 marginLeft: 16,
                 flex: 1,
                 flexDirection: 'row',
@@ -118,38 +116,69 @@ export default class JobList extends React.Component {
                   {data.title}
                 </Text> */}
                 <Text
-                  style={{color: 'black', fontSize: 16}}
+                  style={{color: 'black', fontSize: 16, marginBottom: 8}}
                   ellipsizeMode="tail"
                   numberOfLines={1}>
                   {data.title}
                   {/* {data.company} */}
                 </Text>
                 <View style={{flexDirection: 'row'}}>
-                  <Text style={{color: 'black', fontSize: 12}}>
+                  <Text
+                    style={{color: '#8A8A8F', fontSize: 12, fontWeight: '300'}}>
                     {data.location}
                   </Text>
-                  <Text style={{color: 'black', fontSize: 12}}>{nows}</Text>
+                  <Text
+                    style={{
+                      color: '#8A8A8F',
+                      fontSize: 12,
+                      fontWeight: '300',
+                    }}>{`    ${nows}`}</Text>
                 </View>
-                <View style={{flexDirection: 'row'}}>
-                  <Text style={{fontWeight: '700', color: Theme}}>
-                    {data.minimum_pay / 1000}k-{data.maximum_pay / 1000}k
-                  </Text>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    marginTop: 8,
+                  }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      backgroundColor: 'rgba(29,170,146,0.1)',
+                      paddingHorizontal: 8,
+                      paddingVertical: 4,
+                      borderRadius: 4,
+                    }}>
+                    <Text
+                      style={{
+                        fontWeight: '100',
+                        color: '#1DAA92',
+                        fontSize: 12,
+                      }}>
+                      {data.minimum_pay / 1000}k-{data.maximum_pay / 1000}k
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      backgroundColor: 'rgba(33,33,33,0.05)',
+                      paddingHorizontal: 8,
+                      paddingVertical: 4,
+                      borderRadius: 4,
+                      marginLeft: 8,
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        fontWeight: '100',
+                        color: '#333',
+                      }}>
+                      full time
+                    </Text>
+                  </View>
                 </View>
               </View>
             </View>
           </View>
-        </View>
-        <View
-          style={{
-            paddingVertical: 8,
-            marginHorizontal: 16,
-            flexDirection: 'row',
-            backgroundColor: 'white',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <Text>{parseInt(data.distance)} km</Text>
-          <Entypo size={12} key={0} name="chevron-thin-right" color="#2D59D9" />
         </View>
       </TouchableOpacity>
     );

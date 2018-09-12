@@ -4,11 +4,24 @@ import PageBase from '../../components/PageBase';
 import Header from '../../components/Header';
 import List from '../../components/List';
 import {Text} from 'react-native';
+import {Entypo, MaterialIcons} from '../../components/Icons';
+import {EasyTap} from '../../public/EasyTap';
 
 const Skills = () => {
   return (
     <React.Fragment>
-      <Header />
+      <Header
+        leftButton={[
+          <EasyTap key={1} onPress={() => this.props.navigation.goBack()}>
+            <Entypo size={16} color="white" key={0} name="chevron-thin-left" />
+          </EasyTap>,
+        ]}
+        rightButton={[
+          <EasyTap key={1} onPress={() => this.props.navigation.goBack()}>
+            <MaterialIcons size={20} color="white" key={0} name="check" />
+          </EasyTap>,
+        ]}
+      />
       <PageBase>
         <List
           title={

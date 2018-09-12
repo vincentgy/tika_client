@@ -73,7 +73,7 @@ class Filter extends React.Component {
       s.moneyRange
     );
     Put(state => {
-      state.job.list = s.job.list.cloneWithRows(json.data);
+      state.job.list = s.job.list.cloneWithRows(json.data || []);
       state.job.loading = false;
     });
   }
@@ -102,7 +102,8 @@ class Filter extends React.Component {
           animationType="none"
           visible={this.state.modalOpen}
           transparent>
-          <View
+          <TouchableOpacity
+            onPress={this.handleClose}
             style={{
               backgroundColor: 'transparent',
               height: 48 + (Platform.OS === 'ios' ? 20 : 0),

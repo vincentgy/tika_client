@@ -5,40 +5,39 @@ import InformationContainer from '../../public/InformationContainer';
 import Header from '../../components/Header';
 import styled from 'styled-components';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
-import {Entypo, Ionicons} from '../../components/Icons';
+import {
+  Entypo,
+  Ionicons,
+  EvilIcons,
+  MaterialIcons,
+} from '../../components/Icons';
 import {EasyTap} from '../../public/EasyTap';
-import {Auto} from '../../store';
+import {Auto, getStore} from '../../store';
 import Card from '../../components/Card';
-
-const Info = InformationContainer.Info;
+import {NetworkManager} from '../../manager/networkManager';
 
 const Name = styled.Text`
   font-size: 18px;
   font-weight: 700;
 `;
 
-const ShortBref = styled.Text`
-  color: #abb0b0;
-  font-size: 12;
-  margin-top: 16px;
-`;
-
-const AddButton = ({onPress}) => {
+const AddButton = ({onPress, desc}) => {
   return (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={1}
       style={{
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
         height: 40,
       }}>
+      <Text style={{color: '#2f54eb'}}>{desc}</Text>
       <Ionicons
         name="ios-add"
         size={22}
         style={{marginRight: 8}}
-        color="#FC740D"
+        color="#2f54eb"
       />
     </TouchableOpacity>
   );
@@ -47,8 +46,8 @@ const AddButton = ({onPress}) => {
 const EditBlock = ({
   title,
   icon,
-  desc,
   onPress,
+  desc,
   renderContent,
   isRenderContent,
 }) => {
@@ -65,38 +64,71 @@ const EditBlock = ({
         <Image source={icon} style={{width: 16, height: 16}} />
         <Text style={{marginLeft: 8}}>{title}</Text>
       </View>
-      {isRenderContent ? renderContent() : <AddButton onPress={onPress} />}
+      {isRenderContent ? renderContent() : null}
+      <AddButton desc={desc} onPress={onPress} />
     </Card>
   );
 };
 
-// {renderContent && renderContent()}
-//       {isShow ? (
-//         <View
-//           style={{
-//             flexDirection: 'column',
-//             alignItems: 'center',
-//             justifyContent: 'center',
-//             marginTop: 16,
-//           }}>
-//           <TouchableOpacity onPress={onPress}>
-//             <Image
-//               source={require('../../asset/add.png')}
-//               style={{width: 48, height: 48}}
-//             />
-//           </TouchableOpacity>
-//           <Text style={{fontSize: 12, padding: 16, color: '#FC4C0D'}}>
-//             {desc}
-//           </Text>
-//         </View>
-//       ) : null}
+const HistBlock = ({place, task, start, end}) => {
+  return (
+    <View
+      style={{
+        borderBottomColor: 'rgba(120,120,120,0.1)',
+        borderBottomWidth: 0.5,
+        paddingVertical: 8,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}>
+      <View>
+        <Text>{task}</Text>
+        <View>
+          <Text style={{color: '#abb0b0', fontWeight: '100', fontSize: 12}}>
+            {place}
+          </Text>
+        </View>
+        <Text
+          style={{
+            color: '#FC4C0D',
+            marginTop: 8,
+            fontWeight: '100',
+            fontSize: 12,
+          }}>
+          {`${start} - ${end}`}
+        </Text>
+      </View>
+      <Entypo
+        name="dots-three-horizontal"
+        color="#2f54eb"
+        style={{marginRight: 8}}
+      />
+    </View>
+  );
+};
 
 const AboutMeText = Auto(state => state.profile.aboutMe);
+const EmploymentHistoryArray = Auto(state => state.profile.experiences);
+const QualificationArray = Auto(state => state.profile.qualification);
+const SkillsArray = Auto(state => state.profile.skills);
 
 export default class EditProfile extends React.Component {
   navigation = pages => {
     this.props.navigation.navigate(pages);
   };
+
+  async finisheProfileEditing() {
+    const manager = new NetworkManager();
+    const Store = getStore();
+
+    console.log('开始发送');
+    await manager.UpdateProfile(
+      Store.profile.aboutMe,
+      Store.profile.skills,
+      Store.profile.qualification,
+      Store.profile.experiences
+    );
+  }
 
   render() {
     return (
@@ -110,6 +142,11 @@ export default class EditProfile extends React.Component {
                 key={0}
                 name="chevron-thin-left"
               />
+            </EasyTap>,
+          ]}
+          rightButton={[
+            <EasyTap key={1} onPress={() => this.finisheProfileEditing()}>
+              <MaterialIcons size={20} color="white" key={0} name="check" />
             </EasyTap>,
           ]}
         />
@@ -147,44 +184,99 @@ export default class EditProfile extends React.Component {
               onPress={() => this.navigation('AboutMe')}
               title="About me"
               icon={require('../../asset/me.png')}
+              desc={'Edit about me'}
               renderContent={() => (
-                <TouchableOpacity
-                  activeOpacity={1}
-                  onPress={() => this.navigation('AboutMe')}
+                <Text
                   style={{
+                    color: '#333',
+                    fontWeight: '300',
                     paddingVertical: 8,
-                    flexDirection: 'row',
+                    borderBottomColor: 'rgba(120,120,120,0.1)',
+                    borderBottomWidth: 0.5,
                   }}>
-                  <Text style={{color: '#333', fontWeight: '300'}}>
-                    <Entypo name="edit" size={16} color="#abb0b0" />
-                    {`  ${text}`}
-                  </Text>
-                </TouchableOpacity>
+                  {text}
+                </Text>
               )}
             />
           ))}
-          <EditBlock
-            onPress={() => this.navigation('WorkExprience')}
-            title="Employment history"
-            icon={require('../../asset/employment_history.png')}
-            desc="Click here to add your employment history, this will help employers to see if you have experience with the role."
-          />
-          <EditBlock
-            onPress={() => this.navigation('Qualification')}
-            title="Qualification"
-            icon={require('../../asset/qualification.png')}
-            desc="Click here to add your qualifications, this will help employers to see if you have experience with the role."
-          />
-          <EditBlock
-            onPress={() => this.navigation('Skills')}
-            title="Skills"
-            icon={require('../../asset/me.png')}
-            desc="Click here to add skills to your Job profile. This will make it easier for employers to see what you are good at "
-          />
+          {EmploymentHistoryArray(experiences => (
+            <EditBlock
+              isRenderContent={experiences.length > 0}
+              onPress={() => this.navigation('WorkExprience')}
+              title="Employment history"
+              icon={require('../../asset/employment_history.png')}
+              desc="Add Employment history"
+              renderContent={() =>
+                experiences.map((expo, idx) => {
+                  return <HistBlock key={idx} {...expo} />;
+                })
+              }
+            />
+          ))}
+          {QualificationArray(qualification => (
+            <EditBlock
+              isRenderContent={qualification.length > 0}
+              onPress={() => this.navigation('Qualification')}
+              title="Qualification"
+              icon={require('../../asset/qualification.png')}
+              desc="Add Qualification"
+              renderContent={() =>
+                qualification.map((expo, idx) => {
+                  return (
+                    <HistBlock
+                      key={idx}
+                      task={expo.degree}
+                      place={expo.school}
+                      start={expo.start}
+                      end={expo.end}
+                    />
+                  );
+                })
+              }
+            />
+          ))}
+          {SkillsArray(skill => (
+            <EditBlock
+              isRenderContent={skill.length > 0}
+              onPress={() => this.navigation('Skills')}
+              title="Skills"
+              icon={require('../../asset/me.png')}
+              desc="Add skills"
+              renderContent={() => (
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    borderBottomColor: 'rgba(120,120,120,0.1)',
+                    borderBottomWidth: 0.5,
+                    paddingVertical: 8,
+                  }}>
+                  {skill.map((expo, idx) => (
+                    <View
+                      key={idx}
+                      style={{
+                        backgroundColor: 'rgba(31,44,55,0.1)',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        padding: 4,
+                        marginLeft: 8,
+                        marginVertical: 4,
+                        borderRadius: 8,
+                      }}>
+                      <Text style={{color: '#1F2C43', fontSize: 12}}>
+                        {expo}
+                      </Text>
+                    </View>
+                  ))}
+                </View>
+              )}
+            />
+          ))}
+
           <EditBlock
             title="Portfolio/LinkedIn"
             icon={require('../../asset/social.png')}
-            desc="Click here to add your linkedIn, Portfolio or anything else you think your employer might want to see"
+            desc="Add websites"
           />
         </PageBase>
       </React.Fragment>

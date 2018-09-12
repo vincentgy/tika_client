@@ -1,22 +1,11 @@
 import React from 'react';
 import {Text} from 'react-native';
 import PageBase from '../../components/PageBase';
-import Input from '../../components/Input';
-import List from '../../components/List';
 import Header from '../../components/Header';
-import DataPicker from '../../components/DataPicker';
 import {EasyTap} from '../../public/EasyTap';
 import {Entypo, MaterialIcons} from '../../components/Icons';
-import TagInput from '../../components/TagInput';
 import TimixForm from '../../components/TimixForm';
-
-const ListPicker = ({title, onComfirm}) => (
-  <DataPicker>
-    {setOpen => (
-      <List.Item onComfirm={onComfirm} onPress={setOpen} title={title} />
-    )}
-  </DataPicker>
-);
+import {Put} from '../../store';
 
 const Ft = TimixForm.FormType;
 const Combind = TimixForm.Combind;
@@ -41,17 +30,19 @@ const EmploymentHistForm = Combind({
   },
 });
 
-const EmploymentHistory = TimixForm({
-  JobTitle: Ft.Text,
-  Company: Ft.Text,
-  Start: Ft.Date,
-  End: Ft.Date,
-  Skills: Ft.Tags,
-});
-
 export default class WorkExprience extends React.Component {
   FinisheEditing = () => {
     const HistoryInfo = this.form.getFormData();
+    console.log(HistoryInfo);
+    Put(state => {
+      state.profile.experiences.push({
+        start: `${HistoryInfo.Start[0]} ${HistoryInfo.Start[1]}`,
+        end: `${HistoryInfo.End[0]} ${HistoryInfo.End[1]}`,
+        task: HistoryInfo.JobTitle,
+        place: HistoryInfo.Company,
+      });
+    });
+    this.props.navigation.goBack();
   };
 
   render() {
@@ -59,7 +50,7 @@ export default class WorkExprience extends React.Component {
       <React.Fragment>
         <Header
           leftButton={[
-            <EasyTap key={0} onPress={this.props.navigation.goBack}>
+            <EasyTap key={0} onPress={() => this.props.navigation.goBack()}>
               <Entypo size={16} color="white" name="chevron-thin-left" />
             </EasyTap>,
           ]}

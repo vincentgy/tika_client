@@ -1,16 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import {Platform, StatusBar, View} from 'react-native';
 // import PropTypes from 'prop-types';
 
 import {Theme} from '../../utils/color';
 import LinearGradient from 'react-native-linear-gradient';
-import {WIDTH} from '../../utils/plaform';
-
-const FlexContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
 
 class Header extends React.Component {
   static defaultProps = {
@@ -21,7 +15,7 @@ class Header extends React.Component {
   // <Entypo size={16} color="white" key={0} name="chevron-thin-left" onPress />
 
   render() {
-    const {leftButton, rightButton, style, StatusBarStyle} = this.props;
+    const {rightButton, StatusBarStyle} = this.props;
 
     const Right =
       rightButton instanceof Array ? (
