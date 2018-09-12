@@ -25,6 +25,7 @@ import MapView from 'react-native-maps';
 import {NetworkManager} from '../../manager/networkManager';
 import {Put, Auto} from '../../store';
 import Container from '../../public/InformationContainer';
+import Modal from 'react-native-modal';
 
 const Info = Container.Info;
 
@@ -254,70 +255,80 @@ class Account extends React.Component {
 
   render() {
     return (
-      <PageBase
-        style={{
-          backgroundColor: '#fafafa',
-          height: HEIGHT - 44,
-        }}>
-        <IOSBar barStyle="dark-content" color="white" />
-        {ProfileStore(state => {
-          console.log(state);
-          return (
-            <Profile
-              name={state.name}
-              onEditProfile={this.handleEditProfile}
-              onAatarPress={this.showActionSheet}
-              avatar={state.avatar}
-              aboutMe={state.aboutMe}
-            />
-          );
-        })}
-        <ListGroup>
-          <SettingCell>
-            <Image
-              source={require('../../asset/setting.png')}
-              style={{width: 24, height: 24}}
-            />
-            <Text style={{marginLeft: 8}}>Account settings</Text>
-          </SettingCell>
-          <SettingCell no>
-            <Image
-              source={require('../../asset/notification.png')}
-              style={{width: 24, height: 24}}
-            />
-            <Text style={{marginLeft: 8}}>Notifications</Text>
-          </SettingCell>
-        </ListGroup>
-        <ListGroup>
-          <SettingCell>
-            <Image
-              source={require('../../asset/hiring.png')}
-              style={{width: 24, height: 24}}
-            />
-            <Text style={{marginLeft: 8}}>Recruiter</Text>
-          </SettingCell>
-          <SettingCell onPress={this.handleLogout} no>
-            <Image
-              source={require('../../asset/logout.png')}
-              style={{width: 24, height: 24}}
-            />
-            <Text style={{marginLeft: 8}}>Log out</Text>
-          </SettingCell>
-        </ListGroup>
-        <ActionSheet
-          ref={o => (this.ActionSheet = o)}
-          title={'Choose a picture or take a photo'}
-          options={['Picture', 'Take a photo', 'cancel']}
-          cancelButtonIndex={2}
-          onPress={index => {
-            if (index === 0) {
-              this.Picture();
-            } else if (index === 1) {
-              this.TakePhoto();
-            }
+      <React.Fragment>
+        <Modal
+          isVisible
+          onSwipe={() => {
+            console.log('华东');
           }}
-        />
-      </PageBase>
+          swipeDirection="down">
+          <Text>Hello!</Text>
+        </Modal>
+        <PageBase
+          style={{
+            backgroundColor: '#fafafa',
+            height: HEIGHT - 44,
+          }}>
+          <IOSBar barStyle="dark-content" color="white" />
+          {ProfileStore(state => {
+            console.log(state);
+            return (
+              <Profile
+                name={state.name}
+                onEditProfile={this.handleEditProfile}
+                onAatarPress={this.showActionSheet}
+                avatar={state.avatar}
+                aboutMe={state.aboutMe}
+              />
+            );
+          })}
+          <ListGroup>
+            <SettingCell>
+              <Image
+                source={require('../../asset/setting.png')}
+                style={{width: 24, height: 24}}
+              />
+              <Text style={{marginLeft: 8}}>Account settings</Text>
+            </SettingCell>
+            <SettingCell no>
+              <Image
+                source={require('../../asset/notification.png')}
+                style={{width: 24, height: 24}}
+              />
+              <Text style={{marginLeft: 8}}>Notifications</Text>
+            </SettingCell>
+          </ListGroup>
+          <ListGroup>
+            <SettingCell>
+              <Image
+                source={require('../../asset/hiring.png')}
+                style={{width: 24, height: 24}}
+              />
+              <Text style={{marginLeft: 8}}>Recruiter</Text>
+            </SettingCell>
+            <SettingCell onPress={this.handleLogout} no>
+              <Image
+                source={require('../../asset/logout.png')}
+                style={{width: 24, height: 24}}
+              />
+              <Text style={{marginLeft: 8}}>Log out</Text>
+            </SettingCell>
+          </ListGroup>
+          <ActionSheet
+            ref={o => (this.ActionSheet = o)}
+            title={'Choose a picture or take a photo'}
+            options={['Picture', 'Take a photo', 'cancel']}
+            cancelButtonIndex={2}
+            onPress={index => {
+              if (index === 0) {
+                this.Picture();
+              } else if (index === 1) {
+                this.TakePhoto();
+              }
+            }}
+          />
+        </PageBase>
+      </React.Fragment>
     );
   }
 }
