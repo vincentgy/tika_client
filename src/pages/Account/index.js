@@ -274,18 +274,34 @@ class Account extends React.Component {
         })}
         <ListGroup>
           <SettingCell>
-            <Text>Account settings</Text>
+            <Image
+              source={require('../../asset/setting.png')}
+              style={{width: 24, height: 24}}
+            />
+            <Text style={{marginLeft: 8}}>Account settings</Text>
           </SettingCell>
           <SettingCell no>
-            <Text>Notifications</Text>
+            <Image
+              source={require('../../asset/notification.png')}
+              style={{width: 24, height: 24}}
+            />
+            <Text style={{marginLeft: 8}}>Notifications</Text>
           </SettingCell>
         </ListGroup>
         <ListGroup>
           <SettingCell>
-            <Text>Recruiter</Text>
+            <Image
+              source={require('../../asset/hiring.png')}
+              style={{width: 24, height: 24}}
+            />
+            <Text style={{marginLeft: 8}}>Recruiter</Text>
           </SettingCell>
           <SettingCell onPress={this.handleLogout} no>
-            <Text>Log out</Text>
+            <Image
+              source={require('../../asset/logout.png')}
+              style={{width: 24, height: 24}}
+            />
+            <Text style={{marginLeft: 8}}>Log out</Text>
           </SettingCell>
         </ListGroup>
         <ActionSheet

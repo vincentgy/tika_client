@@ -23,6 +23,7 @@ import {View} from 'react-native';
 import PageBase from './components/PageBase';
 import TimixForm from './components/TimixForm';
 import {Button} from 'react-native-elements';
+import WatchList from './pages/WatchList';
 
 const TestForm = TimixForm({
   text: TimixForm.FormType.Text,
@@ -54,6 +55,7 @@ class TimixFormTest extends React.Component {
 const TabRoot = createBottomTabNavigator(
   {
     JobList,
+    WatchList,
     Chat,
     Account,
     // JobDetail,
