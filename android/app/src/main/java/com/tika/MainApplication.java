@@ -1,6 +1,7 @@
 package com.tika;
 
 import android.app.Application;
+import com.remobile.cordova.*;
 
 import com.facebook.react.ReactApplication;
 import com.rnfs.RNFSPackage;
@@ -18,7 +19,6 @@ import com.react.rnspinkit.RNSpinkitPackage;
 import com.zyu.ReactNativeWheelPickerPackage;
 //https://github.com/remobile/react-native-zip
 import com.remobile.zip.RCTZipPackage;
-
 //https://github.com/remobile/react-native-file-transfer
 import com.remobile.filetransfer.RCTFileTransferPackage; 
 
@@ -36,11 +36,12 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
-            new RNFSPackage(),
+            
             new VectorIconsPackage(),
             new LinearGradientPackage(),
             new ReactNativeWheelPickerPackage(),
             new MapsPackage(),
+            new RNFSPackage(),
             new RCTZipPackage(),
             new RCTFileTransferPackage(),
             new PickerPackage(), new CustomHotUpdateModulePackage(),new RNSpinkitPackage());

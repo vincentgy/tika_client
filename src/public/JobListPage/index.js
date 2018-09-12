@@ -82,7 +82,6 @@ export default class JobList extends React.Component {
   //Given type and data return the view component
   _rowRenderer = (type, data) => {
     const nows = timeago().format(data.timestamp);
-    console.log(data);
     return (
       <TouchableOpacity
         onPress={() => this.props.onSelect && this.props.onSelect(data)}

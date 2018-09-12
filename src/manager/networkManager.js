@@ -103,6 +103,7 @@ export class NetworkManager {
         },
       };
 
+      console.log(body)
       const res = await fetch('http://18.222.175.208/', {
         method: 'POST',
         body: JSON.stringify({param: body}),
@@ -111,10 +112,13 @@ export class NetworkManager {
         },
       });
 
+      console.log(res.status)
       const json = await res.json();
+      
 
       return json;
     } catch (e) {
+      console.log(e)
       return [];
     }
   }

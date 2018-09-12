@@ -13,14 +13,14 @@ include ':react-native-wheel-picker'
 project(':react-native-wheel-picker').projectDir = new File(settingsDir, '../node_modules/react-native-wheel-picker/android')
 
 include ':react-native-cordova'
-project(':react-native-cordova').projectDir = new File(settingsDir, '../node_modules/@remobile/react-native-cordova/android/RCTCordova')
+project(':react-native-cordova').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-cordova/android')
 
 include ':react-native-file-transfer'
-project(':react-native-file-transfer').projectDir = new File(settingsDir, '../node_modules/@remobile/react-native-file-transfer/android')
+project(':react-native-file-transfer').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-file-transfer/android')
 
 
 include ':react-native-zip'
-project(':react-native-zip').projectDir = new File(settingsDir, '../node_modules/@remobile/react-native-zip/android/RCTZip')
+project(':react-native-zip').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-zip/android')
 
 include ':react-native-maps'
 project(':react-native-maps').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-maps/lib/android')
