@@ -29,7 +29,6 @@ export default class SearchJob extends React.Component {
       state.job.list = s.job.list.cloneWithRows(json.data);
       state.job.loading = false;
     });
-
   }
 
   handleOnChangeText = text => {

@@ -7,7 +7,11 @@
 import React from 'react';
 import {Text, View, StatusBar} from 'react-native';
 
-import {EvilIcons, MaterialCommunityIcons, FontAwesome} from '../../components/Icons';
+import {
+  EvilIcons,
+  MaterialCommunityIcons,
+  FontAwesome,
+} from '../../components/Icons';
 
 import JobListTemplate, {Search} from '../../public/JobListPage';
 import {Page} from '../../components/PageHOC';
@@ -49,11 +53,7 @@ class JobListContainer extends React.Component {
 export default Page({
   tabBarIcon: ({focused}) => (
     <View style={{marginTop: 4}}>
-      <FontAwesome
-        name="star"
-        size={24}
-        color={focused ? Theme : '#abb0b0'}
-      />
+      <FontAwesome name="star" size={24} color={focused ? Theme : '#abb0b0'} />
     </View>
   ),
   tabBarOnPress: ({defaultHandler}) => {

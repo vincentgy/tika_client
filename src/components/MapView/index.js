@@ -5,21 +5,19 @@ import {requireNativeComponent} from 'react-native';
 
 class MapView extends React.Component {
   render() {
-
     return <RNTMap {...this.props} />;
   }
 }
 
 MapView.propTypes = {
-
   /**
    * 经度
    */
-  x:PropTypes.any.isRequired,
+  x: PropTypes.any.isRequired,
   /**
    * 维度
    */
-  y:PropTypes.any.isRequired,
+  y: PropTypes.any.isRequired,
   /**
    * A Boolean value that determines whether the user may use pinch
    * gestures to zoom in and out of the map.

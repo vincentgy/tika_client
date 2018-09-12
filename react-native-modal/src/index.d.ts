@@ -1,9 +1,14 @@
-declare module "react-native-modal" {
-  import { Component, ReactNode } from "react";
-  import { StyleProp, ViewStyle } from "react-native";
+declare module 'react-native-modal' {
+  import {Component, ReactNode} from 'react';
+  import {StyleProp, ViewStyle} from 'react-native';
 
-  type AnimationConfig = string | { from: Object; to: Object };
-  type Orientation = "portrait" | "portrait-upside-down" | "landscape" | "landscape-left" | "landscape-right";
+  type AnimationConfig = string | {from: Object; to: Object};
+  type Orientation =
+    | 'portrait'
+    | 'portrait-upside-down'
+    | 'landscape'
+    | 'landscape-left'
+    | 'landscape-right';
 
   export interface ModalProps {
     animationIn?: AnimationConfig;
@@ -26,7 +31,7 @@ declare module "react-native-modal" {
     onSwipe?: () => void;
     swipeThreshold?: number;
     style?: StyleProp<ViewStyle>;
-    swipeDirection?: "up" | "down" | "left" | "right";
+    swipeDirection?: 'up' | 'down' | 'left' | 'right';
     scrollTo?: (e: any) => void;
     scrollOffset?: number;
     scrollOffsetMax?: number;
