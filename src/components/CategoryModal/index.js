@@ -1,15 +1,24 @@
 import React from 'react';
-import {View, ScrollView, StyleSheet} from 'react-native';
+import {View, ScrollView, TouchableWithoutFeedback} from 'react-native';
 import List from '../List';
 import Modal from '../react-native-modal';
 import {NetworkManager} from '../../manager/networkManager';
 import SelectItem from '../../public/SelectItem';
 
-const ModalStyle = StyleSheet.create({
-  modal: {
-    height: 400,
-  },
-});
+class PatchedScrollView extends React.PureComponent {
+  componentDidMount() {
+    // Dirty hack
+    this._scrollView.scrollResponderHandleStartShouldSetResponder = () => true;
+  }
+
+  render() {
+    return (
+      <ScrollView ref={x => (this._scrollView = x)} {...this.props}>
+        {this.props.children}
+      </ScrollView>
+    );
+  }
+}
 
 export default class CategoryModal extends React.Component {
   state = {
@@ -63,11 +72,11 @@ export default class CategoryModal extends React.Component {
           )}
           onSwipe={() => this.setState({isVisiable: false})}
           swipeDirection="down">
-          <ScrollView style={{backgroundColor: 'white', height: 400}}>
+          <PatchedScrollView style={{backgroundColor: 'white', height: 400}}>
             {this.state.cateData.map(item => (
               <SelectItem key={item.id}>{item.name}</SelectItem>
             ))}
-          </ScrollView>
+          </PatchedScrollView>
         </Modal>
       </View>
     );

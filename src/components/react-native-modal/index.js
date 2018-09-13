@@ -8,6 +8,7 @@ import {
   Platform,
   PanResponder,
   Animated,
+  StyleSheet,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {
@@ -188,6 +189,15 @@ class ReactNativeModal extends Component {
     }
 
     this.panResponder = PanResponder.create({
+      onMoveShouldSetPanResponder: () => {
+        return true;
+      },
+      onPanResponderTerminationRequest: () => {
+        // 如果没有这一步
+        // 在内部使用一个 scrollview 的时候，会卡住
+        // 那么会导致前面的步骤卡住
+        return false;
+      },
       onStartShouldSetPanResponder: () => {
         if (this.props.scrollTo) {
           if (this.props.scrollOffset > 0) {
@@ -198,7 +208,6 @@ class ReactNativeModal extends Component {
       },
       onPanResponderMove: (evt, gestureState) => {
         // Dim the background while swiping the modal
-
         const accDistance = this.getAccDistancePerDirection(gestureState);
         const newOpacityFactor = 1 - accDistance / this.state.deviceWidth;
         if (this.isSwipeDirectionAllowed(gestureState)) {
@@ -219,6 +228,7 @@ class ReactNativeModal extends Component {
       },
       onPanResponderRelease: (evt, gestureState) => {
         // Call the onSwipe prop if the threshold has been exceeded
+
         const accDistance = this.getAccDistancePerDirection(gestureState);
 
         if (accDistance > this.props.swipeThreshold) {
