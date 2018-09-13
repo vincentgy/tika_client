@@ -27,7 +27,6 @@ import MapView from 'react-native-maps';
 import {NetworkManager} from '../../manager/networkManager';
 import {Put, Auto} from '../../store';
 import Container from '../../public/InformationContainer';
-import Modal from 'react-native-modal';
 
 const Info = Container.Info;
 
@@ -258,40 +257,9 @@ class Account extends React.Component {
     isVisible: true,
   };
 
-  handleOnScroll = event => {
-    this.setState({
-      scrollOffset: event.nativeEvent.contentOffset.y,
-    });
-  };
-
-  handleScrollTo = p => {
-    if (this.scrollViewRef) {
-      this.scrollViewRef.scrollTo(p);
-    }
-  };
-
   render() {
     return (
       <React.Fragment>
-        <Modal
-          isVisible={this.state.isVisible}
-          onSwipe={() => this.setState({isVisible: false})}
-          swipeDirection="down"
-          // scrollTo={this.handleScrollTo}
-          // scrollOffset={this.state.scrollOffset}
-          // scrollOffsetMax={400 - 100} // content height - ScrollView height
-          style={styles.bottomModal}>
-          <View style={styles.scrollableModal}>
-            <ScrollView horizontal>
-              <View style={styles.scrollableModalContent1}>
-                <Text>Scroll me up</Text>
-              </View>
-              <View style={styles.scrollableModalContent1}>
-                <Text>Scroll me up</Text>
-              </View>
-            </ScrollView>
-          </View>
-        </Modal>
         <PageBase
           style={{
             backgroundColor: '#fafafa',
@@ -360,50 +328,6 @@ class Account extends React.Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  button: {
-    backgroundColor: 'lightblue',
-    padding: 12,
-    margin: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    padding: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  bottomModal: {
-    justifyContent: 'flex-end',
-    margin: 0,
-  },
-  scrollableModal: {
-    height: 300,
-    backgroundColor: 'white',
-  },
-  scrollableModalContent1: {
-    height: 200,
-    backgroundColor: 'orange',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  scrollableModalContent2: {
-    height: 200,
-    backgroundColor: 'lightgreen',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default Page({
   tabBarIcon: ({focused}) => (

@@ -1,7 +1,8 @@
 import React from 'react';
-import Picker from 'react-native-wheel-picker';
+
 import {View, Text} from 'react-native';
 import {WIDTH} from '../../utils/plaform';
+import Picker from 'react-native-wheel-picker';
 var PickerItem = Picker.Item;
 
 export default class MoneyRange extends React.Component {

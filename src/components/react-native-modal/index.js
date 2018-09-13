@@ -91,6 +91,7 @@ class ReactNativeModal extends Component {
     scrollOffset: 0,
     scrollOffsetMax: 0,
     supportedOrientations: ['portrait', 'landscape'],
+    hasHandle: true,
   };
 
   // We use an internal state for keeping track of the modal visibility: this allows us to keep
@@ -417,6 +418,7 @@ class ReactNativeModal extends Component {
       onBackdropPress,
       onBackButtonPress,
       useNativeDriver,
+      hasHandle,
       style,
       ...otherProps
     } = this.props;
@@ -444,7 +446,7 @@ class ReactNativeModal extends Component {
         children
       );
 
-    const containerView = (
+    const containerView = hasHandle ? (
       <React.Fragment>
         <View
           {...panHandlers}
@@ -453,7 +455,7 @@ class ReactNativeModal extends Component {
           pointerEvents="box-none"
           useNativeDriver={useNativeDriver}
           {...otherProps}>
-          <View style={{height: 50, backgroundColor: 'blue'}} />
+          {this.props.renderHandle()}
         </View>
         <View
           ref={body => (this.body = body)}
@@ -461,6 +463,16 @@ class ReactNativeModal extends Component {
           {_children}
         </View>
       </React.Fragment>
+    ) : (
+      <View
+        {...panHandlers}
+        ref={ref => (this.contentRef = ref)}
+        style={[panPosition, computedStyle]}
+        pointerEvents="box-none"
+        useNativeDriver={useNativeDriver}
+        {...otherProps}>
+        {_children}
+      </View>
     );
 
     return (
