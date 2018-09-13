@@ -6,6 +6,7 @@ import PickerAndroid from 'react-native-wheel-picker';
 import Modal from '../react-native-modal';
 
 const PickerCompat = Platform.OS === 'ios' ? Picker : PickerAndroid;
+const PickerItem = Platform.OS === 'ios' ? Picker.Item : PickerAndroid.Item;
 
 const Placeholder = styled.View`
   height: 55%;
@@ -76,13 +77,19 @@ export default class DataPicker extends React.Component {
     return (
       <View style={{backgroundColor: 'white'}}>
         {this.props.children(this.forRenderProps, this.props, [
-          this.state.selectedMonth,
+          // 因为安卓的 value 只支持数字
+          //https://github.com/lesliesam/react-native-wheel-picker/issues/14
+          Platform.OS === 'ios'
+            ? this.state.selectedMonth
+            : this.state.month[this.state.selectedMonth] || 'Jan',
           this.state.selectedYear,
         ])}
         <Modal
           style={{margin: 0, justifyContent: 'flex-end'}}
           swipeDirection="down"
-          hasHandle={false}
+          renderHandle={() => (
+            <View style={{height: 32, backgroundColor: 'red'}} />
+          )}
           onSwipe={() => this.setModalVisible(false)}
           isVisible={this.state.modalVisible}
           onBackdropPress={() => this.setModalVisible(false)}
@@ -98,7 +105,10 @@ export default class DataPicker extends React.Component {
                 onPress={() => {
                   this.props.onComfirm &&
                     this.props.onComfirm(
-                      this.state.selectedMonth,
+                      //安卓因为value 必须是数字
+                      Platform.OS === 'ios'
+                        ? this.state.selectedMonth
+                        : this.state.month[this.state.selectedMonth],
                       this.state.selectedYear
                     );
                   this.setModalVisible(false);
@@ -109,23 +119,37 @@ export default class DataPicker extends React.Component {
             </ButtonGroup>
             <View style={{flexDirection: 'row'}}>
               <PickerCompat
+                itemStyle={{
+                  color: 'black',
+                  fontSize: 18,
+                  height: 145,
+                }}
                 selectedValue={this.state.selectedMonth}
                 onValueChange={value => {
-                  this.props.onValueChange && this.props.onValueChange(value);
+                  //安卓因为value 必须是数字
+                  const Value =
+                    Platform.OS === 'ios' ? value : this.state.month[value];
+                  this.props.onValueChange && this.props.onValueChange(Value);
                   this.setState({
                     selectedMonth: value,
                   });
                 }}
-                style={{width: WIDTH / 2}}>
+                style={{width: WIDTH / 2, height: 250}}>
                 {this.state.month.map((item, index) => (
-                  <PickerCompat.Item
+                  <PickerItem
                     key={index}
                     label={item + ''}
-                    value={item}
+                    //安卓因为value 必须是数字
+                    value={Platform.OS === 'ios' ? item : index}
                   />
                 ))}
               </PickerCompat>
               <PickerCompat
+                itemStyle={{
+                  color: 'black',
+                  fontSize: 18,
+                  height: 145,
+                }}
                 selectedValue={this.state.selectedYear}
                 onValueChange={value => {
                   this.props.onValueChange && this.props.onValueChange(value);
@@ -133,13 +157,9 @@ export default class DataPicker extends React.Component {
                     selectedYear: value,
                   });
                 }}
-                style={{width: WIDTH / 2}}>
+                style={{width: WIDTH / 2, height: 250}}>
                 {this.state.year.map((item, index) => (
-                  <PickerCompat.Item
-                    key={index}
-                    label={item + ''}
-                    value={item}
-                  />
+                  <PickerItem key={index} label={item + ''} value={item} />
                 ))}
               </PickerCompat>
             </View>

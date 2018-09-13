@@ -12,7 +12,7 @@ import Account from './pages/Account';
 import SearchJob from './pages/Search';
 import Description from './pages/PostJob/description';
 import ResultList from './pages/Search/resultList';
-import Chat from './pages/Chat';
+import Chat from './pages/ChatList';
 import JobDetail from './pages/JobDetail';
 import EditProfile from './pages/EditProfile';
 import AboutMe from './pages/AboutMe';
@@ -24,6 +24,7 @@ import PageBase from './components/PageBase';
 import TimixForm from './components/TimixForm';
 import {Button} from 'react-native-elements';
 import WatchList from './pages/WatchList';
+import ChatScreen from './pages/ChatScreen';
 
 const TestForm = TimixForm({
   text: TimixForm.FormType.Text,
@@ -83,7 +84,8 @@ const withoutHeader = page => {
   };
 };
 const HomeStack = createStackNavigator({
-  Tabs: withoutHeader(TabRoot),
+  // Tabs: withoutHeader(TabRoot),
+  ChatScreen: withoutHeader(ChatScreen),
   Edit: withoutHeader(Edit),
   JobDetail: withoutHeader(JobDetail),
   Picker: Picker,
