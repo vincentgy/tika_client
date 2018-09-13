@@ -5,15 +5,7 @@
  A scrollable list with different item type
  */
 import React from 'react';
-import {
-  View,
-  Text,
-  Dimensions,
-  Image,
-  TouchableOpacity,
-  RefreshControl,
-  Platform,
-} from 'react-native';
+import {Dimensions, RefreshControl} from 'react-native';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 import {Entypo} from '../../components/Icons';
 
@@ -23,7 +15,7 @@ import {WIDTH, HEIGHT} from '../../utils/plaform';
 import styled from 'styled-components';
 import Header from '../../components/Header';
 import {Theme} from '../../utils/color';
-import timeago from 'timeago.js';
+import JobListItem from '../JobListItem';
 
 const ViewTypes = {
   FULL: 0,
@@ -69,7 +61,7 @@ export default class JobList extends React.Component {
       },
       (type, dim) => {
         dim.width = width;
-        dim.height = Platform.OS === 'ios' ? 96 : 144;
+        dim.height = JobListItem.HEIGHT;
       }
     );
 
@@ -81,105 +73,11 @@ export default class JobList extends React.Component {
 
   //Given type and data return the view component
   _rowRenderer = (type, data) => {
-    const nows = timeago().format(data.timestamp);
     return (
-      <TouchableOpacity
+      <JobListItem
+        {...data}
         onPress={() => this.props.onSelect && this.props.onSelect(data)}
-        activeOpacity={0.7}
-        style={{
-          backgroundColor: 'white',
-          marginHorizontal: 8,
-          borderRadius: 4,
-          marginTop: 8,
-          height: 88,
-        }}>
-        <View
-          style={{
-            backgroundColor: 'white',
-            borderRadius: 4,
-          }}>
-          <View style={{flexDirection: 'row', padding: 8}}>
-            <Image
-              style={{width: 40, height: 40}}
-              source={require('./alibaba.png')}
-            />
-            <View
-              style={{
-                marginLeft: 16,
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}>
-              <View>
-                {/* <Text ellipsizeMode="tail" numberOfLines={1} width={100}>
-                  {data.title}
-                </Text> */}
-                <Text
-                  style={{color: 'black', fontSize: 16, marginBottom: 8}}
-                  ellipsizeMode="tail"
-                  numberOfLines={1}>
-                  {data.title}
-                  {/* {data.company} */}
-                </Text>
-                <View style={{flexDirection: 'row'}}>
-                  <Text
-                    style={{color: '#8A8A8F', fontSize: 12, fontWeight: '300'}}>
-                    {data.location}
-                  </Text>
-                  <Text
-                    style={{
-                      color: '#8A8A8F',
-                      fontSize: 12,
-                      fontWeight: '300',
-                    }}>{`    ${nows}`}</Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    flexWrap: 'wrap',
-                    marginTop: 8,
-                  }}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      backgroundColor: 'rgba(29,170,146,0.1)',
-                      paddingHorizontal: 8,
-                      paddingVertical: 4,
-                      borderRadius: 4,
-                    }}>
-                    <Text
-                      style={{
-                        fontWeight: '100',
-                        color: '#1DAA92',
-                        fontSize: 12,
-                      }}>
-                      {data.minimum_pay / 1000}k-{data.maximum_pay / 1000}k
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      backgroundColor: 'rgba(33,33,33,0.05)',
-                      paddingHorizontal: 8,
-                      paddingVertical: 4,
-                      borderRadius: 4,
-                      marginLeft: 8,
-                    }}>
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        fontWeight: '100',
-                        color: '#333',
-                      }}>
-                      full time
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
+      />
     );
     //You can return any view here, CellContainer has no special significance
   };

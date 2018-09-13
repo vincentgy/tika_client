@@ -1,7 +1,8 @@
 import React from 'react';
 
-import {View, ScrollView, Platform} from 'react-native';
+import {View, ScrollView, Platform, Text} from 'react-native';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
+import Header from '../Header';
 
 class PageBase extends React.Component {
   static defaultProps = {
@@ -13,8 +14,13 @@ class PageBase extends React.Component {
   }
 
   render() {
-    const {hasStatusBar} = this.props;
-    console.log('shuaxin');
+    const {
+      hasStatusBar,
+      hasHeader,
+      headerTitle,
+      HeaderLeftButton,
+      HeaderRightButton,
+    } = this.props;
     const Height =
       Platform.OS === 'ios'
         ? {
@@ -23,8 +29,11 @@ class PageBase extends React.Component {
           }
         : {};
 
+    const _Header = hasHeader ? <Header title={headerTitle} /> : null;
+
     return (
       <View style={this.props.style}>
+        {_Header}
         <ScrollView
           scrollEventThrottle={32}
           onScroll={this.props.onScroll}
@@ -41,5 +50,14 @@ class PageBase extends React.Component {
     );
   }
 }
+
+PageBase.LargeTitle = ({children}) => (
+  <Text style={{fontSize: 18, fontWeight: '700', color: 'white'}}>
+    {children}
+  </Text>
+);
+PageBase.Title = ({children}) => (
+  <Text style={{color: 'white'}}>{children}</Text>
+);
 
 export default PageBase;

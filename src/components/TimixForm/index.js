@@ -9,6 +9,7 @@ import {Kohana} from 'react-native-textinput-effects';
 import {FontAwesome} from '../Icons';
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import CategoryModal from '../CategoryModal';
 
 const FormType = {
   Text: 'text',
@@ -16,6 +17,7 @@ const FormType = {
   Bool: 'bool',
   Tick: 'tick',
   Tags: 'tags',
+  Cate: 'cate',
 };
 
 const UseKeyboardAwareScrollView = ({notUse, children}) => {
@@ -136,6 +138,9 @@ const TimixForm = formScheme => {
                     )}
                   </DataPicker>
                 );
+              }
+              if (elementType === 'cate') {
+                return <CategoryModal key={index} />;
               }
               return null;
             })}

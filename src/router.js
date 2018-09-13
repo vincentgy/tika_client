@@ -32,6 +32,7 @@ const TestForm = TimixForm({
   tick: TimixForm.FormType.Tick,
   bool: TimixForm.FormType.Bool,
   tags: TimixForm.FormType.Tags,
+  cate: TimixForm.FormType.Cate,
 });
 
 class TimixFormTest extends React.Component {
@@ -61,10 +62,10 @@ const TabRoot = createBottomTabNavigator(
     // JobDetail,
     // EditProfile,
     // AboutMe,
-    // TimixFormTest,
+    TimixFormTest,
   },
   {
-    initialRouteName: 'Account',
+    initialRouteName: 'TimixFormTest',
     tabBarOptions: {
       style: {
         backgroundColor: 'white',

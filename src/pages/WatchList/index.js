@@ -7,46 +7,21 @@
 import React from 'react';
 import {Text, View, StatusBar} from 'react-native';
 
-import {
-  EvilIcons,
-  MaterialCommunityIcons,
-  FontAwesome,
-} from '../../components/Icons';
+import {FontAwesome} from '../../components/Icons';
 
-import JobListTemplate, {Search} from '../../public/JobListPage';
 import {Page} from '../../components/PageHOC';
 import {Theme} from '../../utils/color';
 import {Auto} from '../../store';
-
-const JobList = Auto(state => state.job);
+import PageBase from '../../components/PageBase';
 
 class JobListContainer extends React.Component {
   render() {
-    return JobList(job => {
-      return (
-        <JobListTemplate
-          onSelect={() => {
-            this.props.navigation.navigate('JobDetail');
-          }}
-          title={
-            <Text
-              style={{fontSize: 18, fontWeight: '700', color: 'white'}}
-              key="1">
-              Find a job
-            </Text>
-          }
-          list={job.list}
-          loading={job.loading}
-          rightButton={
-            <Search
-              key="1"
-              onPress={() => this.props.navigation.navigate('SearchJob')}>
-              <EvilIcons name="search" color="white" size={24} />
-            </Search>
-          }
-        />
-      );
-    });
+    return (
+      <PageBase
+        headerTitle={<PageBase.LargeTitle>WatchList</PageBase.LargeTitle>}
+        hasHeader
+      />
+    );
   }
 }
 

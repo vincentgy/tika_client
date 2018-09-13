@@ -380,24 +380,30 @@ class ReactNativeModal extends Component {
     }
 
     if (this.contentRef) {
-      this.contentRef[animationOut](this.props.animationOutTiming).then(() => {
-        this.transitionLock = false;
-        if (this.props.isVisible) {
-          this.open();
-        } else {
-          this.setState(
-            {
-              showContent: false,
-            },
-            () => {
-              this.setState({
-                isVisible: false,
-              });
-            }
-          );
-          this.props.onModalHide();
-        }
-      });
+      this.contentRef[animationOut](this.props.animationOutTiming)
+        .then(() => {
+          this.transitionLock = false;
+          if (this.props.isVisible) {
+            this.open();
+          } else {
+            this.setState(
+              {
+                showContent: false,
+              },
+              () => {
+                this.setState({
+                  isVisible: false,
+                });
+              }
+            );
+            this.props.onModalHide();
+          }
+        })
+        .catch(() => {
+          // 如果没有这一步
+          // 在内部使用一个 scrollview 的时候，会卡住
+          // 那么会导致前面的步骤卡住
+        });
     }
   };
 
@@ -420,6 +426,7 @@ class ReactNativeModal extends Component {
       useNativeDriver,
       hasHandle,
       style,
+      contentStyle,
       ...otherProps
     } = this.props;
     const {deviceWidth, deviceHeight} = this.state;
@@ -428,6 +435,7 @@ class ReactNativeModal extends Component {
       {margin: deviceWidth * 0.05, transform: [{translateY: 0}]},
       styles.content,
       style,
+      contentStyle,
     ];
 
     let panHandlers = {};
@@ -457,9 +465,7 @@ class ReactNativeModal extends Component {
           {...otherProps}>
           {this.props.renderHandle()}
         </View>
-        <View
-          ref={body => (this.body = body)}
-          style={[panPosition, computedStyle]}>
+        <View ref={body => (this.body = body)} style={[panPosition]}>
           {_children}
         </View>
       </React.Fragment>
