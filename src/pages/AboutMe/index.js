@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextInput, Text, View} from 'react-native';
+import {TextInput, Text, View, Platform} from 'react-native';
 import PageBase from '../../components/PageBase';
 import Header from '../../components/Header';
 import KeyboardDetector from '../../utils/keyboard';
@@ -9,6 +9,23 @@ import {Entypo, MaterialIcons} from '../../components/Icons';
 
 const AboutMeText = Auto(s => s.profile.aboutMe);
 const WORD_LIMITS = 600;
+
+class LLTextInput extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return (
+      Platform.OS !== 'ios' ||
+      (this.props.value === nextProps.value &&
+        (nextProps.defaultValue == undefined ||
+          nextProps.defaultValue == '')) ||
+      (this.props.defaultValue === nextProps.defaultValue &&
+        (nextProps.value == undefined || nextProps.value == ''))
+    );
+  }
+
+  render() {
+    return <TextInput {...this.props} />;
+  }
+}
 
 export default class AboutMe extends React.Component {
   onTextChange = text => {
@@ -81,7 +98,7 @@ export default class AboutMe extends React.Component {
                   ))}
                 </View>
                 {AboutMeText(text => (
-                  <TextInput
+                  <LLTextInput
                     onChangeText={this.onTextChange}
                     value={text}
                     multiline

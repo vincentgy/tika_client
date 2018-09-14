@@ -3,24 +3,25 @@
 #### pre 1.0
 
 - [x] job type recreate
-- [ ] after create account,login directly
-- [ ] Get profile fix
-- [ ] job search page
+- [x] after create account,login directly
+- [x] Get profile fix
+- [x] job search page
   - [ ] city location with search
-- [ ] change `type` filter to `two-column selector`
-- [ ] edit profile pages
+- [x] edit profile pages
   - [ ] preview micro CV
-  - [ ] upload user avatar
+  - [x] upload user avatar
 - [x] company infomation
-  - [ ] mapview with company location
+  - [x] mapview with company location
   - [ ] map navigation
   - [ ] apply / chat
-- [ ] switch `user role`
+- [ x switch `user role`
   - [ ] post job
     - [ ] upload company `avatar`
-  - [ ] view `apply application` with `swip card`
+  - [ ] view `apply application` with `new design`
   - [ ] chat
 - [ ] Chat
+  - [x] backend logic is done
+  - [x] ui is done
 - [ ] no button cannot response.
 
 ## android
