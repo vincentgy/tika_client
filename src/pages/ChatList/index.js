@@ -85,7 +85,10 @@ export default class Chat extends React.Component {
   //Given type and data return the view component
   _rowRenderer = (type, data) => {
     return (
-      <TouchableOpacity activeOpacity={0.8} style={{backgroundColor: 'white'}}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={{backgroundColor: 'white'}}
+        onPress={() => this.props.navigation.navigate('ChatScreen')}>
         <View
           style={{
             paddingVertical: 8,

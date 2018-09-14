@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, View, Alert, Text, AsyncStorage} from 'react-native';
+import {ScrollView, View, Alert, Text, AsyncStorage,TextInput} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Form from '../../components/Form';
 import Input from '../../components/Input';
@@ -70,12 +70,12 @@ export default class Login extends React.Component {
             {(onChange, onSumit) => (
               <React.Fragment>
                 <Input
-                  testID="email"
+                  testID="123email4"
                   placeholder="Email"
                   onChangeText={t => onChange({key: 'Email', value: t})}
                 />
                 <Input
-                  testID="password"
+                  testID="123password4"
                   placeholder="Password"
                   onChangeText={t => onChange({key: 'Password', value: t})}
                 />

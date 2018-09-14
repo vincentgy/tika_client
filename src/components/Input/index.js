@@ -68,6 +68,7 @@ class Input extends React.Component {
             {this.props.placeholder}
           </Animatable.Text>
           <TextInput
+            testID={this.props.testID}
             underlineColorAndroid="transparent"
             style={{
               height: 51,

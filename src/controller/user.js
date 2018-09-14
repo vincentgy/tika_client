@@ -1,10 +1,17 @@
 import {AsyncStorage} from 'react-native';
 import UserManager from '../manager/userManager';
 
+export const LoginType = {
+  INIT: 'INIT',
+  SEEKER: 'SEEKER',
+  EMPLOYER: 'EMPLOYER',
+  NOT: 'NOT',
+};
+
 export default {
   name: 'user',
   state: {
-    isLogin: 'init-login-props',
+    isLogin: LoginType.INIT,
   },
   reducers: {
     mutateUser: (state, {payload}) => {
@@ -12,8 +19,29 @@ export default {
     },
   },
   effects: {
+    *goToRecruter({put}) {
+      yield AsyncStorage.setItem('role', LoginType.EMPLOYER);
+      yield put({
+        type: 'mutateUser',
+        payload: {
+          key: 'isLogin',
+          value: LoginType.EMPLOYER,
+        },
+      });
+    },
+    *gotoSeeker({put}) {
+      yield AsyncStorage.setItem('role', LoginType.SEEKER);
+      yield put({
+        type: 'mutateUser',
+        payload: {
+          key: 'isLogin',
+          value: LoginType.SEEKER,
+        },
+      });
+    },
     *checkLogin({put}) {
       const token = yield AsyncStorage.getItem('token');
+      const role = yield AsyncStorage.getItem('role');
 
       if (token !== null) {
         UserManager.setToken(token);
@@ -21,7 +49,7 @@ export default {
           type: 'mutateUser',
           payload: {
             key: 'isLogin',
-            value: true,
+            value: role === null ? LoginType.SEEKER : role,
           },
         });
       } else {
@@ -30,7 +58,7 @@ export default {
           type: 'mutateUser',
           payload: {
             key: 'isLogin',
-            value: false,
+            value: LoginType.NOT,
           },
         });
       }

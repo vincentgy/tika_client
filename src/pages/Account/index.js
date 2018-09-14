@@ -253,6 +253,23 @@ class Account extends React.Component {
   componentDidMount() {
     this.getUserProfile();
   }
+
+  goToRecruter = () => {
+    Alert.alert(
+      'Recruter',
+      'Do you really want to go to Recruter version of Timix?',
+      [
+        {text: 'No', style: 'cancel', onPress: () => {}},
+        {
+          text: 'Yes',
+          onPress: () => {
+            this.props.dispatch({type: 'goToRecruter'});
+          },
+        },
+      ]
+    );
+  };
+
   state = {
     isVisible: true,
   };
@@ -284,7 +301,9 @@ class Account extends React.Component {
                 source={require('../../asset/setting.png')}
                 style={{width: 24, height: 24}}
               />
-              <Text style={{marginLeft: 8}}>Account settings</Text>
+              <Text TestID="Account" style={{marginLeft: 8}}>
+                Account settings
+              </Text>
             </SettingCell>
             <SettingCell no>
               <Image
@@ -295,7 +314,7 @@ class Account extends React.Component {
             </SettingCell>
           </ListGroup>
           <ListGroup>
-            <SettingCell>
+            <SettingCell onPress={this.goToRecruter}>
               <Image
                 source={require('../../asset/hiring.png')}
                 style={{width: 24, height: 24}}
@@ -329,14 +348,16 @@ class Account extends React.Component {
   }
 }
 
-export default Page({
-  tabBarIcon: ({focused}) => (
-    <View style={{marginTop: 8}}>
-      <Entypo name="user" size={24} color={focused ? Theme : '#abb0b0'} />
-    </View>
-  ),
-  tabBarOnPress: ({defaultHandler}) => {
-    defaultHandler();
-    StatusBar.setBarStyle('dark-content', true);
-  },
-})(Account);
+export default connect()(
+  Page({
+    tabBarIcon: ({focused}) => (
+      <View style={{marginTop: 8}}>
+        <Entypo name="user" size={24} color={focused ? Theme : '#abb0b0'} />
+      </View>
+    ),
+    tabBarOnPress: ({defaultHandler}) => {
+      defaultHandler();
+      StatusBar.setBarStyle('dark-content', true);
+    },
+  })(Account)
+);

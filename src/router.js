@@ -25,6 +25,8 @@ import TimixForm from './components/TimixForm';
 import {Button} from 'react-native-elements';
 import WatchList from './pages/WatchList';
 import ChatScreen from './pages/ChatScreen';
+// 雇佣者
+import RecruiterAccount from './recruiterpages/account';
 
 const TestForm = TimixForm({
   text: TimixForm.FormType.Text,
@@ -63,10 +65,10 @@ const TabRoot = createBottomTabNavigator(
     // JobDetail,
     // EditProfile,
     // AboutMe,
-    TimixFormTest,
+    // TimixFormTest,
   },
   {
-    initialRouteName: 'TimixFormTest',
+    initialRouteName: 'Account',
     tabBarOptions: {
       style: {
         backgroundColor: 'white',
@@ -84,7 +86,7 @@ const withoutHeader = page => {
   };
 };
 const HomeStack = createStackNavigator({
-  // Tabs: withoutHeader(TabRoot),
+  Tabs: withoutHeader(TabRoot),
   ChatScreen: withoutHeader(ChatScreen),
   Edit: withoutHeader(Edit),
   JobDetail: withoutHeader(JobDetail),
@@ -99,6 +101,33 @@ const HomeStack = createStackNavigator({
   Skills: withoutHeader(Skills),
 });
 
-export default createSwitchNavigator({
+/**
+ * 从这边起就是 recruiter 端
+ */
+const RecruiterTabRoot = createBottomTabNavigator(
+  {
+    RecruiterAccount,
+  },
+  {
+    initialRouteName: 'RecruiterAccount',
+    tabBarOptions: {
+      style: {
+        backgroundColor: 'white',
+      },
+    },
+  }
+);
+
+const RecruiterHome = createStackNavigator({
+  RecruiterTabRoot: withoutHeader(RecruiterTabRoot),
+});
+
+// 雇佣者的 app
+export const RecruiterApp = createSwitchNavigator({
+  RecruiterHome,
+});
+
+// 查询者的 app
+export const SeekerApp = createSwitchNavigator({
   HomeStack,
 });

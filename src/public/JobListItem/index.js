@@ -12,16 +12,16 @@ const TouchBase = styled.TouchableOpacity`
   height: 88px;
 `;
 
-const Tag = ({text, color, backgroundColor}) => {
+const Tag = ({text, color, backgroundColor, marginLeft}) => {
   return (
     <View
       style={{
+        marginLeft: marginLeft ? 8 : 0,
         flexDirection: 'row',
         backgroundColor: backgroundColor,
         paddingHorizontal: 8,
         paddingVertical: 4,
         borderRadius: 4,
-        marginLeft: 8,
       }}>
       <Text
         style={{
@@ -42,6 +42,7 @@ const JobListItem = ({
   location,
   minimum_pay,
   maximum_pay,
+  icon,
 }) => {
   const nows = timeago().format(timestamp);
   return (
@@ -94,6 +95,7 @@ const JobListItem = ({
                   backgroundColor="rgba(29,170,146,0.1)"
                 />
                 <Tag
+                  marginLeft
                   text="full time"
                   color="#333"
                   backgroundColor="rgba(33,33,33,0.05)"

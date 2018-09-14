@@ -4,6 +4,7 @@ import List from '../List';
 import Modal from '../react-native-modal';
 import {NetworkManager} from '../../manager/networkManager';
 import SelectItem from '../../public/SelectItem';
+import Handle from '../Handle';
 
 class PatchedScrollView extends React.PureComponent {
   componentDidMount() {
@@ -50,26 +51,7 @@ export default class CategoryModal extends React.Component {
           isVisible={this.state.isVisiable}
           hasHandle
           style={{margin: 0, justifyContent: 'flex-end'}}
-          renderHandle={() => (
-            <View
-              style={{
-                height: 24,
-                backgroundColor: 'white',
-                borderTopLeftRadius: 32,
-                borderTopRightRadius: 32,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <View
-                style={{
-                  backgroundColor: '#abb0b0',
-                  height: 3,
-                  width: 48,
-                  borderRadius: 4,
-                }}
-              />
-            </View>
-          )}
+          renderHandle={Handle}
           onSwipe={() => this.setState({isVisiable: false})}
           swipeDirection="down">
           <PatchedScrollView style={{backgroundColor: 'white', height: 400}}>

@@ -3,7 +3,7 @@ import {Provider} from 'react-redux';
 import {createStackNavigator} from 'react-navigation';
 import Rluy from './utils/rluy.native';
 import PJ from './controller/postJob';
-import user from './controller/user';
+import user, {LoginType} from './controller/user';
 import filter from './controller/filter';
 
 import {
@@ -14,8 +14,7 @@ import {
   View,
   StatusBar,
 } from 'react-native';
-import TabRoot from './router';
-import {Logger, Debugger} from './utils/logger';
+import {SeekerApp, RecruiterApp} from './router';
 import CreateAccount from './pages/Login/create';
 import Login from './pages/Login';
 import {connect} from 'react-redux';
@@ -34,6 +33,10 @@ YellowBox.ignoreWarnings([
 Rluy.addController(PJ);
 Rluy.addController(filter);
 Rluy.addController(user);
+
+Rluy.errorFn = e => {
+  console.log(e);
+};
 
 const store = Rluy.run();
 const alert = Alert.alert;
@@ -75,39 +78,21 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.dispatch({type: 'checkLogin'});
-
-    // ImagePicker.openPicker({
-    //   width: 300,
-    //   height: 400,
-    //   cropping: true,
-    // }).then(image => {
-    //   console.log(image);
-    //   let formData = new FormData();
-    //   let file = {uri: image.path, type: image.mime, name: image.filename};
-    //   formData.append(file);
-    //   fetch('http://18.222.175.208/upload.php?token=xxx&c=u&id=3', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'multipart/form-data',
-    //     },
-    //     body: formData,
-    //   }).then(responseData => {
-    //     responseData.json().then(res => {
-    //       console.log(res);
-    //     });
-    //   });
-    // });
   }
 
   render() {
-    if (this.props.isLogin === 'init-login-props') return null;
-    if (!this.props.isLogin) return <LoginStack loginDone={this.LoginDone} />;
+    if (this.props.isLogin === LoginType.INIT) return null;
+    if (this.props.isLogin === LoginType.NOT)
+      return <LoginStack loginDone={this.LoginDone} />;
 
     return (
       <React.Fragment>
         <StatusBar barStyle="light-content" />
-        <TabRoot />
-        <Logger />
+        {this.props.isLogin === LoginType.EMPLOYER ? (
+          <RecruiterApp />
+        ) : (
+          <SeekerApp />
+        )}
       </React.Fragment>
     );
   }
@@ -123,9 +108,6 @@ const DevMenuTrigger = ({children}) => {
       if (gestureState.numberActiveTouches === 3) {
         DevMenu.show();
       }
-      // if (gestureState.numberActiveTouches === 2) {
-      //   Debugger.open();
-      // }
     },
   });
   return (
