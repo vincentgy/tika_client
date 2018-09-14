@@ -11,18 +11,56 @@ import Handle from '../../components/Handle';
 
 import {View, Text, Dimensions, Image} from 'react-native';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
-import {WIDTH} from '../../utils/plaform';
 import JobListItem from '../../public/JobListItem';
 
 const TempData = [
-  'https://cms.qz.com/wp-content/uploads/2018/08/RTX4RKWN-e1533787363757.jpg?quality=75&strip=all&w=410&h=232',
-  'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Steve_Jobs_Headshot_2010-CROP2.jpg/220px-Steve_Jobs_Headshot_2010-CROP2.jpg',
-  'https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D400/sign=9023f9aa6f09c93d07f20ff7af3cf8bb/7a899e510fb30f241b935fa7c095d143ad4b030c.jpg',
-  'https://s3.amazonaws.com/skinner-production/stories/display_images/000/022/885/large/16345010151_9af1358b60_o.jpg?1517862944',
-  'https://chine.in/usb/images/2016/115372_201402261621251jc64.jpg',
-  'https://www.thehindu.com/news/national/article20493061.ece/alternates/FREE_300/17THGATES1',
-  'https://fortunedotcom.files.wordpress.com/2015/03/9826_01_0153.jpg',
-  'http://n.sinaimg.cn/finance/transform/20160115/cYMT-fxnqriz9695881.jpg',
+  {
+    avatar:
+      'https://cms.qz.com/wp-content/uploads/2018/08/RTX4RKWN-e1533787363757.jpg?quality=75&strip=all&w=410&h=232',
+    first: 'Elon',
+    last: 'Musk',
+  },
+  {
+    avatar:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Steve_Jobs_Headshot_2010-CROP2.jpg/220px-Steve_Jobs_Headshot_2010-CROP2.jpg',
+    first: 'Steve',
+    last: 'Jobs',
+  },
+  {
+    avatar:
+      'https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D400/sign=9023f9aa6f09c93d07f20ff7af3cf8bb/7a899e510fb30f241b935fa7c095d143ad4b030c.jpg',
+    first: 'Jun',
+    last: 'Lei',
+  },
+  {
+    avatar:
+      'https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=0003b03088b1cb133e693b15e56f3173/0bd162d9f2d3572c257447038f13632763d0c35f.jpg',
+    first: 'Jack',
+    last: 'Ma',
+  },
+  {
+    avatar: 'https://chine.in/usb/images/2016/115372_201402261621251jc64.jpg',
+    first: 'Pony',
+    last: 'Ma',
+  },
+  {
+    avatar:
+      'https://www.thehindu.com/news/national/article20493061.ece/alternates/FREE_300/17THGATES1',
+    first: 'Bill',
+    last: 'Gates',
+  },
+  {
+    avatar:
+      'https://fortunedotcom.files.wordpress.com/2015/03/9826_01_0153.jpg',
+    first: 'Tim',
+    last: 'Cook',
+  },
+  {
+    avatar:
+      'https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=d6d431bf9aef76c6d0d2fc2da52d9ac7/2f738bd4b31c8701928251782d7f9e2f0708ff7c.jpg',
+    first: 'YanHong',
+    last: 'Li',
+  },
 ];
 
 class Test extends React.Component {
@@ -57,7 +95,7 @@ class Test extends React.Component {
 
     //Since component should always render once data has changed, make data provider part of the state
     this.state = {
-      dataProvider: dataProvider.cloneWithRows(this._generateArray(300)),
+      dataProvider: dataProvider.cloneWithRows(TempData),
       isVisiable: false,
     };
   }
@@ -80,7 +118,7 @@ class Test extends React.Component {
           alignItems: 'center',
         }}>
         <Image
-          source={{uri: TempData[index % 8]}}
+          source={{uri: data.avatar}}
           style={{
             width: 64,
             height: 64,
@@ -89,8 +127,8 @@ class Test extends React.Component {
         />
         <View
           style={{flexDirection: 'column', alignItems: 'center', marginTop: 8}}>
-          <Text>Jack</Text>
-          <Text>ma</Text>
+          <Text>{data.first}</Text>
+          <Text>{data.last}</Text>
         </View>
       </View>
     );
