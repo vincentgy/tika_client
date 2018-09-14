@@ -54,7 +54,7 @@ export default class ChatScreen extends React.Component {
 
   componentDidMount() {
     this.row.forEach(item => {
-      console.log(item);
+      
       item.measure((x, y, width, height) => {
         console.log(height);
       });

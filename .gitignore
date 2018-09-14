@@ -16,6 +16,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+ios/build
+
 
 # 安卓 build 目录下全部不要
 android/app/build

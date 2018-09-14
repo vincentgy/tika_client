@@ -70,10 +70,12 @@ export default class Login extends React.Component {
             {(onChange, onSumit) => (
               <React.Fragment>
                 <Input
+                  testID="email"
                   placeholder="Email"
                   onChangeText={t => onChange({key: 'Email', value: t})}
                 />
                 <Input
+                  testID="password"
                   placeholder="Password"
                   onChangeText={t => onChange({key: 'Password', value: t})}
                 />
@@ -81,6 +83,7 @@ export default class Login extends React.Component {
                   <Loading />
                 ) : (
                   <Button
+                    testID="MyUniqueId123"
                     buttonStyle={{height: 48, marginTop: 16}}
                     backgroundColor="#0077FF"
                     borderRadius={4}

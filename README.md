@@ -1,3 +1,6 @@
+## how to e2e test
+[detox](https://github.com/wix/detox/blob/master/docs/Introduction.GettingStarted.md)
+
 ## Todolist
 
 #### pre 1.0

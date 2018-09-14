@@ -35,7 +35,6 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* tikaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* tikaTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
-		30C653E1E8394258BE4F0B00 /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E65E484E5BE74D1881F4D375 /* libRCTBEEPickerManager.a */; };
 		450CA9A6210CC7930056AB17 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 450CA9A2210CC6EA0056AB17 /* libRNSpinkit.a */; };
 		4521D280213AFB2700A79F34 /* RNTMapview.m in Sources */ = {isa = PBXBuildFile; fileRef = 4521D27F213AFB2700A79F34 /* RNTMapview.m */; };
 		454082C02130408900456980 /* libimageCropPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4540828821303E0800456980 /* libimageCropPicker.a */; };
@@ -692,7 +691,6 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				454082C62130428600456980 /* QBImagePicker.framework in Frameworks */,
 				B874DB4C238847599B269328 /* libBVLinearGradient.a in Frameworks */,
-				30C653E1E8394258BE4F0B00 /* libRCTBEEPickerManager.a in Frameworks */,
 				A116D6513B3242488B51B54E /* libRNFS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
