@@ -1,44 +1,26 @@
-// MapView.js
-import PropTypes from 'prop-types';
 import React from 'react';
-import {requireNativeComponent} from 'react-native';
+import MapView from './native.ios';
+import {Platform} from 'react-native';
+import MapViewAndroid from 'react-native-maps';
 
-class MapView extends React.Component {
-  render() {
-    return <RNTMap {...this.props} />;
-  }
-}
+// const styles = StyleSheet.create({
+//   container: {
+//     ...StyleSheet.absoluteFillObject,
+//     height: 400,
+//     width: 400,
+//     justifyContent: 'flex-end',
+//     alignItems: 'center',
+//   },
+//   map: {
+//     ...StyleSheet.absoluteFillObject,
+//   },
+// });
+export default props => {
+  const {region, ...others} = props;
 
-MapView.propTypes = {
-  /**
-   * 经度
-   */
-  x: PropTypes.any.isRequired,
-  /**
-   * 维度
-   */
-  y: PropTypes.any.isRequired,
-  /**
-   * A Boolean value that determines whether the user may use pinch
-   * gestures to zoom in and out of the map.
-   */
-  scrollEnabled: PropTypes.bool,
-  region: PropTypes.shape({
-    /**
-     * Coordinates for the center of the map.
-     */
-    latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired,
-
-    /**
-     * Distance between the minimum and the maximum latitude/longitude
-     * to be displayed.
-     */
-    latitudeDelta: PropTypes.number.isRequired,
-    longitudeDelta: PropTypes.number.isRequired,
-  }),
+  return Platform.OS === 'ios' ? (
+    <MapView {...props} />
+  ) : (
+    <MapViewAndroid {...others} initialRegion={region} />
+  );
 };
-
-var RNTMap = requireNativeComponent('RNTMap', MapView);
-
-module.exports = MapView;

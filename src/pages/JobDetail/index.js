@@ -92,8 +92,8 @@ const Detail = ({longitude, latitude}) => {
         region={{
           longitude: longitude,
           latitude: latitude,
-          longitudeDelta: 0.1,
-          latitudeDelta: 0.1,
+          longitudeDelta: 0.02,
+          latitudeDelta: 0.02,
         }}
       />
     </DetailContainer>

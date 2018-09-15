@@ -9,7 +9,6 @@ const TouchBase = styled.TouchableOpacity`
   margin-right: 8px;
   border-radius: 4px;
   margin-top: 8px;
-  height: 88px;
 `;
 
 const Tag = ({text, color, backgroundColor, marginLeft}) => {
@@ -109,6 +108,6 @@ const JobListItem = ({
   );
 };
 
-JobListItem.HEIGHT = Platform.OS === 'ios' ? 96 : 144;
+JobListItem.HEIGHT = Platform.OS === 'ios' ? 96 : 112;
 
 export default JobListItem;
