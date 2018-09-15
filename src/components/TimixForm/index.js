@@ -10,6 +10,7 @@ import {FontAwesome} from '../Icons';
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import CategoryModal from '../CategoryModal';
+import {Stepper} from '../Stepper';
 
 const FormType = {
   Text: 'text',
@@ -18,6 +19,8 @@ const FormType = {
   Tick: 'tick',
   Tags: 'tags',
   Cate: 'cate',
+  //公司的人
+  Step: 'step',
 };
 
 const UseKeyboardAwareScrollView = ({notUse, children}) => {
@@ -121,6 +124,15 @@ const TimixForm = formScheme => {
               }
               if (elementType === 'bool') {
                 return <ListTicker data={['bool']} key={index} />;
+              }
+              if (elementType === 'step') {
+                return (
+                  <Stepper
+                    onChange={data => this.onFormChange(key, data)}
+                    unit={key}
+                    key={index}
+                  />
+                );
               }
               if (elementType === 'date') {
                 return (

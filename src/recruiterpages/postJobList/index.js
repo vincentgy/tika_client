@@ -1,10 +1,9 @@
 import React from 'react';
 import {StatusBar} from 'react-native';
-
 import {Button} from 'react-native-elements';
 import {connect} from 'react-redux';
 import {Page} from '../../components/PageHOC';
-import {Entypo} from '../../components/Icons';
+import {Entypo, Ionicons} from '../../components/Icons';
 import {Theme} from '../../utils/color';
 import Header from '../../components/Header';
 import List from '../../components/List';
@@ -14,6 +13,7 @@ import Handle from '../../components/Handle';
 import {View, Text, Dimensions, Image} from 'react-native';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 import JobListItem from '../../public/JobListItem';
+import {EasyTap} from '../../public/EasyTap';
 
 const TempData = [
   {
@@ -192,9 +192,14 @@ class Account extends React.Component {
   render() {
     return (
       <View>
-        <Header />
-        <Test />
-        <Button title="go to seeker" onPress={this.gotoSeeker} />
+        <Header
+          title={<Header.LargeTitle>Post a job</Header.LargeTitle>}
+          rightButton={[
+            <EasyTap>
+              <Ionicons name="ios-add" size={24} color="white" />
+            </EasyTap>,
+          ]}
+        />
       </View>
     );
   }
@@ -208,7 +213,7 @@ export default Page({
   ),
   tabBarOnPress: ({defaultHandler}) => {
     defaultHandler();
-    StatusBar.setBarStyle('dark-content', true);
+    StatusBar.setBarStyle('light-content', true);
   },
-  tabBarLabel: 'Account',
+  tabBarLabel: 'Post a job',
 })(Account);

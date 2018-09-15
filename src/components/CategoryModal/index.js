@@ -51,7 +51,12 @@ export default class CategoryModal extends React.Component {
           isVisible={this.state.isVisiable}
           hasHandle
           style={{margin: 0, justifyContent: 'flex-end'}}
-          renderHandle={Handle}
+          renderHandle={() => (
+            <Handle
+              hasClose
+              onPress={() => this.setState({isVisiable: false})}
+            />
+          )}
           onSwipe={() => this.setState({isVisiable: false})}
           swipeDirection="down">
           <PatchedScrollView style={{backgroundColor: 'white', height: 400}}>

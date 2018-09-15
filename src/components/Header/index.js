@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Platform, StatusBar, View} from 'react-native';
+import {Platform, StatusBar, View, Text} from 'react-native';
 // import PropTypes from 'prop-types';
 
 import {Theme} from '../../utils/color';
@@ -80,5 +80,12 @@ class Header extends React.Component {
     );
   }
 }
+
+Header.LargeTitle = ({children}) => (
+  <Text style={{fontSize: 18, fontWeight: '700', color: 'white'}}>
+    {children}
+  </Text>
+);
+Header.Title = ({children}) => <Text style={{color: 'white'}}>{children}</Text>;
 
 export default Header;

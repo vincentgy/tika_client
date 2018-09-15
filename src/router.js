@@ -27,6 +27,7 @@ import WatchList from './pages/WatchList';
 import ChatScreen from './pages/ChatScreen';
 // 雇佣者
 import RecruiterAccount from './recruiterpages/account';
+import PostJobList from './recruiterpages/postJobList';
 
 const TestForm = TimixForm({
   text: TimixForm.FormType.Text,
@@ -36,6 +37,7 @@ const TestForm = TimixForm({
   bool: TimixForm.FormType.Bool,
   tags: TimixForm.FormType.Tags,
   cate: TimixForm.FormType.Cate,
+  position: TimixForm.FormType.Step,
 });
 
 class TimixFormTest extends React.Component {
@@ -65,10 +67,10 @@ const TabRoot = createBottomTabNavigator(
     // JobDetail,
     // EditProfile,
     // AboutMe,
-    // TimixFormTest,
+    TimixFormTest,
   },
   {
-    initialRouteName: 'Account',
+    initialRouteName: 'TimixFormTest',
     tabBarOptions: {
       style: {
         backgroundColor: 'white',
@@ -107,9 +109,10 @@ const HomeStack = createStackNavigator({
 const RecruiterTabRoot = createBottomTabNavigator(
   {
     RecruiterAccount,
+    PostJobList,
   },
   {
-    initialRouteName: 'RecruiterAccount',
+    initialRouteName: 'PostJobList',
     tabBarOptions: {
       style: {
         backgroundColor: 'white',

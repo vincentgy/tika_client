@@ -13,7 +13,7 @@
     "request": "^2.88.0"
   },
   "scripts": {
-    "e2e":"detox test",
+    "e2e": "detox test",
     "postinstall": "cp vendor/attachWebsocketServer.js node_modules/react-native/local-cli/server/util/ && cp ./react.gradle node_modules/react-native/ && cp ./ReactWheelCurvedPicker.java ./node_modules/react-native-wheel-picker/android/src/main/java/com/zyu/ReactWheelCurvedPicker.java",
     "start:a": "adb reverse tcp:8081 tcp:8081 && npm run start",
     "start": "node ./scripts/abstract.js&&react-native start",

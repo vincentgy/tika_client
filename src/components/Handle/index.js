@@ -3,10 +3,10 @@ import {View} from 'react-native';
 import {EasyTap} from '../../public/EasyTap';
 import {EvilIcons} from '../Icons';
 
-export default ({onPress, isClose}) => (
+export default ({onPress, hasClose}) => (
   <View
     style={{
-      height: isClose ? 32 : 24,
+      height: hasClose ? 32 : 24,
       backgroundColor: 'white',
       borderTopLeftRadius: 32,
       borderTopRightRadius: 32,
@@ -22,7 +22,7 @@ export default ({onPress, isClose}) => (
         borderRadius: 4,
       }}
     />
-    {isClose ? (
+    {hasClose ? (
       <EasyTap
         style={{position: 'absolute', right: 8, top: 2}}
         onPress={onPress}>
