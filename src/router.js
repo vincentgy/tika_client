@@ -10,7 +10,6 @@ import Edit from './pages/PostJob/edit';
 import Picker from './pages/PostJob/picker';
 import Account from './pages/Account';
 import SearchJob from './pages/Search';
-import Description from './pages/PostJob/description';
 import ResultList from './pages/Search/resultList';
 import Chat from './pages/ChatList';
 import JobDetail from './pages/JobDetail';
@@ -28,6 +27,10 @@ import ChatScreen from './pages/ChatScreen';
 // 雇佣者
 import RecruiterAccount from './recruiterpages/account';
 import PostJobList from './recruiterpages/postJobList';
+import CreateCategory from './recruiterpages/postJobStack/createCate';
+import Description from './recruiterpages/postJobStack/description';
+import JobType from './recruiterpages/postJobStack/jobtype';
+import Location from './recruiterpages/postJobStack/location';
 
 const TestForm = TimixForm({
   text: TimixForm.FormType.Text,
@@ -94,7 +97,6 @@ const HomeStack = createStackNavigator({
   JobDetail: withoutHeader(JobDetail),
   Picker: Picker,
   SearchJob: withoutHeader(SearchJob),
-  Description: withoutHeader(Description),
   SearchResult: withoutHeader(ResultList),
   EditProfile: withoutHeader(EditProfile),
   AboutMe: withoutHeader(AboutMe),
@@ -123,6 +125,10 @@ const RecruiterTabRoot = createBottomTabNavigator(
 
 const RecruiterHome = createStackNavigator({
   RecruiterTabRoot: withoutHeader(RecruiterTabRoot),
+  CreateCategory: withoutHeader(CreateCategory),
+  Description: withoutHeader(Description),
+  JobType: withoutHeader(JobType),
+  Location: withoutHeader(Location),
 });
 
 // 雇佣者的 app

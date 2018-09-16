@@ -86,6 +86,8 @@ Header.LargeTitle = ({children}) => (
     {children}
   </Text>
 );
-Header.Title = ({children}) => <Text style={{color: 'white'}}>{children}</Text>;
+Header.Title = ({children}) => (
+  <Text style={{color: 'white', textAlign: 'center'}}>{children}</Text>
+);
 
 export default Header;

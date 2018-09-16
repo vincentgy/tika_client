@@ -15,9 +15,9 @@ const StyledText = styled.Text`
   color: ${props => (props.active ? Theme : '#8c8c8c')};
 `;
 
-export default ({onPress, active, children}) => {
+export default ({onPress, active, children, style}) => {
   return (
-    <RegionItem onPress={onPress}>
+    <RegionItem onPress={onPress} style={style}>
       <StyledText active={active}>{children}</StyledText>
       {active ? (
         <Ionicons

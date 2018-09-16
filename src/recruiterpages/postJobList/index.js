@@ -3,7 +3,7 @@ import {StatusBar} from 'react-native';
 import {Button} from 'react-native-elements';
 import {connect} from 'react-redux';
 import {Page} from '../../components/PageHOC';
-import {Entypo, Ionicons} from '../../components/Icons';
+import {Entypo, Ionicons, EvilIcons} from '../../components/Icons';
 import {Theme} from '../../utils/color';
 import Header from '../../components/Header';
 import List from '../../components/List';
@@ -184,9 +184,9 @@ class Test extends React.Component {
 }
 
 @connect()
-class Account extends React.Component {
-  gotoSeeker = () => {
-    this.props.dispatch({type: 'gotoSeeker'});
+class PostAJob extends React.Component {
+  gotoCreate = () => {
+    this.props.navigation.navigate('CreateCategory');
   };
 
   render() {
@@ -195,7 +195,7 @@ class Account extends React.Component {
         <Header
           title={<Header.LargeTitle>Post a job</Header.LargeTitle>}
           rightButton={[
-            <EasyTap>
+            <EasyTap onPress={this.gotoCreate}>
               <Ionicons name="ios-add" size={24} color="white" />
             </EasyTap>,
           ]}
@@ -207,8 +207,8 @@ class Account extends React.Component {
 
 export default Page({
   tabBarIcon: ({focused}) => (
-    <View style={{marginTop: 8}}>
-      <Entypo name="user" size={24} color={focused ? Theme : '#abb0b0'} />
+    <View>
+      <EvilIcons name="archive" size={32} color={focused ? Theme : '#abb0b0'} />
     </View>
   ),
   tabBarOnPress: ({defaultHandler}) => {
@@ -216,4 +216,4 @@ export default Page({
     StatusBar.setBarStyle('light-content', true);
   },
   tabBarLabel: 'Post a job',
-})(Account);
+})(PostAJob);
