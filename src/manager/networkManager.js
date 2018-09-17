@@ -48,6 +48,69 @@ export class NetworkManager {
     return json;
   }
 
+  async postJob(
+    title,
+    company,
+    description,
+    type,
+    pay_type,
+    minimum_pay,
+    maximum_pay,
+    region_id,
+    district_id,
+    location,
+    number,
+    categories
+  ) {
+    //     ```bash
+    // Request,
+    // ‘a’:'pj',
+    // ‘title’ : job title,
+    // ‘company’ : company name,
+    // ‘description’ : job description,
+    // ’user_id’ : user id of creator,
+    // ‘type’ : job type id,
+    // ‘pay_type’ : pay type id,
+    // ‘minimum_pay’ : minimum salary,
+    // ‘maximum_pay’ : maximum salary,
+    // ‘region_id’ : region id,
+    // ‘district_id’ : district id,
+    // ‘location’ : detailed address,
+    // ‘number’ : number of employees required,
+    // ‘categories’ : list of categories the job belongs.
+
+    const body = {
+      a: 'pj',
+      token: userManager.getToken(),
+      title,
+      company,
+      description,
+      type: '1', //临时
+      pay_type: '2', //临时
+      minimum_pay,
+      maximum_pay,
+      region_id,
+      district_id,
+      location,
+      number,
+      categories,
+    };
+
+    console.log(body);
+
+    const res = await fetch('http://18.222.175.208/', {
+      method: 'POST',
+      body: JSON.stringify({param: body}),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencode',
+      },
+    });
+    const json = await res.json();
+
+    console.log('完成', json);
+    return json;
+  }
+
   /**
    * 根据 filter 搜索用户所要的工作信息
    * @param {*} regionId

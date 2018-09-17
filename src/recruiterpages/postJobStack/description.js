@@ -1,29 +1,41 @@
 import React from 'react';
-import {View, TouchableOpacity, Text} from 'react-native';
-import TimixForm from '../../components/TimixForm';
+import {View, TouchableOpacity, Text, TextInput, Platform} from 'react-native';
 import Header from '../../components/Header';
-import LinearGradient from 'react-native-linear-gradient';
-import {WIDTH} from '../../utils/plaform';
-import {NextBottom} from './nextButton';
+import {Kohana} from 'react-native-textinput-effects';
 
-const DescriptionForm = TimixForm.Combind({
-  JobDescription: {
-    form: TimixForm({
-      'Job Title': TimixForm.FormType.Text,
-      Company: TimixForm.FormType.Text,
-      'Job Description': TimixForm.FormType.Text,
-    }),
-    header: 'JOB DESCRIPTION',
-  },
-  'NUMBER OF POSITIONS': {
-    form: TimixForm({
-      Position: TimixForm.FormType.Step,
-    }),
-    header: 'NUMBER OF POSITIONS',
-  },
-});
+import {NextBottom} from './nextButton';
+import {Auto, Put} from '../../store';
+import {FontAwesome} from '../../components/Icons';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {Stepper} from '../../components/Stepper';
+
+
+class LLTextInput extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return (
+      Platform.OS !== 'ios' ||
+      (this.props.value === nextProps.value &&
+        (nextProps.defaultValue == undefined ||
+          nextProps.defaultValue == '')) ||
+      (this.props.defaultValue === nextProps.defaultValue &&
+        (nextProps.value == undefined || nextProps.value == ''))
+    );
+  }
+
+  render() {
+    return <TextInput {...this.props} />;
+  }
+}
+
+const Des = Auto(s => s.createJob.description);
 
 export default class Description extends React.Component {
+  onFormChange = (key, text) => {
+    Put(state => {
+      state.createJob.description[key] = text;
+    });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -35,7 +47,64 @@ export default class Description extends React.Component {
             </View>
           }
         />
-        <DescriptionForm />
+        {Des(des => {
+          return (
+            <KeyboardAwareScrollView>
+              <Kohana
+                inputStyle={{fontSize: 14}}
+                useNativeDriver
+                label="Job Title"
+                labelStyle={{fontWeight: '100', fontSize: 14}}
+                iconSize={14}
+                iconClass={FontAwesome}
+                iconName={'pencil'}
+                // TextInput props
+                value={des.JobTitle}
+                onChangeText={text => this.onFormChange('JobTitle', text)}
+                autoCapitalize={'none'}
+                autoCorrect={false}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  height: 48,
+                }}
+              />
+              <Kohana
+                inputStyle={{fontSize: 14}}
+                useNativeDriver
+                label="Company"
+                labelStyle={{fontWeight: '100', fontSize: 14}}
+                iconSize={14}
+                iconClass={FontAwesome}
+                iconName={'pencil'}
+                // TextInput props
+                value={des.Company}
+                onChangeText={text => this.onFormChange('Company', text)}
+                autoCapitalize={'none'}
+                autoCorrect={false}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  height: 48,
+                }}
+              />
+              <View style={{padding: 16, backgroundColor: 'white'}}>
+                <LLTextInput
+                  onChangeText={text => this.onFormChange('description', text)}
+                  value={des.description}
+                  placeholder="Description"
+                  multiline
+                  numberOfLines={8}
+                  style={{height: 150}}
+                />
+              </View>
+              <Stepper
+                value={des.position}
+                onChange={number => this.onFormChange('position', number)}
+              />
+            </KeyboardAwareScrollView>
+          );
+        })}
         <NextBottom goto="JobType" {...this.props} />
       </React.Fragment>
     );

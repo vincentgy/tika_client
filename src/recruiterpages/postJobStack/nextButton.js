@@ -3,7 +3,7 @@ import {TouchableOpacity, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {WIDTH} from '../../utils/plaform';
 
-export const NextBottom = ({navigation, goto}) => {
+export const NextBottom = ({navigation, goto, onPress, title = 'Next'}) => {
   return (
     <LinearGradient
       style={{
@@ -16,7 +16,7 @@ export const NextBottom = ({navigation, goto}) => {
       end={{x: 1, y: 0}}
       colors={['#597ef7', '#2f54eb']}>
       <TouchableOpacity
-        onPress={() => navigation.navigate(goto)}
+        onPress={onPress ? onPress : () => navigation.navigate(goto)}
         style={{
           width: WIDTH,
           flexDirection: 'row',
@@ -24,7 +24,7 @@ export const NextBottom = ({navigation, goto}) => {
           alignItems: 'center',
           height: 48,
         }}>
-        <Text style={{color: 'white'}}>Next</Text>
+        <Text style={{color: 'white'}}>{title}</Text>
       </TouchableOpacity>
     </LinearGradient>
   );

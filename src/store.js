@@ -67,6 +67,28 @@ const Store = init({
     }),
     loading: true,
   },
+  createJob: {
+    //第一步
+    categories: [],
+    //第二步
+    description: {
+      JobTitle: 'web developer',
+      Company: 'Timix',
+      description: 'we are chinese',
+      position: 1,
+    },
+    //第三步
+    JobType: {
+      type: '',
+      min: '',
+      max: '',
+    },
+    Location: {
+      Region: {id: '', region: ''},
+      District: {id: '', name: ''},
+      Address: '325 east coast road',
+    },
+  },
 });
 
 export const Put = Store.Put;

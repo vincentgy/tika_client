@@ -42,6 +42,6 @@ const formated = prettier.format(JSfile, {
   bracketSpacing: false,
   trailingComma: 'es5',
 });
-fs.writeFileSync('./src/pages/PostJob/area.js', formated, 'utf8');
+fs.writeFileSync('./src/components/area.js', formated, 'utf8');
 
 console.log('提取完毕');

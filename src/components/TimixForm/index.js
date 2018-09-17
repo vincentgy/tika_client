@@ -11,6 +11,7 @@ import {FontAwesome} from '../Icons';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import CategoryModal from '../CategoryModal';
 import {Stepper} from '../Stepper';
+import equal from 'fast-deep-equal';
 
 const FormType = {
   Text: 'text',
@@ -19,8 +20,8 @@ const FormType = {
   Tick: 'tick',
   Tags: 'tags',
   Cate: 'cate',
-  //公司的人
   Step: 'step',
+  MuiltText: 'muiltText',
 };
 
 const UseKeyboardAwareScrollView = ({notUse, children}) => {
@@ -50,10 +51,21 @@ const TimixForm = formScheme => {
   return class Form extends React.Component {
     static defaultProps = {
       notUseKeyboardAwareScrollView: false,
+      controlled: false,
     };
     constructor(props) {
       super(props);
       this.state = {...formData};
+    }
+
+    componentDidUpdate() {
+      if (this.props.controlled) {
+        if (!equal(this.props.formData, this.state)) {
+          this.setState({
+            ...this.props.formData,
+          });
+        }
+      }
     }
 
     getFormData = () => {
@@ -153,6 +165,22 @@ const TimixForm = formScheme => {
               }
               if (elementType === 'cate') {
                 return <CategoryModal key={index} />;
+              }
+              if (elementType === 'muiltText') {
+                return (
+                  <View
+                    style={{padding: 16, backgroundColor: 'white'}}
+                    key={index}>
+                    <TextInput
+                      onChange={data => this.onFormChange(key, data)}
+                      multiline
+                      numberOfLines={8}
+                      style={{height: 120}}
+                      placeholder={key}
+                      value={this.state[key].value}
+                    />
+                  </View>
+                );
               }
               return null;
             })}

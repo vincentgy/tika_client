@@ -41,6 +41,7 @@ const TestForm = TimixForm({
   tags: TimixForm.FormType.Tags,
   cate: TimixForm.FormType.Cate,
   position: TimixForm.FormType.Step,
+  muilt: TimixForm.FormType.MuiltText,
 });
 
 class TimixFormTest extends React.Component {

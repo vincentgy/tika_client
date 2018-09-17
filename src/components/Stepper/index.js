@@ -13,9 +13,19 @@ export class Stepper extends React.PureComponent {
     number: 1,
   };
 
+  componentDidUpdate() {
+    if (this.props.onChange) {
+      if (this.props.value !== this.state.number) {
+        this.setState({
+          number: this.props.value,
+        });
+      }
+    }
+  }
+
   static defaultProps = {
     unit: 'position',
-    onChange: () => void 666,
+    value: 1,
   };
 
   add = () => {
@@ -24,7 +34,7 @@ export class Stepper extends React.PureComponent {
         number: this.state.number + 1,
       },
       () => {
-        this.props.onChange(this.state.number);
+        this.props.onChange && this.props.onChange(this.state.number);
       }
     );
   };
@@ -36,7 +46,7 @@ export class Stepper extends React.PureComponent {
           number: this.state.number - 1,
         },
         () => {
-          this.props.onChange(this.state.number);
+          this.props.onChange && this.props.onChange(this.state.number);
         }
       );
   };
@@ -51,7 +61,9 @@ export class Stepper extends React.PureComponent {
           justifyContent: 'space-between',
         }}>
         <Container>
-          <Text style={{color: '#abb0b0'}}>{this.state.number}</Text>
+          <Text style={{color: '#abb0b0'}}>
+            {this.props.onChange ? this.props.value : this.state.number}
+          </Text>
           <Text style={{color: '#abb0b0'}}>{`   ${this.props.unit}`}</Text>
         </Container>
         <Container>
