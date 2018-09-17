@@ -9,6 +9,7 @@ import {FontAwesome, Entypo} from '../../components/Icons';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Stepper} from '../../components/Stepper';
 import {EasyTap} from '../../public/EasyTap';
+import {Title} from './title';
 
 class LLTextInput extends React.Component {
   shouldComponentUpdate(nextProps) {
@@ -55,6 +56,7 @@ export default class Description extends React.Component {
         {Des(des => {
           return (
             <KeyboardAwareScrollView>
+              <Title text="JOB DESCRIPTION" />
               <Kohana
                 inputStyle={{fontSize: 14}}
                 useNativeDriver
@@ -103,6 +105,7 @@ export default class Description extends React.Component {
                   style={{height: 150}}
                 />
               </View>
+              <Title text="POSITION" />
               <Stepper
                 value={des.position}
                 onChange={number => this.onFormChange('position', number)}

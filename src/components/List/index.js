@@ -13,19 +13,7 @@ const List = ({title, children}) => {
   return (
     <React.Fragment>
       {title}
-      <View style={{backgroundColor: 'white', marginTop: 8}}>
-        {Children.map((child, index) => {
-          if (index !== 0) {
-            return React.cloneElement(child, {
-              style: {
-                borderTopWidth: 1,
-                borderTopColor: 'rgba(120, 120, 120, 0.2)',
-              },
-            });
-          }
-          return child;
-        })}
-      </View>
+      <View style={{backgroundColor: 'white', marginTop: 8}}>{children}</View>
     </React.Fragment>
   );
 };

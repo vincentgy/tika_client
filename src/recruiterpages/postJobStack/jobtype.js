@@ -9,6 +9,7 @@ import Picker from 'react-native-wheel-picker';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
 import {EasyTap} from '../../public/EasyTap';
 import {Entypo} from '../../components/Icons';
+import {Title} from './title';
 
 const TypeInStore = Auto(state => state.createJob.JobType);
 
@@ -174,23 +175,29 @@ export default class JobType extends React.Component {
             </EasyTap>,
           ]}
         />
-        <View style={{height: HEIGHT - 40 - 76, backgroundColor: 'white'}}>
+        <View style={{height: HEIGHT - 40 - 76}}>
+          <Title text="JOB TYPE" />
           {TypeInStore(state => {
             return (
               <React.Fragment>
-                {['Full time', 'Part time', 'Contract', 'One off'].map(
-                  (item, index) => {
-                    return (
-                      <SelectItem
-                        onPress={() => this.onTypeChange(item)}
-                        key={index}
-                        active={item === state.type}>
-                        {item}
-                      </SelectItem>
-                    );
-                  }
-                )}
-                {this.renderPicker(state)}
+                <View style={{backgroundColor: 'white'}}>
+                  {['Full time', 'Part time', 'Contract', 'One off'].map(
+                    (item, index) => {
+                      return (
+                        <SelectItem
+                          onPress={() => this.onTypeChange(item)}
+                          key={index}
+                          active={item === state.type}>
+                          {item}
+                        </SelectItem>
+                      );
+                    }
+                  )}
+                </View>
+                <Title text="PAY TYPE" />
+                <View style={{backgroundColor: 'white'}}>
+                  {this.renderPicker(state)}
+                </View>
               </React.Fragment>
             );
           })}
