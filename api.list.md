@@ -346,3 +346,20 @@ example:
 </body>
 </html>
 ```
+
+---
+
+17.Get Posted Job List
+
+```bash
+Request,
+‘a’:'gpl', get posted job list,
+‘user_id’ : [optional]user id,
+‘token’ : user token,
+
+if ‘user_id’ is not specified, then it will return the job list posted by user himself, fetched from ‘token’.
+Response,
+JSON object,
+‘ret’, 0 means successful, otherwise failed.
+‘data’, JSON encoded job list.
+```
