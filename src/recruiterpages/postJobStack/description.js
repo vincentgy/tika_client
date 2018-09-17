@@ -5,10 +5,10 @@ import {Kohana} from 'react-native-textinput-effects';
 
 import {NextBottom} from './nextButton';
 import {Auto, Put} from '../../store';
-import {FontAwesome} from '../../components/Icons';
+import {FontAwesome, Entypo} from '../../components/Icons';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Stepper} from '../../components/Stepper';
-
+import {EasyTap} from '../../public/EasyTap';
 
 class LLTextInput extends React.Component {
   shouldComponentUpdate(nextProps) {
@@ -46,6 +46,11 @@ export default class Description extends React.Component {
               <Header.Title>Step 2 of 4</Header.Title>
             </View>
           }
+          leftButton={[
+            <EasyTap key={0} onPress={() => this.props.navigation.goBack()}>
+              <Entypo size={16} color="white" name="chevron-thin-left" />
+            </EasyTap>,
+          ]}
         />
         {Des(des => {
           return (

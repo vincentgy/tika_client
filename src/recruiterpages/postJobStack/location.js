@@ -10,6 +10,8 @@ import {Regions, Disctrict} from '../../components/area';
 import {NextBottom} from './nextButton';
 import {HEIGHT} from '../../utils/plaform';
 import {NetworkManager} from '../../manager/networkManager';
+import {EasyTap} from '../../public/EasyTap';
+import {Entypo} from '../../components/Icons';
 
 const LocationStore = Auto(state => state.createJob.Location);
 
@@ -94,7 +96,6 @@ export default class Location extends React.Component {
 
     if (json.ret === 0) {
       // 成功
-      
     } else {
       // 失败
     }
@@ -104,6 +105,11 @@ export default class Location extends React.Component {
     return (
       <View>
         <Header
+          leftButton={[
+            <EasyTap key={0} onPress={() => this.props.navigation.goBack()}>
+              <Entypo size={16} color="white" name="chevron-thin-left" />
+            </EasyTap>,
+          ]}
           title={
             <View>
               <Header.LargeTitle>Create job: Location</Header.LargeTitle>

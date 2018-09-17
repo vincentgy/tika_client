@@ -9,6 +9,7 @@ import SelectItem from '../../public/SelectItem';
 import {NextBottom} from './nextButton';
 import {Loading} from '../../components/Loading';
 import {getStore, Put} from '../../store';
+import {Entypo} from '../../components/Icons';
 
 export default class Test extends React.Component {
   constructor(args) {
@@ -116,6 +117,11 @@ export default class Test extends React.Component {
               <Header.Title>Step 1 of 4</Header.Title>
             </View>
           }
+          leftButton={[
+            <EasyTap key={0} onPress={() => this.props.navigation.goBack()}>
+              <Entypo size={16} color="white" name="chevron-thin-left" />
+            </EasyTap>,
+          ]}
         />
         {this.state.loading ? (
           <Loading />

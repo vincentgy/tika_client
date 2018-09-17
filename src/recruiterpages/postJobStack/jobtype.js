@@ -7,6 +7,8 @@ import {Auto, Put} from '../../store';
 import SelectItem from '../../public/SelectItem';
 import Picker from 'react-native-wheel-picker';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
+import {EasyTap} from '../../public/EasyTap';
+import {Entypo} from '../../components/Icons';
 
 const TypeInStore = Auto(state => state.createJob.JobType);
 
@@ -166,6 +168,11 @@ export default class JobType extends React.Component {
               <Header.Title>Step 3 of 4</Header.Title>
             </View>
           }
+          leftButton={[
+            <EasyTap key={0} onPress={() => this.props.navigation.goBack()}>
+              <Entypo size={16} color="white" name="chevron-thin-left" />
+            </EasyTap>,
+          ]}
         />
         <View style={{height: HEIGHT - 40 - 76}}>
           {TypeInStore(state => {
