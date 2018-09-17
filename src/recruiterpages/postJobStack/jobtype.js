@@ -174,7 +174,7 @@ export default class JobType extends React.Component {
             </EasyTap>,
           ]}
         />
-        <View style={{height: HEIGHT - 40 - 76}}>
+        <View style={{height: HEIGHT - 40 - 76, backgroundColor: 'white'}}>
           {TypeInStore(state => {
             return (
               <React.Fragment>
