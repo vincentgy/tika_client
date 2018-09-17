@@ -32,9 +32,56 @@ class LLTextInput extends React.Component {
   }
 }
 
-export default class Location extends React.Component {
+class RegionModal extends React.Component {
   state = {
     isRegionVisiable: false,
+  };
+
+  open = () => {
+    this.setState({
+      isRegionVisiable: true,
+    });
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        {this.props.children(this.open)}
+        <Modal
+          isVisible={this.state.isRegionVisiable}
+          hasHandle
+          style={{margin: 0, justifyContent: 'flex-end'}}
+          renderHandle={() => (
+            <Handle onPress={() => this.setState({isRegionVisiable: false})} />
+          )}
+          onSwipe={() => this.setState({isRegionVisiable: false})}
+          swipeDirection="down">
+          <View style={{height: 350, backgroundColor: 'white'}}>
+            <ScrollView>
+              <List>
+                {Regions.map(item => {
+                  return (
+                    <List.Item
+                      onPress={() => {
+                        this.setState({isRegionVisiable: false});
+                        this.props.changeRegion(item);
+                      }}
+                      key={item.id}
+                      title={item.region}
+                    />
+                  );
+                })}
+              </List>
+            </ScrollView>
+          </View>
+        </Modal>
+      </React.Fragment>
+    );
+  }
+}
+
+export default class Location extends React.Component {
+  state = {
     isDistrictVisiable: false,
   };
 
@@ -128,13 +175,18 @@ export default class Location extends React.Component {
                       LOCATION
                     </Text>
                   }>
+                  <RegionModal changeRegion={item => this.changeRegion(item)}>
+                    {open => (
+                      <List.Item
+                        desc={local.Region.region}
+                        key={1}
+                        title="Region"
+                        onPress={open}
+                      />
+                    )}
+                  </RegionModal>
                   <List.Item
-                    desc={local.Region.region}
-                    key={1}
-                    title="Region"
-                    onPress={() => this.setState({isRegionVisiable: true})}
-                  />
-                  <List.Item
+                    disable={Disctrict[local.Region.id] === void 666}
                     desc={local.District.name}
                     key={2}
                     title="Distrct"
@@ -156,31 +208,6 @@ export default class Location extends React.Component {
           })}
         </View>
         <NextBottom title="Done" onPress={() => this.onDone()} />
-        <Modal
-          isVisible={this.state.isRegionVisiable}
-          hasHandle
-          style={{margin: 0, justifyContent: 'flex-end'}}
-          renderHandle={() => (
-            <Handle onPress={() => this.setState({isRegionVisiable: false})} />
-          )}
-          onSwipe={() => this.setState({isRegionVisiable: false})}
-          swipeDirection="down">
-          <View style={{height: 350, backgroundColor: 'white'}}>
-            <ScrollView>
-              <List>
-                {Regions.map(item => {
-                  return (
-                    <List.Item
-                      onPress={() => this.changeRegion(item)}
-                      key={item.id}
-                      title={item.region}
-                    />
-                  );
-                })}
-              </List>
-            </ScrollView>
-          </View>
-        </Modal>
         <Modal
           isVisible={this.state.isDistrictVisiable}
           hasHandle

@@ -1,4 +1,5 @@
 import userManager from './userManager';
+import Config from '../pages/PostJob/config';
 
 const getPosition = () =>
   // eslint-disable-next-line
@@ -79,13 +80,15 @@ export class NetworkManager {
     // ‘number’ : number of employees required,
     // ‘categories’ : list of categories the job belongs.
 
+    const jobType_id = Config.jobType.find(i => i.name === type).id;
+
     const body = {
       a: 'pj',
       token: userManager.getToken(),
       title,
       company,
       description,
-      type: '1', //临时
+      type: jobType_id, //临时
       pay_type: '2', //临时
       minimum_pay,
       maximum_pay,

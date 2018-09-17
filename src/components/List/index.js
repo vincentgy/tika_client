@@ -50,13 +50,11 @@ const TextMargined = T.extend`
   margin-right: 8px;
 `;
 
-const Item = ({title, desc, style, onPress}) => {
-  const PlaformView =
-    Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
-
+const Item = ({title, desc, style, onPress, disable}) => {
+  if (disable) return <View />;
   return (
     <View style={style}>
-      <PlaformView onPress={onPress}>
+      <TouchableOpacity onPress={onPress}>
         <Padding16>
           <ItemContainer>
             <T>{title}</T>
@@ -71,7 +69,7 @@ const Item = ({title, desc, style, onPress}) => {
             </ItemContainer>
           </ItemContainer>
         </Padding16>
-      </PlaformView>
+      </TouchableOpacity>
     </View>
   );
 };
