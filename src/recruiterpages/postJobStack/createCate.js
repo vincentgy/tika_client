@@ -10,6 +10,9 @@ import {NextBottom} from './nextButton';
 import {Loading} from '../../components/Loading';
 import {getStore, Put} from '../../store';
 import {Entypo} from '../../components/Icons';
+//https://github.com/testshallpass/react-native-dropdownalert
+import DropdownAlert from 'react-native-dropdownalert';
+import {EasyTap} from '../../public/EasyTap';
 
 export default class Test extends React.Component {
   constructor(args) {
@@ -107,6 +110,22 @@ export default class Test extends React.Component {
     );
   }
 
+  validAndNext = () => {
+    const store = getStore();
+    const list = store.createJob.categories.filter(i => {
+      if (i.isSelected === true) return i;
+    });
+    if (list.length < 1) {
+      this.dropdown.alertWithType(
+        'error',
+        'Error',
+        'Please select at lease one category'
+      );
+    } else {
+      this.props.navigation.navigate('Description');
+    }
+  };
+
   render() {
     return (
       <View style={{backgroundColor: 'white', width: WIDTH, height: HEIGHT}}>
@@ -132,9 +151,17 @@ export default class Test extends React.Component {
               dataProvider={this.state.dataProvider}
               rowRenderer={this._rowRenderer}
             />
-            <NextBottom goto="Description" {...this.props} />
+            <NextBottom onPress={this.validAndNext} />
           </React.Fragment>
         )}
+        <DropdownAlert
+          showCancel
+          updateStatusBar={false}
+          closeInterval={1500}
+          panResponderEnabled={false}
+          zIndex={1000}
+          ref={ref => (this.dropdown = ref)}
+        />
       </View>
     );
   }
