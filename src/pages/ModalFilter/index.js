@@ -73,7 +73,7 @@ class Filter extends React.Component {
       s.moneyRange
     );
     Put(state => {
-      state.job.list = s.job.list.cloneWithRows(json.data || []);
+      state.job.list = s.job.list.cloneWithRows(json.data.reverse() || []);
       state.job.loading = false;
     });
   }

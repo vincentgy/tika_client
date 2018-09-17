@@ -2,19 +2,19 @@ export default {
   jobType: [
     {
       id: '1',
-      name: 'full-time',
+      name: 'Full time',
     },
     {
       id: '2',
-      name: 'contract',
+      name: 'Contract',
     },
     {
       id: '3',
-      name: 'part-time',
+      name: 'Part time',
     },
     {
       id: '4',
-      name: 'one-off',
+      name: 'One off',
     },
   ],
   payType: [

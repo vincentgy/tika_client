@@ -128,7 +128,8 @@ export default class Test extends React.Component {
 
   render() {
     return (
-      <View style={{backgroundColor: 'white', width: WIDTH, height: HEIGHT}}>
+      <View
+        style={{backgroundColor: 'white', width: WIDTH, height: HEIGHT}}>
         <Header
           title={
             <View>

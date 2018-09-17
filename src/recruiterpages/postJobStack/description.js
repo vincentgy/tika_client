@@ -4,12 +4,13 @@ import Header from '../../components/Header';
 import {Kohana} from 'react-native-textinput-effects';
 
 import {NextBottom} from './nextButton';
-import {Auto, Put} from '../../store';
+import {Auto, Put, getStore} from '../../store';
 import {FontAwesome, Entypo} from '../../components/Icons';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Stepper} from '../../components/Stepper';
 import {EasyTap} from '../../public/EasyTap';
 import {Title} from './title';
+import DropdownAlert from 'react-native-dropdownalert';
 
 class LLTextInput extends React.Component {
   shouldComponentUpdate(nextProps) {
@@ -28,6 +29,13 @@ class LLTextInput extends React.Component {
   }
 }
 
+const checkText = text => {
+  if (text === '' || text === void 666 || !/\S/.test(text)) {
+    return false;
+  }
+  return true;
+};
+
 const Des = Auto(s => s.createJob.description);
 
 export default class Description extends React.Component {
@@ -35,6 +43,23 @@ export default class Description extends React.Component {
     Put(state => {
       state.createJob.description[key] = text;
     });
+  };
+
+  checkDescription = () => {
+    const store = getStore().createJob.description;
+    if (
+      checkText(store.Company) &&
+      checkText(store.description) &&
+      checkText(store.JobTitle)
+    ) {
+      this.props.navigation.navigate('JobType');
+    } else {
+      this.dropdown.alertWithType(
+        'error',
+        'Error',
+        'Job Title, Company, Description can not be empty'
+      );
+    }
   };
 
   render() {
@@ -113,7 +138,15 @@ export default class Description extends React.Component {
             </KeyboardAwareScrollView>
           );
         })}
-        <NextBottom goto="JobType" {...this.props} />
+        <NextBottom onPress={this.checkDescription} />
+        <DropdownAlert
+          showCancel
+          updateStatusBar={false}
+          closeInterval={1500}
+          panResponderEnabled={false}
+          zIndex={1000}
+          ref={ref => (this.dropdown = ref)}
+        />
       </React.Fragment>
     );
   }

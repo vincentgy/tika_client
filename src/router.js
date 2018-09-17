@@ -30,7 +30,7 @@ import PostJobList from './recruiterpages/postJobList';
 import CreateCategory from './recruiterpages/postJobStack/createCate';
 import Description from './recruiterpages/postJobStack/description';
 import JobType from './recruiterpages/postJobStack/jobtype';
-import Location from './recruiterpages/postJobStack/location';
+import _Location from './recruiterpages/postJobStack/location';
 
 const TestForm = TimixForm({
   text: TimixForm.FormType.Text,
@@ -71,10 +71,10 @@ const TabRoot = createBottomTabNavigator(
     // JobDetail,
     // EditProfile,
     // AboutMe,
-    TimixFormTest,
+    // TimixFormTest,
   },
   {
-    initialRouteName: 'TimixFormTest',
+    initialRouteName: 'JobList',
     tabBarOptions: {
       style: {
         backgroundColor: 'white',
@@ -129,7 +129,7 @@ const RecruiterHome = createStackNavigator({
   CreateCategory: withoutHeader(CreateCategory),
   Description: withoutHeader(Description),
   JobType: withoutHeader(JobType),
-  Location: withoutHeader(Location),
+  Location: withoutHeader(_Location),
 });
 
 // 雇佣者的 app

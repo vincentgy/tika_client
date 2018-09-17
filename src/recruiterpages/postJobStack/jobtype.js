@@ -11,6 +11,7 @@ import {EasyTap} from '../../public/EasyTap';
 import {Entypo} from '../../components/Icons';
 import {Title} from './title';
 
+
 const TypeInStore = Auto(state => state.createJob.JobType);
 
 const paymentType = {

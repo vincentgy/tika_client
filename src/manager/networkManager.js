@@ -49,6 +49,23 @@ export class NetworkManager {
     return json;
   }
 
+  async getPostJobList() {
+    const body = {
+      a: 'gpl',
+      token: userManager.getToken(),
+    };
+
+    const res = await fetch('http://18.222.175.208/', {
+      method: 'POST',
+      body: JSON.stringify({param: body}),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencode',
+      },
+    });
+
+    return await res.json();
+  }
+
   async postJob(
     title,
     company,
@@ -63,23 +80,7 @@ export class NetworkManager {
     number,
     categories
   ) {
-    //     ```bash
-    // Request,
-    // ‘a’:'pj',
-    // ‘title’ : job title,
-    // ‘company’ : company name,
-    // ‘description’ : job description,
-    // ’user_id’ : user id of creator,
-    // ‘type’ : job type id,
-    // ‘pay_type’ : pay type id,
-    // ‘minimum_pay’ : minimum salary,
-    // ‘maximum_pay’ : maximum salary,
-    // ‘region_id’ : region id,
-    // ‘district_id’ : district id,
-    // ‘location’ : detailed address,
-    // ‘number’ : number of employees required,
-    // ‘categories’ : list of categories the job belongs.
-
+    console.log(type);
     const jobType_id = Config.jobType.find(i => i.name === type).id;
 
     const body = {

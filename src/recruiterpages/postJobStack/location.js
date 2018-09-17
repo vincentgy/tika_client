@@ -12,6 +12,7 @@ import {HEIGHT} from '../../utils/plaform';
 import {NetworkManager} from '../../manager/networkManager';
 import {EasyTap} from '../../public/EasyTap';
 import {Entypo} from '../../components/Icons';
+import DropdownAlert from 'react-native-dropdownalert';
 
 const LocationStore = Auto(state => state.createJob.Location);
 
@@ -141,10 +142,39 @@ export default class Location extends React.Component {
         })
     );
 
+    console.log(json);
+
     if (json.ret === 0) {
       // 成功
+      this.props.navigation.navigate('PostJobList');
+      // 清空
+      Put(state => {
+        state.createJob = {
+          //第一步
+          categories: [],
+          //第二步
+          description: {
+            JobTitle: 'web developer',
+            Company: 'Timix',
+            description: 'we are chinese',
+            position: 1,
+          },
+          //第三步
+          JobType: {
+            type: '',
+            min: '',
+            max: '',
+          },
+          Location: {
+            Region: {id: '', region: ''},
+            District: {id: '', name: ''},
+            Address: '325 east coast road',
+          },
+        };
+      });
     } else {
       // 失败
+      this.dropdown.alertWithType('error', 'Error', JSON.stringify(json));
     }
   }
 
@@ -237,6 +267,14 @@ export default class Location extends React.Component {
             </ScrollView>
           </View>
         </Modal>
+        <DropdownAlert
+          showCancel
+          updateStatusBar={false}
+          closeInterval={1500}
+          panResponderEnabled={false}
+          zIndex={1000}
+          ref={ref => (this.dropdown = ref)}
+        />
       </View>
     );
   }
