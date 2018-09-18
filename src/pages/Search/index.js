@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TextInput} from 'react-native';
+import {View, Text, TextInput, RefreshControl, Dimensions} from 'react-native';
 import Header from '../../components/Header';
 
 import {Theme} from '../../utils/color';
@@ -7,27 +7,22 @@ import {WithGoback} from '../../utils/withGoback';
 import {EvilIcons} from '../../components/Icons';
 import {EasyTap} from '../../public/EasyTap';
 import {NetworkManager} from '../../manager/networkManager';
-import {getStore, Put} from '../../store';
+import JobListItem from '../../public/JobListItem';
+import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
+import {HEIGHT, WIDTH} from '../../utils/plaform';
 
 @WithGoback
 export default class SearchJob extends React.Component {
-  state = {
-    text: '',
-  };
-
   async handleEndEditing() {
-    // Alert.alert(this.state.text);
-    // this.props.navigation.navigate('SearchResult')
-    const manager = new NetworkManager();
-    const s = getStore();
-
-    Put(state => {
-      state.job.loading = true;
+    this.setState({
+      loading: true,
     });
+    const manager = new NetworkManager();
     const json = await manager.textSearch(this.state.text);
-    Put(state => {
-      state.job.list = s.job.list.cloneWithRows(json.data);
-      state.job.loading = false;
+    console.log(json);
+    this.setState({
+      resultList: json.data,
+      loading: false,
     });
   }
 
@@ -35,6 +30,53 @@ export default class SearchJob extends React.Component {
     this.setState({
       text: text,
     });
+  };
+
+  constructor(args) {
+    super(args);
+
+    let {width} = Dimensions.get('window');
+
+    //Create the data provider and provide method which takes in two rows of data and return if those two are different or not.
+    //THIS IS VERY IMPORTANT, FORGET PERFORMANCE IF THIS IS MESSED UP
+    let dataProvider = new DataProvider((r1, r2) => {
+      return r1 !== r2;
+    });
+
+    //Create the layout provider
+    //First method: Given an index return the type of item e.g ListItemType1, ListItemType2 in case you have variety of items in your list/grid
+    //Second: Given a type and object set the exact height and width for that type on given object, if you're using non deterministic rendering provide close estimates
+    //If you need data based check you can access your data provider here
+    //You'll need data in most cases, we don't provide it by default to enable things like data virtualization in the future
+    //NOTE: For complex lists LayoutProvider will also be complex it would then make sense to move it to a different file
+    this._layoutProvider = new LayoutProvider(
+      index => {
+        return index;
+      },
+      (type, dim) => {
+        dim.width = width;
+        dim.height = JobListItem.HEIGHT;
+      }
+    );
+
+    //Since component should always render once data has changed, make data provider part of the state
+    this.state = {
+      dataProvider: dataProvider,
+      text: '',
+      resultList: [],
+      loading: false,
+    };
+  }
+
+  //Given type and data return the view component
+  _rowRenderer = (type, data) => {
+    return (
+      <JobListItem
+        {...data}
+        onPress={() => this.props.onSelect && this.props.onSelect(data)}
+      />
+    );
+    //You can return any view here, CellContainer has no special significance
   };
 
   render() {
@@ -56,17 +98,7 @@ export default class SearchJob extends React.Component {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Text
-              style={{
-                marginLeft: 16,
-                fontSize: 12,
-                paddingRight: 8,
-                borderRightWidth: 1,
-                borderRightColor: 'rgba(120,120,120,0.1)',
-              }}>
-              placeholder
-            </Text>
-            <View style={{width: '70%', height: 38, paddingLeft: 6}}>
+            <View style={{width: '90%', height: 38, paddingLeft: 6}}>
               <TextInput
                 onSubmitEditing={() => this.handleEndEditing()}
                 returnKeyType="done"
@@ -81,6 +113,32 @@ export default class SearchJob extends React.Component {
             </View>
           </View>
         </Header>
+        <RecyclerListView
+          scrollViewProps={{
+            refreshControl: (
+              <RefreshControl
+                refreshing={this.state.loading}
+                onRefresh={() => {
+                  console.log('刷新');
+                }}
+                tintColor={'rgba(120,120,120,0.4)'}
+                titleColor={Theme}
+                colors={[Theme, Theme, Theme]}
+                progressBackgroundColor="white"
+                style={{backgroundColor: 'transparent'}}
+              />
+            ),
+          }}
+          style={{
+            height: HEIGHT - 76,
+            width: WIDTH,
+          }}
+          layoutProvider={this._layoutProvider}
+          dataProvider={this.state.dataProvider.cloneWithRows(
+            this.state.resultList
+          )}
+          rowRenderer={this._rowRenderer}
+        />
       </View>
     );
   }

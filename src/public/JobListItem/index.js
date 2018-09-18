@@ -43,7 +43,7 @@ const JobListItem = ({
   maximum_pay,
   icon,
 }) => {
-  const nows = timeago().format(timestamp);
+  const nows = timeago().format(timestamp * 1000);
   return (
     <TouchBase onPress={onPress} activeOpacity={0.7}>
       <View

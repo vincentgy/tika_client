@@ -1,5 +1,6 @@
 import userManager from './userManager';
 import Config from '../pages/PostJob/config';
+import {Alert} from 'react-native';
 
 const getPosition = () =>
   // eslint-disable-next-line
@@ -19,6 +20,28 @@ const getPosition = () =>
   });
 
 export class NetworkManager {
+  constructor() {
+    this.url = 'http://18.222.175.208/';
+  }
+
+  async fetcher(body) {
+    try {
+      const res = await fetch(this.url, {
+        method: 'POST',
+        body: JSON.stringify({param: body}),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencode',
+        },
+      });
+
+      const json = await res.json();
+
+      return json;
+    } catch (e) {
+      Alert.alert('debug: error', JSON.stringify(e));
+    }
+  }
+
   async textSearch(text) {
     // ‘title’ : job title key word,
     // ‘company’ : company name key word,
@@ -37,16 +60,8 @@ export class NetworkManager {
         longitude: position.longitude,
       },
     };
-    const res = await fetch('http://18.222.175.208/', {
-      method: 'POST',
-      body: JSON.stringify({param: body}),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencode',
-      },
-    });
-    const json = await res.json();
 
-    return json;
+    return await this.fetcher(body);
   }
 
   async postJob(
@@ -99,19 +114,7 @@ export class NetworkManager {
       categories,
     };
 
-    console.log(body);
-
-    const res = await fetch('http://18.222.175.208/', {
-      method: 'POST',
-      body: JSON.stringify({param: body}),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencode',
-      },
-    });
-    const json = await res.json();
-
-    console.log('完成', json);
-    return json;
+    return await this.fetcher(body);
   }
 
   /**
@@ -169,19 +172,7 @@ export class NetworkManager {
         },
       };
 
-      console.log(body);
-      const res = await fetch('http://18.222.175.208/', {
-        method: 'POST',
-        body: JSON.stringify({param: body}),
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencode',
-        },
-      });
-
-      console.log(res.status);
-      const json = await res.json();
-
-      return json;
+      return await this.fetcher(body);
     } catch (e) {
       console.log(e);
       return [];
@@ -199,47 +190,19 @@ export class NetworkManager {
       qualifications: qualifications,
       experiences: experiences,
     };
-    console.log('body', body);
 
-    const res = await fetch('http://18.222.175.208/', {
-      method: 'POST',
-      body: JSON.stringify({param: body}),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencode',
-      },
-    });
-
-    const json = await res.json();
-    console.log(json);
+    return await this.fetcher(body);
   }
 
   /**
    * 从服务器获取category
    */
   async getCategory() {
-    const res = await fetch('http://18.222.175.208/', {
-      method: 'POST',
-      body: JSON.stringify({param: {a: 'jc'}}),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencode',
-      },
-    });
-
-    const json = await res.json();
-
-    return json;
+    return await this.fetcher({a: 'jc'});
   }
 
   async getProfile() {
-    const res = await fetch('http://18.222.175.208/', {
-      method: 'POST',
-      body: JSON.stringify({param: {a: 'gp', token: userManager.getToken()}}),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencode',
-      },
-    });
-    const data = await res.json();
-    const json = data.data;
+    const json = await this.fetcher({a: 'gp', token: userManager.getToken()});
 
     return {
       avatar: json.avatar,
