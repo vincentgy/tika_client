@@ -70,7 +70,7 @@ const EditBlock = ({
   );
 };
 
-const HistBlock = ({place, task, start, end}) => {
+const HistBlock = ({place, task, start, end, onPress}) => {
   return (
     <View
       style={{
@@ -98,11 +98,9 @@ const HistBlock = ({place, task, start, end}) => {
           {`${start} - ${end}`}
         </Text>
       </View>
-      <Entypo
-        name="dots-three-horizontal"
-        color="#2f54eb"
-        style={{marginRight: 8}}
-      />
+      <EasyTap onPress={onPress}>
+        <Entypo name="dots-three-horizontal" color="#2f54eb" />
+      </EasyTap>
     </View>
   );
 };
@@ -208,7 +206,13 @@ export default class EditProfile extends React.Component {
               desc="Add Employment history"
               renderContent={() =>
                 experiences.map((expo, idx) => {
-                  return <HistBlock key={idx} {...expo} />;
+                  return (
+                    <HistBlock
+                      key={idx}
+                      {...expo}
+                      onPress={() => this.navigation('WorkExprience')}
+                    />
+                  );
                 })
               }
             />
