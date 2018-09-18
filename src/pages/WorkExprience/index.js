@@ -3,9 +3,13 @@ import {Text} from 'react-native';
 import PageBase from '../../components/PageBase';
 import Header from '../../components/Header';
 import {EasyTap} from '../../public/EasyTap';
-import {Entypo, MaterialIcons} from '../../components/Icons';
+import {Entypo, MaterialIcons, FontAwesome} from '../../components/Icons';
 import TimixForm from '../../components/TimixForm';
 import {Put} from '../../store';
+import {Kohana} from 'react-native-textinput-effects';
+import DataPicker from '../../components/DataPicker';
+import List from '../../components/List';
+import TagInput from '../../components/TagInput';
 
 const Ft = TimixForm.FormType;
 const Combind = TimixForm.Combind;
@@ -31,6 +35,8 @@ const EmploymentHistForm = Combind({
 });
 
 export default class WorkExprience extends React.Component {
+
+  
   FinisheEditing = () => {
     const HistoryInfo = this.form.getFormData();
     console.log(HistoryInfo);
@@ -62,7 +68,67 @@ export default class WorkExprience extends React.Component {
           title={<Text style={{color: 'white'}}>Employment History</Text>}
         />
         <PageBase>
-          <EmploymentHistForm ref={node => (this.form = node)} />
+          <Kohana
+            inputStyle={{fontSize: 14}}
+            useNativeDriver
+            label="Job Title"
+            labelStyle={{fontWeight: '100', fontSize: 14}}
+            iconSize={14}
+            iconClass={FontAwesome}
+            iconName={'pencil'}
+            // TextInput props
+            // value={this.state[key].value}
+            // onChangeText={text => this.onFormChange(key, text)}
+            autoCapitalize={'none'}
+            autoCorrect={false}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              height: 48,
+            }}
+          />
+          <Kohana
+            inputStyle={{fontSize: 14}}
+            useNativeDriver
+            label="Company"
+            labelStyle={{fontWeight: '100', fontSize: 14}}
+            iconSize={14}
+            iconClass={FontAwesome}
+            iconName={'pencil'}
+            // TextInput props
+            // value={this.state[key].value}
+            // onChangeText={text => this.onFormChange(key, text)}
+            autoCapitalize={'none'}
+            autoCorrect={false}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              height: 48,
+            }}
+          />
+          <DataPicker
+          // onComfirm={(month, year) => this.onFormChange(key, [month, year])}
+          >
+            {(setOpen, props, data) => (
+              <List.Item
+                onPress={setOpen}
+                title="Start"
+                desc={`${data[0]}/${data[1]}`}
+              />
+            )}
+          </DataPicker>
+          <DataPicker
+          // onComfirm={(month, year) => this.onFormChange(key, [month, year])}
+          >
+            {(setOpen, props, data) => (
+              <List.Item
+                onPress={setOpen}
+                title="End"
+                desc={`${data[0]}/${data[1]}`}
+              />
+            )}
+          </DataPicker>
+          <TagInput placeholder="Skills" />
         </PageBase>
       </React.Fragment>
     );

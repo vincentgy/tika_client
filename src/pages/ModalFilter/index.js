@@ -72,6 +72,7 @@ class Filter extends React.Component {
       s.jobTypeId,
       s.moneyRange
     );
+
     Put(state => {
       state.job.list = s.job.list.cloneWithRows(json.data.reverse() || []);
       state.job.loading = false;

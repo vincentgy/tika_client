@@ -2,6 +2,7 @@ import React from 'react';
 import {TouchableOpacity, View, Text, Image, Platform} from 'react-native';
 import styled from 'styled-components';
 import timeago from 'timeago.js';
+import {Entypo} from '../../components/Icons';
 
 const TouchBase = styled.TouchableOpacity`
   background-color: white;
@@ -43,7 +44,7 @@ const JobListItem = ({
   maximum_pay,
   icon,
 }) => {
-  const nows = timeago().format(timestamp * 1000, 'UTC');
+  const nows = timeago().format(timestamp * 1000);
   return (
     <TouchBase onPress={onPress} activeOpacity={0.7}>
       <View
@@ -70,7 +71,8 @@ const JobListItem = ({
                 numberOfLines={1}>
                 {title}
               </Text>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Entypo name="location-pin" size={12} color="#8A8A8F" />
                 <Text
                   style={{color: '#8A8A8F', fontSize: 12, fontWeight: '300'}}>
                   {location}

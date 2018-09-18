@@ -10,6 +10,7 @@ import {WIDTH, HEIGHT} from '../../utils/plaform';
 import MapView from '../../components/MapView';
 import InformationContainer from '../../public/InformationContainer';
 import {shadowStyle} from '../../public/shadowStyle';
+import {getStore, Auto} from '../../store';
 
 const Info = InformationContainer.Info;
 
@@ -61,12 +62,24 @@ const Location = ({title}) => {
   );
 };
 
-const Detail = ({longitude, latitude}) => {
+const Detail = ({
+  longitude,
+  latitude,
+  title,
+  company,
+  minimum_pay,
+  maximum_pay,
+  location,
+  district,
+  region,
+}) => {
   return (
     <DetailContainer style={shadowStyle}>
-      <JobTitle>Front of house and kitchen hand</JobTitle>
-      <CompanyTitle>Mcdonals</CompanyTitle>
-      <Salary>$45k - $55k</Salary>
+      <JobTitle>{title}</JobTitle>
+      <CompanyTitle>{company}</CompanyTitle>
+      <Salary>
+        ${minimum_pay / 1000}k - ${maximum_pay / 1000}k
+      </Salary>
       <InformationContainer>
         <Info
           title="Qualification"
@@ -84,7 +97,7 @@ const Detail = ({longitude, latitude}) => {
           img={require('../../asset/case.png')}
         />
       </InformationContainer>
-      <Location title="73 Tatora street, Auckland CBD, Auckland" />
+      <Location title={`${location}, ${district}, ${region}`} />
       <MapView
         style={{width: WIDTH - 48, height: 165, borderRadius: 8, marginTop: 16}}
         x={latitude}
@@ -100,7 +113,7 @@ const Detail = ({longitude, latitude}) => {
   );
 };
 
-const Section = ({title, children}) => {
+const Section = ({title, desc}) => {
   const TextStyle = {fontSize: 16, fontWeight: '300', marginBottom: 8};
 
   return (
@@ -118,21 +131,7 @@ const Section = ({title, children}) => {
         />
         <Text style={{fontSize: 18, marginLeft: 16}}>{title}</Text>
       </View>
-      <Text style={TextStyle}>
-        1. The beauty of astronomy is that anybody can do it. From the tiniest
-        baby to the most advanced astrophysicist, there is something for anyone
-        who wants to enjoy astronomy.
-      </Text>
-      <Text style={TextStyle}>
-        2. The beauty of astronomy is that anybody can do it. From the tiniest
-        baby to the most advanced astrophysicist, there is something for anyone
-        who wants to enjoy astronomy.
-      </Text>
-      <Text style={TextStyle}>
-        3. The beauty of astronomy is that anybody can do it. From the tiniest
-        baby to the most advanced astrophysicist, there is something for anyone
-        who wants to enjoy astronomy.
-      </Text>
+      <Text style={TextStyle}>{desc}</Text>
     </View>
   );
 };
@@ -163,10 +162,9 @@ const Recruiter = () => {
   );
 };
 
-export default class JobDetail extends React.Component {
+class JobDetail extends React.Component {
   state = {
     opacity: 0,
-    loading: true,
     region: {
       latitude: 37.48,
       longitude: 122.16,
@@ -175,12 +173,12 @@ export default class JobDetail extends React.Component {
     },
   };
   componentDidMount() {
+    console.log(this.props);
     navigator.geolocation.getCurrentPosition(
       res => {
         const lat = res.coords.latitude;
         const long = res.coords.longitude;
         this.setState({
-          loading: false,
           region: {
             latitudeDelta: 0.001,
             longitudeDelta: 0.001,
@@ -273,16 +271,20 @@ export default class JobDetail extends React.Component {
               </TouchableOpacity>
             </View>
           }>
-          {this.state.loading ? null : (
-            <Detail
-              latitude={this.state.region.latitude}
-              longitude={this.state.region.longitude}
-            />
-          )}
+          <Detail
+            {...this.props}
+            latitude={this.state.region.latitude}
+            longitude={this.state.region.longitude}
+          />
           <Recruiter />
-          <Section title="Job Description" />
+          <Section title="Job Description" desc={this.props.description} />
         </PageBase>
       </React.Fragment>
     );
   }
 }
+
+export default props =>
+  Auto(state => state.currentSelectJobItem)(state => (
+    <JobDetail {...props} {...state} />
+  ));

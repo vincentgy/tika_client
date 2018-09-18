@@ -1,5 +1,7 @@
 import userManager from './userManager';
 import Config from '../pages/PostJob/config';
+import {Alert} from 'react-native';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const getPosition = () =>
   // eslint-disable-next-line
@@ -19,6 +21,90 @@ const getPosition = () =>
   });
 
 export class NetworkManager {
+  constructor() {
+    this.url = 'http://18.222.175.208/';
+  }
+
+  /**
+   *
+   * @param {string} type
+   */
+  async uploadPicture(type) {
+    try {
+      // 获取照片
+      let image = {};
+      if (type === 'picture') {
+        image = await ImagePicker.openPicker({
+          width: 400,
+          height: 400,
+          cropping: true,
+          cropperCircleOverlay: true,
+        });
+      } else {
+        await ImagePicker.openCamera({
+          width: 400,
+          height: 400,
+          cropping: true,
+          cropperCircleOverlay: true,
+        });
+      }
+      // formData
+      let formData = new FormData();
+      let file = {
+        uri: image.path,
+        type: image.mime,
+        name: 'fileToUpload',
+      };
+      formData.append('fileToUpload', file);
+      const res = await fetch(
+        `${this.url}upload.php?token=${userManager.getToken()}&c=u`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          body: formData,
+        }
+      );
+      const json = await res.json();
+
+      return {
+        ret: json.ret,
+        url: json.url,
+      };
+    } catch (e) {
+      if (/User/.test(e.message))
+        return {
+          ret: 'cancel',
+          message: e.message,
+        };
+      else {
+        return {
+          ret: 'fail',
+          message: e.message,
+        };
+      }
+    }
+  }
+
+  async fetcher(body) {
+    try {
+      const res = await fetch(this.url, {
+        method: 'POST',
+        body: JSON.stringify({param: body}),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencode',
+        },
+      });
+
+      const json = await res.json();
+
+      return json;
+    } catch (e) {
+      Alert.alert('debug: error', JSON.stringify(e));
+    }
+  }
+
   async textSearch(text) {
     // ‘title’ : job title key word,
     // ‘company’ : company name key word,
@@ -37,16 +123,8 @@ export class NetworkManager {
         longitude: position.longitude,
       },
     };
-    const res = await fetch('http://18.222.175.208/', {
-      method: 'POST',
-      body: JSON.stringify({param: body}),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencode',
-      },
-    });
-    const json = await res.json();
 
-    return json;
+    return await this.fetcher(body);
   }
 
   async getPostJobList() {
@@ -100,19 +178,7 @@ export class NetworkManager {
       categories,
     };
 
-    console.log(body);
-
-    const res = await fetch('http://18.222.175.208/', {
-      method: 'POST',
-      body: JSON.stringify({param: body}),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencode',
-      },
-    });
-    const json = await res.json();
-
-    console.log('完成', json);
-    return json;
+    return await this.fetcher(body);
   }
 
   /**
@@ -170,19 +236,7 @@ export class NetworkManager {
         },
       };
 
-      console.log(body);
-      const res = await fetch('http://18.222.175.208/', {
-        method: 'POST',
-        body: JSON.stringify({param: body}),
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencode',
-        },
-      });
-
-      console.log(res.status);
-      const json = await res.json();
-
-      return json;
+      return await this.fetcher(body);
     } catch (e) {
       console.log(e);
       return [];
@@ -193,54 +247,31 @@ export class NetworkManager {
     const userId = userManager.getToken();
     const body = {
       a: 'up',
-      user_id: userId,
+      token: userId,
       description: aboutme,
       phone: '',
       skills: skills,
       qualifications: qualifications,
       experiences: experiences,
     };
-    console.log('body', body);
 
-    const res = await fetch('http://18.222.175.208/', {
-      method: 'POST',
-      body: JSON.stringify({param: body}),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencode',
-      },
-    });
+    console.log(body);
 
-    const json = await res.json();
-    console.log(json);
+    return await this.fetcher(body);
   }
 
   /**
    * 从服务器获取category
    */
   async getCategory() {
-    const res = await fetch('http://18.222.175.208/', {
-      method: 'POST',
-      body: JSON.stringify({param: {a: 'jc'}}),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencode',
-      },
-    });
-
-    const json = await res.json();
-
-    return json;
+    return await this.fetcher({a: 'jc'});
   }
 
   async getProfile() {
-    const res = await fetch('http://18.222.175.208/', {
-      method: 'POST',
-      body: JSON.stringify({param: {a: 'gp', token: userManager.getToken()}}),
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencode',
-      },
-    });
-    const data = await res.json();
-    const json = data.data;
+    const res = await this.fetcher({a: 'gp', token: userManager.getToken()});
+
+    const json = res.data;
+    console.log(json);
 
     return {
       avatar: json.avatar,
