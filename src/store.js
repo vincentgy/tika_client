@@ -67,6 +67,7 @@ const Store = init({
     }),
     loading: true,
   },
+  currentSelectJobItem: {},
   createJob: {
     //第一步
     categories: [],

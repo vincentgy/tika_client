@@ -120,12 +120,13 @@ export default class EditProfile extends React.Component {
     const Store = getStore();
 
     console.log('开始发送');
-    await manager.UpdateProfile(
+    const json = await manager.UpdateProfile(
       Store.profile.aboutMe,
       Store.profile.skills,
       Store.profile.qualification,
       Store.profile.experiences
     );
+    console.log(json);
   }
 
   render() {

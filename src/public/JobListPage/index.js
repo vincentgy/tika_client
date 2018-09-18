@@ -5,9 +5,8 @@
  A scrollable list with different item type
  */
 import React from 'react';
-import {Dimensions, RefreshControl} from 'react-native';
+import {Dimensions, RefreshControl, View} from 'react-native';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
-import {Entypo} from '../../components/Icons';
 
 import Filter from '../../pages/ModalFilter';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
@@ -16,12 +15,6 @@ import styled from 'styled-components';
 import Header from '../../components/Header';
 import {Theme} from '../../utils/color';
 import JobListItem from '../JobListItem';
-
-const ViewTypes = {
-  FULL: 0,
-  HALF_LEFT: 1,
-  HALF_RIGHT: 2,
-};
 
 export const Search = styled.TouchableOpacity`
   height: 40px;
@@ -51,13 +44,7 @@ export default class JobList extends React.Component {
     //NOTE: For complex lists LayoutProvider will also be complex it would then make sense to move it to a different file
     this._layoutProvider = new LayoutProvider(
       index => {
-        if (index % 3 === 0) {
-          return ViewTypes.FULL;
-        } else if (index % 3 === 1) {
-          return ViewTypes.HALF_LEFT;
-        } else {
-          return ViewTypes.HALF_RIGHT;
-        }
+        return index;
       },
       (type, dim) => {
         dim.width = width;
@@ -90,7 +77,7 @@ export default class JobList extends React.Component {
     // const size = this.props.list._size;
 
     return (
-      <React.Fragment>
+      <View style={{height: HEIGHT - 56}}>
         <Header
           title={this.props.title}
           leftButton={this.props.leftButton}
@@ -112,15 +99,12 @@ export default class JobList extends React.Component {
               />
             ),
           }}
-          style={{
-            height: HEIGHT,
-            width: WIDTH,
-          }}
+          style={{width: WIDTH}}
           layoutProvider={this._layoutProvider}
           dataProvider={this.props.list}
           rowRenderer={this._rowRenderer}
         />
-      </React.Fragment>
+      </View>
     );
   }
 }

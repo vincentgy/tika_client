@@ -4,6 +4,7 @@ import {WIDTH} from '../../utils/plaform';
 import styled from 'styled-components';
 import PickerAndroid from 'react-native-wheel-picker';
 import Modal from '../react-native-modal';
+import Handle from '../Handle';
 
 const PickerCompat = Platform.OS === 'ios' ? Picker : PickerAndroid;
 const PickerItem = Platform.OS === 'ios' ? Picker.Item : PickerAndroid.Item;
@@ -87,9 +88,7 @@ export default class DataPicker extends React.Component {
         <Modal
           style={{margin: 0, justifyContent: 'flex-end'}}
           swipeDirection="down"
-          renderHandle={() => (
-            <View style={{height: 32, backgroundColor: 'red'}} />
-          )}
+          renderHandle={() => <Handle />}
           onSwipe={() => this.setModalVisible(false)}
           isVisible={this.state.modalVisible}
           onBackdropPress={() => this.setModalVisible(false)}

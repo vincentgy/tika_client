@@ -79,8 +79,6 @@ const SettingCell = ({children, no, onPress}) => {
   );
 };
 
-
-
 const Profile = ({onEditProfile, onAatarPress, aboutMe, name, avatar}) => {
   return (
     <View style={{backgroundColor: 'white'}}>

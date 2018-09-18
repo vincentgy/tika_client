@@ -183,13 +183,15 @@ export class NetworkManager {
     const userId = userManager.getToken();
     const body = {
       a: 'up',
-      user_id: userId,
+      token: userId,
       description: aboutme,
       phone: '',
       skills: skills,
       qualifications: qualifications,
       experiences: experiences,
     };
+
+    console.log(body);
 
     return await this.fetcher(body);
   }
@@ -202,7 +204,10 @@ export class NetworkManager {
   }
 
   async getProfile() {
-    const json = await this.fetcher({a: 'gp', token: userManager.getToken()});
+    const res = await this.fetcher({a: 'gp', token: userManager.getToken()});
+
+    const json = res.data;
+    console.log(json);
 
     return {
       avatar: json.avatar,

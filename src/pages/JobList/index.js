@@ -12,7 +12,7 @@ import {EvilIcons, MaterialCommunityIcons} from '../../components/Icons';
 import JobListTemplate, {Search} from '../../public/JobListPage';
 import {Page} from '../../components/PageHOC';
 import {Theme} from '../../utils/color';
-import {Auto} from '../../store';
+import {Auto, Put} from '../../store';
 
 const JobList = Auto(state => state.job);
 
@@ -21,7 +21,10 @@ class JobListContainer extends React.Component {
     return JobList(job => {
       return (
         <JobListTemplate
-          onSelect={() => {
+          onSelect={item => {
+            Put(state => {
+              state.currentSelectJobItem = item;
+            });
             this.props.navigation.navigate('JobDetail');
           }}
           title={
