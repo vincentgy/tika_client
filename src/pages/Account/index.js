@@ -27,6 +27,8 @@ import MapView from 'react-native-maps';
 import {NetworkManager} from '../../manager/networkManager';
 import {Put, Auto} from '../../store';
 import Container from '../../public/InformationContainer';
+import UserImage from '../../public/UserImage';
+import DropdownAlert from 'react-native-dropdownalert';
 
 const Info = Container.Info;
 
@@ -79,7 +81,14 @@ const SettingCell = ({children, no, onPress}) => {
   );
 };
 
-const Profile = ({onEditProfile, onAatarPress, aboutMe, name, avatar}) => {
+const Profile = ({
+  onEditProfile,
+  onAatarPress,
+  aboutMe,
+  name,
+  avatar,
+  dropdown,
+}) => {
   return (
     <View style={{backgroundColor: 'white'}}>
       <ProfileContainer>
@@ -101,20 +110,7 @@ const Profile = ({onEditProfile, onAatarPress, aboutMe, name, avatar}) => {
             <Text style={{color: '#abb0b0', paddingLeft: 8}}>Edit profile</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={onAatarPress}>
-          {avatar ? (
-            <Image
-              cache="reload"
-              source={{uri: avatar}}
-              style={{
-                width: 64,
-                height: 64,
-                marginRight: 16,
-                borderRadius: 32,
-              }}
-            />
-          ) : null}
-        </TouchableOpacity>
+        {avatar ? <UserImage dropdown={dropdown} uri={avatar} /> : null}
       </ProfileContainer>
       <Container style={{margin: 16}}>
         <Info
@@ -264,9 +260,9 @@ class Account extends React.Component {
             console.log(state);
             return (
               <Profile
+                dropdown={this.dropdown}
                 name={state.name}
                 onEditProfile={this.handleEditProfile}
-                onAatarPress={this.showActionSheet}
                 avatar={state.avatar}
                 aboutMe={state.aboutMe}
               />
@@ -320,6 +316,14 @@ class Account extends React.Component {
             }}
           />
         </PageBase>
+        <DropdownAlert
+          showCancel
+          updateStatusBar={false}
+          closeInterval={1500}
+          panResponderEnabled={false}
+          zIndex={1000}
+          ref={ref => (this.dropdown = ref)}
+        />
       </React.Fragment>
     );
   }

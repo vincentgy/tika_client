@@ -284,5 +284,7 @@ class JobDetail extends React.Component {
   }
 }
 
-export default () =>
-  Auto(state => state.currentSelectJobItem)(state => <JobDetail {...state} />);
+export default props =>
+  Auto(state => state.currentSelectJobItem)(state => (
+    <JobDetail {...props} {...state} />
+  ));

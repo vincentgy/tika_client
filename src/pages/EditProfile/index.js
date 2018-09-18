@@ -12,9 +12,11 @@ import {
   MaterialIcons,
 } from '../../components/Icons';
 import {EasyTap} from '../../public/EasyTap';
-import {Auto, getStore} from '../../store';
+import {Auto, getStore, Put} from '../../store';
 import Card from '../../components/Card';
 import {NetworkManager} from '../../manager/networkManager';
+import DropdownAlert from 'react-native-dropdownalert';
+import UserImage from '../../public/UserImage';
 
 const Name = styled.Text`
   font-size: 18px;
@@ -109,6 +111,11 @@ const AboutMeText = Auto(state => state.profile.aboutMe);
 const EmploymentHistoryArray = Auto(state => state.profile.experiences);
 const QualificationArray = Auto(state => state.profile.qualification);
 const SkillsArray = Auto(state => state.profile.skills);
+const ProfileStore = Auto(state => ({
+  name: state.profile.name,
+  aboutMe: state.profile.aboutMe,
+  avatar: state.profile.avatar,
+}));
 
 export default class EditProfile extends React.Component {
   navigation = pages => {
@@ -151,32 +158,17 @@ export default class EditProfile extends React.Component {
         />
         <PageBase
           style={{backgroundColor: '#fafafa', height: HEIGHT - 48 - 20}}>
-          <Card style={{marginTop: 8}}>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <View style={{width: WIDTH / 3}}>
-                <Name>Kenneth van Reeves</Name>
+          {ProfileStore(me => (
+            <Card style={{marginTop: 8}}>
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View style={{width: WIDTH / 3}}>
+                  <Name>{me.name}</Name>
+                </View>
+                <UserImage dropdown={this.dropdown} uri={me.avatar} />
               </View>
-              <TouchableOpacity
-                style={{
-                  shadowColor: '#abb0b0',
-                  shadowOffset: {h: 16, w: 16},
-                  shadowRadius: 8,
-                  shadowOpacity: 0.3,
-                }}>
-                <Image
-                  cache="reload"
-                  source={require('./temp.png')}
-                  style={{
-                    width: 64,
-                    height: 64,
-                    marginRight: 16,
-                    borderRadius: 32,
-                  }}
-                />
-              </TouchableOpacity>
-            </View>
-          </Card>
+            </Card>
+          ))}
           {AboutMeText(text => (
             <EditBlock
               isRenderContent={text.length !== 0}
@@ -277,13 +269,20 @@ export default class EditProfile extends React.Component {
               )}
             />
           ))}
-
           <EditBlock
             title="Portfolio/LinkedIn"
             icon={require('../../asset/social.png')}
             desc="Add websites"
           />
         </PageBase>
+        <DropdownAlert
+          showCancel
+          updateStatusBar={false}
+          closeInterval={1500}
+          panResponderEnabled={false}
+          zIndex={1000}
+          ref={ref => (this.dropdown = ref)}
+        />
       </React.Fragment>
     );
   }

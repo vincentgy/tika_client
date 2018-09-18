@@ -1,6 +1,7 @@
 import userManager from './userManager';
 import Config from '../pages/PostJob/config';
 import {Alert} from 'react-native';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const getPosition = () =>
   // eslint-disable-next-line
@@ -22,6 +23,68 @@ const getPosition = () =>
 export class NetworkManager {
   constructor() {
     this.url = 'http://18.222.175.208/';
+  }
+
+  /**
+   *
+   * @param {string} type
+   */
+  async uploadPicture(type) {
+    try {
+      // 获取照片
+      let image = {};
+      if (type === 'picture') {
+        image = await ImagePicker.openPicker({
+          width: 400,
+          height: 400,
+          cropping: true,
+          cropperCircleOverlay: true,
+        });
+      } else {
+        await ImagePicker.openCamera({
+          width: 400,
+          height: 400,
+          cropping: true,
+          cropperCircleOverlay: true,
+        });
+      }
+      // formData
+      let formData = new FormData();
+      let file = {
+        uri: image.path,
+        type: image.mime,
+        name: 'fileToUpload',
+      };
+      formData.append('fileToUpload', file);
+      const res = await fetch(
+        `${this.url}upload.php?token=${userManager.getToken()}&c=u`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          body: formData,
+        }
+      );
+      const json = await res.json();
+
+      return {
+        ret: json.ret,
+        url: json.url,
+      };
+    } catch (e) {
+      if (/User/.test(e.message))
+        return {
+          ret: 'cancel',
+          message: e.message,
+        };
+      else {
+        return {
+          ret: 'fail',
+          message: e.message,
+        };
+      }
+    }
   }
 
   async fetcher(body) {
