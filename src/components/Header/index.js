@@ -52,7 +52,7 @@ class Header extends React.Component {
             <StatusBar barStyle={'light-content'} />
           </LinearGradient>
         ) : (
-          <StatusBar backgroundColor={Theme} />
+          <StatusBar backgroundColor='#2f54eb' />
         )}
         <View
           style={{

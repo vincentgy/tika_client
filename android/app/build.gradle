@@ -160,6 +160,7 @@ dependencies {
     compile project(':react-native-zip')
     compile project(':react-native-cordova')
     compile project(':react-native-file-transfer')
+    compile project(':react-native-android-statusbar')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile 'com.android.support:appcompat-v7:27.0.3'
     implementation 'com.android.support:support-v4:27.1.1'// for google maps

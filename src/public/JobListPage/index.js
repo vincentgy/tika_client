@@ -5,7 +5,7 @@
  A scrollable list with different item type
  */
 import React from 'react';
-import {Dimensions, RefreshControl, View} from 'react-native';
+import {Dimensions, RefreshControl, View, Platform} from 'react-native';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 
 import Filter from '../../pages/ModalFilter';
@@ -77,7 +77,7 @@ export default class JobList extends React.Component {
     // const size = this.props.list._size;
 
     return (
-      <View style={{height: HEIGHT - 56}}>
+      <View style={{height: HEIGHT - 56 - (Platform.OS === 'ios' ? 0 : 24)}}>
         <Header
           title={this.props.title}
           leftButton={this.props.leftButton}
