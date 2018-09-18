@@ -21,6 +21,8 @@ import com.zyu.ReactNativeWheelPickerPackage;
 import com.remobile.zip.RCTZipPackage;
 //https://github.com/remobile/react-native-file-transfer
 import com.remobile.filetransfer.RCTFileTransferPackage; 
+
+//https://github.com/irshadvali/StatusBarColorGradient
 import me.neo.react.StatusBarPackage; //https://github.com/NishanthShankar/react-native-android-statusbar
 
 import java.util.Arrays;
