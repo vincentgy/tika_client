@@ -81,7 +81,7 @@ const EditBlock = ({
   );
 };
 
-const HistBlock = ({place, task, start, end, onPress}) => {
+const HistBlock = ({place, task, start, end, onPress, onDelete}) => {
   return (
     <View
       style={{
@@ -142,7 +142,7 @@ const HistBlock = ({place, task, start, end, onPress}) => {
           <MenuOption onSelect={onPress}>
             <Entypo name="edit" size={20} />
           </MenuOption>
-          <MenuOption onSelect={() => alert(`Delete`)}>
+          <MenuOption onSelect={onDelete}>
             <MaterialCommunityIcons name="delete" size={20} color="red" />
           </MenuOption>
         </MenuOptions>
@@ -250,6 +250,13 @@ export default class EditProfile extends React.Component {
                     <HistBlock
                       key={idx}
                       {...expo}
+                      onDelete={() => {
+                        Put(state => {
+                          state.profile.experiences = state.profile.experiences.filter(
+                            (i, ix) => ix !== idx
+                          );
+                        });
+                      }}
                       onPress={() => {
                         Put(state => (state.profileEditType = idx));
                         this.navigation('WorkExprience');
@@ -276,6 +283,13 @@ export default class EditProfile extends React.Component {
                       place={expo.school}
                       start={expo.start}
                       end={expo.end}
+                      onDelete={() => {
+                        Put(state => {
+                          state.profile.qualification = state.profile.qualification.filter(
+                            (i, ix) => ix !== idx
+                          );
+                        });
+                      }}
                     />
                   );
                 })

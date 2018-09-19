@@ -153,9 +153,11 @@ export default class WorkExprience extends React.Component {
             )}
           </DataPicker>
           <DataPicker
-            onComfirm={(month, year) =>
-              this.onFormChange('end', [month, year])
-            }>
+            selectedMonth={this.state.end[0]}
+            selectedYear={this.state.end[1]}
+            onValueChange={(month, year) => {
+              this.onFormChange('end', [month, year]);
+            }}>
             {(setOpen, props, data) => (
               <List.Item
                 onPress={setOpen}
