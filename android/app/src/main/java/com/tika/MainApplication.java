@@ -20,10 +20,7 @@ import com.zyu.ReactNativeWheelPickerPackage;
 //https://github.com/remobile/react-native-zip
 import com.remobile.zip.RCTZipPackage;
 //https://github.com/remobile/react-native-file-transfer
-import com.remobile.filetransfer.RCTFileTransferPackage; 
-
-//https://github.com/irshadvali/StatusBarColorGradient
-import me.neo.react.StatusBarPackage; //https://github.com/NishanthShankar/react-native-android-statusbar
+import com.remobile.filetransfer.RCTFileTransferPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,16 +35,10 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(new MainReactPackage(),
-            new StatusBarPackage(),
-            new VectorIconsPackage(), 
-            new LinearGradientPackage(),
-            new ReactNativeWheelPickerPackage(),
-            new MapsPackage(),
-            new RNFSPackage(),
-            new RCTZipPackage(),
-            new RCTFileTransferPackage(),
-            new PickerPackage(), new CustomHotUpdateModulePackage(),new RNSpinkitPackage());
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new VectorIconsPackage(), new LinearGradientPackage(),
+          new ReactNativeWheelPickerPackage(), new MapsPackage(), new RNFSPackage(), new RCTZipPackage(),
+          new RCTFileTransferPackage(), new PickerPackage(), new CustomHotUpdateModulePackage(), 
+          new RNSpinkitPackage());
     }
 
     @Override
@@ -71,6 +62,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+
     SoLoader.init(this, /* native exopackage */ false);
   }
 }

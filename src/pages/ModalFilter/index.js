@@ -107,7 +107,7 @@ class Filter extends React.Component {
             onPress={this.handleClose}
             style={{
               backgroundColor: 'transparent',
-              height: 48 + (Platform.OS === 'ios' ? 20 : 0),
+              height: 48 + (Platform.OS === 'ios' ? 20 : -4),
             }}
           />
           <FilterTab

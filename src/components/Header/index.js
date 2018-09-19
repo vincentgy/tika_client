@@ -24,7 +24,7 @@ class Header extends React.Component {
             key={idx}
             style={{
               position: 'absolute',
-              top: Platform.OS === 'ios' ? 24 : 6,
+              top: 24,
               right: idx * 32,
             }}>
             {i}
@@ -34,7 +34,7 @@ class Header extends React.Component {
         <View
           style={{
             position: 'absolute',
-            top: Platform.OS === 'ios' ? 24 : 6,
+            top: 24,
             right: 0,
           }}>
           {this.props.rightButton}
@@ -52,12 +52,18 @@ class Header extends React.Component {
             <StatusBar barStyle={'light-content'} />
           </LinearGradient>
         ) : (
-          <StatusBar backgroundColor='#2f54eb' />
+          <LinearGradient
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 0}}
+            colors={['#597ef7', '#2f54eb']}
+            style={{...StatusBarStyle, height: 20}}>
+            <StatusBar translucent={true} backgroundColor="transparent" />
+          </LinearGradient>
         )}
         <View
           style={{
             position: 'absolute',
-            top: Platform.OS === 'ios' ? 24 : 6,
+            top: 24,
             zIndex: 1000,
           }}>
           {this.props.leftButton}

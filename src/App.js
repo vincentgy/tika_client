@@ -6,7 +6,6 @@ import PJ from './controller/postJob';
 import user, {LoginType} from './controller/user';
 import filter from './controller/filter';
 import {MenuProvider} from 'react-native-popup-menu';
-
 import {
   NativeModules,
   YellowBox,
@@ -20,6 +19,9 @@ import CreateAccount from './pages/Login/create';
 import Login from './pages/Login';
 import {connect} from 'react-redux';
 import {start} from './utils/update';
+
+
+// StatusBarAndroid.setHexColor('#AB1223');
 
 // StatusBar.setBarStyle('light-content', true);
 

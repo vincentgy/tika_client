@@ -18,8 +18,7 @@ project(':react-native-cordova').projectDir = new File(rootProject.projectDir, '
 include ':react-native-file-transfer'
 project(':react-native-file-transfer').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-file-transfer/android')
 
-include ':react-native-android-statusbar'
-project(':react-native-android-statusbar').projectDir = new File(settingsDir, '../node_modules/react-native-android-statusbar')
+
 
 include ':react-native-zip'
 project(':react-native-zip').projectDir = new File(rootProject.projectDir, '../node_modules/@remobile/react-native-zip/android')

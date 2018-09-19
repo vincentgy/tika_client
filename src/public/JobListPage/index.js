@@ -77,7 +77,7 @@ export default class JobList extends React.Component {
     // const size = this.props.list._size;
 
     return (
-      <View style={{height: HEIGHT - 56 - (Platform.OS === 'ios' ? 0 : 24)}}>
+      <View style={{height: HEIGHT - 56}}>
         <Header
           title={this.props.title}
           leftButton={this.props.leftButton}
