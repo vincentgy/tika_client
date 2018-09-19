@@ -10,6 +10,7 @@ import {
   Ionicons,
   EvilIcons,
   MaterialIcons,
+  MaterialCommunityIcons,
 } from '../../components/Icons';
 import {EasyTap} from '../../public/EasyTap';
 import {Auto, getStore, Put} from '../../store';
@@ -17,6 +18,14 @@ import Card from '../../components/Card';
 import {NetworkManager} from '../../manager/networkManager';
 import DropdownAlert from 'react-native-dropdownalert';
 import UserImage from '../../public/UserImage';
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
+import {shadowStyle} from '../../public/shadowStyle';
+//https://github.com/instea/react-native-popup-menu/blob/master/doc/api.md
 
 const Name = styled.Text`
   font-size: 18px;
@@ -100,9 +109,44 @@ const HistBlock = ({place, task, start, end, onPress}) => {
           {`${start} - ${end}`}
         </Text>
       </View>
-      <EasyTap onPress={onPress}>
-        <Entypo name="dots-three-horizontal" color="#2f54eb" />
-      </EasyTap>
+      <Menu>
+        <MenuTrigger>
+          <Entypo
+            style={{padding: 16}}
+            name="dots-three-horizontal"
+            color="#2f54eb"
+          />
+        </MenuTrigger>
+        <MenuOptions
+          customStyles={{
+            optionsWrapper: {
+              flexDirection: 'row',
+            },
+            optionsContainer: {
+              width: 120,
+              marginTop: 32,
+              borderRadius: 4,
+              shadowColor: '#abb0b0',
+              shadowOffset: {h: 16, w: 16},
+              shadowRadius: 8,
+              shadowOpacity: 0.3,
+            },
+            optionWrapper: {
+              height: 48,
+              width: 60,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            },
+          }}>
+          <MenuOption onSelect={onPress}>
+            <Entypo name="edit" size={20} />
+          </MenuOption>
+          <MenuOption onSelect={() => alert(`Delete`)}>
+            <MaterialCommunityIcons name="delete" size={20} color="red" />
+          </MenuOption>
+        </MenuOptions>
+      </Menu>
     </View>
   );
 };
@@ -193,7 +237,10 @@ export default class EditProfile extends React.Component {
           {EmploymentHistoryArray(experiences => (
             <EditBlock
               isRenderContent={experiences.length > 0}
-              onPress={() => this.navigation('WorkExprience')}
+              onPress={() => {
+                Put(state => (state.profileEditType = 'add'));
+                this.navigation('WorkExprience');
+              }}
               title="Employment history"
               icon={require('../../asset/employment_history.png')}
               desc="Add Employment history"
@@ -203,7 +250,10 @@ export default class EditProfile extends React.Component {
                     <HistBlock
                       key={idx}
                       {...expo}
-                      onPress={() => this.navigation('WorkExprience')}
+                      onPress={() => {
+                        Put(state => (state.profileEditType = idx));
+                        this.navigation('WorkExprience');
+                      }}
                     />
                   );
                 })

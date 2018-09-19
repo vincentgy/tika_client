@@ -5,6 +5,7 @@ import Rluy from './utils/rluy.native';
 import PJ from './controller/postJob';
 import user, {LoginType} from './controller/user';
 import filter from './controller/filter';
+import {MenuProvider} from 'react-native-popup-menu';
 
 import {
   NativeModules,
@@ -119,8 +120,10 @@ const DevMenuTrigger = ({children}) => {
 
 export default () => (
   <Provider store={store}>
-    <DevMenuTrigger>
-      <App />
-    </DevMenuTrigger>
+    <MenuProvider>
+      <DevMenuTrigger>
+        <App />
+      </DevMenuTrigger>
+    </MenuProvider>
   </Provider>
 );

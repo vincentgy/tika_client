@@ -32,6 +32,7 @@ const Store = init({
   districtIds: {},
   categories: [],
   categoriesIds: {},
+  profileEditType: 'add',
   profile: {
     name: '',
     avatar: '',
@@ -56,10 +57,7 @@ const Store = init({
     employedFrom: '',
     employedTo: '',
     skills: ['JavaScript', 'TypeScript', 'Nodejs', 'React Native'],
-    experiences: [
-      {place: 'timix', task: 'web', start: 'Jan 2017', end: 'Jan 2018'},
-      {place: 'timix', task: 'web', start: 'Jan 2017', end: 'Jan 2018'},
-    ],
+    experiences: [],
   },
   job: {
     list: new DataProvider((r1, r2) => {

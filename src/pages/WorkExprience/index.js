@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import {EasyTap} from '../../public/EasyTap';
 import {Entypo, MaterialIcons, FontAwesome} from '../../components/Icons';
 import TimixForm from '../../components/TimixForm';
-import {Put} from '../../store';
+import {Put, getStore} from '../../store';
 import {Kohana} from 'react-native-textinput-effects';
 import DataPicker from '../../components/DataPicker';
 import List from '../../components/List';
@@ -35,19 +35,51 @@ const EmploymentHistForm = Combind({
 });
 
 export default class WorkExprience extends React.Component {
+  state = {jobTitle: '', company: '', start: ['Jan', 2017], end: ['Jan', 2017]};
 
-  
-  FinisheEditing = () => {
-    const HistoryInfo = this.form.getFormData();
-    console.log(HistoryInfo);
-    Put(state => {
-      state.profile.experiences.push({
-        start: `${HistoryInfo.Start[0]} ${HistoryInfo.Start[1]}`,
-        end: `${HistoryInfo.End[0]} ${HistoryInfo.End[1]}`,
-        task: HistoryInfo.JobTitle,
-        place: HistoryInfo.Company,
-      });
+  onFormChange = (key, value) => {
+    this.setState({
+      [key]: value,
     });
+  };
+
+  componentDidMount() {
+    const type = getStore().profileEditType;
+    if (type !== 'add') {
+      const oneHist = getStore().profile.experiences[type];
+      this.setState({
+        jobTitle: oneHist.task,
+        company: oneHist.place,
+        start: oneHist.start,
+        end: oneHist.end,
+      });
+    }
+  }
+
+  FinisheEditing = () => {
+    const type = getStore().profileEditType;
+    const HistoryInfo = this.state;
+
+    if (type === 'add') {
+      Put(state => {
+        state.profile.experiences.push({
+          start: HistoryInfo.start,
+          end: HistoryInfo.end,
+          task: HistoryInfo.jobTitle,
+          place: HistoryInfo.company,
+        });
+      });
+    } else {
+      Put(state => {
+        state.profile.experiences[type] = {
+          start: HistoryInfo.start,
+          end: HistoryInfo.end,
+          task: HistoryInfo.jobTitle,
+          place: HistoryInfo.company,
+        };
+      });
+    }
+
     this.props.navigation.goBack();
   };
 
@@ -77,8 +109,8 @@ export default class WorkExprience extends React.Component {
             iconClass={FontAwesome}
             iconName={'pencil'}
             // TextInput props
-            // value={this.state[key].value}
-            // onChangeText={text => this.onFormChange(key, text)}
+            value={this.state.jobTitle}
+            onChangeText={text => this.onFormChange('jobTitle', text)}
             autoCapitalize={'none'}
             autoCorrect={false}
             style={{
@@ -96,8 +128,8 @@ export default class WorkExprience extends React.Component {
             iconClass={FontAwesome}
             iconName={'pencil'}
             // TextInput props
-            // value={this.state[key].value}
-            // onChangeText={text => this.onFormChange(key, text)}
+            value={this.state.company}
+            onChangeText={text => this.onFormChange('company', text)}
             autoCapitalize={'none'}
             autoCorrect={false}
             style={{
@@ -107,8 +139,11 @@ export default class WorkExprience extends React.Component {
             }}
           />
           <DataPicker
-          // onComfirm={(month, year) => this.onFormChange(key, [month, year])}
-          >
+            selectedMonth={this.state.start[0]}
+            selectedYear={this.state.start[1]}
+            onValueChange={(month, year) => {
+              this.onFormChange('start', [month, year]);
+            }}>
             {(setOpen, props, data) => (
               <List.Item
                 onPress={setOpen}
@@ -118,8 +153,9 @@ export default class WorkExprience extends React.Component {
             )}
           </DataPicker>
           <DataPicker
-          // onComfirm={(month, year) => this.onFormChange(key, [month, year])}
-          >
+            onComfirm={(month, year) =>
+              this.onFormChange('end', [month, year])
+            }>
             {(setOpen, props, data) => (
               <List.Item
                 onPress={setOpen}
@@ -128,7 +164,6 @@ export default class WorkExprience extends React.Component {
               />
             )}
           </DataPicker>
-          <TagInput placeholder="Skills" />
         </PageBase>
       </React.Fragment>
     );

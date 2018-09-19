@@ -62,6 +62,20 @@ export default class DataPicker extends React.Component {
     };
   }
 
+  componentDidUpdate() {
+    if (this.props.onValueChange) {
+      if (
+        this.props.selectedMonth !== this.state.selectedMonth ||
+        this.props.selectedYear !== this.state.selectedYear
+      ) {
+        this.setState({
+          selectedMonth: this.props.selectedMonth,
+          selectedYear: this.props.selectedYear,
+        });
+      }
+    }
+  }
+
   setModalVisible = modalVisible => {
     this.setState({
       modalVisible,
@@ -128,7 +142,8 @@ export default class DataPicker extends React.Component {
                   //安卓因为value 必须是数字
                   const Value =
                     Platform.OS === 'ios' ? value : this.state.month[value];
-                  this.props.onValueChange && this.props.onValueChange(Value);
+                  this.props.onValueChange &&
+                    this.props.onValueChange(Value, this.state.selectedYear);
                   this.setState({
                     selectedMonth: value,
                   });
@@ -151,7 +166,8 @@ export default class DataPicker extends React.Component {
                 }}
                 selectedValue={this.state.selectedYear}
                 onValueChange={value => {
-                  this.props.onValueChange && this.props.onValueChange(value);
+                  this.props.onValueChange &&
+                    this.props.onValueChange(this.state.selectedMonth, value);
                   this.setState({
                     selectedYear: value,
                   });
