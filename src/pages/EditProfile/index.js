@@ -182,6 +182,32 @@ export default class EditProfile extends React.Component {
       Store.profile.experiences
     );
     console.log(json);
+    this.refreshProfile();
+  }
+
+  async refreshProfile() {
+    const manager = new NetworkManager();
+    const profile = await manager.getProfile();
+    Put(state => {
+      state.profile.name = profile.name;
+      state.profile.avatar = profile.avatar;
+      state.profile.skills = profile.skills.split(',');
+      state.profile.experiences = profile.experiences;
+      state.profile.qualification = profile.qualifications;
+      state.profile.aboutMe = profile.description;
+    });
+  }
+
+  async deleteExp(id) {
+    const manager = new NetworkManager();
+    await manager.deleteExprience(id);
+    this.refreshProfile();
+  }
+
+  async deleteQuali(id) {
+    const manager = new NetworkManager();
+    await manager.deleteQualification(id);
+    this.refreshProfile();
   }
 
   render() {
@@ -255,11 +281,12 @@ export default class EditProfile extends React.Component {
                       key={idx}
                       {...expo}
                       onDelete={() => {
-                        Put(state => {
-                          state.profile.experiences = state.profile.experiences.filter(
-                            (i, ix) => ix !== idx
-                          );
-                        });
+                        // Put(state => {
+                        //   state.profile.experiences = state.profile.experiences.filter(
+                        //     (i, ix) => ix !== idx
+                        //   );
+                        // });
+                        this.deleteExp(expo.id);
                       }}
                       onPress={() => {
                         Put(state => (state.profileEditType = idx));
@@ -293,6 +320,7 @@ export default class EditProfile extends React.Component {
                             (i, ix) => ix !== idx
                           );
                         });
+                        this.deleteQuali(expo.id);
                       }}
                     />
                   );

@@ -162,64 +162,16 @@ class Account extends React.Component {
     this.props.navigation.navigate('EditProfile');
   };
 
-  showActionSheet = () => {
-    this.ActionSheet.show();
-  };
-
-  Picture = () => {
-    ImagePicker.openPicker({
-      width: 400,
-      height: 400,
-      cropping: true,
-      cropperCircleOverlay: true,
-    })
-      .then(image => {
-        let formData = new FormData();
-        let file = {
-          uri: image.path,
-          type: image.mime,
-          name: 'fileToUpload',
-        };
-        formData.append('fileToUpload', file);
-        fetch(
-          `http://18.222.175.208/upload.php?token=${userManager.getToken()}&c=u`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-            body: formData,
-          }
-        )
-          .then(responseData => {
-            responseData.json().then(res => {
-              console.log(res);
-            });
-          })
-          .catch(res => {
-            console.log(res, '上传错误');
-          });
-      })
-      .catch(e => {});
-  };
-
-  TakePhoto = () => {
-    ImagePicker.openCamera({
-      width: 400,
-      height: 400,
-      cropping: true,
-      cropperCircleOverlay: true,
-    })
-      .then()
-      .catch();
-  };
-
   async getUserProfile() {
     const manager = new NetworkManager();
     const profile = await manager.getProfile();
     Put(state => {
       state.profile.name = profile.name;
       state.profile.avatar = profile.avatar;
+      state.profile.skills = profile.skills.split(',');
+      state.profile.experiences = profile.experiences;
+      state.profile.qualification = profile.qualifications;
+      state.profile.aboutMe = profile.description;
     });
   }
 

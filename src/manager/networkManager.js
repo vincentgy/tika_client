@@ -284,4 +284,21 @@ export class NetworkManager {
       skills: json.skills,
     };
   }
+
+  async deleteExprience(id) {
+    const res = await this.fetcher({
+      a: 'de',
+      token: userManager.getToken(),
+      id,
+    });
+    console.log(res);
+  }
+
+  async deleteQualification(id) {
+    const res = await this.fetcher({
+      a: 'dq',
+      token: userManager.getToken(),
+      id,
+    });
+  }
 }

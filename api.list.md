@@ -391,7 +391,7 @@ JSON object,
 
 ---
 
-19.Update a certain qualification,
+19.Delete a certain qualification,
 
 ```bash
 Request,
