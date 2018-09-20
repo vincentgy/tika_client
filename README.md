@@ -27,6 +27,11 @@
   - [x] ui is done
 - [ ] no button cannot response.
 
+- [ ] 删除某个 experience 和某个 qualification 的接口
+- [ ] up接口的skills 依然是 null
+- [ ] Post Job 接口可能要加一点可选择的项： 学历要求，工作年限要求
+- [ ] searchjob 和 postlist 接口返回的数据里面，需要发布者的信息
+
 ## android
 
 ```json
