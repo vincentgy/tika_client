@@ -43,7 +43,8 @@ JSON object with `ret`,
 3.  Job categories,
 
 Request,
-'a':'jc'
+'a':'jc',
+‘token’ : user token,
 
 Response,
 JSON object,
@@ -55,7 +56,8 @@ JSON object,
 4.  Job types,
 
 Request,
-'a':'jt'
+'a':'jt',
+‘token’ : user token,
 
 Response,
 JSON object,
@@ -75,7 +77,8 @@ JSON object,
 
 5.  Job pay types,
     Request,
-    'a':'jpt'
+    'a':'jpt',
+    ‘token’ : user token,
 
 Response,
 JSON object,
@@ -95,7 +98,8 @@ JSON object,
 6.  List regions,
 
 Request,
-'a':'lr'
+'a':'lr',
+‘token’ : user token
 
 Response,
 JSON object,
@@ -129,7 +133,8 @@ JSON object,
 ```
 Request,
 'a':'ld'
-‘r’: region id
+‘r’: region id,
+‘token’ : user token
 
 Response,
 JSON object,
@@ -147,7 +152,7 @@ Request,
 ‘title’ : job title,
 ‘company’ : company name,
 ‘description’ : job description,
-’user_id’ : user id of creator,
+’token’ : user token,
 ‘type’ : job type id,
 ‘pay_type’ : pay type id,
 ‘minimum_pay’ : minimum salary,
@@ -187,7 +192,8 @@ Request,
 'location' =>[
     ‘latitude’: latitude of current location,
     ‘longitude’: ‘longitude’ of current location
-]
+],
+‘token’ : user token
 
 Response,
 JSON object,
@@ -202,7 +208,7 @@ JSON object,
 ```bash
 Request,
 ‘a’:'up', update profile
-‘user_id’ : user id,
+‘token’ : user token,
 ‘description’ : self description,
 ‘phone’ : phohe number,
 ‘skills’ : skill tags, like plumper, electrician xxx,
@@ -215,6 +221,7 @@ Request,
 ],
 ‘experiences’ => [
     ‘place’ : company name or other location names,
+    ‘title’ : job title of work,
     ‘task’ : work content,
     ‘start’ : start yearmonth, like 201008,
     ‘end’ : start yearmonth, like 201208,
@@ -253,6 +260,7 @@ Request,
 ‘major’ : major,
 ‘start’ : start yearmonth, like 201008,
 ‘end’ : start yearmonth, like 201208,
+‘token’ : user token
 
 Response,
 JSON object,
@@ -265,12 +273,14 @@ JSON object,
 
 ```bash
 Request,
-‘a’:'ue', update qualification
+‘a’:'ue', update experience
 ‘id’ : work experience id,
 ‘place’ : company name or other location names,
+‘title’ : job title of work,
 ‘task’ : work content,
 ‘start’ : start yearmonth, like 201008,
 ‘end’ : start yearmonth, like 201208,
+‘token’ : user token
 
 Response,
 JSON object,
@@ -285,7 +295,7 @@ JSON object,
 Request,
 ‘a’:'ap', apply position
 ‘p’ : position id,
-‘u’ : user id
+‘token’ : user token
 
 Response,
 JSON object,
@@ -362,4 +372,34 @@ Response,
 JSON object,
 ‘ret’, 0 means successful, otherwise failed.
 ‘data’, JSON encoded job list.
+```
+
+---
+
+18.Delete a certain work experience,
+
+```bash
+Request,
+‘a’:'de', delete experience
+‘id’ : work experience id,
+‘token’ : user token
+
+Response,
+JSON object,
+‘ret’, 0 means successful, otherwise failed.
+```
+
+---
+
+19.Update a certain qualification,
+
+```bash
+Request,
+‘a’:'dq', delete qualification
+‘id’ : qualification id,
+‘token’ : user token
+
+Response,
+JSON object,
+‘ret’, 0 means successful, otherwise failed.
 ```
