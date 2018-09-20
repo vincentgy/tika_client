@@ -82,6 +82,10 @@ const EditBlock = ({
 };
 
 const HistBlock = ({place, task, start, end, onPress, onDelete}) => {
+  const _processDate = string => {
+    if (!string) return 'note_date';
+    return [string.substring(0, 2), string.substring(2, 6)];
+  };
   return (
     <View
       style={{
@@ -106,7 +110,7 @@ const HistBlock = ({place, task, start, end, onPress, onDelete}) => {
             fontWeight: '100',
             fontSize: 12,
           }}>
-          {`${start} - ${end}`}
+          {`${_processDate(start)} - ${_processDate(end)}`}
         </Text>
       </View>
       <Menu>
@@ -333,11 +337,11 @@ export default class EditProfile extends React.Component {
               )}
             />
           ))}
-          <EditBlock
+          {/* <EditBlock
             title="Portfolio/LinkedIn"
             icon={require('../../asset/social.png')}
             desc="Add websites"
-          />
+          /> */}
         </PageBase>
         <DropdownAlert
           showCancel

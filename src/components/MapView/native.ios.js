@@ -11,6 +11,14 @@ class MapView extends React.PureComponent {
 
 MapView.propTypes = {
   /**
+   * 大头针名字
+   */
+  name: PropTypes.any.isRequired,
+  /**
+   * 大头针描述
+   */
+  desc: PropTypes.any.isRequired,
+  /**
    * 经度
    */
   x: PropTypes.any.isRequired,

@@ -62,6 +62,33 @@ RCT_EXPORT_MODULE()
 }
 
 RCT_EXPORT_VIEW_PROPERTY(scrollEnabled, BOOL)
+RCT_CUSTOM_VIEW_PROPERTY(name, NSString*, RNTMapView)
+{
+  if (!json) {
+    return;
+  }
+  NSString* name = [RCTConvert NSString:json];
+  view.name = name;
+  //  view.x = [NSJSONSerialization JSONObjectWithData:[x dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+  if (!view.name) {
+    view.name = name;
+  }
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(desc, NSString*, RNTMapView)
+{
+  if (!json) {
+    return;
+  }
+  NSString* desc = [RCTConvert NSString:json];
+  view.desc = desc;
+  //  view.x = [NSJSONSerialization JSONObjectWithData:[x dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+  if (!view.desc) {
+    view.desc = desc;
+  }
+   [view addMark];
+}
+
 
 RCT_CUSTOM_VIEW_PROPERTY(x, double, RNTMapView)
 {
@@ -87,7 +114,7 @@ RCT_CUSTOM_VIEW_PROPERTY(y, double, RNTMapView)
   if (!view.y) {
     view.y = y;
   }
-  [view addMark];
+ 
 }
 
 

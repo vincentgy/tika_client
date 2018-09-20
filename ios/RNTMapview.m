@@ -46,8 +46,9 @@
   MKPointAnnotation *annotation0 = [[MKPointAnnotation alloc] init];
   
   [annotation0 setCoordinate:CLLocationCoordinate2DMake(x, y)];
-  [annotation0 setTitle:@"重庆理工大学"];
-  [annotation0 setSubtitle:@"重庆市巴南区红光大道69号"];
+  [annotation0 setTitle:_name];
+  [annotation0 setSubtitle:_desc];
+
   [self addAnnotation:annotation0];
 }
 
@@ -56,9 +57,11 @@
   MKPointAnnotation *annotation0 = [[MKPointAnnotation alloc] init];
   
   [annotation0 setCoordinate:CLLocationCoordinate2DMake(self.x, self.y)];
-  [annotation0 setTitle:@"重庆理工大学"];
-  [annotation0 setSubtitle:@"重庆市巴南区红光大道69号"];
+  [annotation0 setTitle:_name];
+  [annotation0 setSubtitle:_desc];
+  
   [self addAnnotation:annotation0];
+  
 }
 
 //// 每次添加大头针都会调用此方法  可以设置大头针的样式

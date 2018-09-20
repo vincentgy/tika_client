@@ -100,6 +100,8 @@ const Detail = ({
       <Location title={`${location}, ${district}, ${region}`} />
       <MapView
         style={{width: WIDTH - 48, height: 165, borderRadius: 8, marginTop: 16}}
+        name={company}
+        desc={title}
         x={latitude}
         y={longitude}
         region={{
@@ -172,28 +174,19 @@ class JobDetail extends React.Component {
       longitudeDelta: 0.1,
     },
   };
-  componentDidMount() {
-    console.log(this.props);
-    navigator.geolocation.getCurrentPosition(
-      res => {
-        const lat = res.coords.latitude;
-        const long = res.coords.longitude;
-        this.setState({
-          region: {
-            latitudeDelta: 0.001,
-            longitudeDelta: 0.001,
-            latitude: lat,
-            longitude: long,
-          },
-        });
+
+  constructor(props) {
+    super(props);
+    const {longitude, latitude} = props;
+    this.state = {
+      opacity: 0,
+      region: {
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
       },
-      () => {},
-      {
-        enableHighAccuracy: false,
-        timeout: 1000,
-        maxAge: 100,
-      }
-    );
+    };
   }
 
   render() {

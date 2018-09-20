@@ -10,6 +10,7 @@ import {NetworkManager} from '../../manager/networkManager';
 import JobListItem from '../../public/JobListItem';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 import {HEIGHT, WIDTH} from '../../utils/plaform';
+import {Put} from '../../store';
 
 @WithGoback
 export default class SearchJob extends React.Component {
@@ -73,7 +74,12 @@ export default class SearchJob extends React.Component {
     return (
       <JobListItem
         {...data}
-        onPress={() => this.props.onSelect && this.props.onSelect(data)}
+        onPress={() => {
+          Put(state => {
+            state.currentSelectJobItem = data;
+          });
+          this.props.navigation.navigate('JobDetail');
+        }}
       />
     );
     //You can return any view here, CellContainer has no special significance

@@ -35,7 +35,7 @@ const EmploymentHistForm = Combind({
 });
 
 export default class WorkExprience extends React.Component {
-  state = {jobTitle: '', company: '', start: ['Jan', 2017], end: ['Jan', 2017]};
+  state = {jobTitle: '', company: '', start: ['01', 2017], end: ['01', 2017]};
 
   onFormChange = (key, value) => {
     this.setState({
@@ -43,15 +43,20 @@ export default class WorkExprience extends React.Component {
     });
   };
 
+  _ProcessDate = string => {
+    return [string.substring(0, 2), string.substring(2, 6)];
+  };
+
   componentDidMount() {
     const type = getStore().profileEditType;
     if (type !== 'add') {
       const oneHist = getStore().profile.experiences[type];
+
       this.setState({
         jobTitle: oneHist.task,
         company: oneHist.place,
-        start: oneHist.start,
-        end: oneHist.end,
+        start: this._ProcessDate(oneHist.start),
+        end: this._ProcessDate(oneHist.end),
       });
     }
   }
@@ -59,24 +64,21 @@ export default class WorkExprience extends React.Component {
   FinisheEditing = () => {
     const type = getStore().profileEditType;
     const HistoryInfo = this.state;
+    const NewInfo = {
+      start: `${HistoryInfo.start[0]}${HistoryInfo.start[1]}`,
+      end: `${HistoryInfo.end[0]}${HistoryInfo.end[1]}`,
+      task: HistoryInfo.jobTitle,
+      place: HistoryInfo.company,
+      title: HistoryInfo.jobTitle,
+    };
 
     if (type === 'add') {
       Put(state => {
-        state.profile.experiences.push({
-          start: HistoryInfo.start,
-          end: HistoryInfo.end,
-          task: HistoryInfo.jobTitle,
-          place: HistoryInfo.company,
-        });
+        state.profile.experiences.push(NewInfo);
       });
     } else {
       Put(state => {
-        state.profile.experiences[type] = {
-          start: HistoryInfo.start,
-          end: HistoryInfo.end,
-          task: HistoryInfo.jobTitle,
-          place: HistoryInfo.company,
-        };
+        state.profile.experiences[type] = NewInfo;
       });
     }
 

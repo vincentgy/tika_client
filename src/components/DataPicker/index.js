@@ -42,22 +42,22 @@ export default class DataPicker extends React.Component {
 
     this.state = {
       month: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'June',
-        'July',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
+        '01',
+        '02',
+        '03',
+        '04',
+        '05',
+        '06',
+        '07',
+        '08',
+        '09',
+        '10',
+        '11',
+        '12',
       ],
       year: year,
       modalVisible: false,
-      selectedMonth: 'Jan',
+      selectedMonth: '01',
       selectedYear: 2017,
     };
   }
@@ -96,7 +96,7 @@ export default class DataPicker extends React.Component {
           //https://github.com/lesliesam/react-native-wheel-picker/issues/14
           Platform.OS === 'ios'
             ? this.state.selectedMonth
-            : this.state.month[this.state.selectedMonth] || 'Jan',
+            : this.state.month[this.state.selectedMonth] || '01',
           this.state.selectedYear,
         ])}
         <Modal

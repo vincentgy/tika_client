@@ -257,7 +257,6 @@ class Account extends React.Component {
           }}>
           <IOSBar barStyle="dark-content" color="white" />
           {ProfileStore(state => {
-            console.log(state);
             return (
               <Profile
                 dropdown={this.dropdown}

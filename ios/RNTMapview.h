@@ -18,6 +18,8 @@
 
 @property (nonatomic) double x;
 @property (nonatomic) double y;
+@property (nonatomic,strong) NSString *name;
+@property (nonatomic,strong) NSString *desc;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 
 - (void) addMark;
