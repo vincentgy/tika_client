@@ -9,16 +9,16 @@
 - [x] after create account,login directly
 - [x] Get profile fix
 - [x] job search page
-  - [ ] city location with search
+  - [x] city location with search
 - [x] edit profile pages
-  - [ ] preview micro CV
+  - [x] preview micro CV
   - [x] upload user avatar
 - [x] company infomation
   - [x] mapview with company location
   - [ ] map navigation
   - [ ] apply / chat
-- [ x switch `user role`
-  - [ ] post job
+- [x] switch `user role`
+  - [x] post job
     - [ ] upload company `avatar`
   - [ ] view `apply application` with `new design`
   - [ ] chat
