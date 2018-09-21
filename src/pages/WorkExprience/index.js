@@ -10,6 +10,7 @@ import {Kohana} from 'react-native-textinput-effects';
 import DataPicker from '../../components/DataPicker';
 import List from '../../components/List';
 import TagInput from '../../components/TagInput';
+import {NetworkManager} from '../../manager/networkManager';
 
 const Ft = TimixForm.FormType;
 const Combind = TimixForm.Combind;
@@ -43,10 +44,6 @@ export default class WorkExprience extends React.Component {
     });
   };
 
-  _ProcessDate = string => {
-    return [string.substring(0, 2), string.substring(2, 6)];
-  };
-
   componentDidMount() {
     const type = getStore().profileEditType;
     if (type !== 'add') {
@@ -61,6 +58,10 @@ export default class WorkExprience extends React.Component {
     }
   }
 
+  _ProcessDate = string => {
+    return [string.substring(0, 2), string.substring(2, 6)];
+  };
+
   FinisheEditing = () => {
     const type = getStore().profileEditType;
     const HistoryInfo = this.state;
@@ -73,9 +74,12 @@ export default class WorkExprience extends React.Component {
     };
 
     if (type === 'add') {
-      Put(state => {
-        state.profile.experiences.push(NewInfo);
-      });
+      const manager = new NetworkManager();
+      manager.addExprience(NewInfo);
+
+      // Put(state => {
+      //   state.profile.experiences.push(NewInfo);
+      // });
     } else {
       Put(state => {
         state.profile.experiences[type] = NewInfo;

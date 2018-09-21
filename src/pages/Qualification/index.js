@@ -8,18 +8,23 @@ import Input from '../../components/Input';
 import KeyboardDetector from '../../utils/keyboard';
 import * as Animatable from 'react-native-animatable';
 import ListTicker from '../../components/ListTicker';
-import {Entypo, FontAwesome} from '../../components/Icons';
+import {Entypo, FontAwesome, MaterialIcons} from '../../components/Icons';
 import {EasyTap} from '../../public/EasyTap';
 
 import {Kohana} from 'react-native-textinput-effects';
 import DataPicker from '../../components/DataPicker';
 import List from '../../components/List';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {getStore, Put} from '../../store';
+import {NetworkManager} from '../../manager/networkManager';
 
 export default class QualificationEditor extends React.Component {
   state = {
-    currentSelect: 'High school',
-    start: ['Jan', 2017],
-    end: ['Jan', 2017],
+    start: ['01', 2017],
+    end: ['01', 2017],
+    degree: 'Bachelors',
+    school: '',
+    major: '',
   };
 
   selectQuali = name => {
@@ -32,6 +37,51 @@ export default class QualificationEditor extends React.Component {
     this.setState({
       [key]: value,
     });
+  };
+  _ProcessDate = string => {
+    return [string.substring(0, 2), string.substring(2, 6)];
+  };
+
+  componentDidMount() {
+    const type = getStore().qualificationEditType;
+
+    if (type !== 'add') {
+      const QualiInfo = getStore().profile.qualification[type];
+      const NewInfo = {
+        start: this._ProcessDate(QualiInfo.start),
+        end: this._ProcessDate(QualiInfo.end),
+        degree: QualiInfo.degree,
+        school: QualiInfo.school,
+        major: QualiInfo.major,
+      };
+
+      console.log(NewInfo);
+      this.setState({...NewInfo});
+    }
+  }
+
+  FinisheEditing = () => {
+    const type = getStore().qualificationEditType;
+    const QualiInfo = this.state;
+    const NewInfo = {
+      start: `${QualiInfo.start[0]}${QualiInfo.start[1]}`,
+      end: `${QualiInfo.end[0]}${QualiInfo.end[1]}`,
+      degree: QualiInfo.degree,
+      school: QualiInfo.school,
+      major: QualiInfo.major,
+    };
+
+    if (type === 'add') {
+      Put(state => {
+        state.profile.qualification.push(NewInfo);
+      });
+    } else {
+      Put(state => {
+        state.profile.qualification[type] = NewInfo;
+      });
+    }
+
+    this.props.navigation.goBack();
   };
 
   render() {
@@ -57,9 +107,19 @@ export default class QualificationEditor extends React.Component {
               />
             </EasyTap>,
           ]}
+          rightButton={[
+            <EasyTap key={1} onPress={this.FinisheEditing}>
+              <MaterialIcons size={20} color="white" key={0} name="check" />
+            </EasyTap>,
+          ]}
           title={<Text style={{color: 'white'}}>Qualification</Text>}
         />
-        <PageBase>
+        <KeyboardAwareScrollView>
+          <ListTicker
+            currentActive={this.state.degree}
+            onChange={data => this.onFormChange('degree', data)}
+            data={Quali}
+          />
           <Kohana
             inputStyle={{fontSize: 14}}
             useNativeDriver
@@ -69,8 +129,8 @@ export default class QualificationEditor extends React.Component {
             iconClass={FontAwesome}
             iconName={'pencil'}
             // TextInput props
-            value={this.state.company}
-            onChangeText={text => this.onFormChange('company', text)}
+            value={this.state.school}
+            onChangeText={text => this.onFormChange('school', text)}
             autoCapitalize={'none'}
             autoCorrect={false}
             style={{
@@ -88,8 +148,8 @@ export default class QualificationEditor extends React.Component {
             iconClass={FontAwesome}
             iconName={'pencil'}
             // TextInput props
-            value={this.state.company}
-            onChangeText={text => this.onFormChange('company', text)}
+            value={this.state.major}
+            onChangeText={text => this.onFormChange('major', text)}
             autoCapitalize={'none'}
             autoCorrect={false}
             style={{
@@ -126,12 +186,7 @@ export default class QualificationEditor extends React.Component {
               />
             )}
           </DataPicker>
-          <ListTicker
-            currentActive={'Master'}
-            onChange={data => this.onFormChange(key, data)}
-            data={Quali}
-          />
-        </PageBase>
+        </KeyboardAwareScrollView>
       </React.Fragment>
     );
   }

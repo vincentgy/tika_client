@@ -97,8 +97,12 @@ export class NetworkManager {
         },
       });
 
-      const json = await res.json();
+      if (res.status !== 200) {
+        Alert.alert('debug: 服务器返回错误', `${res.status}`);
+        return {};
+      }
 
+      const json = await res.json();
       return json;
     } catch (e) {
       Alert.alert('debug: error', JSON.stringify(e));
@@ -243,6 +247,17 @@ export class NetworkManager {
     }
   }
 
+  async addExprience(experiences) {
+    const userId = userManager.getToken();
+    const body = {
+      a: 'up',
+      token: userId,
+      experiences: experiences,
+    };
+
+    return await this.fetcher(body);
+  }
+
   async UpdateProfile(aboutme, skills, qualifications, experiences) {
     const userId = userManager.getToken();
     const body = {
@@ -269,9 +284,11 @@ export class NetworkManager {
 
   async getProfile() {
     const res = await this.fetcher({a: 'gp', token: userManager.getToken()});
-
+    if (!res) {
+      Alert.alert('debug: getProfile,服务器返回错误', `res:${res}`);
+      return {};
+    }
     const json = res.data;
-    console.log(json);
 
     return {
       avatar: json.avatar,

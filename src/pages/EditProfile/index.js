@@ -281,11 +281,6 @@ export default class EditProfile extends React.Component {
                       key={idx}
                       {...expo}
                       onDelete={() => {
-                        // Put(state => {
-                        //   state.profile.experiences = state.profile.experiences.filter(
-                        //     (i, ix) => ix !== idx
-                        //   );
-                        // });
                         this.deleteExp(expo.id);
                       }}
                       onPress={() => {
@@ -314,12 +309,11 @@ export default class EditProfile extends React.Component {
                       place={expo.school}
                       start={expo.start}
                       end={expo.end}
+                      onPress={() => {
+                        Put(state => (state.qualificationEditType = idx));
+                        this.navigation('Qualification');
+                      }}
                       onDelete={() => {
-                        Put(state => {
-                          state.profile.qualification = state.profile.qualification.filter(
-                            (i, ix) => ix !== idx
-                          );
-                        });
                         this.deleteQuali(expo.id);
                       }}
                     />

@@ -33,6 +33,7 @@ const Store = init({
   categories: [],
   categoriesIds: {},
   profileEditType: 'add',
+  qualificationEditType: 'add',
   profile: {
     name: '',
     avatar: '',
