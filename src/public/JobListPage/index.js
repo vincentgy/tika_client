@@ -56,6 +56,8 @@ export default class JobList extends React.Component {
     this.state = {
       dataProvider: dataProvider,
     };
+
+    this.y = 0;
   }
 
   //Given type and data return the view component
@@ -66,8 +68,9 @@ export default class JobList extends React.Component {
         onPress={() => this.props.onSelect && this.props.onSelect(data)}
       />
     );
-    //You can return any view here, CellContainer has no special significance
   };
+
+  onScroll = (raw, x, y) => {};
 
   gotoSearch = () => {
     this.props.navigation.navigate('SearchJob');
@@ -84,9 +87,14 @@ export default class JobList extends React.Component {
           rightButton={this.props.rightButton}
           title={this.props.title}
         />
-        <Filter componentDidMount={this.props.componentDidMount} />
+        <Filter
+          // ref={node => (this.Filter = node)}
+          componentDidMount={this.props.componentDidMount}
+        />
         {/* {size === 0 ? <Text>there is no data</Text> : null} */}
         <RecyclerListView
+          // onScroll={this.onScroll}
+          // scrollThrottle={16}
           scrollViewProps={{
             refreshControl: (
               <RefreshControl

@@ -35,6 +35,7 @@
 - [x] qualification 的绑定
 - [x] skills 的绑定
 - [ ] 添加 qualification 接口 和 experience 接口
+- [ ] 测试 post 不同类型的 job ,`full time`,`partime`,`xxxx`
 
 ## android
 
