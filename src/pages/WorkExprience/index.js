@@ -3,13 +3,12 @@ import {Text} from 'react-native';
 import PageBase from '../../components/PageBase';
 import Header from '../../components/Header';
 import {EasyTap} from '../../public/EasyTap';
-import {Entypo, MaterialIcons, FontAwesome} from '../../components/Icons';
+import {MaterialIcons, FontAwesome} from '../../components/Icons';
 import TimixForm from '../../components/TimixForm';
 import {Put, getStore} from '../../store';
 import {Kohana} from 'react-native-textinput-effects';
 import DataPicker from '../../components/DataPicker';
 import List from '../../components/List';
-import TagInput from '../../components/TagInput';
 import {NetworkManager} from '../../manager/networkManager';
 
 const Ft = TimixForm.FormType;
@@ -93,11 +92,9 @@ export default class WorkExprience extends React.Component {
     return (
       <React.Fragment>
         <Header
-          leftButton={[
-            <EasyTap key={0} onPress={() => this.props.navigation.goBack()}>
-              <Entypo size={16} color="white" name="chevron-thin-left" />
-            </EasyTap>,
-          ]}
+          leftButton={
+            <Header.BackIcon onPress={() => this.props.navigation.goBack()} />
+          }
           rightButton={[
             <EasyTap key={1} onPress={this.FinisheEditing}>
               <MaterialIcons size={20} color="white" key={0} name="check" />

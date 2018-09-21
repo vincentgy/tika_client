@@ -5,14 +5,14 @@ import {Platform, StatusBar, View, Text} from 'react-native';
 
 import {Theme} from '../../utils/color';
 import LinearGradient from 'react-native-linear-gradient';
+import {EasyTap} from '../../public/EasyTap';
+import {Entypo} from '../Icons';
 
 class Header extends React.Component {
   static defaultProps = {
     rightButton: [],
     leftButton: [],
   };
-
-  // <Entypo size={16} color="white" key={0} name="chevron-thin-left" onPress />
 
   render() {
     const {rightButton, StatusBarStyle} = this.props;
@@ -37,7 +37,7 @@ class Header extends React.Component {
             top: 24,
             right: 0,
           }}>
-          {this.props.rightButton}
+          {rightButton}
         </View>
       );
 
@@ -94,6 +94,12 @@ Header.LargeTitle = ({children}) => (
 );
 Header.Title = ({children}) => (
   <Text style={{color: 'white', textAlign: 'center'}}>{children}</Text>
+);
+
+Header.BackIcon = ({onPress}) => (
+  <EasyTap onPress={onPress}>
+    <Entypo size={16} color="white" name="chevron-thin-left" />
+  </EasyTap>
 );
 
 export default Header;
