@@ -11,6 +11,7 @@ import MapView from '../../components/MapView';
 import InformationContainer from '../../public/InformationContainer';
 import {shadowStyle} from '../../public/shadowStyle';
 import {getStore, Auto} from '../../store';
+import config from '../PostJob/config';
 
 const Info = InformationContainer.Info;
 
@@ -72,7 +73,9 @@ const Detail = ({
   location,
   district,
   region,
+  ...others
 }) => {
+  const jobtype = config.jobType.find(i => i.id === others.type + '');
   return (
     <DetailContainer style={shadowStyle}>
       <JobTitle>{title}</JobTitle>
@@ -88,7 +91,7 @@ const Detail = ({
         />
         <Info
           title="Job Type"
-          info="Full time"
+          info={jobtype && jobtype.name}
           img={require('../../asset/time.png')}
         />
         <Info

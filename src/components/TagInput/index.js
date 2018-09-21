@@ -62,6 +62,23 @@ export default class TagInput extends React.Component {
     }
   };
 
+  componentDidMount() {
+    console.log(this.props.onAddTag ? true : false);
+    if (this.props.onAddTag && this.props.tags !== this.state.tags) {
+      this.setState({
+        tags: this.props.tags,
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.onAddTag && this.props.tags !== this.state.tags) {
+      this.setState({
+        tags: this.props.tags,
+      });
+    }
+  }
+
   render() {
     const {placeholder} = this.props;
     return (

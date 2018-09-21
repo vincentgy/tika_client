@@ -1,14 +1,12 @@
 import React from 'react';
 import {View, TouchableOpacity, Image, Text} from 'react-native';
 import PageBase from '../../components/PageBase';
-import InformationContainer from '../../public/InformationContainer';
 import Header from '../../components/Header';
 import styled from 'styled-components';
 import {WIDTH, HEIGHT} from '../../utils/plaform';
 import {
   Entypo,
   Ionicons,
-  EvilIcons,
   MaterialIcons,
   MaterialCommunityIcons,
 } from '../../components/Icons';
@@ -24,7 +22,6 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
-import {shadowStyle} from '../../public/shadowStyle';
 //https://github.com/instea/react-native-popup-menu/blob/master/doc/api.md
 
 const Name = styled.Text`
@@ -214,16 +211,9 @@ export default class EditProfile extends React.Component {
     return (
       <React.Fragment>
         <Header
-          leftButton={[
-            <EasyTap key={1} onPress={() => this.props.navigation.goBack()}>
-              <Entypo
-                size={16}
-                color="white"
-                key={0}
-                name="chevron-thin-left"
-              />
-            </EasyTap>,
-          ]}
+          leftButton={
+            <Header.BackIcon onPress={() => this.props.navigation.goBack()} />
+          }
           rightButton={[
             <EasyTap key={1} onPress={() => this.finisheProfileEditing()}>
               <MaterialIcons size={20} color="white" key={0} name="check" />
@@ -281,11 +271,6 @@ export default class EditProfile extends React.Component {
                       key={idx}
                       {...expo}
                       onDelete={() => {
-                        // Put(state => {
-                        //   state.profile.experiences = state.profile.experiences.filter(
-                        //     (i, ix) => ix !== idx
-                        //   );
-                        // });
                         this.deleteExp(expo.id);
                       }}
                       onPress={() => {
@@ -314,12 +299,11 @@ export default class EditProfile extends React.Component {
                       place={expo.school}
                       start={expo.start}
                       end={expo.end}
+                      onPress={() => {
+                        Put(state => (state.qualificationEditType = idx));
+                        this.navigation('Qualification');
+                      }}
                       onDelete={() => {
-                        Put(state => {
-                          state.profile.qualification = state.profile.qualification.filter(
-                            (i, ix) => ix !== idx
-                          );
-                        });
                         this.deleteQuali(expo.id);
                       }}
                     />

@@ -1,4 +1,5 @@
 ## how to e2e test
+
 [detox](https://github.com/wix/detox/blob/master/docs/Introduction.GettingStarted.md)
 
 ## Todolist
@@ -28,12 +29,13 @@
 - [ ] no button cannot response.
 
 - [x] 删除某个 experience 和某个 qualification 的接口
-- [x] up接口的skills 依然是 null
+- [x] up 接口的 skills 依然是 null
 - [ ] Post Job 接口可能要加一点可选择的项： 学历要求，工作年限要求
 - [ ] searchjob 和 postlist 接口返回的数据里面，需要发布者的信息
-- [ ] qualification 的绑定
-- [ ] skills 的绑定
-- [ ] fulltime 必须填写公司信息就好。
+- [x] qualification 的绑定
+- [x] skills 的绑定
+- [ ] 添加 qualification 接口 和 experience 接口
+- [ ] 测试 post 不同类型的 job ,`full time`,`partime`,`xxxx`
 
 ## android
 

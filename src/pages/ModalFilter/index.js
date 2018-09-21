@@ -23,13 +23,15 @@ import {Regions} from '../PostJob/area';
 import {NetworkManager} from '../../manager/networkManager';
 import {Put, getStore} from '../../store';
 import LinearGradient from 'react-native-linear-gradient';
+import Collapsible from 'react-native-collapsible';
 
-class Filter extends React.Component {
+export default class Filter extends React.Component {
   constructor() {
     super();
     this.state = {
       selectedIndex: 0,
       modalOpen: false,
+      collapsed: false,
     };
   }
 
@@ -83,52 +85,53 @@ class Filter extends React.Component {
     this.StartToFetcher();
   }
 
+  setOpacity = collapsed => {
+    this.setState({
+      collapsed: collapsed,
+    });
+  };
+
   render() {
     return (
-      <LinearGradient
-        style={{padding: 8}}
-        start={{x: 0, y: 0}}
-        end={{x: 1, y: 0}}
-        colors={['#597ef7', '#2f54eb']}>
-        <SegmentedControlTab
-          tabTextStyle={{color: 'white'}}
-          tabStyle={{borderColor: 'white', backgroundColor: 'transparent'}}
-          activeTabStyle={{backgroundColor: '#333'}}
-          values={['Location', 'Job Category', 'Job Type']}
-          selectedIndex={-1}
-          onTabPress={this.handleOpen}
-        />
-        <Modal
-          onRequestClose={() => {}}
-          animationType="none"
-          visible={this.state.modalOpen}
-          transparent>
-          <TouchableOpacity
-            onPress={this.handleClose}
-            style={{
-              backgroundColor: 'transparent',
-              height: 48 + (Platform.OS === 'ios' ? 20 : -4),
-            }}
+      <Collapsible collapsed={this.state.collapsed}>
+        <LinearGradient
+          style={{padding: 8}}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+          colors={['#597ef7', '#2f54eb']}>
+          <SegmentedControlTab
+            tabTextStyle={{color: 'white'}}
+            tabStyle={{borderColor: 'white', backgroundColor: 'transparent'}}
+            activeTabStyle={{backgroundColor: '#333'}}
+            values={['Location', 'Job Category', 'Job Type']}
+            selectedIndex={-1}
+            onTabPress={this.handleOpen}
           />
-          <FilterTab
-            segmentIndex={this.state.selectedIndex}
-            onDone={() => this.StartToFetcher()}
-          />
-          <TouchableOpacity
-            onPress={this.handleClose}
-            activeOpacity={1}
-            style={{height: '100%', backgroundColor: 'rgba(0,0,0,0.2)'}}
-          />
-        </Modal>
-      </LinearGradient>
+
+          <Modal
+            onRequestClose={() => {}}
+            animationType="none"
+            visible={this.state.modalOpen}
+            transparent>
+            <TouchableOpacity
+              onPress={this.handleClose}
+              style={{
+                backgroundColor: 'transparent',
+                height: 48 + (Platform.OS === 'ios' ? 20 : -4),
+              }}
+            />
+            <FilterTab
+              segmentIndex={this.state.selectedIndex}
+              onDone={() => this.StartToFetcher()}
+            />
+            <TouchableOpacity
+              onPress={this.handleClose}
+              activeOpacity={1}
+              style={{height: '100%', backgroundColor: 'rgba(0,0,0,0.2)'}}
+            />
+          </Modal>
+        </LinearGradient>
+      </Collapsible>
     );
   }
 }
-
-const mapState = state => {
-  return {
-    ...state.filter,
-  };
-};
-
-export default connect(mapState)(Filter);
