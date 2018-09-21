@@ -33,6 +33,7 @@
 - [ ] searchjob 和 postlist 接口返回的数据里面，需要发布者的信息
 - [ ] qualification 的绑定
 - [ ] skills 的绑定
+- [ ] fulltime 必须填写公司信息就好。
 
 ## android
 
